@@ -1,0 +1,12 @@
+{
+  "name": "akaswisdom-deploy",
+  "version": "1.0.0",
+  "description": "Builds akaswisdom.com pages from Airtable and deploys them to SiteGround.",
+  "type": "commonjs",
+  "scripts": {
+    "build": "node scripts/build.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
