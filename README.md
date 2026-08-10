@@ -71,7 +71,52 @@ npm run build           # writes to /public
 npx serve public        # or any static server, to preview before pushing
 ```
 
-## Growing beyond one flat template
+## The akas-sitemap section (live Airtable read, not build-time)
+
+`static/akas-sitemap/` is different from the rest of this repo: it's not rendered by
+build.js at build time. It's copied verbatim into `/public` right before deploy (see the
+"Copy hand-authored static sections" step in deploy.yml), and reads Airtable **live, at
+request time**, through `api.php`.
+
+This is a read-only viewer of the akastex.com website plan — 123 pages, each with a Purpose,
+an Outcome, and a ledger of Evidence/Telling/Question lines authored in `Sitemap Knowledge` —
+for partners (Revity, Brian, Shelby, Chris) to read without Airtable access. Built directly
+against the confirmed schema of base `appmjMDolgOXu8BJu`:
+
+- `api.php` — sweeps and caches three Airtable tables (60-second TTL): `sitemap` (the 123
+  pages), `knowledge` (evidence/telling/question lines, linked to a page by its `Page ID`
+  text field), `standards` (universal rules). Handles Airtable's 100-record pagination itself.
+- `.htaccess` — rewrites `/akas-sitemap/AKAS-010/` to `detail.html` internally (URL stays
+  as typed), plus a `noindex` header for the whole section.
+- `index.html` — all 123 pages, grouped by Section, filterable by section/page type/status
+  and by name.
+- `detail.html` — one page in full: Purpose, the Evidence/Telling/Questions ledger (nested
+  notes under their parent line, Disputed lines called out), Outcome, and a Must-Not-Say
+  governance callout where one exists. Shows the final `§5 Content` prominently once a page
+  has one. Knowledge lines tagged `Register: Internal` are filtered out client-side as a
+  second line of defense, even though the base itself is meant to hold nothing sensitive.
+- `config.example.php` — **not the real config.** The real `akas-config.php` (with your actual
+  Airtable token) gets placed by hand via SiteGround File Manager, one directory *above*
+  `public_html` — outside git, and outside the folder this repo's FTP deploy account can even
+  reach. Never commit a filled-in version of this.
+
+Typography follows the palette already settled for this project's sitemap-review app: Newsreader
+for display, Hanken Grotesk for body, a monospace face for IDs, no red anywhere in the palette.
+
+## ⚠️ Deploy safety — read before adding new top-level folders
+
+The FTP deploy step **mirrors** `/public` onto the server: anything on the server that isn't
+
+in `/public` gets deleted. Since this repo only manages some of what's in `public_html`
+(`akas/`, `zorb/`, `wazoodle/`, `procool/`, `proeco/`, `sorbents/` all predate this pipeline
+and live there by hand), those folders are explicitly listed in deploy.yml's `exclude:` so
+they're never considered for deletion, no matter what is or isn't in `/public`.
+
+**If you or Claude Code ever add a brand-new top-level section this repo doesn't generate**
+(hand-uploaded via File Manager, managed by another process, etc.), add it to that same
+`exclude:` list before the next push — otherwise the next deploy will delete it.
+
+
 
 Right now every record renders through a single template with simple field substitution.
 As akaswisdom.com's real structure (parent pages, maker portrait pages, portals, etc.) gets
