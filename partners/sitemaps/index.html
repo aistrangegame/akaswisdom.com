@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en" data-chassis="akas" data-brand="akastex" data-ground="paper">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Both websites, one picture — Wazoodle 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Hanken+Grotesk:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>/* ============================================================
+   rupakarshini V3 — tokens/spine.css
+   THE SPINE. Role tokens. Both chassis obey this grammar.
+   Components reference ONLY spine tokens. Worlds fill them.
+   Scope: everything lives under [data-chassis][data-brand].
+   Load order: spine.css → scales.css → ONE world file → rk.css
+   ============================================================ */
+
+:root, [data-chassis] {
+  /* ---- GROUND (Neev) — what the page stands on ---------- */
+  --bg:            var(--w-ground);        /* page ground                    */
+  --surface:       var(--w-surface);       /* cards, panels, the raised plane */
+  --surface-2:     var(--w-surface-2);     /* quiet alternate band            */
+  --surface-wash:  var(--w-wash);          /* identity tint band              */
+  --surface-deep:  var(--w-deep);          /* the ONE deep band per page      */
+  --surface-hover: var(--w-hover);
+
+  /* ---- MEDIUM (Shweta) — what the reader reads through --- */
+  --fg:            var(--w-ink);           /* primary text                    */
+  --fg-2:          var(--w-ink-2);         /* secondary text                  */
+  --fg-muted:      var(--w-muted);         /* captions, tertiary (≥4.5:1)     */
+  --fg-eyebrow:    var(--w-muted);         /* RULING: eyebrow uses muted, never label */
+  --fg-on-deep:    var(--w-on-deep);       /* text on the deep band           */
+  --fg-on-action:  #FFFFFF;
+
+  /* text ladder — one hue, distance not darkness (chassis-independent) */
+  --t-high:    color-mix(in oklch, var(--fg) 92%, transparent);
+  --t-mid:     color-mix(in oklch, var(--fg) 80%, transparent);
+  --t-body:    color-mix(in oklch, var(--fg) 72%, transparent);
+  --t-soft:    color-mix(in oklch, var(--fg) 58%, transparent);
+  --t-whisper: color-mix(in oklch, var(--fg) 36%, transparent);
+  --t-ghost:   color-mix(in oklch, var(--fg) 20%, transparent);
+
+  /* ---- HOLD (Sid) — lines and edges ---------------------- */
+  --line:          var(--w-line);          /* hairline                        */
+  --line-strong:   var(--w-sig);           /* 3px authority rule              */
+  --line-wash:     var(--w-wash-bd);
+  --radius:        var(--w-radius, 12px);
+  --radius-sm:     calc(var(--radius) * .5);
+  --radius-lg:     calc(var(--radius) * 1.33);
+  --radius-pill:   999px;
+
+  /* ---- VOICE (Arch) — identity and speaking colour ------- */
+  --sig:           var(--w-sig);           /* identity signature              */
+  --sig-pressed:   var(--w-sig-dk);
+  --sig-tint:      var(--w-sig-d);
+  --voice:         var(--w-voice);         /* the chassis's speaking colour   */
+  --voice-pressed: var(--w-voice-dk);
+  --spark:         var(--w-spark);         /* earned once against deep        */
+
+  /* ---- CONSEQUENCE (Bindu) — one colour across the estate  */
+  --bindu:         #C0392B;                /* the point where something is decided */
+  --bindu-pressed: #9E2D21;
+  --action:        var(--bindu);           /* commerce buy · threshold crossed */
+  --action-fg:     #FFFFFF;
+
+  /* ---- STATUS — the system deliberately has no general alert colour */
+  --ok:            var(--w-voice);
+  --warn:          #B8860B;                /* goldenrod — Low stock only       */
+  --danger:        var(--bindu);
+  --info:          #2575B5;
+
+  /* ---- GRACE (Karishma) — readiness ------------------------ */
+  --ring:          color-mix(in oklch, var(--sig) 70%, white);
+  --ring-w:        2px;
+  --ring-offset:   2px;
+  --shadow-1: 0 1px 3px rgba(40,34,24,.06), 0 1px 2px rgba(40,34,24,.04);
+  --shadow-2: 0 10px 34px rgba(40,34,24,.16), 0 2px 8px rgba(40,34,24,.08);
+  --shadow-3: 0 24px 60px rgba(40,34,24,.20), 0 6px 16px rgba(40,34,24,.10);
+
+  /* ---- FONT FACES — chassis constant, world never changes -- */
+  --font-display:  var(--w-font-display);
+  --font-ui:       var(--w-font-ui);
+  --font-mono:     var(--w-font-mono);
+  --font-ceremony: var(--w-font-ceremony, var(--w-font-display));
+}
+
+/* Focus ring recipe — one rule for the whole estate (keyboard only) */
+:where([data-chassis]) :focus-visible {
+  outline: var(--ring-w) solid var(--ring);
+  outline-offset: var(--ring-offset);
+  border-radius: var(--radius-sm);
+}
+
+/* Foreground-pairing invariant: any surface must be used with its pair */
+[data-chassis] .on-deep  { color: var(--fg-on-deep); }
+[data-chassis] .on-deep .eyebrow { color: var(--sig-tint); }
+[data-chassis] .on-wash .eyebrow { color: var(--sig-pressed); }
+/* ============================================================
+   rupakarshini V3 — tokens/scales.css
+   Fluid type (Utopia math, 360→1440, rem term always present so
+   WCAG 1.4.4 holds: every step max ≤ 2.5× min), measure, space,
+   band rhythm, width scale, motion vocabulary.
+   Both chassis share this file. Worlds may override --pace-*.
+   ============================================================ */
+
+:root, [data-chassis] {
+  /* ---- TYPE LADDER — 8 steps, ratio ~1.2 mobile → 1.25 desktop */
+  --fs-display: clamp(2.5rem,    1.281rem + 5.42vi, 4.75rem);  /* 40 → 76  */
+  --fs-h1:      clamp(2rem,      1.303rem + 3.10vi, 3.28rem);  /* 32 → 52  */
+  --fs-h2:      clamp(1.6rem,    1.211rem + 1.73vi, 2.32rem);  /* 26 → 37  */
+  --fs-h3:      clamp(1.28rem,   1.074rem + 0.91vi, 1.64rem);  /* 20 → 26  */
+  --fs-lg:      clamp(1.125rem,  1.014rem + 0.49vi, 1.33rem);  /* 18 → 21  */
+  --fs-body:    clamp(1rem,      0.958rem + 0.19vi, 1.11rem);  /* 16 → 17.7*/
+  --fs-ui:      clamp(0.875rem,  0.86rem  + 0.07vi, 0.9rem);   /* 14 → 14.4*/
+  --fs-sm:      0.8125rem;                                     /* 13 fixed */
+  --fs-eyebrow: 0.8125rem;                                     /* 13 — RULING (was 12) */
+  --fs-mono-floor: 0.6875rem;                                  /* 11 — never below */
+
+  /* optical size pinned per step (CSS can't read clamp result) */
+  --opsz-display: 72; --opsz-h: 36; --opsz-body: 16; --opsz-label: 10;
+
+  /* ---- LINE HEIGHT — inverse to size */
+  --lh-display: 1.05; --lh-h: 1.15; --lh-lg: 1.35; --lh-body: 1.6; --lh-ui: 1.4;
+  --ls-display: -0.02em; --ls-h: -0.01em; --ls-eyebrow: .18em; --ls-mono: .16em;
+
+  /* ---- WIDTH SCALE — density governs measure (Parrot ruling) */
+  --w-reading:    68ch;                              /* invariant for prose  */
+  --w-reading-b:  60ch;                              /* ASG contemplative    */
+  --w-instrument: 720px;                             /* 640–760 band         */
+  --w-column:     940px;                             /* the editorial column */
+  --w-breakout:   min(1440px, 100vw - 64px);         /* grids, media, tables */
+  --w-shell:      1320px;
+
+  /* ---- SPACE — 8-pt */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px;
+  --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px;
+  --gap-tight: var(--s-2); --gap: var(--s-4); --gap-loose: var(--s-5);
+  --pad-card: var(--s-5);
+
+  /* ---- BAND RHYTHM — RULING 72 / 60; scale, not one value */
+  --band-tight:  clamp(40px, 5vw, 56px);
+  --band:        clamp(60px, 6vw, 72px);
+  --band-deep:   clamp(72px, 8vw, 104px);
+  --silence:     40px;                               /* .silence run-out     */
+  --strata-1: 10px; --strata-2: 14px; --strata-3: 18px; /* the descent seam  */
+
+  /* ---- MOTION VOCABULARY — named, budgeted, reduced-motion gated */
+  --ease-out:  cubic-bezier(.22,.61,.36,1);
+  --ease-soft: cubic-bezier(.4,0,.2,1);
+  --dur-fast: .15s; --dur-base: .25s; --dur-slow: .5s;
+  --dur-breath: 6s;                                  /* ASG breathe loop     */
+  --rise-y: 24px;                                    /* rise/reveal travel   */
+  --veil-y: -8px;                                    /* veil entry travel    */
+  --hold-ms: 700;                                    /* hold-to-continue     */
+
+  /* ---- PACE — world overrides (still / measured / quick) */
+  --pace-dur: var(--dur-base);
+  --pace-y:   var(--rise-y);
+}
+
+/* Reduced motion: keep end states, remove travel */
+@media (prefers-reduced-motion: reduce) {
+  :root, [data-chassis] { --rise-y: 0px; --veil-y: 0px; --dur-breath: 0s; }
+}
+
+/* Named motions (chassis-independent). Used by rk.css. */
+@keyframes rk-rise   { from { opacity:0; transform:translateY(var(--rise-y)); } to { opacity:1; transform:none; } }
+@keyframes rk-seed   { from { opacity:0; letter-spacing:.06em; } to { opacity:1; letter-spacing:0; } }
+@keyframes rk-breathe{ 0%,100% { transform:scale(1); opacity:.85; } 50% { transform:scale(1.04); opacity:1; } }
+@keyframes rk-pulse  { 0%,100% { opacity:.55; } 50% { opacity:1; } }
+@keyframes rk-shimmer{ from { background-position: -200% 0; } to { background-position: 200% 0; } }
+@keyframes rk-descend{ from { transform:translateY(-6px); opacity:0; } to { transform:none; opacity:1; } }
+@keyframes rk-curtain{ from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
+@keyframes rk-mote   { 0% { transform:translate(0,0); opacity:0; } 20% { opacity:.6; } 100% { transform:translate(var(--mx,8px),var(--my,-40px)); opacity:0; } }
+@keyframes rk-blink  { 0%,92%,100% { transform:scaleY(1); } 96% { transform:scaleY(.08); } }
+/* ============================================================
+   rupakarshini V3 — tokens/worlds/akas.css
+   CHASSIS A — AKAS / Wazoodle. Canon as amended in Parrot
+   (Design System table, Sep 2026), not the June zip.
+   Usage:  <html data-chassis="akas" data-brand="zorb">
+   Type is constant. Colour separates the brands.
+   ============================================================ */
+
+[data-chassis="akas"] {
+  /* ---- chassis constants (Sid) ---- */
+  --w-font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --w-font-ui:      'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --w-font-mono:    'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace; /* RULING: mono eyebrow face added */
+  --w-radius:       12px;
+
+  /* spine surfaces — warm stone (Neev) */
+  --w-ground:    #EFECE6;   /* page ground                       */
+  --w-surface:   #FFFFFF;   /* paper                             */
+  --w-surface-2: #E7E1D5;   /* stone                             */
+  --w-hover:     #F6F2E9;
+  --w-line:      #E3DDD0;
+  --w-divider:   #ECE6DA;
+
+  /* medium (Shweta) */
+  --w-ink:     #1E1E1E;
+  --w-ink-2:   #3A352E;
+  --w-muted:   #6F685C;     /* 5.2:1 on paper · 4.4 on stone — eyebrow lives here (measured; Parrot value #8A8377 was 3.75) */
+  --w-label:   #A8A095;     /* decorative only; NEVER for eyebrow (2.4:1) */
+  --w-on-deep: rgba(255,255,255,.92);
+
+  /* the chassis speaking colour */
+  --w-voice:    #3B8234;
+  --w-voice-dk: #2C6427;
+
+  /* body position default */
+  --body-default: both;
+}
+
+/* Paper-first variant for consumer LPEs and Brand Home (Revity Gen 2 lesson) */
+[data-chassis="akas"][data-ground="paper"] { --w-ground: #FFFFFF; --w-surface: #FBF9F4; }
+
+/* ---- THE EIGHT WORLDS — sig / sig-dk / sig-d / wash / wash-bd / deep / deep-hi / spark ---- */
+[data-chassis="akas"], [data-chassis="akas"][data-brand="house"] {
+  --w-sig:#1E5219; --w-sig-dk:#163D12; --w-sig-d:#6A9E66;
+  --w-wash:#E4EFE2; --w-wash-bd:#C8DEC4; --w-deep:#1A2E15; --w-deep-hi:#213A1B; --w-spark:#D4B800;
+  --pace: measured; --imagery: raw; --motion-budget: rise seed;
+}
+[data-chassis="akas"][data-brand="zorb"] {
+  --w-sig:#0A5A99; --w-sig-dk:#08456F; --w-sig-d:#5FA8DC;
+  --w-wash:#DCEDFB; --w-wash-bd:#BFDDF4; --w-deep:#0A3354; --w-deep-hi:#0E3E66; --w-spark:#CDE970;
+  --pace: quick; --imagery: annotated; --motion-budget: rise seed pulse;   /* clinical precision */
+}
+[data-chassis="akas"][data-brand="prosoft"] {
+  --w-sig:#006B8A; --w-sig-dk:#004E67; --w-sig-d:#5BB8D0;
+  --w-wash:#D4F0F5; --w-wash-bd:#8FD5E0; --w-deep:#003A48; --w-deep-hi:#004D60; --w-spark:#A78CE0;
+  --pace: still; --imagery: raw; --motion-budget: rise;                     /* silent, soft, permanent */
+}
+[data-chassis="akas"][data-brand="proeco"] {
+  --w-sig:#8A6800; --w-sig-dk:#6B5000; --w-sig-d:#C8A840;
+  --w-wash:#F5EDCC; --w-wash-bd:#DEC880; --w-deep:#2E2600; --w-deep-hi:#3A3200; --w-spark:#F0D040;
+  --pace: measured; --imagery: raw; --motion-budget: rise seed breathe;    /* rooted in earth */
+}
+[data-chassis="akas"][data-brand="procool"] {
+  --w-sig:#4A5A9E; --w-sig-dk:#364488; --w-sig-d:#9BA0D4;
+  --w-wash:#E8EAF5; --w-wash-bd:#C0C6E8; --w-deep:#0D1720; --w-deep-hi:#162232; --w-spark:#3FC6F4;
+  --pace: quick; --imagery: annotated; --motion-budget: rise shimmer;      /* cool precision */
+}
+[data-chassis="akas"][data-brand="supabsorb"] {
+  --w-sig:#1A7A3A; --w-sig-dk:#125A2A; --w-sig-d:#60B878;
+  --w-wash:#DDEEE4; --w-wash-bd:#B0D4BC;
+  --w-deep:#0B4A22; --w-deep-hi:#0F5A2A;                                     /* RULING: darkened from #0D672E — APCA Lc≥75 on deep */
+  --w-spark:#FFD200;
+  --pace: quick; --imagery: raw; --motion-budget: rise;                      /* built for the floor */
+}
+[data-chassis="akas"][data-brand="akastex"] {
+  --w-sig:#0E7E92; --w-sig-dk:#0A6072; --w-sig-d:#27C3DA;
+  --w-wash:#E6F6FB; --w-wash-bd:#A9EAF8; --w-deep:#16404F; --w-deep-hi:#1D4E5F; --w-spark:#D85326;
+  --pace: measured; --imagery: annotated; --motion-budget: rise seed descend; /* RULING: canon; get.akastex lineage retired */
+}
+[data-chassis="akas"][data-brand="silverarch"] {
+  --w-sig:#1A6B8E; --w-sig-dk:#134F6A; --w-sig-d:#60A8C8;
+  --w-wash:#D0EBF5; --w-wash-bd:#A0D0E8; --w-deep:#0D2535; --w-deep-hi:#112E41; --w-spark:#44D4B8;
+  --pace: still; --imagery: annotated; --motion-budget: rise pulse;         /* midnight steel */
+}
+/* Worlds-in-waiting inherit House until a character sheet exists */
+[data-chassis="akas"][data-brand="akastiq"],
+[data-chassis="akas"][data-brand="protec"],
+[data-chassis="akas"][data-brand="procare"] { /* inherits house */ }
+
+/* Family palette — crosses both chassis (archetype colours) */
+[data-chassis] {
+  --arch:#7A2F14; --arch-lt:#B8623F; --sid:#1B3A5C; --sid-lt:#4F7BA8;
+  --ash:#26421A; --ash-lt:#5E8A4E;  --shared:#4A4238; --akas:#2A2520; --waz:#8B5E3C;
+}
+
+:root{--wv1:#2E6B2A;--wv2:#1F6FB0;--wv3:#B08A10;--wv4:#A9532F;--wv5:#7B4A8C;
+--sh-Door:#1E5219;--sh-Navigator:#5B7F4A;--sh-Recognition:#B08A10;--sh-Gateway:#1F6FB0;--sh-Body:#0E7C93;--sh-Telling:#A9532F;--sh-Guide:#4F5FA8;--sh-Instrument:#7B4A8C;--sh-Proof:#2F7A62;--sh-Ledger:#6A6A60;--sh-Crossing:#C2721A;--ink-soft:color-mix(in oklch,var(--fg) 55%,transparent)}
+*{box-sizing:border-box}
+html{background:var(--surface)}
+body{margin:0;font-family:var(--font-ui);color:var(--fg);background:var(--surface);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1440px;margin:0 auto;padding:0 clamp(16px,3vw,40px)}
+header.top{padding:clamp(28px,5vw,56px) 0 var(--s-5)}
+.kicker{font-family:var(--font-mono);font-size:var(--fs-mono-floor);letter-spacing:var(--ls-mono);color:var(--fg-muted);text-transform:uppercase}
+h1{font-family:var(--font-display);font-weight:400;font-size:clamp(2rem,1.2rem + 3vw,3.6rem);line-height:1.02;letter-spacing:-.02em;margin:var(--s-2) 0 var(--s-4)}
+.sum{display:flex;flex-wrap:wrap;gap:var(--s-2) var(--s-6);font-size:var(--fs-ui);color:var(--fg-2)}
+.sum b{font-family:var(--font-display);font-weight:500;font-size:var(--fs-h3);color:var(--fg);margin-right:6px}
+.bar{position:sticky;top:0;z-index:5;background:color-mix(in oklch,var(--surface) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.bar .wrap{display:flex;flex-wrap:wrap;gap:var(--s-3) var(--s-5);align-items:center;padding-block:var(--s-3)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface)}
+.seg button{font:inherit;font-size:var(--fs-ui);border:0;background:transparent;padding:8px 14px;border-radius:999px;cursor:pointer;color:var(--fg-2);min-height:36px}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--surface)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:var(--fs-sm);color:var(--fg-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px;cursor:default}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.legend i.hollow{background:transparent!important;box-shadow:inset 0 0 0 1.5px var(--fg-2)}
+.stage{display:grid;grid-template-columns:minmax(0,2.3fr) minmax(0,1fr);gap:clamp(20px,3vw,48px);padding:var(--s-7) 0 var(--s-6)}
+@media (max-width:900px){.stage{grid-template-columns:1fr}}
+.stage{scroll-margin-top:72px}.site h2{font-family:var(--font-display);font-weight:500;font-size:var(--fs-h2);margin:0}
+.site .meta{font-size:var(--fs-sm);color:var(--fg-muted);margin:4px 0 var(--s-5)}
+.clusters{display:flex;flex-wrap:wrap;gap:var(--s-5) var(--s-5);align-items:flex-start}
+.cl{border:0;background:transparent;padding:0;text-align:left;cursor:pointer;font:inherit;color:inherit;max-width:100%}
+.cl .lab{display:flex;gap:8px;align-items:baseline;margin-bottom:6px;font-size:var(--fs-sm);color:var(--fg-2);white-space:nowrap}
+.cl .lab b{font-weight:600;color:var(--fg)}
+.cl .lab em{font-style:normal;font-family:var(--font-mono);font-size:var(--fs-mono-floor);color:var(--fg-muted)}
+.dots{display:grid;grid-auto-flow:row;gap:2px;justify-content:start;--dz:9px}
+.d{width:9px;height:9px;border-radius:2px;background:var(--c,#999);transition:background .35s var(--ease-out),opacity .35s,box-shadow .35s}
+.d.h{background:transparent;box-shadow:inset 0 0 0 1.5px var(--c,#999)}
+.cl:hover .lab b,.cl:focus-visible .lab b{text-decoration:underline;text-underline-offset:3px}
+.cl:focus-visible{outline:2px solid var(--ring);outline-offset:6px;border-radius:6px}
+.dim .d{opacity:.13}
+@media (max-width:600px){.d{width:7px;height:7px}.dots{--dz:7px}}
+/* gates */
+.gates{padding:var(--s-7) 0;border-top:1px solid var(--line)}
+.gates h3,.decide h3,.recon h3{font-family:var(--font-display);font-weight:500;font-size:var(--fs-h3);margin:0 0 var(--s-5)}
+.line{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--s-3);position:relative}
+@media (max-width:900px){.line{grid-template-columns:1fr}}
+.g{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;border:0;font:inherit;text-align:left;cursor:pointer;background:var(--surface);color:inherit;padding:var(--s-4);border-radius:12px;box-shadow:inset 0 0 0 1px var(--line);position:relative;min-height:44px}
+.g[aria-pressed="true"]{box-shadow:inset 0 0 0 2px var(--wc)}
+.g .no{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--wc);color:#fff;font-family:var(--font-mono);font-size:12px;margin-bottom:var(--s-3)}
+.g b{display:block;font-family:var(--font-display);font-weight:500;font-size:var(--fs-lg)}
+.g .fig{display:flex;gap:var(--s-4);margin:var(--s-2) 0;font-size:var(--fs-sm);color:var(--fg-2)}
+.g .fig span b{display:inline;font-family:var(--font-ui);font-weight:600;font-size:inherit;color:var(--fg)}
+.g .cost{display:block;height:6px;border-radius:3px;background:var(--wc);margin-top:var(--s-3);width:var(--cw)}
+.g .usd{display:block;font-family:var(--font-mono);font-size:var(--fs-mono-floor);color:var(--fg-muted);margin-top:6px}
+.g .gate{font-size:var(--fs-sm);color:var(--fg-muted);margin-top:var(--s-3);line-height:1.35}
+.total{display:flex;flex-wrap:wrap;gap:var(--s-2) var(--s-6);margin-top:var(--s-5);font-size:var(--fs-ui);color:var(--fg-2)}
+.total b{font-family:var(--font-display);font-size:var(--fs-h3);font-weight:500;color:var(--fg);margin-right:6px}
+/* decisions */
+.decide{padding:var(--s-7) 0;border-top:1px solid var(--line)}
+.four{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:var(--s-4)}
+.four div{padding:var(--s-5);border-radius:12px;background:var(--bg)}
+.four b{display:block;font-family:var(--font-display);font-weight:500;font-size:var(--fs-lg);margin-bottom:6px}
+.four p{margin:0;font-size:var(--fs-ui);color:var(--fg-2);line-height:1.45}
+.recon{padding:var(--s-6) 0 var(--s-8);border-top:1px solid var(--line);font-size:var(--fs-sm);color:var(--fg-muted)}
+.recon table{border-collapse:collapse;font-size:var(--fs-sm);margin-top:var(--s-2)}
+.recon td,.recon th{padding:4px 18px 4px 0;text-align:left;border-bottom:1px solid var(--line)}
+.recon th{font-weight:600;color:var(--fg-2)}
+/* panel */
+dialog.panel{border:0;padding:0;margin:0 0 0 auto;height:100dvh;max-height:100dvh;width:min(440px,100vw);background:var(--surface);color:var(--fg);box-shadow:-20px 0 60px color-mix(in oklch,var(--fg) 18%,transparent)}
+dialog.panel::backdrop{background:color-mix(in oklch,var(--fg) 30%,transparent)}
+.pin{padding:var(--s-6) var(--s-6) calc(var(--s-7) + env(safe-area-inset-bottom,0px));height:100%;overflow:auto}
+.pin .x{float:right;min-width:44px;min-height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);font:inherit;cursor:pointer}
+.pin h4{font-family:var(--font-display);font-weight:500;font-size:var(--fs-h2);margin:var(--s-2) 0 var(--s-4);line-height:1.1}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:var(--s-5)}
+.chips span{font-size:var(--fs-sm);padding:4px 10px;border-radius:999px;background:var(--bg);color:var(--fg-2)}
+.chips span i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;vertical-align:0}
+.pin ol{list-style:none;padding:0;margin:0}
+.pin li{display:flex;gap:10px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--line);font-size:var(--fs-ui)}
+.pin li i{flex:0 0 8px;height:8px;border-radius:2px;display:inline-block}
+.pin li.h i{background:transparent!important;box-shadow:inset 0 0 0 1.5px var(--fg-muted)}
+.pin li small{margin-left:auto;color:var(--fg-muted);font-size:var(--fs-sm);white-space:nowrap}
+.pin .pop{padding:var(--s-5);border-radius:12px;background:var(--bg);font-size:var(--fs-ui);color:var(--fg-2);line-height:1.5}
+.pin .pop b{font-family:var(--font-display);font-weight:500;font-size:var(--fs-h2);display:block;color:var(--fg)}
+@media (prefers-reduced-motion:reduce){.d{transition:none}}
+</style></head>
+<body>
+<header class="top"><div class="wrap">
+ <p class="kicker">Wazoodle 2.0 · the rebuild with Revity</p>
+ <h1>Both websites, one picture.</h1>
+ <div class="sum"><span><b>954</b>pages</span><span><b>32</b>kinds of page</span><span><b>11</b>shapes beneath them</span><span><b>5</b>waves</span></div>
+</div></header>
+<div class="bar"><div class="wrap">
+ <div class="seg" id="modes" role="group" aria-label="Colour the pages by"><button data-m="wave" aria-pressed="true">By wave</button><button data-m="shape" aria-pressed="false">By shape</button><button data-m="live" aria-pressed="false">Live today</button></div>
+ <div class="legend" id="legend"></div>
+</div></div>
+<main class="wrap">
+ <section class="stage" id="picture">
+  <div class="site"><h2>wazoodle.com</h2><p class="meta">824 pages · Shopify</p><div class="clusters" id="cl-W"></div></div>
+  <div class="site"><h2>akastex.com</h2><p class="meta">130 pages · WordPress</p><div class="clusters" id="cl-A"></div></div>
+ </section>
+ <section class="gates"><h3>Five waves, one gate each.</h3>
+  <div class="line"><button class="g" data-w="1" aria-pressed="false" style="--wc:var(--wv1);--cw:92%">
+<span class="no">1</span><b>The system</b><span class="fig"><span><b>20</b> pages</span><span><b>12</b> new themes</span></span>
+<span class="usd">$18,193.92</span><span class="cost"></span><p class="gate">Gate: Ash approves the design system and the three master templates</p></button><button class="g" data-w="2" aria-pressed="false" style="--wc:var(--wv2);--cw:38%">
+<span class="no">2</span><b>Wazoodle commerce</b><span class="fig"><span><b>575</b> pages</span><span><b>5</b> new themes</span></span>
+<span class="usd">$7,580.80</span><span class="cost"></span><p class="gate">Gate: Ash approves brand gateway and collection treatments</p></button><button class="g" data-w="3" aria-pressed="false" style="--wc:var(--wv3);--cw:15%">
+<span class="no">3</span><b>Discovery</b><span class="fig"><span><b>213</b> pages</span><span><b>2</b> new themes</span></span>
+<span class="usd">$3,032.32</span><span class="cost"></span><p class="gate">Gate: Ash approves finder behaviour and the hub structure</p></button><button class="g" data-w="4" aria-pressed="false" style="--wc:var(--wv4);--cw:100%">
+<span class="no">4</span><b>AKAS Tex</b><span class="fig"><span><b>122</b> pages</span><span><b>13</b> new themes</span></span>
+<span class="usd">$19,710.08</span><span class="cost"></span><p class="gate">Gate: Ash approves the narrative treatments</p></button><button class="g" data-w="5" aria-pressed="false" style="--wc:var(--wv5);--cw:31%">
+<span class="no">5</span><b>The tail</b><span class="fig"><span><b>23</b> pages</span><span><b>4</b> new themes</span></span>
+<span class="usd">$6,064.60</span><span class="cost"></span></button></div>
+  <div class="total"><span><b>$54,581</b>design and build</span><span><b>+ $10,000</b>authored content, optional</span><span><b>$6,880</b>credit applied in wave 1</span></div>
+ </section>
+ <section class="decide"><h3>Four things to decide.</h3>
+  <div class="four">
+   <div><b>The finder moves</b><p>The Fabric Finder lives inside Shopify today. In the plan it is rebuilt on WordPress — an engineering job, possibly its own scope.</p></div>
+   <div><b>Authored or generated</b><p>Write the top pages by hand and govern the rest with human review, or pay $10,000 for authored content throughout.</p></div>
+   <div><b>How bespoke AKAS is</b><p>The single largest cost lever. akastex.com has 17 kinds of page, yet 104 of its 130 pages sit in just five shapes — most of AKAS can be assembled from the section library.</p></div>
+   <div><b>Swatch kits on AKAS</b><p>A samples section on akastex.com with Shopify checkout inside it, so the sale still lands in Shopify.</p></div>
+  </div>
+ </section>
+ <section class="recon"><h3>How the counts reconcile</h3>
+  <p>Our sitemap in Owl holds 954 pages (824 Wazoodle, 130 AKAS Tex) plus nine template rows. Revity sized 953 (827 and 126). The pages sit in waves by their section.</p>
+  <table><tr><th>Wave</th><th>Revity</th><th>Our sitemap</th></tr><tr><td>Wave 1</td><td>20</td><td>14</td></tr><tr><td>Wave 2</td><td>575</td><td>575</td></tr><tr><td>Wave 3</td><td>213</td><td>213</td></tr><tr><td>Wave 4</td><td>122</td><td>125</td></tr><tr><td>Wave 5</td><td>23</td><td>27</td></tr></table>
+ </section>
+</main>
+<dialog class="panel" id="panel" aria-label="Pages in this group"><div class="pin" id="pbody"></div></dialog>
+<script>const DATA=[{"site":"A","ty":"Utility","name":"Policies","shape":"Ledger","pages":[["Terms of Sale","Contact",1,0,"Ledger"],["Freight & Shipping","Contact",1,0,"Ledger"],["Privacy & Terms of Use","Contact",1,0,"Ledger"]],"waves":{"1":3},"n":3,"live":0,"master":false,"wave":1},{"site":"A","ty":"Home","name":"Home","shape":"Door","pages":[["Homepage","Home",1,0,"Door"]],"waves":{"1":1},"n":1,"live":0,"master":false,"wave":1},{"site":"A","ty":"Contact","name":"Contact","shape":"Instrument","pages":[["Contact / Request a Quote","Contact",1,0,"Instrument"]],"waves":{"1":1},"n":1,"live":0,"master":false,"wave":1},{"site":"A","ty":"Z-Style","name":"Fabric styles","shape":"Body","pages":[["ProSoft PUL 1 mil ECO-PUL","Fabric Styles",4,0,"Body"],["ProSoft PUL 2 mil ECO-PUL","Fabric Styles",4,0,"Body"],["ProCool 360 Stretch-FIT","Fabric Styles",4,0,"Body"],["ProECO Bamboo Fleece","Fabric Styles",4,0,"Body"],["ProECO Bamboo French Terry","Fabric Styles",4,0,"Body"],["ProECO Bamboo Jersey","Fabric Styles",4,0,"Body"],["ProECO Bamboo Lining Fleece","Fabric Styles",4,0,"Body"],["ProECO Bamboo Loop Terry","Fabric Styles",4,0,"Body"],["ProCool Supima Cotton Jersey","Fabric Styles",4,0,"Body"],["ProCool Pique Mesh","Fabric Styles",4,0,"Body"],["ProSoft PUL Food Safe PUL","Fabric Styles",4,0,"Body"],["ProSoft PUL Lightweight PUL","Fabric Styles",4,0,"Body"],["ProSoft PUL MediPUL","Fabric Styles",4,0,"Body"],["ProECO Merino Wool Jersey","Fabric Styles",4,0,"Body"],["ProECO Merino Wool Interlock","Fabric Styles",4,0,"Body"],["Zorb Microfiber Terry","Fabric Styles",4,0,"Body"],["ProCool Nylon Interlock","Fabric Styles",4,0,"Body"],["ProECO Organic Cotton Fleece","Fabric Styles",4,0,"Body"],["ProECO Stretch-FIT OC Fleece","Fabric Styles",4,0,"Body"],["ProECO Organic Cotton Rib","Fabric Styles",4,0,"Body"],["ProECO OC French Terry","Fabric Styles",4,0,"Body"],["ProECO OC Interlock","Fabric Styles",4,0,"Body"],["ProECO Stretch-FIT OC Jersey","Fabric Styles",4,0,"Body"],["ProECO Organic Cotton Twill","Fabric Styles",4,0,"Body"],["ProCool Interlock","Fabric Styles",4,0,"Body"],["ProCool Jersey Mesh","Fabric Styles",4,0,"Body"],["ProCool Lightweight Knit","Fabric Styles",4,0,"Body"],["ProTEC Fleece","Fabric Styles",4,0,"Body"],["ProCool TransWICK X-FIT Jersey","Fabric Styles",4,0,"Body"],["AKAStiq Wide Loop","Fabric Styles",4,0,"Body"],["Zorb 3D Bamboo Dimple","Fabric Styles",4,0,"Body"],["Zorb 3D OC Dimple","Fabric Styles",4,0,"Body"],["Zorb 3D Diamond","Fabric Styles",4,0,"Body"],["Zorb 3D Stay Dry Dimple","Fabric Styles",4,0,"Body"],["Zorb 4D OC Dimple CORE PUL","Fabric Styles",4,0,"Body"],["Zorb 4D Stay Dry CORE PUL","Fabric Styles",4,0,"Body"],["Zorb Original","Fabric Styles",4,0,"Body"],["ProCare","Fabric Styles",4,0,"Body"]],"waves":{"4":38},"n":38,"live":0,"master":false,"wave":4},{"site":"A","ty":"Industry","name":"Industries","shape":"Recognition","pages":[["Baby & Child Care","Industries",4,0,"Recognition"],["Apparel & Clothing","Industries",4,0,"Recognition"],["Industrial Safety & Absorbents","Industries",4,0,"Recognition"],["Pet Care","Industries",4,0,"Recognition"],["Athletic & Fitness","Industries",4,0,"Recognition"],["Food & Beverage","Industries",4,0,"Recognition"],["Healthcare & Medical","Industries",4,0,"Recognition"],["Hygiene & Care","Industries",4,0,"Recognition"],["Defense / Military / Government","Industries",4,0,"Recognition"],["Outdoor Recreation","Industries",4,0,"Recognition"],["Industrial Manufacturing","Industries",4,0,"Recognition"],["Incontinence","Industries",4,0,"Recognition"],["Furniture & Home Decor","Industries",4,0,"Recognition"],["Swim & Waterwear","Industries",4,0,"Recognition"],["Home Essentials","Industries",4,0,"Recognition"],["Hospitality","Industries",4,0,"Recognition"]],"waves":{"4":16},"n":16,"live":0,"master":false,"wave":4},{"site":"A","ty":"Story","name":"Stories","shape":"Telling","pages":[["About AKAS Tex Family","The Dream",4,0,"Telling"],["Wazoodle Buying Journey Story","The Dream",4,0,"Telling"],["COVID-19 Response Journey","The Dream",4,0,"Telling"],["Zorb Origin Story","The Dream",4,0,"Telling"],["ProSoft PUL Origin Story","The Dream",4,0,"Telling"],["SupAbsorb Origin Story","The Dream",4,0,"Telling"],["ProCool Origin Story","The Dream",4,0,"Telling"],["ProECO Origin Story","The Dream",4,0,"Telling"],["Cuddle Plush Partnership","The Dream",4,0,"Telling"],["Milpoint Partnership","The Dream",4,0,"Telling"],["Find a Fabric Partnership","The Dream",4,0,"Telling"],["Rainbow Group SA Partnership","The Dream",4,0,"Telling"],["Press & Media","Proof",4,0,"Telling"]],"waves":{"4":13},"n":13,"live":0,"master":false,"wave":4},{"site":"A","ty":"Sorbent Product","name":"SupAbsorb products","shape":"Body","pages":[["Rag Rug Industrial Absorbent Mats","SupAbsorb Products",4,0,"Body"],["StickyBack Anti-Slip Absorbent Mats","SupAbsorb Products",4,0,"Body"],["Ultra Heavy Duty Oil Absorbent Mats w/ Barrier","SupAbsorb Products",4,0,"Body"],["BSM Barrier Spill Absorbent Mats","SupAbsorb Products",4,0,"Body"],["Universal Meltblown Absorbent Pads","SupAbsorb Products",4,0,"Body"],["StickyBack Leakproof Universal Absorbent Mats","SupAbsorb Products",4,0,"Body"],["Universal Leakproof Barrier","SupAbsorb Products",4,0,"Body"],["Biodegradable Corn Cob Sorbents","SupAbsorb Products",4,0,"Body"],["Bio-Based Sorbent Socks (AKASoak)","SupAbsorb Products",4,0,"Body"],["Oil Only Pads","SupAbsorb Products",4,0,"Body"],["Hazmat Pads","SupAbsorb Products",4,0,"Body"]],"waves":{"4":11},"n":11,"live":0,"master":false,"wave":4},{"site":"A","ty":"Hub","name":"Hubs","shape":"Navigator","pages":[["Dream Hub","The Dream",4,0,"Navigator"],["Journey Hub","The Journey",4,0,"Navigator"],["Challenges Hub","Challenges",4,0,"Navigator"],["Industries Hub","Industries",4,0,"Navigator"],["Services Hub","Services",4,0,"Navigator"],["Technologies Hub","Technologies",4,0,"Navigator"],["Certifications Hub","Proof",4,0,"Navigator"],["Brands Hub","Brands",4,0,"Navigator"],["Impact Hub","Impact",4,0,"Navigator"],["Insights","Impact",4,0,"Navigator"]],"waves":{"4":10},"n":10,"live":0,"master":false,"wave":4},{"site":"A","ty":"Technology","name":"Technologies","shape":"Guide","pages":[["Absorbent Tech","Technologies",4,0,"Guide"],["Wicking Tech","Technologies",4,0,"Guide"],["Waterproof Tech","Technologies",4,0,"Guide"],["Antimicrobial Tech","Technologies",4,0,"Guide"],["FoodSAFE Tech","Technologies",4,0,"Guide"],["Fiber Partnerships","Technologies",4,0,"Guide"],["Sorbents Tech","Technologies",4,0,"Guide"]],"waves":{"4":7},"n":7,"live":0,"master":false,"wave":4},{"site":"A","ty":"Service","name":"Services","shape":"Guide","pages":[["Textile Knitting","Services",4,0,"Guide"],["Dyeing & Finishing","Services",4,0,"Guide"],["Lamination","Services",4,0,"Guide"],["Custom Colour & Print Programme","Services",4,0,"Guide"],["New Product Development","Services",4,0,"Guide"],["Sustainability Consulting","Services",4,0,"Guide"]],"waves":{"4":6},"n":6,"live":0,"master":false,"wave":4},{"site":"A","ty":"Brand Gateway","name":"Brand gateways","shape":"Gateway","pages":[["Zorb","Brands",4,0,"Gateway"],["ProCool","Brands",4,0,"Gateway"],["ProSoft PUL","Brands",4,0,"Gateway"],["ProECO","Brands",4,0,"Gateway"],["AKAStiq","Brands",4,0,"Gateway"],["SupAbsorb Tech","Brands",4,0,"Gateway"]],"waves":{"4":6},"n":6,"live":0,"master":false,"wave":4},{"site":"A","ty":"Impact","name":"Impact","shape":"Proof","pages":[["Supporting the Explorer Economy","Impact",4,0,"Proof"],["Sustainability Through Reusables","Impact",4,0,"Proof"],["Made in USA Manufacturing","Impact",4,0,"Proof"],["Health Benefits Initiatives","Impact",4,0,"Proof"],["Integrated Supply Chain","Impact",4,0,"Proof"],["Measuring Our Impact","Impact",4,0,"Proof"]],"waves":{"4":6},"n":6,"live":0,"master":false,"wave":4},{"site":"A","ty":"Journey","name":"Journeys","shape":"Crossing","pages":[["AKAS Tex Journey","The Journey",4,0,"Crossing"],["Wazoodle Journey (Textile)","The Journey",4,0,"Crossing"],["SupAbsorb Journey (Mats)","The Journey",4,0,"Crossing"]],"waves":{"4":3},"n":3,"live":0,"master":false,"wave":4},{"site":"A","ty":"Challenge","name":"Challenges","shape":"Recognition","pages":[["Manufacturing + Technical + Safety","Challenges",4,0,"Recognition"],["Business Challenges","Challenges",4,0,"Recognition"],["Selection Challenges","Challenges",4,0,"Recognition"]],"waves":{"4":3},"n":3,"live":0,"master":false,"wave":4},{"site":"A","ty":"Proof","name":"Proof","shape":"Proof","pages":[["How We Test / Quality Standards","Proof",4,0,"Proof"],["Client Case Studies","Proof",4,0,"Proof"],["Competitor Proof","Proof",4,0,"Proof"]],"waves":{"4":3},"n":3,"live":0,"master":false,"wave":4},{"site":"A","ty":"Directory","name":"Directories","shape":"Instrument","pages":[["Find Your Contractor","Partner Resources",4,0,"Instrument"],["Find a Distributor","Partner Resources",4,0,"Instrument"]],"waves":{"4":2},"n":2,"live":0,"master":false,"wave":4},{"site":"A","ty":"Shop","name":"Samples and swatch kits","shape":"Crossing","pages":[["Samples & Swatch Kits","Contact",4,0,"Crossing"]],"waves":{"4":1},"n":1,"live":0,"master":false,"wave":4},{"site":"W","ty":"Utility","name":"Tools and policies","shape":"Ledger","pages":[["Compare Tool","Find",1,1,"Instrument"],["Fabric Finder Form — Ask a Wazoodle Expert","Find",1,1,"Instrument"],["Canada Orders & Shipping","Utility",1,1,"Ledger"],["Contact Us","Utility",1,1,"Ledger"],["Privacy Policy","Utility",1,1,"Ledger"],["Refund & Returns Policy","Utility",1,1,"Ledger"],["Shipping Policy","Utility",1,1,"Ledger"],["Terms of Service","Utility",1,1,"Ledger"]],"waves":{"1":8},"n":8,"live":8,"master":false,"wave":1},{"site":"W","ty":"Home","name":"Home","shape":"Door","pages":[["Home","Home",1,1,"Door"]],"waves":{"1":1},"n":1,"live":1,"master":false,"wave":1},{"site":"W","ty":"Product Page","name":"Product pages","shape":"Body","pages":[],"waves":{"2":374},"n":374,"live":331,"master":true,"section":"Shop","wave":2},{"site":"W","ty":"Swatch Kit Page","name":"Swatch kits","shape":"Body","pages":[],"waves":{"2":128},"n":128,"live":128,"master":true,"section":"Shop","wave":2},{"site":"W","ty":"Collection","name":"Collections","shape":"Navigator","pages":[["Notions","Shop",2,0,"Navigator"],["Other Fabrics","Shop",2,0,"Navigator"],["Swatch Kits","Shop",2,1,"Navigator"],["Absorbent","Shop",2,1,"Navigator"],["Bamboo","Shop",2,0,"Navigator"],["FoodSAFE","Shop",2,1,"Navigator"],["Organic Cotton","Shop",2,0,"Navigator"],["Recycled","Shop",2,0,"Navigator"],["Silver Plus Antimicrobial","Shop",2,1,"Navigator"],["Stay-Dry","Shop",2,1,"Navigator"],["Stretch & Recovery","Shop",2,0,"Navigator"],["Waterproof","Shop",2,1,"Navigator"],["Wicking & Cooling","Shop",2,0,"Navigator"],["ProCool 360 Stretch-FIT","Shop",2,1,"Navigator"],["ProCool Interlock","Shop",2,1,"Navigator"],["ProCool Jersey Mesh","Shop",2,1,"Navigator"],["ProCool Lightweight Knit","Shop",2,0,"Navigator"],["ProCool Pique Mesh","Shop",2,0,"Navigator"],["ProCool Sports Fleece","Shop",2,0,"Navigator"],["ProCool Supima Cotton Jersey","Shop",2,0,"Navigator"],["ProCool TransWICK X-FIT Jersey","Shop",2,0,"Navigator"],["ProECO Bamboo Fleece","Shop",2,1,"Navigator"],["ProECO Bamboo French Terry","Shop",2,1,"Navigator"],["ProECO Bamboo Loop Terry","Shop",2,1,"Navigator"],["ProECO Bamboo Sherpa","Shop",2,1,"Navigator"],["ProECO Merino Wool","Shop",2,0,"Navigator"],["ProECO Organic Cotton Fleece","Shop",2,1,"Navigator"],["ProECO Organic Cotton French Terry","Shop",2,1,"Navigator"],["ProECO Organic Cotton Interlock","Shop",2,1,"Navigator"],["ProECO Organic Cotton Twill","Shop",2,1,"Navigator"],["ProECO ReInspire Recycled Cotton","Shop",2,0,"Navigator"],["ProECO Stretch-FIT Organic Cotton Fleece","Shop",2,0,"Navigator"],["ProECO Stretch-FIT Organic Cotton Jersey","Shop",2,0,"Navigator"],["ProSoft 1 mil ECO-PUL","Shop",2,0,"Navigator"],["ProSoft 2 mil ECO-PUL","Shop",2,0,"Navigator"],["ProSoft Bamboo Fleece PUL","Shop",2,0,"Navigator"],["ProSoft Bamboo Loop Terry PUL","Shop",2,0,"Navigator"],["ProSoft CORE PUL","Shop",2,0,"Navigator"],["ProSoft FoodSAFE PUL","Shop",2,0,"Navigator"],["ProSoft Lightweight PUL","Shop",2,0,"Navigator"],["ProSoft MediPUL","Shop",2,0,"Navigator"],["ProSoft Organic Cotton Fleece PUL","Shop",2,0,"Navigator"],["ProSoft Organic Cotton Interlock PUL","Shop",2,0,"Navigator"],["ProSoft Organic Cotton Sherpa PUL","Shop",2,0,"Navigator"],["ProSoft Organic Cotton Twill PUL","Shop",2,0,"Navigator"],["ProSoft Stretch-FIT Organic Cotton Fleece PUL","Shop",2,0,"Navigator"],["ProSoft Stretch-FIT Organic Cotton Jersey PUL","Shop",2,0,"Navigator"],["ProSoft Stretch-FIT PUL","Shop",2,0,"Navigator"],["Zorb 3D Bamboo Dimple","Shop",2,0,"Navigator"],["Zorb 3D Organic Cotton Dimple","Shop",2,1,"Navigator"],["Zorb 3D Stay Dry Dimple","Shop",2,0,"Navigator"],["Zorb 4D Organic Cotton Dimple CORE PUL","Shop",2,0,"Navigator"],["Zorb 4D Stay Dry Dimple CORE PUL","Shop",2,0,"Navigator"],["Zorb Microfiber","Shop",2,0,"Navigator"],["Brand Swatch Kits","Shop",2,0,"Navigator"],["Fabric Finder Swatch Kits","Shop",2,0,"Navigator"],["Family Swatch Kits","Shop",2,0,"Navigator"],["Zorb Original","Shop",2,0,"Navigator"]],"waves":{"2":58},"n":58,"live":18,"master":false,"wave":2},{"site":"W","ty":"Brand Gateway","name":"Brand gateways","shape":"Gateway","pages":[["SupAbsorb Tech","Shop",2,0,"Gateway"],["AKAStiq","Shop",2,0,"Gateway"],["ProCool","Shop",2,0,"Gateway"],["ProECO","Shop",2,0,"Gateway"],["ProSoft PUL","Shop",2,1,"Gateway"],["ProTEC","Shop",2,0,"Gateway"],["Silver Arch","Shop",2,0,"Gateway"],["Zorb","Shop",2,1,"Gateway"]],"waves":{"2":8},"n":8,"live":2,"master":false,"wave":2},{"site":"W","ty":"Custom","name":"Deals and lots","shape":"Navigator","pages":[["Deals","Shop",2,0,"Navigator"],["Mystery Grab Bags","Shop",2,0,"Navigator"],["Clearance","Shop",2,0,"Navigator"],["Dev Lots","Shop",2,0,"Navigator"],["Overstock","Shop",2,0,"Navigator"],["Seconds","Shop",2,0,"Navigator"]],"waves":{"2":6},"n":6,"live":0,"master":false,"wave":2},{"site":"W","ty":"Fabric Finder","name":"Fabric finders","shape":"Recognition","pages":[],"waves":{"3":193},"n":193,"live":7,"master":true,"section":"Find","wave":3},{"site":"W","ty":"Community","name":"Communities","shape":"Recognition","pages":[["Athletic & Performance Wear","Find",3,0,"Recognition"],["Automotive & Outdoor","Find",3,0,"Recognition"],["Baby & Child Care","Find",3,0,"Recognition"],["Bags, Storage & Organization","Find",3,0,"Recognition"],["Cleaning & Household","Find",3,0,"Recognition"],["Commercial Food Service","Find",3,0,"Recognition"],["Everyday Apparel","Find",3,0,"Recognition"],["Food Storage & Kitchen","Find",3,0,"Recognition"],["Gym, Fitness & Sports Gear","Find",3,0,"Recognition"],["Hats, Accessories & Small Items","Find",3,0,"Recognition"],["Home Textiles & Décor","Find",3,0,"Recognition"],["Medical & Healthcare","Find",3,0,"Recognition"],["Menstrual, Incontinence & Personal Hygiene","Find",3,0,"Recognition"],["Outdoor & Specialty","Find",3,0,"Recognition"],["Outerwear & Layers","Find",3,0,"Recognition"],["Personal Care & Accessories","Find",3,0,"Recognition"],["Pet Care","Find",3,0,"Recognition"],["Swimwear & Water Sports","Find",3,0,"Recognition"],["Underwear & Intimates","Find",3,0,"Recognition"]],"waves":{"3":19},"n":19,"live":0,"master":false,"wave":3},{"site":"W","ty":"Guide","name":"Guides","shape":"Guide","pages":[["Annual Requirements & Supply Planning","Journey",5,0,"Guide"],["Buying for a Programme","Journey",5,0,"Guide"],["Custom & Development","Journey",5,0,"Guide"],["The Path","Journey",5,0,"Guide"],["Turning This Into a Business","Journey",5,0,"Guide"],["Wholesale & Bulk","Journey",5,0,"Guide"],["Humanitarian — buying for someone you'll never meet","Journey",5,0,"Guide"],["Certified & Tested","Learn",5,0,"Guide"],["Fabric 101 — how the layers work","Learn",5,0,"Guide"],["Choosing your fabric","Learn",5,0,"Guide"],["Care & first wash","Learn",5,0,"Guide"],["Sewing with our fabrics","Learn",5,0,"Guide"],["Glossary","Learn",5,0,"Guide"]],"waves":{"5":13},"n":13,"live":0,"master":false,"wave":5},{"site":"W","ty":"Hub","name":"Hubs","shape":"Navigator","pages":[["Shop Hub","Shop",2,0,"Navigator"],["Fabric Finders Hub","Find",3,1,"Navigator"],["Journey","Journey",5,0,"Navigator"],["Learn","Learn",5,0,"Navigator"],["Family Hub","Family",5,0,"Navigator"]],"waves":{"2":1,"3":1,"5":3},"n":5,"live":1,"master":false,"wave":5},{"site":"W","ty":"Story","name":"Stories","shape":"Telling","pages":[["About The Family","Family",5,1,"Telling"],["Our Impact — direct from consumers & businesses","Family",5,0,"Telling"],["Our Dream","Family",5,0,"Telling"],["The Book of Makers / Wall of Stories","Family",5,0,"Telling"]],"waves":{"5":4},"n":4,"live":1,"master":false,"wave":5},{"site":"W","ty":"Impact","name":"Impact","shape":"Proof","pages":[["The Maker Economy","Family",5,0,"Proof"],["Health Benefits — chemical-free","Family",5,0,"Proof"],["Sustainability Through Reusables","Family",5,0,"Proof"]],"waves":{"5":3},"n":3,"live":0,"master":false,"wave":5},{"site":"W","ty":"Directory","name":"Directories","shape":"Instrument","pages":[["Authorized Distributors","Journey",5,1,"Instrument"],["Sewing Contractors","Journey",5,1,"Instrument"]],"waves":{"5":2},"n":2,"live":2,"master":false,"wave":5},{"site":"W","ty":"Proof","name":"Walls","shape":"Proof","pages":[["Wall of Creations","Family",5,1,"Proof"],["Wall of Love","Family",5,1,"Proof"]],"waves":{"5":2},"n":2,"live":2,"master":false,"wave":5}];const WAVES=[{"w": 1, "n": "The system", "d": "Design system \u00b7 section library \u00b7 three master templates \u00b7 both homes \u00b7 tools and policies \u00b7 redirects", "p": 20, "t": 12, "c": 18193.92, "g": "Ash approves the design system and the three master templates", "ours": 14}, {"w": 2, "n": "Wazoodle commerce", "d": "Brand gateways \u00b7 collections \u00b7 374 product pages \u00b7 128 swatch kits", "p": 575, "t": 5, "c": 7580.8, "g": "Ash approves brand gateway and collection treatments", "ours": 575}, {"w": 3, "n": "Discovery", "d": "Find hub \u00b7 communities \u00b7 193 fabric finders \u00b7 the finder tool rebuilt on WordPress", "p": 213, "t": 2, "c": 3032.32, "g": "Ash approves finder behaviour and the hub structure", "ours": 213}, {"w": 4, "n": "AKAS Tex", "d": "The Dream \u00b7 journeys \u00b7 industries \u00b7 services \u00b7 technologies \u00b7 38 fabric styles \u00b7 11 SupAbsorb products \u00b7 swatch checkout", "p": 122, "t": 13, "c": 19710.08, "g": "Ash approves the narrative treatments", "ours": 125}, {"w": 5, "n": "The tail", "d": "Journey guides \u00b7 Learn \u00b7 Family", "p": 23, "t": 4, "c": 6064.6, "g": "", "ours": 27}];
+const T=DATA, W=WAVES;
+const shapeVerb={Door:'arrive and are placed',Navigator:'choose among rooms',Recognition:'see yourself first',Gateway:'enter a brand’s world',Body:'decide on one thing, fully',Telling:'are told what happened',Guide:'learn how',Instrument:'operate something',Proof:'check it yourself',Ledger:'look up a fact',Crossing:'move up a rung'};
+const shapes=Object.keys(shapeVerb);
+let mode='wave', only=0;
+const $=s=>document.querySelector(s);
+function cols(n){return Math.max(4,Math.min(24,Math.ceil(Math.sqrt(n*2.2))))}
+function build(){
+  for(const site of ['W','A']){
+    const box=document.getElementById('cl-'+site); box.innerHTML='';
+    T.filter(t=>t.site===site).forEach((t,ti)=>{
+      const b=document.createElement('button'); b.className='cl'; b.dataset.k=T.indexOf(t);
+      b.innerHTML=`<span class="lab"><b>${t.name}</b><em>${t.n}</em></span>`;
+      const g=document.createElement('span'); g.className='dots'; g.style.gridTemplateColumns=`repeat(${Math.min(cols(t.n),t.n)},var(--dz))`;
+      // one dot per page; masters use counts
+      const seq=t.master? Array.from({length:t.n},(_,i)=>[null,null,t.wave,i<t.live?1:0,t.shape]) : t.pages;
+      seq.forEach(p=>{const d=document.createElement('i'); d.className='d'; d.dataset.w=p[2]; d.dataset.l=p[3]; d.dataset.s=p[4]; g.appendChild(d)});
+      b.appendChild(g); b.addEventListener('click',()=>open(t)); box.appendChild(b);
+    });
+  }
+  paint();
+}
+function paint(){
+  document.querySelectorAll('.d').forEach(d=>{
+    let c, hollow=false;
+    if(mode==='wave'){c=`var(--wv${d.dataset.w})`}
+    else if(mode==='shape'){c=`var(--sh-${d.dataset.s})`}
+    else {c='var(--fg-2)'; hollow=d.dataset.l==='0'}
+    d.style.setProperty('--c',c); d.classList.toggle('h',hollow);
+    d.style.opacity = only && +d.dataset.w!==only ? .12 : 1;
+  });
+  const L=$('#legend');
+  if(mode==='wave') L.innerHTML=W.map(w=>`<span><i style="background:var(--wv${w.w})"></i>Wave ${w.w} · ${w.n}</span>`).join('');
+  else if(mode==='shape') L.innerHTML=shapes.map(s=>`<span title="${shapeVerb[s]}"><i style="background:var(--sh-${s})"></i>${s}</span>`).join('');
+  else L.innerHTML=`<span><i style="background:var(--fg-2)"></i>Live today · ${T.reduce((a,t)=>a+t.live,0)}</span><span><i class="hollow"></i>To build · ${T.reduce((a,t)=>a+t.n-t.live,0)}</span>`;
+}
+document.querySelectorAll('#modes button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#modes button').forEach(x=>x.setAttribute('aria-pressed',x===b)); mode=b.dataset.m; paint();
+}));
+document.querySelectorAll('.g').forEach(g=>g.addEventListener('click',()=>{
+  const w=+g.dataset.w; only = only===w?0:w;
+  document.querySelectorAll('.g').forEach(x=>x.setAttribute('aria-pressed',+x.dataset.w===only));
+  if(mode!=='wave'){mode='wave';document.querySelectorAll('#modes button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.m==='wave'))}
+  paint(); $('#picture').scrollIntoView({behavior:'smooth',block:'start'});
+}));
+const P=$('#panel'), PB=$('#pbody');
+function open(t){
+  const site=t.site==='W'?'wazoodle.com':'akastex.com';
+  const wv=Object.entries(t.waves).map(([w,n])=>`<span><i style="background:var(--wv${w})"></i>Wave ${w}${Object.keys(t.waves).length>1?' · '+n:''}</span>`).join('');
+  let h=`<button class="x" data-close aria-label="Close">✕</button><p class="kicker">${site}</p><h4>${t.name}</h4>
+  <div class="chips"><span><i style="background:var(--sh-${t.shape})"></i>${t.shape} — you ${shapeVerb[t.shape]}</span>${wv}<span>${t.live} live · ${t.n-t.live} to build</span></div>`;
+  if(t.master) h+=`<div class="pop"><b>${t.n}</b>${t.name.toLowerCase()} from one master template. ${t.ty==='Fabric Finder'?'The finder tool itself is rebuilt on the WordPress side; these pages are content placed into it.':'Populated from the products already in Shopify — designed once, filled many times.'}</div>`;
+  else h+=`<ol>${t.pages.map(p=>`<li class="${p[3]?'':'h'}"><i style="background:var(--wv${p[2]})"></i>${p[0]}<small>${p[1]}</small></li>`).join('')}</ol>`;
+  PB.innerHTML=h; P.showModal();
+}
+P.addEventListener('click',e=>{if(e.target===P||e.target.closest('[data-close]'))P.close()});
+build();
+</script>
+</body></html>
