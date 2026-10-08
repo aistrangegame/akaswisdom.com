@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FFFFFF">
+<title>Zorb Original — The Portal · AKAS Wisdom</title>
+<meta name="description" content="The portal to Zorb Original. Five resources and fourteen voices.">
+
+<!--
+═══════════════════════════════════════════════════════════════════════
+  ZORB ORIGINAL · The Portal
+  akaswisdom.com/zorb-original/
+
+  The front door to the entire Zorb Original space on AKAS Wisdom.
+
+  Two sections, in this order:
+    RESOURCES (5)  — The Atlas, Help Center, UGC Gallery, Fabric Images, Documents
+    THE VOICES (14) — every I-Perspective story, listed by community + name
+
+  Voice rows lead with COMMUNITY (the invitation — visitors recognize themselves
+  by the maker community they belong to), then the personal name and pivot below.
+
+    The Cloth Diaper Maker
+    Jennifer · seven hours. she woke up dry.
+
+  Profoundly simple: one universal row template across all 19 doorways.
+═══════════════════════════════════════════════════════════════════════
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,200..400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..500;1,8..60,300..500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  /* Zorb Original — clinical, science-forward palette
+     Brand: Crisp White paper · Mist Gray rules · Brand Blue accent · Email Background hover */
+  --paper:        #FFFFFF;            /* Crisp White */
+  --paper-edge:   #F0F4F7;            /* subtle cool */
+  --page:         #FAFCFD;            /* very slight cool tint */
+  --ink:          #0C0C0A;
+  --body:         #1F1F1C;
+  --warm:         #4D4D47;
+  --dim:          #67665F;
+  --rule:         #BFCFD9;            /* Cool Shadow */
+  --rule-soft:    #E6EAEA;            /* Mist Gray */
+  --accent:       #006CB7;            /* Zorb brand Primary Blue */
+  --accent-soft:  #DDF4FF;            /* Zorb brand Email Background — perfect hover */
+  --accent-glow:  rgba(0, 108, 183, 0.20);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  background: var(--paper);
+  color: var(--body);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-weight: 400;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-size: 17px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.portal {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 80px 28px 80px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ═══ MASTHEAD ═══ */
+.masthead {
+  margin-bottom: 64px;
+}
+
+.masthead-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--warm);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 28px;
+}
+
+.masthead-eyebrow::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--warm);
+  display: inline-block;
+}
+
+.masthead-name {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 3.4rem);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--ink);
+}
+
+/* ═══ SECTION HEADERS ═══ */
+.section-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--warm);
+  font-weight: 500;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.section-eyebrow::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--warm);
+  display: inline-block;
+}
+
+.section-eyebrow .count {
+  color: var(--dim);
+  font-weight: 400;
+}
+
+.section {
+  margin-bottom: 56px;
+}
+
+.section:last-of-type {
+  margin-bottom: 0;
+}
+
+/* Subtle visual divider between maker voices and foundational voices */
+.voices-rule {
+  height: 18px;
+  display: block;
+  border-top: 1px solid var(--rule-soft);
+  margin: 0;
+}
+
+/* ═══ DOORWAYS — universal row template across all 19 ═══ */
+.doorways {
+  display: flex;
+  flex-direction: column;
+}
+
+.doorway {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 22px 36px 22px 4px;
+  border-top: 1px solid var(--rule-soft);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  transition: background 0.4s ease;
+}
+
+.doorway:last-child {
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.doorway::after {
+  content: '→';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  color: var(--dim);
+  opacity: 0.4;
+  transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
+}
+
+.doorway:hover,
+.doorway:focus-visible {
+  background: var(--accent-soft);
+  outline: none;
+}
+
+.doorway:hover::after,
+.doorway:focus-visible::after {
+  opacity: 1;
+  transform: translateY(-50%) translateX(4px);
+  color: var(--accent);
+}
+
+.doorway:hover .doorway-label,
+.doorway:focus-visible .doorway-label {
+  color: var(--accent);
+}
+
+.doorway-glyph {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 11px;
+  box-shadow: 0 0 0 0 var(--accent-glow);
+  transition: box-shadow 0.4s ease;
+}
+
+.doorway:hover .doorway-glyph,
+.doorway:focus-visible .doorway-glyph {
+  box-shadow: 0 0 0 5px var(--accent-glow);
+}
+
+.doorway-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.doorway-label {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 400;
+  font-size: 1.22rem;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.doorway-line {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-weight: 400;
+  font-size: 0.95rem;
+  color: var(--dim);
+  line-height: 1.5;
+}
+
+/* Voice rows: italic essence-line (the pivot reads as a quoted whisper) */
+.section-voices .doorway-line {
+  font-style: italic;
+}
+
+.section-voices .voice-name {
+  font-style: normal;
+  color: var(--warm);
+  font-weight: 500;
+}
+
+/* ═══ PENDING STATE ═══
+   For doorways awaiting their destination URL.
+   Visually distinct: muted text, empty glyph, "soon" indicator
+   replacing the arrow. Non-interactive (pointer-events: none). */
+.doorway.pending {
+  cursor: default;
+  pointer-events: none;
+}
+
+.doorway.pending::after {
+  content: 'soon';
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dim);
+  opacity: 0.85;
+  font-weight: 500;
+  /* keep vertical centering, no horizontal shift */
+}
+
+.doorway.pending .doorway-label {
+  color: var(--warm);
+}
+
+.doorway.pending .doorway-glyph {
+  background: transparent;
+  border: 1px solid var(--rule);
+  box-shadow: none;
+}
+
+.doorway.pending .doorway-line {
+  opacity: 0.75;
+}
+
+/* ═══ FOOTER ═══ */
+.portal-foot {
+  margin-top: auto;
+  padding-top: 80px;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dim);
+  font-weight: 500;
+}
+
+.portal-foot::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--rule);
+  display: inline-block;
+}
+
+/* ═══ REVEAL ═══ */
+.reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══ MOBILE ═══ */
+@media (max-width: 480px) {
+  .portal { padding: 56px 22px 56px; }
+  .masthead { margin-bottom: 48px; }
+  .masthead-name { font-size: 2.3rem; }
+  .section { margin-bottom: 44px; }
+  .doorway { padding: 18px 32px 18px 4px; gap: 12px; }
+  .doorway-label { font-size: 1.1rem; }
+  .doorway-line { font-size: 0.88rem; }
+  .doorway-glyph { margin-top: 9px; }
+  .portal-foot { padding-top: 56px; }
+}
+
+/* ═══ REDUCED MOTION ═══ */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .doorway, .doorway::after, .doorway-glyph, .doorway-label {
+    transition: none;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+</style>
+</head>
+<body>
+
+<main class="portal">
+
+  <!-- ═══ MASTHEAD ═══ -->
+  <header class="masthead">
+    <p class="masthead-eyebrow reveal">AKAS Wisdom · Portal</p>
+    <h1 class="masthead-name reveal">Zorb Original</h1>
+  </header>
+
+  <!-- ═══ RESOURCES — 6 ═══ -->
+  <section class="section section-resources" aria-label="Resources">
+    <p class="section-eyebrow reveal">Resources <span class="count">· 7 · 1 pending</span></p>
+
+    <div class="doorways">
+
+      <!-- The Atlas KB Docs -->
+      <a class="doorway reveal" target="_blank" rel="noopener noreferrer" href="zorb-original-atlas-kbdocs.html">
+        <span class="doorway-glyph" aria-hidden="true"></span>
+        <span class="doorway-content">
+          <span class="doorway-label">The Atlas — KB Docs</span>
+          <span class="doorway-line">The technical knowledge base. Specs, properties, applications.</span>
+        </span>
+      </a>
+
+      <!-- The Atlas Stories -->
+      <a class="doorway reveal" target="_blank" rel="noopener noreferrer" href="zorb-original-atlas-stories.html">
+        <span class="doorway-glyph" aria-hidden="true"></span>
+        <span class="doorway-content">
+          <span class="doorway-label">The Atlas — Stories</span>
+          <span class="doorway-line">The impact stories. Thirteen years of makers, in their words.</span>
+        </span>
+      </a>
+
+      <!-- The Help Center — external · help.wazoodle.com -->
+      <a class="doorway reveal" target="_blank" rel="noopener noreferrer" href="https://help.wazoodle.com/article/911-zorb-original-discovery">
+        <span class="doorway-glyph" aria-hidden="true"></span>
+        <span class="doorway-content">
+          <span class="doorway-label">The Help Center</span>
+          <span class="doorway-line">Customer questions, answered. Care, sewing, troubleshooting.</span>
+        </span>
+      </a>
+
+      <!-- The UGC Gallery — pending -->
+      <div class="doorway pending reveal" aria-disabled="true">
+        <span class="doorway-glyph" aria-hidden="true"></span>
+        <span class="doorway-content">
+          <span class="doorway-label">The UGC Gallery</span>
+          <span class="doorway-line">What the community has made. Photos from real makers.</span>
+        </span>
+      </div>
+
+      <!-- The Fabric Images — Airtable -->
+      <a class="doorway reveal" target="_blank" rel="noopener noreferrer" href="https://airtable.com/appwS1QBk6UezGvP4/shrAhHHumZv8MTTPh/tbl0Li0XfcFUd08AS">
+        <span class="doorway-glyph" aria-hidden="true"></span>
+        <span class="doorway-content">
+          <span class="doorway-label">The Fabric Images</span>
+          <span class="doorway-line">Detail photography. Structure, weight, drape.</span>
+        </span>
+      </a>
+
+      <!-- The Documents — Airtable -->
+      <a class="doorway reveal" target="_blank" rel="noopener noreferrer" href="https://airtable.com/appeeRuBwCgQOL1Xt/shru4hmZu2f6H8Wcf">
+        <span class="doorway-glyph" aria-hidden="true"></span>
+        <span class="doorway-content">
+          <span class="doorway-label">The Documents</span>
+          <span class="doorway-line">Spec sheets, certifications, sourcing — downloadable.</span>
+        </span>
+      </a>
+
+      <!-- The Moments-Line -->
+      <a class="doorway reveal" target="_blank" rel="noopener noreferrer" href="https://akaswisdom.com/zorb/zorb-original/zorb-original-moments-line.html">
+        <span class="doorway-glyph" aria-hidden="true"></span>
+        <span class="doorway-content">
+          <span class="doorway-label">The Moments-Line</span>
+          <span class="doorway-line">Every significant moment, in order. The living archive.</span>
+        </span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═══ THE VOICES — 14 ═══ -->
+  <section class="section section-voices" aria-label="The Voices">
+    <p class="section-eyebrow reveal">The Voices <span class="count">· 14</span></p>
+
+    <div class="doorways">
+
+      <!-- 11 maker voices · alphabetical by community -->
+
+      <a class="doorway reveal" target="_blank" rel="noopener noreferrer" href="incontinence-anne.html">
+        <span class="doorway-glyph" aria-hidden="true"></span>
+        <span class="doorway-content">
+          <span class="doorway-label">The Incontinence Maker</span>
+          <span class="doorway-line"><span class="voice-name">Anne</span> · it held.</span>
+        </span>
+      </a>
+
+      <a class="doorway reveal" target="_blank" rel="noopener noreferrer" href="personal-pad-ashley.html">
+        <span class="doorway-glyph" aria-hidden="true"></span>
+        <span class="doorway-content">
+          <span class="doorway-label">The Personal Pad Maker</span>
+          <span class="doorway-line"><span class="voice-name">Ashley</span> · unreal.</span>
+        </span>
+      </a>
+
+      <a class="doorway reveal" target="_blank" rel="noopener noreferrer" href="special-needs-bubba.html">
+        <span class="doorway-glyph" aria-hidden="true"></span>
+        <span class="doorway-content">
+          <span class="doorway-label">The Special Needs Caregiver</span>
+          <span class="doorway-line"><span class="voice-name">Bubba</span> · that absence is the success.</span>
+        </span>
+      </a>
+
+      <a class="doorway reveal" target="_blank" rel="noopener noreferrer" href="humanitarian-dianne.html">
+        <span class="doorway-glyph" aria-hidden="true"></span>
+        <span class="doorway-content">
+          <span class="doorway-label">The Humanitarian Maker</span>
+          <span class="doorway-line"><span class="voice-name">Dianne</span> · three hundred and thirty-three girls.</span>
+        </span>
+      </a>
+
+      <a class="doorway reveal" target="_blank" rel="noopener noreferrer" href="cloth-diaper-jennifer.html">
+        <span class="doorway-glyph" aria-hidden="true"></span>
+        <span class="doorway-content">
+          <span class="doorway-label">The Cloth Diaper Maker</span>
+          <span class="doorway-line"><span class="voice-name">Jennifer</span> · seven hours. she woke up dry.</span>
+        </span>
+      </a>
+
+      <a class="doorway reveal" target="_blank" rel="noopener noreferrer" href="hydroponic-john.html">
+        <span class="doorway-glyph" aria-hidden="true"></span>
+        <span class="doorway-content">
+          <span class="doorway-label">The Hydroponic Grower</span>
+          <span class="doorway-line"><span class="voice-name">John</span> · that's the discovery.</span>
+        </span>
+      </a>
+
+      <a class="doorway reveal" target="_blank" rel="noopener noreferrer" href="household-kathrine.html">
+        <span class="doorway-glyph" aria-hidden="true"></span>
+        <span class="doorway-content">
+          <span class="doorway-label">The Household Maker</span>
+          <span class="doorway-line"><span class="voice-name">Kathrine</span> · the fabric doesn't know it's a sponge now.</span>
+        </span>
+      </a>
+
+      <a class="doorway reveal" target="_blank" rel="noopener noreferrer" href="business-pad-laura.html">
+        <span class="doorway-glyph" aria-hidden="true"></span>
+        <span class="doorway-content">
+          <span class="doorway-label">The Business Pad Maker</span>
+          <span class="doorway-line"><span class="voice-name">Laura</span> · a satisfied customer.</span>
+        </span>
+      </a>
+
+      <a class="doorway reveal" target="_blank" rel="noopener noreferrer" href="medical-nancy.html">
+        <span class="doorway-glyph" aria-hidden="true"></span>
+        <span class="doorway-content">
+          <span class="doorway-label">The Medical Maker</span>
+          <span class="doorway-line"><span class="voice-name">Nancy</span> · no itching. and no odor.</span>
+        </span>
+      </a>
+
+      <a class="doorway reveal" target="_blank" rel="noopener noreferrer" href="guinea-pig-shelleyray.html">
+        <span class="doorway-glyph" aria-hidden="true"></span>
+        <span class="doorway-content">
+          <span class="doorway-label">The Guinea Pig Owner</span>
+          <span class="doorway-line"><span class="voice-name">ShelleyRay</span> · four days. no smell.</span>
+        </span>
+      </a>
+
+      <a class="doorway reveal" target="_blank" rel="noopener noreferrer" href="dog-owner-vanessa.html">
+        <span class="doorway-glyph" aria-hidden="true"></span>
+        <span class="doorway-content">
+          <span class="doorway-label">The Dog Owner</span>
+          <span class="doorway-line"><span class="voice-name">Vanessa</span> · getting her house back.</span>
+        </span>
+      </a>
+
+      <!-- Subtle visual divider before foundational voices -->
+      <span class="voices-rule" aria-hidden="true"></span>
+
+      <!-- 3 foundational voices · narrative order: sacred letter → witness → cosmos -->
+
+      <a class="doorway reveal" target="_blank" rel="noopener noreferrer" href="one-listens-to-fabric.html">
+        <span class="doorway-glyph" aria-hidden="true"></span>
+        <span class="doorway-content">
+          <span class="doorway-label">The Fabric Speaks</span>
+          <span class="doorway-line"><span class="voice-name">One Listens</span> · it was ready before you were.</span>
+        </span>
+      </a>
+
+      <a class="doorway reveal" target="_blank" rel="noopener noreferrer" href="family-story.html">
+        <span class="doorway-glyph" aria-hidden="true"></span>
+        <span class="doorway-content">
+          <span class="doorway-label">The Work Speaks Back</span>
+          <span class="doorway-line"><span class="voice-name">Family Perspective</span> · you made this.</span>
+        </span>
+      </a>
+
+      <a class="doorway reveal" target="_blank" rel="noopener noreferrer" href="fabric-i-story.html">
+        <span class="doorway-glyph" aria-hidden="true"></span>
+        <span class="doorway-content">
+          <span class="doorway-label">Consciousness Awakening</span>
+          <span class="doorway-line"><span class="voice-name">The Fabric's I</span> · i am absorbent.</span>
+        </span>
+      </a>
+
+    </div>
+  </section>
+
+  <footer class="portal-foot reveal">
+    AKAS Wisdom
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  // Stagger reveal — masthead first, then sections, then footer.
+  // 19 doorways + 2 section eyebrows + masthead lines + footer.
+  // Faster cadence (50ms apart) so total entry stays under 1.5s.
+  const items = document.querySelectorAll('.reveal');
+  items.forEach((el, i) => {
+    setTimeout(() => el.classList.add('in'), 80 + i * 50);
+  });
+})();
+</script>
+
+</body>
+</html>

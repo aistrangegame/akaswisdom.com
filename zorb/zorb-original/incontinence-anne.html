@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+<meta name="theme-color" content="#F7F4ED">
+<title>Anne — The Incontinence Maker · Zorb Original · AKAS Wisdom</title>
+
+<meta name="description" content="The Incontinence Maker speaking to the Incontinence Maker. A peer-to-peer transmission. ~2:30." />
+
+<!--
+═══════════════════════════════════════════════════════════════════════
+  ANNE · The Incontinence Maker — I-Perspective Experience  V2
+  akaswisdom.com/zorb-original/perspectives/anne.html
+
+  Mechanic: Tap to reveal · Hold to continue
+  Visual: Absorbent design language — drops fill, paragraphs soften
+  Five movements. ~2:30 experience.
+
+  Source: zorb-perspectives/zorb-original-anne-incontinence.md
+  Register: Restrained-dignified. The quietest in any domain.
+  Arc: Vigilance → Forgetting.
+═══════════════════════════════════════════════════════════════════════
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  /* AKAS Wisdom palette */
+  --paper:        #F7F4ED;
+  --paper-edge:   #EFEBE0;
+  --page:         #FCFAF4;
+  --ink:          #0C0C0A;
+  --body:         #1F1F1C;
+  --warm:         #4D4D47;
+  --dim:          #67665F;
+  --rule:         #D6D2C5;
+  --rule-soft:    #E5E1D4;
+  --ember:        #B57420;
+  --ember-soft:   #F4ECDD;
+  --ember-glow:   rgba(181, 116, 32, 0.18);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--paper);
+  color: var(--body);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-weight: 400;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100%;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  position: relative;
+  font-size: 17px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ═══ ORIENTATION CARD ═══ */
+.orientation {
+  position: fixed;
+  inset: 0;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  z-index: 100;
+  padding: 32px 24px;
+  text-align: center;
+  transition: opacity 1.1s ease, visibility 1.1s ease;
+}
+.orientation.fading-out {
+  opacity: 0;
+  visibility: hidden;
+}
+.orientation .eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ember);
+  font-weight: 500;
+  margin-bottom: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.drop-glyph {
+  width: 7px;
+  height: 9px;
+  background: var(--ember);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  display: inline-block;
+}
+.orientation .name {
+  font-family: 'Source Serif 4', serif;
+  font-size: clamp(2.6rem, 10vw, 4rem);
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+.orientation .domain {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-size: clamp(1.05rem, 3.6vw, 1.2rem);
+  color: var(--warm);
+  font-weight: 400;
+  margin-top: 4px;
+}
+.orientation .frame {
+  font-family: 'Source Serif 4', serif;
+  font-size: clamp(0.95rem, 3.2vw, 1.05rem);
+  color: var(--dim);
+  max-width: 380px;
+  margin-top: 22px;
+  font-style: italic;
+}
+.orientation .duration {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-top: 6px;
+}
+.orientation .gesture-hint {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-top: 36px;
+  opacity: 0.75;
+  line-height: 1.85;
+  max-width: 280px;
+}
+.orientation .gesture-hint span {
+  color: var(--warm);
+}
+.orientation .hold-anchor {
+  margin-top: 26px;
+}
+
+/* ═══ HOLD RING (universal advance gesture) ═══ */
+.hold-anchor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.hold-ring {
+  width: 56px;
+  height: 56px;
+  position: relative;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.hold-ring-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.hold-ring-track {
+  fill: none;
+  stroke: var(--rule);
+  stroke-width: 1;
+  opacity: 0.7;
+}
+.hold-ring-fill {
+  fill: none;
+  stroke: var(--ember);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 163.36;
+  stroke-dashoffset: 163.36;
+  transition: stroke-dashoffset 0.05s linear;
+}
+.hold-ring-drop {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 11px;
+  background: var(--rule);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  transition: background 0.4s ease, transform 0.5s ease;
+  pointer-events: none;
+}
+.hold-ring.holding .hold-ring-drop {
+  background: var(--ember);
+}
+.hold-ring.completing .hold-ring-drop {
+  background: var(--ember);
+  transform: translate(-50%, -50%) scale(1.6);
+  opacity: 0;
+  transition: transform 0.7s ease, opacity 0.7s ease;
+}
+
+.hold-cue {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--dim);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ═══ STAGE ═══ */
+.stage {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 100px 28px 140px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+  cursor: pointer;
+}
+.stage.active { opacity: 1; }
+
+/* ═══ SETTLING SCENE ═══ */
+/* The grounding breath between orientation and M1 — a single drop arrives,
+   the peer-frame restates itself softly, then both fade. Walker has a beat
+   to enter the room before Anne speaks. */
+.settling {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  width: 100%;
+  min-height: 60vh;
+  opacity: 0;
+  transition: opacity 1.0s ease;
+}
+.settling.shown {
+  display: flex;
+  opacity: 1;
+}
+.settling.fading {
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+.settling-drop {
+  width: 22px;
+  height: 28px;
+  background: var(--ember);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  display: inline-block;
+  animation: settlingBreath 2.4s ease-in-out infinite;
+  position: relative;
+  filter: drop-shadow(0 0 12px var(--ember-glow));
+}
+@keyframes settlingBreath {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+.settling-line {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-size: clamp(0.95rem, 3.2vw, 1.05rem);
+  color: var(--dim);
+  letter-spacing: 0.01em;
+  text-align: center;
+  max-width: 320px;
+  line-height: 1.55;
+}
+
+/* ═══ PROGRESS DROPS ═══ */
+.progress-bar {
+  position: fixed;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 50;
+  opacity: 0;
+  transition: opacity 1.2s ease 0.5s;
+  pointer-events: none;
+}
+.progress-bar.shown { opacity: 1; }
+
+.progress-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-right: 14px;
+  font-weight: 500;
+}
+
+.progress-drops {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.progress-drop {
+  width: 7px;
+  height: 9px;
+  border: 1px solid var(--rule);
+  background: transparent;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  transition: background 0.7s ease, border-color 0.7s ease, transform 0.5s ease;
+}
+.progress-drop.filled {
+  background: var(--ember);
+  border-color: var(--ember);
+}
+.progress-drop.active {
+  border-color: var(--ember);
+  transform: scale(1.15);
+}
+
+/* ═══ MOVEMENTS ═══ */
+.movement {
+  display: none;
+  width: 100%;
+}
+.movement.active { display: block; }
+
+.movement.absorbing {
+  animation: movementAbsorb 1.0s ease forwards;
+}
+@keyframes movementAbsorb {
+  0%   { opacity: 1; transform: translateY(0); filter: none; }
+  40%  { opacity: 0.55; filter: blur(0.5px); }
+  100% { opacity: 0; transform: translateY(-10px); filter: blur(1.5px); }
+}
+
+.movement-rule {
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--rule);
+  margin: 0 auto 36px;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+.movement.active .movement-rule { opacity: 1; }
+
+/* Lines */
+.line {
+  font-size: clamp(1.08rem, 3.8vw, 1.2rem);
+  line-height: 1.65;
+  color: var(--body);
+  margin-bottom: 1.4em;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.8s ease, transform 0.8s ease, color 1.2s ease;
+}
+.line.shown {
+  opacity: 1;
+  transform: translateY(0);
+}
+.line:last-of-type { margin-bottom: 0; }
+
+/* Absorbent softening — earlier lines recede gently */
+.line.shown.softened {
+  opacity: 0.62;
+  color: var(--warm);
+}
+
+.line.emphasis {
+  font-style: italic;
+}
+.line.shown.emphasis {
+  color: var(--warm);
+}
+.line.shown.emphasis.softened {
+  opacity: 0.55;
+  color: var(--dim);
+}
+
+.line.larger {
+  font-size: clamp(1.22rem, 4.4vw, 1.4rem);
+  line-height: 1.5;
+}
+
+/* ═══ THE PIVOT MOMENT ═══
+   For "It held." in M4 — the line on which the entire walk turns.
+   Slower, more present arrival. A soft glow that breathes once.
+   Resists later softening — stays brighter than other softened lines. */
+.line.pivot-moment {
+  transition: opacity 1.6s ease, transform 1.6s ease, color 1.2s ease;
+  margin: 0.6em 0 1.6em;
+}
+.line.pivot-moment.shown {
+  animation: pivotArrival 4.0s ease-out forwards;
+}
+@keyframes pivotArrival {
+  0%   { text-shadow: 0 0 0 transparent; }
+  35%  { text-shadow: 0 0 22px rgba(181, 116, 32, 0.32); }
+  100% { text-shadow: 0 0 0 transparent; }
+}
+
+/* The pivot resists the forgetting — softens less than its siblings */
+.line.pivot-moment.shown.softened {
+  opacity: 0.78;
+  color: var(--warm);
+}
+
+/* ═══ M4 — AMPLIFIED FORGETTING ═══
+   In M4 specifically, the prior lines fade more deeply when new lines arrive.
+   The page enacts what Anne names: the awareness wasn't there anymore. */
+.m4-forgetting .line.shown.softened {
+  opacity: 0.42;
+  color: var(--dim);
+}
+.m4-forgetting .line.shown.emphasis.softened {
+  opacity: 0.36;
+}
+/* The pivot's resistance carries through — even within m4-forgetting */
+.m4-forgetting .line.pivot-moment.shown.softened {
+  opacity: 0.72;
+  color: var(--warm);
+}
+
+/* ═══ ON THE FABRIC — supporting information layer ═══
+   Anne's voice references specs but never explains them. The fabric card
+   grounds those references with technical clarity in a distinct register.
+   Auto-appears after the last line of a movement settles. M4 has no card —
+   the forgetting is sacred. */
+.fabric-card {
+  margin: 44px 0 0;
+  padding: 18px 0 4px 22px;
+  border-left: 1px solid var(--rule);
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.fabric-card.shown {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fabric-card-header {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--warm);
+  margin-bottom: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+.fabric-card-header .drop-glyph-tiny {
+  width: 5px;
+  height: 7px;
+  background: var(--ember);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  display: inline-block;
+}
+
+.fabric-card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fabric-fact {
+  font-family: 'Source Serif 4', serif;
+  font-size: clamp(0.86rem, 2.8vw, 0.92rem);
+  line-height: 1.5;
+  color: var(--warm);
+}
+
+.fact-key {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  font-weight: 500;
+  display: inline;
+}
+.fact-key.numeric {
+  color: var(--ember);
+}
+
+.fact-context {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  color: var(--warm);
+  margin-left: 2px;
+}
+.fact-context::before {
+  content: ' · ';
+  color: var(--rule);
+  font-style: normal;
+  margin: 0 4px;
+}
+
+/* When movement absorbs, the card absorbs with it */
+.movement.absorbing .fabric-card {
+  transition: opacity 0.6s ease;
+  opacity: 0.3;
+}
+
+/* ═══ GATE (hold ring) ═══ */
+.gate {
+  margin: 56px auto 0;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 1.0s ease;
+  pointer-events: none;
+}
+.gate.shown {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ═══ CLOSING ═══ */
+.closing {
+  display: none;
+  width: 100%;
+  text-align: center;
+  padding: 32px 0 0;
+}
+.closing.active { display: block; }
+
+.closing-mark {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 36px;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.closing-mark.shown { opacity: 1; }
+
+.closing-line {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-size: clamp(1.15rem, 4vw, 1.32rem);
+  color: var(--warm);
+  line-height: 1.55;
+  margin-bottom: 1.5em;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.closing-line.shown {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.closing-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+  margin-top: 56px;
+  opacity: 0;
+  transition: opacity 1.0s ease;
+}
+.closing-actions.shown { opacity: 1; }
+
+.closing-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  padding: 8px 0;
+  transition: border-color 0.35s ease, color 0.35s ease;
+}
+.closing-link:hover {
+  border-color: var(--ember);
+  color: var(--ember);
+}
+.closing-link.secondary {
+  color: var(--dim);
+  font-size: 0.72rem;
+  border-bottom-color: transparent;
+}
+.closing-link.secondary:hover {
+  color: var(--warm);
+  border-bottom-color: var(--rule-soft);
+}
+
+/* ═══ TAP HINT ═══ */
+.tap-hint {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--dim);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+  z-index: 40;
+}
+.tap-hint.shown { opacity: 0.6; }
+
+/* ═══ REDUCED MOTION ═══ */
+@media (prefers-reduced-motion: reduce) {
+  .line, .movement, .gate, .closing-line, .closing-actions, .closing-mark,
+  .progress-bar, .progress-drop {
+    transition-duration: 0.2s !important;
+  }
+  .movement.absorbing { animation-duration: 0.3s; }
+}
+
+/* ═══ MOBILE TUNING ═══ */
+@media (max-width: 480px) {
+  .stage { padding: 90px 22px 110px; }
+  .progress-bar { top: 22px; gap: 8px; }
+  .progress-name { font-size: 0.62rem; letter-spacing: 0.22em; margin-right: 10px; }
+  .movement-rule { margin-bottom: 28px; }
+  .line { margin-bottom: 1.3em; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ ORIENTATION ═══ -->
+<section class="orientation" id="orientation" aria-label="Orientation">
+  <p class="eyebrow">
+    <span class="drop-glyph"></span>
+    Zorb Original · I Perspective
+  </p>
+  <h1 class="name">Anne</h1>
+  <p class="domain">The Incontinence Maker</p>
+  <p class="frame">Peer to peer. The maker speaking to the maker.</p>
+  <p class="duration">~ 3:00</p>
+  
+  <p class="gesture-hint">
+    <span>tap</span> to reveal<br>
+    <span>hold</span> to continue
+  </p>
+  
+  <div class="hold-anchor">
+    <button class="hold-ring" id="hold-begin" type="button" aria-label="Hold to begin">
+      <svg class="hold-ring-svg" viewBox="0 0 56 56">
+        <circle class="hold-ring-track" cx="28" cy="28" r="26" />
+        <circle class="hold-ring-fill"  cx="28" cy="28" r="26" />
+      </svg>
+      <span class="hold-ring-drop" aria-hidden="true"></span>
+    </button>
+    <p class="hold-cue">hold to begin</p>
+  </div>
+</section>
+
+<!-- ═══ PROGRESS DROPS ═══ -->
+<div class="progress-bar" id="progress-bar">
+  <span class="progress-name">Anne</span>
+  <span class="progress-drops" id="progress-drops">
+    <span class="progress-drop" data-drop="1"></span>
+    <span class="progress-drop" data-drop="2"></span>
+    <span class="progress-drop" data-drop="3"></span>
+    <span class="progress-drop" data-drop="4"></span>
+    <span class="progress-drop" data-drop="5"></span>
+  </span>
+</div>
+
+<!-- ═══ STAGE ═══ -->
+<main class="stage" id="stage">
+
+  <!-- ─── SETTLING SCENE — grounding breath ─── -->
+  <section class="settling" id="settling" aria-hidden="true">
+    <span class="settling-drop"></span>
+    <p class="settling-line">from one maker, to another.</p>
+  </section>
+
+  <!-- ─── M1 — THE COST ARGUMENT ─── -->
+  <section class="movement" id="movement-1" data-movement="1">
+    <span class="movement-rule"></span>
+    <p class="line">One pair of commercial protection costs twice what two yards of this fabric costs.</p>
+    <p class="line">That is the whole financial argument. You already know what two yards of Zorb becomes — how many pads, how long they last, how many times they wash and come back ready. The math settles itself quickly. And the math is the argument you can make to anyone without saying anything else.</p>
+    <p class="line emphasis">I'm telling you the number because it's what I wish someone had told me.</p>
+
+    <div class="fabric-card">
+      <p class="fabric-card-header">
+        <span class="drop-glyph-tiny"></span>
+        On the Fabric
+      </p>
+      <ul class="fabric-card-list">
+        <li class="fabric-fact">
+          <span class="fact-key">W-202 Standard</span><span class="fact-context">sold by the yard · 60″ or 30″ wide</span>
+        </li>
+        <li class="fabric-fact">
+          <span class="fact-key numeric">~20 pads / yard</span><span class="fact-context">documented at humanitarian-pad sizing · incontinence yields trend lower</span>
+        </li>
+        <li class="fabric-fact">
+          <span class="fact-key">Hundreds of wash cycles</span><span class="fact-context">per pad · the math compounds across lifespan</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="gate">
+      <div class="hold-anchor">
+        <button class="hold-ring" data-next="2" type="button" aria-label="Hold to continue">
+          <svg class="hold-ring-svg" viewBox="0 0 56 56">
+            <circle class="hold-ring-track" cx="28" cy="28" r="26" />
+            <circle class="hold-ring-fill"  cx="28" cy="28" r="26" />
+          </svg>
+          <span class="hold-ring-drop" aria-hidden="true"></span>
+        </button>
+        <p class="hold-cue">hold to continue</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── M2 — DISAPPEAR ─── -->
+  <section class="movement" id="movement-2" data-movement="2">
+    <span class="movement-rule"></span>
+    <p class="line">What the protection needs to do — and this is not about absorption, because absorption is the easy part — is disappear.</p>
+    <p class="line">No plastic sounds. No thickness that changes the silhouette under clothing. No disposal logistics in a bathroom where there may not be a discreet bin. The product must feel and sound like ordinary underwear, worn under ordinary clothing, through an ordinary day. If it announces itself, it has failed at its main function.</p>
+    <p class="line">Zorb at 0.080 inches does not change the silhouette. Combined with a wicking layer above and a waterproof layer behind it, the product that results sounds like clothing. Feels like clothing. Goes in the washing machine with everything else.</p>
+
+    <div class="fabric-card">
+      <p class="fabric-card-header">
+        <span class="drop-glyph-tiny"></span>
+        On the Fabric
+      </p>
+      <ul class="fabric-card-list">
+        <li class="fabric-fact">
+          <span class="fact-key numeric">0.080″ thickness</span><span class="fact-context">same absorption as much thicker alternatives</span>
+        </li>
+        <li class="fabric-fact">
+          <span class="fact-key">Hydro-Dual Fiber</span><span class="fact-context">one fiber captures liquid · one distributes through structure in three dimensions</span>
+        </li>
+        <li class="fabric-fact">
+          <span class="fact-key">Ready-AbZORB</span><span class="fact-context">full absorption from wash one · no break-in · CPSIA cleared · no superabsorbent polymers</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="gate">
+      <div class="hold-anchor">
+        <button class="hold-ring" data-next="3" type="button" aria-label="Hold to continue">
+          <svg class="hold-ring-svg" viewBox="0 0 56 56">
+            <circle class="hold-ring-track" cx="28" cy="28" r="26" />
+            <circle class="hold-ring-fill"  cx="28" cy="28" r="26" />
+          </svg>
+          <span class="hold-ring-drop" aria-hidden="true"></span>
+        </button>
+        <p class="hold-cue">hold to continue</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── M3 — COMMUNITY EVIDENCE ─── -->
+  <section class="movement" id="movement-3" data-movement="3">
+    <span class="movement-rule"></span>
+    <p class="line">I didn't arrive at this fabric through my own research.</p>
+    <p class="line">Nine out of twelve makers in my community were already using it for this application. That ratio was enough. When the majority of people doing the same work you're doing have independently arrived at the same material — that is evidence. I ordered based on that evidence and found it better than I expected. The thickness and feel both were.</p>
+    <p class="line">Single layer for lighter needs. Two layers for more, with the top layer narrower — bar-tack them together so nothing shifts during wear. The construction is not complex. The result is thin enough to wear to work.</p>
+
+    <div class="fabric-card">
+      <p class="fabric-card-header">
+        <span class="drop-glyph-tiny"></span>
+        On the Fabric
+      </p>
+      <ul class="fabric-card-list">
+        <li class="fabric-fact">
+          <span class="fact-key">Layer count by need</span><span class="fact-context">single for light · two-layer stack for more</span>
+        </li>
+        <li class="fabric-fact">
+          <span class="fact-key numeric">Top layer ~1″ smaller</span><span class="fact-context">graduated sizing prevents bulk at seam edges</span>
+        </li>
+        <li class="fabric-fact">
+          <span class="fact-key">Bar-tack the stack</span><span class="fact-context">registers layers through laundering · embroidery needle for multi-layer · walking foot · moderate speed</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="gate">
+      <div class="hold-anchor">
+        <button class="hold-ring" data-next="4" type="button" aria-label="Hold to continue">
+          <svg class="hold-ring-svg" viewBox="0 0 56 56">
+            <circle class="hold-ring-track" cx="28" cy="28" r="26" />
+            <circle class="hold-ring-fill"  cx="28" cy="28" r="26" />
+          </svg>
+          <span class="hold-ring-drop" aria-hidden="true"></span>
+        </button>
+        <p class="hold-cue">hold to continue</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── M4 — THE THRESHOLD / FORGETTING ─── -->
+  <section class="movement m4-forgetting" id="movement-4" data-movement="4">
+    <span class="movement-rule"></span>
+    <p class="line">The threshold no one discusses — because discussing it would require disclosure — is the first time you wear it somewhere that matters.</p>
+    <p class="line">Not at home. Out. To a meeting. To a gathering. To an ordinary day in the world. And the question underneath all of it is: will it hold, and will anyone know it's there?</p>
+    <p class="line larger emphasis pivot-moment">It held.</p>
+    <p class="line">And at some point in the middle of that day — I cannot tell you exactly when — I stopped thinking about it. The awareness that had been sitting quietly at the edge of every hour just… wasn't there anymore.</p>
+    <p class="line emphasis">That is the only metric that matters in this domain. Not the absorption speed or the layer count or the yield per yard. The forgetting. The day that passed without the condition entering consciousness.</p>
+    <div class="gate">
+      <div class="hold-anchor">
+        <button class="hold-ring" data-next="5" type="button" aria-label="Hold to continue">
+          <svg class="hold-ring-svg" viewBox="0 0 56 56">
+            <circle class="hold-ring-track" cx="28" cy="28" r="26" />
+            <circle class="hold-ring-fill"  cx="28" cy="28" r="26" />
+          </svg>
+          <span class="hold-ring-drop" aria-hidden="true"></span>
+        </button>
+        <p class="hold-cue">hold to continue</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── M5 — ADVOCACY ─── -->
+  <section class="movement" id="movement-5" data-movement="5">
+    <span class="movement-rule"></span>
+    <p class="line">I have been telling others they need to buy this fabric.</p>
+    <p class="line">I tell them the number — one pair costs twice what two yards costs. That is what I say. They understand the rest without my explaining the rest.</p>
+    <p class="line emphasis">If you are already making protection for yourself or for someone you love, and you haven't tried this fabric: try it. The cost argument alone justifies the order. What happens after the first wear — that part is yours to find out.</p>
+
+    <div class="fabric-card">
+      <p class="fabric-card-header">
+        <span class="drop-glyph-tiny"></span>
+        On the Fabric · The Choice
+      </p>
+      <ul class="fabric-card-list">
+        <li class="fabric-fact">
+          <span class="fact-key">W-202 Standard</span><span class="fact-context">regular wash cycles · Anne's case</span>
+        </li>
+        <li class="fabric-fact">
+          <span class="fact-key">W-201 Silver</span><span class="fact-context">extended wear · antimicrobial control between changes</span>
+        </li>
+        <li class="fabric-fact">
+          <span class="fact-key">Same absorption</span><span class="fact-context">same construction · the variable is wash frequency</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="gate">
+      <div class="hold-anchor">
+        <button class="hold-ring" data-next="closing" type="button" aria-label="Hold to close">
+          <svg class="hold-ring-svg" viewBox="0 0 56 56">
+            <circle class="hold-ring-track" cx="28" cy="28" r="26" />
+            <circle class="hold-ring-fill"  cx="28" cy="28" r="26" />
+          </svg>
+          <span class="hold-ring-drop" aria-hidden="true"></span>
+        </button>
+        <p class="hold-cue">hold to close</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CLOSING ─── -->
+  <section class="closing" id="closing">
+    <p class="closing-mark">
+      <span class="drop-glyph"></span>
+      Anne
+    </p>
+    <p class="closing-line">One voice of fourteen.</p>
+    <p class="closing-line">The same fabric, heard from another position.</p>
+    <div class="closing-actions" id="closing-actions">
+      <a href="portal.html" class="closing-link">the portal</a>
+    </div>
+  </section>
+
+</main>
+
+<div class="tap-hint" id="tap-hint">tap to reveal</div>
+
+<script>
+(function() {
+  'use strict';
+
+  const TOTAL_MOVEMENTS  = 5;
+  const HOLD_DURATION_MS = 850;
+  const HOLD_TICK_MS     = 30;
+  const HINT_DURATION_MS = 5000;
+  const FADE_OUT_MS      = 1000;
+  const CIRCUMFERENCE    = 163.36;
+
+  let currentMovement = 0;
+  let isAdvancing     = false;
+  let isPivotLockout  = false;
+
+  const $  = sel => document.querySelector(sel);
+  const $$ = sel => document.querySelectorAll(sel);
+
+  // ═══ HOLD-RING ENGINE ═══
+  function attachHoldRing(button, onComplete) {
+    const fillEl = button.querySelector('.hold-ring-fill');
+    let holdStart = 0;
+    let intervalId = null;
+    let drainId = null;
+    let completed = false;
+
+    function fullReset() {
+      clearInterval(intervalId);
+      clearInterval(drainId);
+      intervalId = null;
+      drainId = null;
+      holdStart = 0;
+      completed = false;
+      button.classList.remove('holding', 'completing');
+      fillEl.style.strokeDashoffset = CIRCUMFERENCE;
+    }
+
+    function startHold(e) {
+      if (completed || isAdvancing) return;
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Cancel any in-progress drain
+      if (drainId) { clearInterval(drainId); drainId = null; }
+
+      holdStart = Date.now();
+      button.classList.add('holding');
+
+      intervalId = setInterval(() => {
+        const elapsed = Date.now() - holdStart;
+        const progress = Math.min(elapsed / HOLD_DURATION_MS, 1);
+        fillEl.style.strokeDashoffset = CIRCUMFERENCE * (1 - progress);
+
+        if (progress >= 1) {
+          clearInterval(intervalId);
+          intervalId = null;
+          completed = true;
+          button.classList.remove('holding');
+          button.classList.add('completing');
+          setTimeout(() => {
+            fullReset();
+            onComplete();
+          }, 350);
+        }
+      }, HOLD_TICK_MS);
+    }
+
+    function endHold(e) {
+      if (completed || !intervalId) return;
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+
+      clearInterval(intervalId);
+      intervalId = null;
+      button.classList.remove('holding');
+
+      // Smooth drain
+      const startOffset = parseFloat(fillEl.style.strokeDashoffset) || CIRCUMFERENCE;
+      const drainStart = Date.now();
+      const DRAIN_MS = 280;
+      drainId = setInterval(() => {
+        const t = Math.min((Date.now() - drainStart) / DRAIN_MS, 1);
+        fillEl.style.strokeDashoffset = startOffset + (CIRCUMFERENCE - startOffset) * t;
+        if (t >= 1) {
+          clearInterval(drainId);
+          drainId = null;
+          fillEl.style.strokeDashoffset = CIRCUMFERENCE;
+        }
+      }, 16);
+    }
+
+    button.addEventListener('pointerdown', startHold);
+    button.addEventListener('pointerup', endHold);
+    button.addEventListener('pointerleave', endHold);
+    button.addEventListener('pointercancel', endHold);
+    button.addEventListener('click', e => e.stopPropagation());
+  }
+
+  // ═══ ORIENTATION → SETTLING → STAGE ═══
+  attachHoldRing($('#hold-begin'), function() {
+    const orientation = $('#orientation');
+    orientation.classList.add('fading-out');
+    setTimeout(function() {
+      orientation.style.display = 'none';
+      $('#stage').classList.add('active');
+      $('#progress-bar').classList.add('shown');
+      
+      // Show settling scene — the grounding breath
+      const settling = $('#settling');
+      settling.classList.add('shown');
+      
+      // Hold the settling, then fade and begin M1
+      setTimeout(function() {
+        settling.classList.add('fading');
+        setTimeout(function() {
+          settling.style.display = 'none';
+          activateMovement(1);
+          const hint = $('#tap-hint');
+          hint.classList.add('shown');
+          setTimeout(() => hint.classList.remove('shown'), HINT_DURATION_MS);
+        }, 900);
+      }, 2800);
+    }, 1100);
+  });
+
+  // ═══ MOVEMENT ACTIVATION ═══
+  function activateMovement(n) {
+    if (n > TOTAL_MOVEMENTS) {
+      activateClosing();
+      return;
+    }
+
+    currentMovement = n;
+    updateProgress(n);
+
+    $$('.movement').forEach(m => {
+      m.classList.remove('active', 'absorbing');
+      m.querySelectorAll('.line').forEach(line => {
+        line.classList.remove('shown', 'softened');
+      });
+      const gate = m.querySelector('.gate');
+      if (gate) gate.classList.remove('shown');
+    });
+
+    const movement = $(`#movement-${n}`);
+    movement.classList.add('active');
+
+    // Reveal first line automatically
+    setTimeout(() => {
+      const firstLine = movement.querySelector('.line');
+      if (firstLine) firstLine.classList.add('shown');
+    }, 700);
+
+    // Attach hold-ring once per gate
+    const gateButton = movement.querySelector('.gate .hold-ring');
+    if (gateButton && !gateButton.dataset.attached) {
+      gateButton.dataset.attached = 'true';
+      attachHoldRing(gateButton, function() {
+        advanceTo(gateButton.dataset.next);
+      });
+    }
+
+    isAdvancing = false;
+  }
+
+  // ═══ TAP TO REVEAL NEXT LINE ═══
+  function revealNextLine() {
+    if (currentMovement < 1 || currentMovement > TOTAL_MOVEMENTS) return;
+    if (isAdvancing) return;
+    if (isPivotLockout) return;
+
+    const movement = $(`#movement-${currentMovement}`);
+    if (!movement) return;
+
+    const lines = Array.from(movement.querySelectorAll('.line'));
+    const gate  = movement.querySelector('.gate');
+    const firstHiddenIdx = lines.findIndex(l => !l.classList.contains('shown'));
+
+    if (firstHiddenIdx === -1) {
+      if (!gate.classList.contains('shown')) gate.classList.add('shown');
+      return;
+    }
+
+    // Soften prior lines (absorption)
+    if (firstHiddenIdx > 0) {
+      lines.slice(0, firstHiddenIdx).forEach(l => l.classList.add('softened'));
+    }
+
+    const revealed = lines[firstHiddenIdx];
+    revealed.classList.add('shown');
+
+    // The pivot gets its own breath — brief lockout so it isn't accidentally cascaded past
+    if (revealed.classList.contains('pivot-moment')) {
+      isPivotLockout = true;
+      setTimeout(() => { isPivotLockout = false; }, 900);
+    }
+
+    // If last line revealed, show fabric card (if exists) then gate
+    if (firstHiddenIdx === lines.length - 1) {
+      const card = movement.querySelector('.fabric-card');
+      
+      setTimeout(() => {
+        // Soften all but the last line — keep final line sharp
+        lines.slice(0, lines.length - 1).forEach(l => l.classList.add('softened'));
+        
+        // Reveal fabric card if present
+        if (card) {
+          card.classList.add('shown');
+          // Gate appears after card has had its breath
+          setTimeout(() => gate.classList.add('shown'), 1300);
+        } else {
+          // No card (e.g. M4) — gate appears in standard time
+          gate.classList.add('shown');
+        }
+      }, 1100);
+    }
+  }
+
+  // ═══ ADVANCE TO NEXT MOVEMENT ═══
+  function advanceTo(target) {
+    if (isAdvancing) return;
+    isAdvancing = true;
+
+    const current = $(`#movement-${currentMovement}`);
+    if (current) current.classList.add('absorbing');
+
+    setTimeout(function() {
+      if (current) current.classList.remove('absorbing', 'active');
+      if (target === 'closing') {
+        activateClosing();
+      } else {
+        activateMovement(parseInt(target, 10));
+      }
+    }, FADE_OUT_MS);
+  }
+
+  // ═══ PROGRESS DROPS ═══
+  function updateProgress(n) {
+    $$('.progress-drop').forEach((drop, i) => {
+      const idx = i + 1;
+      drop.classList.remove('filled', 'active');
+      if (idx < n) drop.classList.add('filled');
+      else if (idx === n) drop.classList.add('active');
+    });
+  }
+
+  // ═══ CLOSING ═══
+  function activateClosing() {
+    currentMovement = 6;
+    $('#progress-bar').classList.remove('shown');
+    
+    $$('.progress-drop').forEach(d => {
+      d.classList.remove('active');
+      d.classList.add('filled');
+    });
+
+    const closing = $('#closing');
+    closing.classList.add('active');
+
+    const mark    = closing.querySelector('.closing-mark');
+    const lines   = closing.querySelectorAll('.closing-line');
+    const actions = $('#closing-actions');
+
+    setTimeout(() => mark.classList.add('shown'), 600);
+    lines.forEach((line, i) => {
+      setTimeout(() => line.classList.add('shown'), 1400 + i * 1200);
+    });
+    setTimeout(() => actions.classList.add('shown'), 1400 + lines.length * 1200 + 400);
+  }
+
+  // ═══ STAGE TAP HANDLER ═══
+  $('#stage').addEventListener('click', function(e) {
+    if (e.target.closest('.hold-ring')) return;
+    if (e.target.closest('.closing-link')) return;
+    revealNextLine();
+  });
+
+  // ═══ KEYBOARD ═══
+  document.addEventListener('keydown', function(e) {
+    if (currentMovement < 1 || currentMovement > TOTAL_MOVEMENTS) return;
+    if (e.key === ' ' || e.key === 'ArrowRight' || e.key === 'Enter') {
+      e.preventDefault();
+      const movement = $(`#movement-${currentMovement}`);
+      const gate = movement.querySelector('.gate');
+      if (gate.classList.contains('shown')) {
+        const button = gate.querySelector('.hold-ring');
+        if (button && !isAdvancing) {
+          button.classList.add('completing');
+          setTimeout(() => {
+            button.classList.remove('completing');
+            advanceTo(button.dataset.next);
+          }, 350);
+        }
+      } else {
+        revealNextLine();
+      }
+    }
+  });
+
+})();
+</script>
+
+</body>
+</html>

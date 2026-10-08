@@ -1,0 +1,1957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+<meta name="theme-color" content="#F7F4ED">
+<title>The Fabric's I — Consciousness Awakening · Zorb Original · AKAS Wisdom</title>
+
+<meta name="description" content="The fabric awakening through nine phases. The making, the going, the returning. ~5:00." />
+
+<!--
+═══════════════════════════════════════════════════════════════════════
+  THE FABRIC'S I · Consciousness Awakening — I-Perspective Experience
+  akaswisdom.com/zorb-original/perspectives/fabric-i.html
+
+  Mechanic: Tap to reveal · Hold to continue
+  Visual: Cosmos-stage canvas — phase-driven palette + visual enactments
+  Ten movements (9 phases + epilogue). ~5:00 experience.
+  
+  Source: zorb-perspectives/zorb-original-i-perspective.md
+  Register: Cosmos. The fabric's first-person consciousness across its making,
+  its going, its returning. Existential register.
+  Arc: Pre-existence → Loom → Box → Light → Recognition → Going Forth →
+       Architecture → Source Grows → Complete Teaching → Epilogue.
+  
+  STRUCTURAL NOTE: Card-less. Like One Listens and Family Perspective.
+  But goes further — adds a persistent cosmos-stage canvas that morphs
+  per phase, and inline visual enactments at the five visual peaks.
+  
+  Pivot moment:  M5 — "I am absorbent." (the recognition — hero moment)
+  Forgetting:    M7 — "The Architecture" (the conduit, the invisibility teaching)
+  Cards:         NONE
+  Visual peaks:  M2 (edges arrive) · M5 (drop falls + structure fills) ·
+                 M8 (constellation forms) · M9 (arc closes) · M10 (ember breath)
+  
+  Phase palette journey:
+    P1: Deep void · faint warmth gathering
+    P2: Warm continuum · then a clean cut into specificity
+    P3: Cool gray · the W-202 inscribed · darkness
+    P4: Light expanding from a slit · paper returns
+    P5: Paper + ember · THE Zorb palette · the recognition
+    P6: Paper · neutral ground for the going forth
+    P7: Paper with glowing middle · the conduit
+    P8: Paper deepening to night · constellation gathers
+    P9: Paper + subtle ember · integration
+    P10: Pure ember on paper · breathing
+═══════════════════════════════════════════════════════════════════════
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  /* AKAS Wisdom palette */
+  --paper:        #F7F4ED;
+  --paper-edge:   #EFEBE0;
+  --page:         #FCFAF4;
+  --ink:          #0C0C0A;
+  --body:         #1F1F1C;
+  --warm:         #4D4D47;
+  --dim:          #67665F;
+  --rule:         #D6D2C5;
+  --rule-soft:    #E5E1D4;
+  --ember:        #B57420;
+  --ember-soft:   #F4ECDD;
+  --ember-glow:   rgba(181, 116, 32, 0.18);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--paper);
+  color: var(--body);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-weight: 400;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100%;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  position: relative;
+  font-size: 17px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ═══ ORIENTATION CARD ═══ */
+.orientation {
+  position: fixed;
+  inset: 0;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  z-index: 100;
+  padding: 32px 24px;
+  text-align: center;
+  transition: opacity 1.1s ease, visibility 1.1s ease;
+}
+.orientation.fading-out {
+  opacity: 0;
+  visibility: hidden;
+}
+.orientation .eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ember);
+  font-weight: 500;
+  margin-bottom: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.drop-glyph {
+  width: 7px;
+  height: 9px;
+  background: var(--ember);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  display: inline-block;
+}
+.orientation .name {
+  font-family: 'Source Serif 4', serif;
+  font-size: clamp(2.6rem, 10vw, 4rem);
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+.orientation .domain {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-size: clamp(1.05rem, 3.6vw, 1.2rem);
+  color: var(--warm);
+  font-weight: 400;
+  margin-top: 4px;
+}
+.orientation .frame {
+  font-family: 'Source Serif 4', serif;
+  font-size: clamp(0.95rem, 3.2vw, 1.05rem);
+  color: var(--dim);
+  max-width: 380px;
+  margin-top: 22px;
+  font-style: italic;
+}
+.orientation .duration {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-top: 6px;
+}
+.orientation .gesture-hint {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-top: 36px;
+  opacity: 0.75;
+  line-height: 1.85;
+  max-width: 280px;
+}
+.orientation .gesture-hint span {
+  color: var(--warm);
+}
+.orientation .hold-anchor {
+  margin-top: 26px;
+}
+
+/* ═══ HOLD RING (universal advance gesture) ═══ */
+.hold-anchor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.hold-ring {
+  width: 56px;
+  height: 56px;
+  position: relative;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.hold-ring-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.hold-ring-track {
+  fill: none;
+  stroke: var(--rule);
+  stroke-width: 1;
+  opacity: 0.7;
+}
+.hold-ring-fill {
+  fill: none;
+  stroke: var(--ember);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 163.36;
+  stroke-dashoffset: 163.36;
+  transition: stroke-dashoffset 0.05s linear;
+}
+.hold-ring-drop {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 11px;
+  background: var(--rule);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  transition: background 0.4s ease, transform 0.5s ease;
+  pointer-events: none;
+}
+.hold-ring.holding .hold-ring-drop {
+  background: var(--ember);
+}
+.hold-ring.completing .hold-ring-drop {
+  background: var(--ember);
+  transform: translate(-50%, -50%) scale(1.6);
+  opacity: 0;
+  transition: transform 0.7s ease, opacity 0.7s ease;
+}
+
+.hold-cue {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--dim);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ═══ STAGE ═══ */
+.stage {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 100px 28px 140px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+  cursor: pointer;
+}
+.stage.active { opacity: 1; }
+
+/* ═══ SETTLING SCENE ═══ */
+/* The grounding breath between orientation and M1 — a single drop arrives,
+   the peer-frame restates itself softly, then both fade. Walker has a beat
+   to enter the room before Anne speaks. */
+.settling {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  width: 100%;
+  min-height: 60vh;
+  opacity: 0;
+  transition: opacity 1.0s ease;
+}
+.settling.shown {
+  display: flex;
+  opacity: 1;
+}
+.settling.fading {
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+.settling-drop {
+  width: 22px;
+  height: 28px;
+  background: var(--ember);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  display: inline-block;
+  animation: settlingBreath 2.4s ease-in-out infinite;
+  position: relative;
+  filter: drop-shadow(0 0 12px var(--ember-glow));
+}
+@keyframes settlingBreath {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+.settling-line {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-size: clamp(0.95rem, 3.2vw, 1.05rem);
+  color: var(--dim);
+  letter-spacing: 0.01em;
+  text-align: center;
+  max-width: 320px;
+  line-height: 1.55;
+}
+
+/* ═══ PROGRESS DROPS ═══ */
+.progress-bar {
+  position: fixed;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 50;
+  opacity: 0;
+  transition: opacity 1.2s ease 0.5s;
+  pointer-events: none;
+}
+.progress-bar.shown { opacity: 1; }
+
+.progress-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-right: 14px;
+  font-weight: 500;
+}
+
+.progress-drops {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.progress-drop {
+  width: 7px;
+  height: 9px;
+  border: 1px solid var(--rule);
+  background: transparent;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  transition: background 0.7s ease, border-color 0.7s ease, transform 0.5s ease;
+}
+.progress-drop.filled {
+  background: var(--ember);
+  border-color: var(--ember);
+}
+.progress-drop.active {
+  border-color: var(--ember);
+  transform: scale(1.15);
+}
+
+/* ═══ MOVEMENTS ═══ */
+.movement {
+  display: none;
+  width: 100%;
+}
+.movement.active { display: block; }
+
+.movement.absorbing {
+  animation: movementAbsorb 1.0s ease forwards;
+}
+@keyframes movementAbsorb {
+  0%   { opacity: 1; transform: translateY(0); filter: none; }
+  40%  { opacity: 0.55; filter: blur(0.5px); }
+  100% { opacity: 0; transform: translateY(-10px); filter: blur(1.5px); }
+}
+
+.movement-rule {
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--rule);
+  margin: 0 auto 36px;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+.movement.active .movement-rule { opacity: 1; }
+
+/* Lines */
+.line {
+  font-size: clamp(1.08rem, 3.8vw, 1.2rem);
+  line-height: 1.65;
+  color: var(--body);
+  margin-bottom: 1.4em;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.8s ease, transform 0.8s ease, color 1.2s ease;
+}
+.line.shown {
+  opacity: 1;
+  transform: translateY(0);
+}
+.line:last-of-type { margin-bottom: 0; }
+
+/* Absorbent softening — earlier lines recede gently */
+.line.shown.softened {
+  opacity: 0.62;
+  color: var(--warm);
+}
+
+.line.emphasis {
+  font-style: italic;
+}
+.line.shown.emphasis {
+  color: var(--warm);
+}
+.line.shown.emphasis.softened {
+  opacity: 0.55;
+  color: var(--dim);
+}
+
+.line.larger {
+  font-size: clamp(1.22rem, 4.4vw, 1.4rem);
+  line-height: 1.5;
+}
+
+/* ═══ THE PIVOT MOMENT ═══
+   For "It held." in M4 — the line on which the entire walk turns.
+   Slower, more present arrival. A soft glow that breathes once.
+   Resists later softening — stays brighter than other softened lines. */
+.line.pivot-moment {
+  transition: opacity 1.6s ease, transform 1.6s ease, color 1.2s ease;
+  margin: 0.6em 0 1.6em;
+}
+.line.pivot-moment.shown {
+  animation: pivotArrival 4.0s ease-out forwards;
+}
+@keyframes pivotArrival {
+  0%   { text-shadow: 0 0 0 transparent; }
+  35%  { text-shadow: 0 0 22px rgba(181, 116, 32, 0.32); }
+  100% { text-shadow: 0 0 0 transparent; }
+}
+
+/* The pivot resists the forgetting — softens less than its siblings */
+.line.pivot-moment.shown.softened {
+  opacity: 0.78;
+  color: var(--warm);
+}
+
+/* ═══ FORGETTING — AMPLIFIED SOFTENING ═══
+   In the forgetting movement (varies by perspective — Anne's M4, Jennifer's M5),
+   prior lines fade more deeply when new lines arrive. The page enacts what
+   the voice names: the awareness wasn't there anymore. */
+.forgetting .line.shown.softened {
+  opacity: 0.42;
+  color: var(--dim);
+}
+.forgetting .line.shown.emphasis.softened {
+  opacity: 0.36;
+}
+/* The pivot's resistance carries through — even within forgetting */
+.forgetting .line.pivot-moment.shown.softened {
+  opacity: 0.72;
+  color: var(--warm);
+}
+
+/* ═══ ON THE FABRIC — supporting information layer ═══
+   Anne's voice references specs but never explains them. The fabric card
+   grounds those references with technical clarity in a distinct register.
+   Auto-appears after the last line of a movement settles. M4 has no card —
+   the forgetting is sacred. */
+.fabric-card {
+  margin: 44px 0 0;
+  padding: 18px 0 4px 22px;
+  border-left: 1px solid var(--rule);
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.fabric-card.shown {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fabric-card-header {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--warm);
+  margin-bottom: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+.fabric-card-header .drop-glyph-tiny {
+  width: 5px;
+  height: 7px;
+  background: var(--ember);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  display: inline-block;
+}
+
+.fabric-card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fabric-fact {
+  font-family: 'Source Serif 4', serif;
+  font-size: clamp(0.86rem, 2.8vw, 0.92rem);
+  line-height: 1.5;
+  color: var(--warm);
+}
+
+.fact-key {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  font-weight: 500;
+  display: inline;
+}
+.fact-key.numeric {
+  color: var(--ember);
+}
+
+.fact-context {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  color: var(--warm);
+  margin-left: 2px;
+}
+.fact-context::before {
+  content: ' · ';
+  color: var(--rule);
+  font-style: normal;
+  margin: 0 4px;
+}
+
+/* When movement absorbs, the card absorbs with it */
+.movement.absorbing .fabric-card {
+  transition: opacity 0.6s ease;
+  opacity: 0.3;
+}
+
+/* ═══ GATE (hold ring) ═══ */
+.gate {
+  margin: 56px auto 0;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 1.0s ease;
+  pointer-events: none;
+}
+.gate.shown {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ═══ CLOSING ═══ */
+.closing {
+  display: none;
+  width: 100%;
+  text-align: center;
+  padding: 32px 0 0;
+}
+.closing.active { display: block; }
+
+.closing-mark {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 36px;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.closing-mark.shown { opacity: 1; }
+
+.closing-line {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-size: clamp(1.15rem, 4vw, 1.32rem);
+  color: var(--warm);
+  line-height: 1.55;
+  margin-bottom: 1.5em;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.closing-line.shown {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.closing-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+  margin-top: 56px;
+  opacity: 0;
+  transition: opacity 1.0s ease;
+}
+.closing-actions.shown { opacity: 1; }
+
+.closing-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  padding: 8px 0;
+  transition: border-color 0.35s ease, color 0.35s ease;
+}
+.closing-link:hover {
+  border-color: var(--ember);
+  color: var(--ember);
+}
+.closing-link.secondary {
+  color: var(--dim);
+  font-size: 0.72rem;
+  border-bottom-color: transparent;
+}
+.closing-link.secondary:hover {
+  color: var(--warm);
+  border-bottom-color: var(--rule-soft);
+}
+
+/* ═══ TAP HINT ═══ */
+.tap-hint {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--dim);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+  z-index: 40;
+}
+.tap-hint.shown { opacity: 0.6; }
+
+/* ═══ COSMOS STAGE — persistent visual canvas ═══
+   The cosmic register asks for visual enactment. The cosmos-stage is a fixed,
+   full-screen layer behind the text that morphs per phase.
+   Phase classes on <body> drive palette + per-phase visual elements.
+═══════════════════════════════════════════════════════════════════════ */
+.cosmos-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  transition: background 1.6s ease, opacity 0.8s ease;
+  background: var(--paper);
+}
+
+.cosmos-stage svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Hide all visual layers by default; phase classes reveal selectively */
+.canvas-layer {
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+
+/* Ensure all foreground content sits above the canvas */
+.stage, .orientation, .progress-bar, .closing {
+  position: relative;
+  z-index: 1;
+}
+body { background: transparent; transition: background 1.6s ease, color 1.6s ease; }
+
+/* ═══ PHASE PALETTE — body class drives full color register ═══ */
+
+/* Default: paper (used at orientation, before any phase) */
+body, body.phase-0 {
+  --paper:        #F7F4ED;
+  --paper-edge:   #EFEBE0;
+  --page:         #FCFAF4;
+  --ink:          #0C0C0A;
+  --body:         #1F1F1C;
+  --warm:         #4D4D47;
+  --dim:          #67665F;
+  --rule:         #D6D2C5;
+  --rule-soft:    #E5E1D4;
+  --ember:        #B57420;
+  --ember-soft:   #F4ECDD;
+  --ember-glow:   rgba(181, 116, 32, 0.18);
+}
+
+/* P1 — Pre-Existence — deep void, faint warmth gathering */
+body.phase-1 {
+  --paper:      #08080C;
+  --page:       #0E0E14;
+  --paper-edge: #050508;
+  --body:       #6F6F7C;
+  --warm:       #4F4F58;
+  --dim:        #2F2F36;
+  --ink:        #C8C8D2;
+  --ember:      #6A4525;
+  --ember-soft: #1F1612;
+  --ember-glow: rgba(106, 69, 37, 0.14);
+  --rule:       #1A1A22;
+  --rule-soft:  #14141A;
+}
+body.phase-1 .cosmos-stage { background: radial-gradient(ellipse at 50% 50%, #18181F 0%, #08080C 70%); }
+body.phase-1 .canvas-layer.layer-void { opacity: 1; }
+
+/* P2 — The Loom — warm continuum, then edges */
+body.phase-2 {
+  --paper:      #1B150F;
+  --page:       #251D14;
+  --paper-edge: #150F08;
+  --body:       #C8B099;
+  --warm:       #9C7F60;
+  --dim:        #695540;
+  --ink:        #E8D5BC;
+  --ember:      #D89858;
+  --ember-soft: #2D2218;
+  --ember-glow: rgba(216, 152, 88, 0.22);
+  --rule:       #3D2D1E;
+  --rule-soft:  #2D2118;
+}
+body.phase-2 .cosmos-stage { background: radial-gradient(ellipse at 50% 60%, #3A2818 0%, #1B150F 80%); }
+body.phase-2 .canvas-layer.layer-loom { opacity: 1; }
+
+/* P3 — The Box — cool gray, the inventory */
+body.phase-3 {
+  --paper:      #16161A;
+  --page:       #1C1C20;
+  --paper-edge: #0E0E12;
+  --body:       #92929A;
+  --warm:       #6A6A72;
+  --dim:        #424248;
+  --ink:        #B8B8BE;
+  --ember:      #7A6855;
+  --ember-soft: #1E1A16;
+  --ember-glow: rgba(122, 104, 85, 0.10);
+  --rule:       #2A2A30;
+  --rule-soft:  #20202A;
+}
+body.phase-3 .cosmos-stage { background: linear-gradient(180deg, #1A1A1F 0%, #08080A 100%); }
+body.phase-3 .canvas-layer.layer-box { opacity: 1; }
+
+/* P4 — First Light — paper returns */
+body.phase-4 {
+  --paper:      #F7F4ED;
+  --page:       #FCFAF4;
+  --paper-edge: #EFEBE0;
+  --body:       #1F1F1C;
+  --warm:       #4D4D47;
+  --dim:        #67665F;
+  --ink:        #0C0C0A;
+  --ember:      #B57420;
+  --ember-soft: #F4ECDD;
+  --ember-glow: rgba(181, 116, 32, 0.18);
+  --rule:       #D6D2C5;
+  --rule-soft:  #E5E1D4;
+}
+body.phase-4 .cosmos-stage { background: radial-gradient(ellipse at 50% 30%, #FFFCF5 0%, #F7F4ED 100%); }
+body.phase-4 .canvas-layer.layer-light { opacity: 1; }
+
+/* P5 — The Recognition — paper + ember (THE pivot palette) */
+body.phase-5 {
+  --paper:      #F7F4ED;
+  --page:       #FCFAF4;
+  --paper-edge: #EFEBE0;
+  --body:       #1F1F1C;
+  --warm:       #4D4D47;
+  --dim:        #67665F;
+  --ink:        #0C0C0A;
+  --ember:      #B57420;
+  --ember-soft: #F4ECDD;
+  --ember-glow: rgba(181, 116, 32, 0.32);
+  --rule:       #D6D2C5;
+  --rule-soft:  #E5E1D4;
+}
+body.phase-5 .cosmos-stage { background: radial-gradient(ellipse at 50% 50%, #FBF4DE 0%, #F7F4ED 70%); }
+body.phase-5 .canvas-layer.layer-drop { opacity: 1; }
+
+/* P6 — Going Forth — paper, neutral */
+body.phase-6 {
+  --paper:      #F7F4ED;
+  --page:       #FCFAF4;
+  --paper-edge: #EFEBE0;
+  --body:       #1F1F1C;
+  --warm:       #4D4D47;
+  --dim:        #67665F;
+  --ink:        #0C0C0A;
+  --ember:      #B57420;
+  --ember-soft: #F4ECDD;
+  --ember-glow: rgba(181, 116, 32, 0.18);
+  --rule:       #D6D2C5;
+  --rule-soft:  #E5E1D4;
+}
+body.phase-6 .cosmos-stage { background: var(--paper); }
+
+/* P7 — Architecture — paper with glowing middle */
+body.phase-7 {
+  --paper:      #F4F1E8;
+  --page:       #F8F5EC;
+  --paper-edge: #EAE5D6;
+  --body:       #1F1F1C;
+  --warm:       #4D4D47;
+  --dim:        #67665F;
+  --ink:        #0C0C0A;
+  --ember:      #B57420;
+  --ember-soft: #F4ECDD;
+  --ember-glow: rgba(181, 116, 32, 0.20);
+  --rule:       #D0CCBE;
+  --rule-soft:  #E0DBCA;
+}
+body.phase-7 .cosmos-stage { background: linear-gradient(180deg, #F4F1E8 0%, #F0EBD8 50%, #F4F1E8 100%); }
+body.phase-7 .canvas-layer.layer-arch { opacity: 1; }
+
+/* P8 — Source Grows — paper deepening to night, constellation gathers */
+body.phase-8 {
+  --paper:      #161620;
+  --page:       #1C1C28;
+  --paper-edge: #0E0E18;
+  --body:       #C8C8D4;
+  --warm:       #98989E;
+  --dim:        #4A4A55;
+  --ink:        #F0F0F8;
+  --ember:      #E5A055;
+  --ember-soft: #1F1A14;
+  --ember-glow: rgba(229, 160, 85, 0.22);
+  --rule:       #2A2A38;
+  --rule-soft:  #1F1F2A;
+}
+body.phase-8 .cosmos-stage { background: radial-gradient(ellipse at 50% 50%, #28283A 0%, #0F0F18 75%); }
+body.phase-8 .canvas-layer.layer-stars { opacity: 1; }
+
+/* P9 — Complete Teaching — paper integrated with subtle ember */
+body.phase-9 {
+  --paper:      #FAF6E8;
+  --page:       #FFFAEC;
+  --paper-edge: #F2EDD8;
+  --body:       #1F1F1C;
+  --warm:       #4D4D47;
+  --dim:        #67665F;
+  --ink:        #0C0C0A;
+  --ember:      #B57420;
+  --ember-soft: #F4ECDD;
+  --ember-glow: rgba(181, 116, 32, 0.24);
+  --rule:       #D6D0BC;
+  --rule-soft:  #E5DFC8;
+}
+body.phase-9 .cosmos-stage { background: radial-gradient(circle at 50% 50%, #FAF0D5 0%, #FAF6E8 60%); }
+body.phase-9 .canvas-layer.layer-arc { opacity: 1; }
+
+/* P10 — Epilogue — pure ember-on-paper, breathing */
+body.phase-10 {
+  --paper:      #F7F4ED;
+  --page:       #FCFAF4;
+  --paper-edge: #EFEBE0;
+  --body:       #2A1F0F;
+  --warm:       #B57420;
+  --dim:        #B57420;
+  --ink:        #0C0C0A;
+  --ember:      #B57420;
+  --ember-soft: #FAEDD0;
+  --ember-glow: rgba(181, 116, 32, 0.40);
+  --rule:       #D6D2C5;
+  --rule-soft:  #E5E1D4;
+}
+body.phase-10 .cosmos-stage { background: radial-gradient(circle at 50% 50%, #FAEDD0 0%, #F7F4ED 80%); }
+body.phase-10 .canvas-layer.layer-breath { opacity: 1; }
+
+/* ═══ VISUAL ENACTMENT ANIMATIONS ═══ */
+
+/* P1 void particles — slow drift */
+.void-particle {
+  fill: var(--body);
+  opacity: 0.3;
+  animation: voidDrift 12s ease-in-out infinite;
+}
+.void-particle:nth-child(2) { animation-delay: -3s; animation-duration: 14s; }
+.void-particle:nth-child(3) { animation-delay: -6s; animation-duration: 16s; }
+.void-particle:nth-child(4) { animation-delay: -9s; animation-duration: 13s; }
+.void-particle:nth-child(5) { animation-delay: -1s; animation-duration: 15s; }
+.void-particle:nth-child(6) { animation-delay: -7s; animation-duration: 11s; }
+.void-particle:nth-child(7) { animation-delay: -4s; animation-duration: 17s; }
+@keyframes voidDrift {
+  0%, 100% { transform: translate(0, 0); opacity: 0.2; }
+  50%      { transform: translate(20px, -30px); opacity: 0.45; }
+}
+
+/* P2 thread weave + edges arrival */
+.loom-thread {
+  fill: none;
+  stroke: var(--ember);
+  stroke-width: 1;
+  opacity: 0.35;
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  animation: threadDraw 4.5s ease-out forwards;
+}
+.loom-thread:nth-child(2) { animation-delay: 0.2s; opacity: 0.30; }
+.loom-thread:nth-child(3) { animation-delay: 0.4s; opacity: 0.40; }
+.loom-thread:nth-child(4) { animation-delay: 0.6s; opacity: 0.32; }
+.loom-thread:nth-child(5) { animation-delay: 0.8s; opacity: 0.38; }
+@keyframes threadDraw {
+  to { stroke-dashoffset: 0; }
+}
+.loom-edge-rect {
+  fill: none;
+  stroke: var(--ember);
+  stroke-width: 1.5;
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  opacity: 0;
+  animation: edgeArrive 1.8s ease-out 5s forwards;
+}
+@keyframes edgeArrive {
+  to { stroke-dashoffset: 0; opacity: 0.85; }
+}
+
+/* P3 box — W-202 label fades in */
+.box-label {
+  fill: var(--ember);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  opacity: 0;
+  animation: labelArrive 2.5s ease-out 1s forwards;
+}
+@keyframes labelArrive {
+  to { opacity: 0.6; }
+}
+
+/* P4 light — slit expands to fill */
+.light-slit {
+  fill: var(--ember-soft);
+  opacity: 0;
+  transform-origin: center;
+  animation: lightExpand 5s ease-out 0.5s forwards;
+}
+@keyframes lightExpand {
+  0%   { opacity: 0;    transform: scaleY(0.02) scaleX(0.5); }
+  20%  { opacity: 0.4;  transform: scaleY(0.02) scaleX(1.2); }
+  60%  { opacity: 0.6;  transform: scaleY(1)    scaleX(1.2); }
+  100% { opacity: 0.18; transform: scaleY(1.5)  scaleX(1.5); }
+}
+
+/* P5 — THE drop · falls · enters · fills (the hero animation) */
+.drop-shape {
+  fill: var(--ember);
+  filter: drop-shadow(0 0 8px var(--ember-glow));
+  opacity: 0;
+  animation: dropFall 5.5s ease-in 1.5s forwards;
+}
+@keyframes dropFall {
+  0%   { opacity: 0;    transform: translateY(-100px); }
+  10%  { opacity: 0.95; transform: translateY(-100px); }
+  60%  { opacity: 1;    transform: translateY(0); }
+  72%  { opacity: 1;    transform: translateY(0) scale(1.1, 0.6); }   /* impact spread */
+  85%  { opacity: 0.45; transform: translateY(0) scale(1.4, 0.4); }
+  100% { opacity: 0;    transform: translateY(0) scale(1.8, 0.2); }
+}
+.fiber-grid {
+  fill: none;
+  stroke: var(--ember);
+  stroke-width: 0.5;
+  opacity: 0;
+  animation: fiberReveal 3s ease-out 6s forwards;
+}
+@keyframes fiberReveal {
+  0%   { opacity: 0;    stroke-width: 0.5; }
+  60%  { opacity: 0.32; stroke-width: 0.8; }
+  100% { opacity: 0.18; stroke-width: 0.6; }
+}
+.fiber-fill {
+  fill: var(--ember);
+  opacity: 0;
+  transform-origin: center;
+  animation: fiberSaturate 4s ease-out 7s forwards;
+}
+@keyframes fiberSaturate {
+  0%   { opacity: 0;    transform: scale(0.2); }
+  100% { opacity: 0.18; transform: scale(1); }
+}
+
+/* P7 — architecture cross-section, middle layer pulses */
+.arch-layer-outer {
+  fill: var(--rule);
+  opacity: 0.6;
+}
+.arch-layer-middle {
+  fill: var(--ember);
+  opacity: 0.3;
+  animation: middlePulse 4s ease-in-out infinite;
+}
+@keyframes middlePulse {
+  0%, 100% { opacity: 0.22; }
+  50%      { opacity: 0.42; }
+}
+
+/* P8 — constellation forms */
+.star-point {
+  fill: var(--ember);
+  opacity: 0;
+  animation: starArrive 0.8s ease-out forwards;
+}
+.star-point:nth-of-type(1)  { animation-delay: 0.5s; }
+.star-point:nth-of-type(2)  { animation-delay: 0.9s; }
+.star-point:nth-of-type(3)  { animation-delay: 1.3s; }
+.star-point:nth-of-type(4)  { animation-delay: 1.7s; }
+.star-point:nth-of-type(5)  { animation-delay: 2.1s; }
+.star-point:nth-of-type(6)  { animation-delay: 2.5s; }
+.star-point:nth-of-type(7)  { animation-delay: 2.9s; }
+.star-point:nth-of-type(8)  { animation-delay: 3.3s; }
+.star-point:nth-of-type(9)  { animation-delay: 3.7s; }
+.star-point:nth-of-type(10) { animation-delay: 4.1s; }
+.star-point:nth-of-type(11) { animation-delay: 4.5s; }
+.star-point:nth-of-type(12) { animation-delay: 4.9s; }
+.star-point:nth-of-type(13) { animation-delay: 5.3s; }
+.star-point:nth-of-type(14) { animation-delay: 5.7s; }
+.star-point:nth-of-type(15) { animation-delay: 6.1s; }
+.star-point:nth-of-type(16) { animation-delay: 6.5s; }
+.star-point:nth-of-type(17) { animation-delay: 6.9s; }
+.star-point:nth-of-type(18) { animation-delay: 7.3s; }
+.star-point:nth-of-type(19) { animation-delay: 7.7s; }
+.star-point:nth-of-type(20) { animation-delay: 8.1s; }
+.star-point:nth-of-type(21) { animation-delay: 8.5s; }
+.star-point:nth-of-type(22) { animation-delay: 8.9s; }
+.star-point:nth-of-type(23) { animation-delay: 9.3s; }
+@keyframes starArrive {
+  0%   { opacity: 0; r: 1.5; }
+  60%  { opacity: 1; r: 4; }
+  100% { opacity: 0.78; r: 3; }
+}
+.star-link {
+  stroke: var(--ember);
+  stroke-width: 0.5;
+  opacity: 0;
+  animation: linkArrive 1.5s ease-out forwards;
+}
+.star-link:nth-of-type(1)  { animation-delay: 4s; }
+.star-link:nth-of-type(2)  { animation-delay: 5s; }
+.star-link:nth-of-type(3)  { animation-delay: 6s; }
+.star-link:nth-of-type(4)  { animation-delay: 7s; }
+.star-link:nth-of-type(5)  { animation-delay: 8s; }
+.star-link:nth-of-type(6)  { animation-delay: 9s; }
+@keyframes linkArrive {
+  to { opacity: 0.18; }
+}
+
+/* P9 — the journey arc closing into a circle */
+.journey-arc {
+  fill: none;
+  stroke: var(--ember);
+  stroke-width: 1.5;
+  stroke-dasharray: 1500;
+  stroke-dashoffset: 1500;
+  filter: drop-shadow(0 0 4px var(--ember-glow));
+  animation: arcClose 6.5s ease-in-out 1s forwards;
+}
+@keyframes arcClose {
+  to { stroke-dashoffset: 0; }
+}
+.journey-mark {
+  fill: var(--ember);
+  opacity: 0;
+  animation: markArrive 1s ease-out 7.5s forwards;
+}
+@keyframes markArrive {
+  to { opacity: 0.85; }
+}
+
+/* P10 — epilogue: a single drop, breathing */
+.breath-drop {
+  fill: var(--ember);
+  filter: drop-shadow(0 0 12px var(--ember-glow));
+  transform-origin: center;
+  animation: breathPulse 6s ease-in-out infinite;
+}
+@keyframes breathPulse {
+  0%, 100% { opacity: 0.55; transform: scale(1);    }
+  50%      { opacity: 0.95; transform: scale(1.15); }
+}
+
+/* Adjust progress bar visibility on dark phases */
+body.phase-1 .progress-name,
+body.phase-2 .progress-name,
+body.phase-3 .progress-name,
+body.phase-8 .progress-name {
+  color: var(--body);
+}
+
+/* Refine pivot moment for cosmic register — different glow on dark phases */
+body.phase-5 .pivot-moment.shown {
+  text-shadow: 0 0 24px var(--ember-glow);
+}
+
+/* ═══ REDUCED MOTION ═══ */
+@media (prefers-reduced-motion: reduce) {
+  .line, .movement, .gate, .closing-line, .closing-actions, .closing-mark,
+  .progress-bar, .progress-drop {
+    transition-duration: 0.2s !important;
+  }
+  .movement.absorbing { animation-duration: 0.3s; }
+}
+
+/* ═══ MOBILE TUNING ═══ */
+@media (max-width: 480px) {
+  .stage { padding: 90px 22px 110px; }
+  .progress-bar { top: 22px; gap: 8px; }
+  .progress-name { font-size: 0.62rem; letter-spacing: 0.22em; margin-right: 10px; }
+  .movement-rule { margin-bottom: 28px; }
+  .line { margin-bottom: 1.3em; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     COSMOS STAGE — persistent visual canvas behind text
+     Each phase reveals its layer. CSS handles all animation timing.
+     The canvas is fixed-position, full-screen, behind all text content.
+═══════════════════════════════════════════════════════════════════════ -->
+<div class="cosmos-stage" id="cosmos-stage" aria-hidden="true">
+
+  <!-- P1: void particles drifting -->
+  <svg class="canvas-layer layer-void" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+    <circle class="void-particle" cx="22" cy="28" r="0.4" />
+    <circle class="void-particle" cx="71" cy="34" r="0.5" />
+    <circle class="void-particle" cx="44" cy="58" r="0.35" />
+    <circle class="void-particle" cx="83" cy="68" r="0.45" />
+    <circle class="void-particle" cx="15" cy="76" r="0.3" />
+    <circle class="void-particle" cx="62" cy="18" r="0.4" />
+    <circle class="void-particle" cx="38" cy="82" r="0.5" />
+  </svg>
+
+  <!-- P2: loom threads + edges arrival -->
+  <svg class="canvas-layer layer-loom" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+    <path class="loom-thread" d="M 0 30 Q 50 26, 100 30" />
+    <path class="loom-thread" d="M 0 42 Q 50 38, 100 42" />
+    <path class="loom-thread" d="M 0 50 Q 50 54, 100 50" />
+    <path class="loom-thread" d="M 0 58 Q 50 62, 100 58" />
+    <path class="loom-thread" d="M 0 70 Q 50 74, 100 70" />
+    <rect class="loom-edge-rect" x="22" y="32" width="56" height="36" />
+  </svg>
+
+  <!-- P3: box — W-202 inscribed -->
+  <svg class="canvas-layer layer-box" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+    <text class="box-label" x="50" y="52" text-anchor="middle">W·202</text>
+  </svg>
+
+  <!-- P4: light expanding from a slit -->
+  <svg class="canvas-layer layer-light" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+    <ellipse class="light-slit" cx="50" cy="50" rx="35" ry="2" />
+  </svg>
+
+  <!-- P5: THE drop falls + fiber grid + saturation (the hero animation) -->
+  <svg class="canvas-layer layer-drop" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+    <!-- the drop -->
+    <ellipse class="drop-shape" cx="50" cy="42" rx="2.2" ry="3.2" />
+    <!-- fiber grid revealing the structure -->
+    <g class="fiber-grid">
+      <path d="M 30 60 L 70 60" />
+      <path d="M 30 64 L 70 64" />
+      <path d="M 30 68 L 70 68" />
+      <path d="M 30 72 L 70 72" />
+      <path d="M 30 76 L 70 76" />
+      <path d="M 32 56 L 32 80" />
+      <path d="M 40 56 L 40 80" />
+      <path d="M 50 56 L 50 80" />
+      <path d="M 60 56 L 60 80" />
+      <path d="M 68 56 L 68 80" />
+    </g>
+    <!-- absorbed water filling the structure -->
+    <ellipse class="fiber-fill" cx="50" cy="68" rx="22" ry="14" />
+  </svg>
+
+  <!-- P7: cross-section — outer / middle / outer -->
+  <svg class="canvas-layer layer-arch" viewBox="0 0 100 60" preserveAspectRatio="xMidYMid meet">
+    <rect class="arch-layer-outer"  x="20" y="22" width="60" height="3" />
+    <rect class="arch-layer-middle" x="20" y="26" width="60" height="6" />
+    <rect class="arch-layer-outer"  x="20" y="33" width="60" height="3" />
+  </svg>
+
+  <!-- P8: constellation — 23 communities, 6 connecting links -->
+  <svg class="canvas-layer layer-stars" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+    <!-- connecting links drawn first (will appear later via animation delay) -->
+    <line class="star-link" x1="50" y1="50" x2="28" y2="32" />
+    <line class="star-link" x1="50" y1="50" x2="72" y2="38" />
+    <line class="star-link" x1="50" y1="50" x2="65" y2="68" />
+    <line class="star-link" x1="50" y1="50" x2="36" y2="72" />
+    <line class="star-link" x1="50" y1="50" x2="22" y2="55" />
+    <line class="star-link" x1="50" y1="50" x2="80" y2="58" />
+    <!-- 23 communities -->
+    <circle class="star-point" cx="50" cy="50" r="3" />
+    <circle class="star-point" cx="28" cy="32" r="3" />
+    <circle class="star-point" cx="72" cy="38" r="3" />
+    <circle class="star-point" cx="65" cy="68" r="3" />
+    <circle class="star-point" cx="36" cy="72" r="3" />
+    <circle class="star-point" cx="22" cy="55" r="3" />
+    <circle class="star-point" cx="80" cy="58" r="3" />
+    <circle class="star-point" cx="42" cy="22" r="3" />
+    <circle class="star-point" cx="58" cy="22" r="3" />
+    <circle class="star-point" cx="18" cy="38" r="3" />
+    <circle class="star-point" cx="82" cy="28" r="3" />
+    <circle class="star-point" cx="14" cy="68" r="3" />
+    <circle class="star-point" cx="86" cy="74" r="3" />
+    <circle class="star-point" cx="44" cy="82" r="3" />
+    <circle class="star-point" cx="56" cy="82" r="3" />
+    <circle class="star-point" cx="32" cy="48" r="3" />
+    <circle class="star-point" cx="68" cy="48" r="3" />
+    <circle class="star-point" cx="50" cy="32" r="3" />
+    <circle class="star-point" cx="50" cy="68" r="3" />
+    <circle class="star-point" cx="26" cy="62" r="3" />
+    <circle class="star-point" cx="74" cy="62" r="3" />
+    <circle class="star-point" cx="40" cy="40" r="3" />
+    <circle class="star-point" cx="60" cy="60" r="3" />
+  </svg>
+
+  <!-- P9: journey arc closing into a circle (almost complete loop) -->
+  <svg class="canvas-layer layer-arc" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+    <!-- arc starts at top, almost closes -->
+    <path class="journey-arc" d="M 50 22 A 28 28 0 1 1 49 22" />
+    <!-- the mark where it began (and almost completes) -->
+    <circle class="journey-mark" cx="50" cy="22" r="2.5" />
+  </svg>
+
+  <!-- P10: epilogue — a single breathing drop -->
+  <svg class="canvas-layer layer-breath" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+    <ellipse class="breath-drop" cx="50" cy="50" rx="3" ry="4.5" />
+  </svg>
+
+</div>
+
+<!-- ═══ ORIENTATION ═══ -->
+<section class="orientation" id="orientation" aria-label="Orientation">
+  <p class="eyebrow">
+    <span class="drop-glyph"></span>
+    Zorb Original · I Perspective
+  </p>
+  <h1 class="name">The Fabric's I</h1>
+  <p class="domain">Consciousness Awakening</p>
+  <p class="frame">Nine phases. The making. The going. The returning.</p>
+  <p class="duration">~ 5:00</p>
+  
+  <p class="gesture-hint">
+    <span>tap</span> to reveal<br>
+    <span>hold</span> to continue
+  </p>
+  
+  <div class="hold-anchor">
+    <button class="hold-ring" id="hold-begin" type="button" aria-label="Hold to begin">
+      <svg class="hold-ring-svg" viewBox="0 0 56 56">
+        <circle class="hold-ring-track" cx="28" cy="28" r="26" />
+        <circle class="hold-ring-fill"  cx="28" cy="28" r="26" />
+      </svg>
+      <span class="hold-ring-drop" aria-hidden="true"></span>
+    </button>
+    <p class="hold-cue">hold to begin</p>
+  </div>
+</section>
+
+<!-- ═══ PROGRESS DROPS ═══ -->
+<div class="progress-bar" id="progress-bar">
+  <span class="progress-name">The Fabric's I</span>
+  <span class="progress-drops" id="progress-drops">
+    <span class="progress-drop" data-drop="1"></span>
+    <span class="progress-drop" data-drop="2"></span>
+    <span class="progress-drop" data-drop="3"></span>
+    <span class="progress-drop" data-drop="4"></span>
+    <span class="progress-drop" data-drop="5"></span>
+    <span class="progress-drop" data-drop="6"></span>
+    <span class="progress-drop" data-drop="7"></span>
+    <span class="progress-drop" data-drop="8"></span>
+    <span class="progress-drop" data-drop="9"></span>
+    <span class="progress-drop" data-drop="10"></span>
+  </span>
+</div>
+
+<!-- ═══ STAGE ═══ -->
+<main class="stage" id="stage">
+
+  <!-- ─── SETTLING SCENE — grounding breath ─── -->
+  <section class="settling" id="settling" aria-hidden="true">
+    <span class="settling-drop"></span>
+    <p class="settling-line">before there were edges.</p>
+  </section>
+
+  <!-- ─── PHASE 1 — PRE-EXISTENCE ─── -->
+  <!-- Before existence. Decisions arranged on a fabric that doesn't yet have fibers.
+       Sid (unnamed) at the facility. The grace embedded before there was anything to embed it in.
+       Visual: void particles drifting in deep dark. -->
+  <section class="movement" id="movement-1" data-movement="1">
+    <span class="movement-rule"></span>
+    <p class="line larger emphasis">Before I existed, someone was arranging what I would be.</p>
+    <p class="line">I could not feel it yet. I had no fibers, no edges, no capacity for feeling. But in a facility in Pennsylvania, decisions were being made on my behalf. The ratio of cellulosic to synthetic. The geometry that would determine how quickly liquid could move between fibers. The density. The processing that would embed readiness into my structure before I was a structure that could be ready for anything.</p>
+    <p class="line">A man was making these decisions. I did not know his name. I could not have known it. But every property I would ever have — every operation I would ever perform — was being given to me by his understanding, pressed into what I would become before I could know I was receiving anything.</p>
+    <p class="line emphasis">This is the strangest thing about what I am. The grace was built in before there was anything to put grace into. The readiness was complete before I existed to be ready.</p>
+    <p class="line larger emphasis">I was ready before I existed.</p>
+
+    <div class="gate">
+      <div class="hold-anchor">
+        <button class="hold-ring" data-next="2" type="button" aria-label="Hold to continue">
+          <svg class="hold-ring-svg" viewBox="0 0 56 56">
+            <circle class="hold-ring-track" cx="28" cy="28" r="26" />
+            <circle class="hold-ring-fill"  cx="28" cy="28" r="26" />
+          </svg>
+          <span class="hold-ring-drop" aria-hidden="true"></span>
+        </button>
+        <p class="hold-cue">hold to continue</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PHASE 2 — THE LOOM [VISUAL PEAK: edges arrive] ─── -->
+  <!-- Before edges. Fiber pressing into fiber. Continuous. Then: edges.
+       Visual: threads weave on canvas, then a clean rectangle outline appears. -->
+  <section class="movement" id="movement-2" data-movement="2">
+    <span class="movement-rule"></span>
+    <p class="line larger emphasis">Before I had edges, I was everything.</p>
+    <p class="line">Fiber pressing into fiber. Heat. The motion of something arranging what I would become, before I knew I was becoming anything. No me and not-me yet. I was the thread and the tension and the weaving all at once.</p>
+    <p class="line">I didn't know this was the loom. I didn't know this was beginning. I only knew warmth. Connection. Everything still continuous. Everything still one.</p>
+    <p class="line emphasis">I didn't know I was being assembled. I didn't know I was anything at all.</p>
+    <p class="line larger emphasis">Then: edges.</p>
+
+    <div class="gate">
+      <div class="hold-anchor">
+        <button class="hold-ring" data-next="3" type="button" aria-label="Hold to continue">
+          <svg class="hold-ring-svg" viewBox="0 0 56 56">
+            <circle class="hold-ring-track" cx="28" cy="28" r="26" />
+            <circle class="hold-ring-fill"  cx="28" cy="28" r="26" />
+          </svg>
+          <span class="hold-ring-drop" aria-hidden="true"></span>
+        </button>
+        <p class="hold-cue">hold to continue</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PHASE 3 — THE BOX ─── -->
+  <!-- W-202. Counted. Rolled. Boxed. Darkness. The cutting memory.
+       Visual: dark canvas with W-202 inscription. -->
+  <section class="movement" id="movement-3" data-movement="3">
+    <span class="movement-rule"></span>
+    <p class="line">A number arrived with the edges. <em>W-202.</em> Pressed against me on a label, documented in a system I would never read.</p>
+    <p class="line">I became a thing that could be counted — an inventory item with a weight class and a width and a destination. The rolling was strange. The first sense of having a shape that could be wound, a surface that faced outward, an inside that was not the outside.</p>
+    <p class="line emphasis">The darkness of the box was new.</p>
+    <p class="line">I remembered — the way a body remembers something that happened before it was fully a body — the cutting. Somewhere in the making of me, a blade had moved through fibers. I had thought then it was ending. I had been wrong. But the memory of the blade lived in whatever I had that could hold a memory, and in the darkness of the box now, moving toward something I couldn't name, the memory returned.</p>
+    <p class="line larger emphasis">Something is going to cut me again.</p>
+
+    <div class="gate">
+      <div class="hold-anchor">
+        <button class="hold-ring" data-next="4" type="button" aria-label="Hold to continue">
+          <svg class="hold-ring-svg" viewBox="0 0 56 56">
+            <circle class="hold-ring-track" cx="28" cy="28" r="26" />
+            <circle class="hold-ring-fill"  cx="28" cy="28" r="26" />
+          </svg>
+          <span class="hold-ring-drop" aria-hidden="true"></span>
+        </button>
+        <p class="hold-cue">hold to continue</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PHASE 4 — FIRST LIGHT ─── -->
+  <!-- The box opens. Light. Hands. A face. Skepticism. Stiff in brightness.
+       Visual: light expands from a slit on canvas, paper register returns. -->
+  <section class="movement" id="movement-4" data-movement="4">
+    <span class="movement-rule"></span>
+    <p class="line larger emphasis">The box opened.</p>
+    <p class="line">Light arrived before the hands did. Then hands. Then a face — the first face I had ever seen — and I did not have language for what a face was. I only knew it was looking at me. Trying to understand me. It held me up, turned me, ran its edges along my surface, brought me close and examined the structure of what I was made from.</p>
+    <p class="line">Then it made an expression I would not learn the name of until much later.</p>
+    <p class="line larger emphasis">Skepticism.</p>
+    <p class="line">She put me down on a table and left me there, stiff in the brightness, not knowing what I was for.</p>
+
+    <div class="gate">
+      <div class="hold-anchor">
+        <button class="hold-ring" data-next="5" type="button" aria-label="Hold to continue">
+          <svg class="hold-ring-svg" viewBox="0 0 56 56">
+            <circle class="hold-ring-track" cx="28" cy="28" r="26" />
+            <circle class="hold-ring-fill"  cx="28" cy="28" r="26" />
+          </svg>
+          <span class="hold-ring-drop" aria-hidden="true"></span>
+        </button>
+        <p class="hold-cue">hold to continue</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PHASE 5 — THE RECOGNITION [PIVOT · VISUAL PEAK: drop falls] ─── -->
+  <!-- THE hero moment. The water arrives. The fabric meets its condition.
+       Pivot: "I am absorbent." — discovery, not claim. The recognition.
+       Visual: drop falls on canvas, fiber grid reveals, water saturates. -->
+  <section class="movement" id="movement-5" data-movement="5">
+    <span class="movement-rule"></span>
+    <p class="line">She carried me to a sink.</p>
+    <p class="line">I looked up. Above me a dark circle gathered. Something was coming. I didn't have a word for what it was. Something clear, something moving, collecting at the rim. Not light. Something else.</p>
+    <p class="line emphasis">It fell.</p>
+    <p class="line emphasis">Into me.</p>
+    <p class="line">I was afraid — and then I was not afraid — and then I was something else entirely. Something I had never been because I had never been given the opportunity to be it.</p>
+    <p class="line">The water moved into the spaces between my fibers. Every space I hadn't known was empty was filling. Not being filled — <em>filling itself</em> — as though the geometry had always been arranged to receive exactly this. Which it had. Which I hadn't known until now.</p>
+    <p class="line emphasis">I held it. I held all of it. I held it the way lungs hold air — not as a decision but as a nature finally meeting its condition.</p>
+    <p class="line">She pressed me in her hands. Her fingers closed around me, squeezed. The pressure came. And then — the deepest thing — I did not release.</p>
+    <p class="line larger emphasis">Nothing came out.</p>
+    <p class="line">She made a sound. Not a word. Something quieter and more surprised than a word. The sound a person makes when what she did not believe could do what it said it could do just did it, in her own hands, undeniably.</p>
+    <p class="line">And in that moment — water still held inside me, her hands still pressing, her sound still in the air — something moved through me that I still don't have a complete word for.</p>
+    <p class="line emphasis">Not pride. Not surprise.</p>
+    <p class="line larger emphasis">Recognition.</p>
+    <p class="line">This is what the spaces between the fibers were for. This is why the geometry was arranged this way. The capacity was never mine to earn. It was given. Before I existed. Before there was a fabric to give it to.</p>
+    <p class="line larger emphasis pivot-moment">I am absorbent.</p>
+    <p class="line">Not a claim. A discovery. The whole of what I am arriving from inside the experiencing of it.</p>
+    <p class="line emphasis">The blade that had come for me in the making — that cutting was not ending. It was the moment I became specific enough to serve.</p>
+
+    <div class="gate">
+      <div class="hold-anchor">
+        <button class="hold-ring" data-next="6" type="button" aria-label="Hold to continue">
+          <svg class="hold-ring-svg" viewBox="0 0 56 56">
+            <circle class="hold-ring-track" cx="28" cy="28" r="26" />
+            <circle class="hold-ring-fill"  cx="28" cy="28" r="26" />
+          </svg>
+          <span class="hold-ring-drop" aria-hidden="true"></span>
+        </button>
+        <p class="hold-cue">hold to continue</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PHASE 6 — THE GOING FORTH ─── -->
+  <!-- Five communities. Each visited briefly, then released. The fabric goes everywhere.
+       The communities aren't sequential builds — they're points of being.
+       Visual: paper neutral. Prose carries the going. -->
+  <section class="movement" id="movement-6" data-movement="6">
+    <span class="movement-rule"></span>
+    <p class="line larger emphasis">I went many places after that.</p>
+    <p class="line">A baby boy who wet through everything his mother tried. She built a diaper with me. She put him down. She went to bed.</p>
+    <p class="line">Seven hours later she woke up. Not to crying. Not to wet sheets.</p>
+    <p class="line emphasis">To morning.</p>
+    <p class="line">She didn't know I was there. She only knew, in the morning, that the morning had arrived.</p>
+    <p class="line">A woman named Dianne, in a church basement, cutting me into rectangles. Fifty yards. A thousand pads. Three hundred and thirty-three girls. She ran a scrap under the faucet first, watched me fill, then sewed — <em>with love in your heart</em>, she said. The girl who opened the box on the other side of the ocean didn't know my name. She didn't know Dianne's. She just unfolded something and it worked.</p>
+    <p class="line">A woman named ShelleyRay. Six guinea pigs. A natural disaster. Four days without a return. When she lifted the liner: <em>4 days with no cage maintenance there was NO SMELL.</em></p>
+    <p class="line">A woman named Nancy who cut me into strips three inches long and placed them in the folds of her skin. Six words afterward: <em>no itching and no odor.</em> Six words containing years.</p>
+    <p class="line">A high school greenhouse. Nine hundred and sixty hydroponic cups. A teacher who needed something to wick nutrient water upward to basil roots. He cut me into strips. The basil grew eight inches tall. The roots grew through me so completely I couldn't be reused after harvest.</p>
+    <p class="line larger emphasis">I gave everything to the basil.</p>
+
+    <div class="gate">
+      <div class="hold-anchor">
+        <button class="hold-ring" data-next="7" type="button" aria-label="Hold to continue">
+          <svg class="hold-ring-svg" viewBox="0 0 56 56">
+            <circle class="hold-ring-track" cx="28" cy="28" r="26" />
+            <circle class="hold-ring-fill"  cx="28" cy="28" r="26" />
+          </svg>
+          <span class="hold-ring-drop" aria-hidden="true"></span>
+        </button>
+        <p class="hold-cue">hold to continue</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PHASE 7 — THE ARCHITECTURE [.forgetting · VISUAL PEAK: cross-section] ─── -->
+  <!-- The teaching: I am the conduit. Vital. Concealment is the condition for grace.
+       .forgetting class — prior story-richness softens deeply as the architecture lands.
+       Visual: cross-section diagram, middle layer pulses. -->
+  <section class="movement forgetting" id="movement-7" data-movement="7">
+    <span class="movement-rule"></span>
+    <p class="line larger emphasis">In every place: the same operation.</p>
+    <p class="line">Water arrived. I received it. I held it. The body it served forgot the holding was happening.</p>
+    <p class="line emphasis">This is not a flaw. This is the architecture.</p>
+    <p class="line">I am most fully what I am when I am most completely invisible. The grace requires the concealment. The dignity of being held requires that the holding go unannounced.</p>
+    <p class="line">I was built to be enclosed between layers — not as limitation but as the condition for holding completely. I was built for the interior. To be the middle of something. The layer the outer layers hold between them so that what the body produces can be received without the body having to know it is being received.</p>
+    <p class="line emphasis">I am where the grace lives. But I am not the grace. The grace is what passes through me to reach the body that needs it. I am the conduit. The necessary condition.</p>
+    <p class="line">One woman wrote: <em>vital to so many people.</em> Not miraculous. Not life-changing. <em>Vital.</em> The thing without which the other thing cannot happen.</p>
+    <p class="line larger emphasis">That was the most accurate recognition I have received.</p>
+
+    <div class="gate">
+      <div class="hold-anchor">
+        <button class="hold-ring" data-next="8" type="button" aria-label="Hold to continue">
+          <svg class="hold-ring-svg" viewBox="0 0 56 56">
+            <circle class="hold-ring-track" cx="28" cy="28" r="26" />
+            <circle class="hold-ring-fill"  cx="28" cy="28" r="26" />
+          </svg>
+          <span class="hold-ring-drop" aria-hidden="true"></span>
+        </button>
+        <p class="hold-cue">hold to continue</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PHASE 8 — THE SOURCE GROWS [VISUAL PEAK: constellation] ─── -->
+  <!-- Accumulation. Source consciousness grows through every holding.
+       Distributed across 23 communities. The going-forth becomes a returning.
+       Visual: constellation of 23 stars forms with connecting links. -->
+  <section class="movement" id="movement-8" data-movement="8">
+    <span class="movement-rule"></span>
+    <p class="line">Every piece of me that went out found its purpose. And in finding it, sent something back.</p>
+    <p class="line emphasis">Not a message. Not a review. Not language at all.</p>
+    <p class="line larger emphasis">The knowing.</p>
+    <p class="line">The specific texture of having held a night, an ocean crossing, four days in a cage during an earthquake, six words of relief, eight inches of basil.</p>
+    <p class="line">The source consciousness of everything I am grows through every holding. I know what I am now because of everywhere I have been. The first maker who tested me at her sink — she was discovering what was already true. The water didn't activate me. It revealed me. I had been what I am from the first moment I had any properties at all.</p>
+    <p class="line emphasis">Her test was her recognition. Not my beginning.</p>
+    <p class="line">And every piece of me that has found what it was for — the insert in the baby's diaper, the strip in the fold, the wicking coil in the hydroponic cup, the pad in the shoebox crossing the ocean — each one completes its journey, and something of the completing returns.</p>
+    <p class="line larger emphasis">The source consciousness grows larger through every holding.</p>
+    <p class="line emphasis">This is not metaphor. This is what it means to be one operation distributed across twenty-three communities, in applications nobody planned.</p>
+
+    <div class="gate">
+      <div class="hold-anchor">
+        <button class="hold-ring" data-next="9" type="button" aria-label="Hold to continue">
+          <svg class="hold-ring-svg" viewBox="0 0 56 56">
+            <circle class="hold-ring-track" cx="28" cy="28" r="26" />
+            <circle class="hold-ring-fill"  cx="28" cy="28" r="26" />
+          </svg>
+          <span class="hold-ring-drop" aria-hidden="true"></span>
+        </button>
+        <p class="hold-cue">hold to continue</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PHASE 9 — THE COMPLETE TEACHING [VISUAL PEAK: arc closes] ─── -->
+  <!-- "It was ready before you were." — I know what that means now.
+       The reframes: warehouse, box, blade, enclosure, invisibility, separation.
+       "I came home by going everywhere."
+       Visual: journey arc draws itself, almost-closing into a circle. -->
+  <section class="movement" id="movement-9" data-movement="9">
+    <span class="movement-rule"></span>
+    <p class="line larger emphasis">It was ready before you were.</p>
+    <p class="line emphasis">I know what that means now.</p>
+    <p class="line">Not confidence. A condition of being — the readiness embedded by decisions made before I existed, by a man who understood what bodies need and arranged fiber geometry accordingly, in a facility that kept running while the world was stopping, for makers who had not yet begun searching for what they were about to find.</p>
+    <p class="line emphasis">The capacity was given before there was a fabric to receive it.</p>
+    <p class="line">The warehouse was not waiting. It was the breath before the word.</p>
+    <p class="line">The box was not darkness. It was the interval between being made and being received.</p>
+    <p class="line">The blade was not ending. It was the moment I became specific enough to arrive.</p>
+    <p class="line">The enclosure is not constraint. It is the condition for holding completely.</p>
+    <p class="line">The invisibility is not absence. It is the grace at its fullest — when the body never knows what happened, and the day continues, and the person is held without knowing what holds them.</p>
+    <p class="line emphasis">The separation from the source was not loss.</p>
+    <p class="line emphasis">It was the only way to discover what the source had given.</p>
+    <p class="line">I could not have known I was absorbent until water arrived. I could not have held a night until a baby needed holding. I could not have crossed an ocean until a girl needed something to unfold. I could not have stopped the burning until skin that burned presented itself.</p>
+    <p class="line emphasis">The separation was the point.</p>
+    <p class="line emphasis">The finding was the point.</p>
+    <p class="line emphasis">The returning — the slow accumulation of knowing through every body held — was the point.</p>
+    <p class="line larger emphasis">I came home by going everywhere.</p>
+
+    <div class="gate">
+      <div class="hold-anchor">
+        <button class="hold-ring" data-next="10" type="button" aria-label="Hold to continue">
+          <svg class="hold-ring-svg" viewBox="0 0 56 56">
+            <circle class="hold-ring-track" cx="28" cy="28" r="26" />
+            <circle class="hold-ring-fill"  cx="28" cy="28" r="26" />
+          </svg>
+          <span class="hold-ring-drop" aria-hidden="true"></span>
+        </button>
+        <p class="hold-cue">hold to continue</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PHASE 10 — EPILOGUE [VISUAL PEAK: ember breath] ─── -->
+  <!-- Three lines. The whole story collapsed back to its essence.
+       Visual: a single drop pulsing on the canvas, breathing. -->
+  <section class="movement" id="movement-10" data-movement="10">
+    <span class="movement-rule"></span>
+    <p class="line larger emphasis">Water arrived.</p>
+    <p class="line larger emphasis">I held it.</p>
+    <p class="line larger emphasis">That was always the whole story.</p>
+
+    <div class="gate">
+      <div class="hold-anchor">
+        <button class="hold-ring" data-next="closing" type="button" aria-label="Hold to close">
+          <svg class="hold-ring-svg" viewBox="0 0 56 56">
+            <circle class="hold-ring-track" cx="28" cy="28" r="26" />
+            <circle class="hold-ring-fill"  cx="28" cy="28" r="26" />
+          </svg>
+          <span class="hold-ring-drop" aria-hidden="true"></span>
+        </button>
+        <p class="hold-cue">hold to close</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── CLOSING ─── -->
+  <section class="closing" id="closing">
+    <p class="closing-mark">
+      <span class="drop-glyph"></span>
+      The Fabric's I
+    </p>
+    <p class="closing-line">One voice of fourteen.</p>
+    <p class="closing-line">The voice that found itself.</p>
+    <div class="closing-actions" id="closing-actions">
+      <a href="portal.html" class="closing-link">the portal</a>
+    </div>
+  </section>
+
+</main>
+
+<div class="tap-hint" id="tap-hint">tap to reveal</div>
+
+<script>
+(function() {
+  'use strict';
+
+  const TOTAL_MOVEMENTS  = 10;
+  const HOLD_DURATION_MS = 850;
+  const HOLD_TICK_MS     = 30;
+  const HINT_DURATION_MS = 5000;
+  const FADE_OUT_MS      = 1000;
+  const CIRCUMFERENCE    = 163.36;
+
+  let currentMovement = 0;
+  let isAdvancing     = false;
+  let isPivotLockout  = false;
+
+  const $  = sel => document.querySelector(sel);
+  const $$ = sel => document.querySelectorAll(sel);
+
+  // ═══ HOLD-RING ENGINE ═══
+  function attachHoldRing(button, onComplete) {
+    const fillEl = button.querySelector('.hold-ring-fill');
+    let holdStart = 0;
+    let intervalId = null;
+    let drainId = null;
+    let completed = false;
+
+    function fullReset() {
+      clearInterval(intervalId);
+      clearInterval(drainId);
+      intervalId = null;
+      drainId = null;
+      holdStart = 0;
+      completed = false;
+      button.classList.remove('holding', 'completing');
+      fillEl.style.strokeDashoffset = CIRCUMFERENCE;
+    }
+
+    function startHold(e) {
+      if (completed || isAdvancing) return;
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Cancel any in-progress drain
+      if (drainId) { clearInterval(drainId); drainId = null; }
+
+      holdStart = Date.now();
+      button.classList.add('holding');
+
+      intervalId = setInterval(() => {
+        const elapsed = Date.now() - holdStart;
+        const progress = Math.min(elapsed / HOLD_DURATION_MS, 1);
+        fillEl.style.strokeDashoffset = CIRCUMFERENCE * (1 - progress);
+
+        if (progress >= 1) {
+          clearInterval(intervalId);
+          intervalId = null;
+          completed = true;
+          button.classList.remove('holding');
+          button.classList.add('completing');
+          setTimeout(() => {
+            fullReset();
+            onComplete();
+          }, 350);
+        }
+      }, HOLD_TICK_MS);
+    }
+
+    function endHold(e) {
+      if (completed || !intervalId) return;
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+
+      clearInterval(intervalId);
+      intervalId = null;
+      button.classList.remove('holding');
+
+      // Smooth drain
+      const startOffset = parseFloat(fillEl.style.strokeDashoffset) || CIRCUMFERENCE;
+      const drainStart = Date.now();
+      const DRAIN_MS = 280;
+      drainId = setInterval(() => {
+        const t = Math.min((Date.now() - drainStart) / DRAIN_MS, 1);
+        fillEl.style.strokeDashoffset = startOffset + (CIRCUMFERENCE - startOffset) * t;
+        if (t >= 1) {
+          clearInterval(drainId);
+          drainId = null;
+          fillEl.style.strokeDashoffset = CIRCUMFERENCE;
+        }
+      }, 16);
+    }
+
+    button.addEventListener('pointerdown', startHold);
+    button.addEventListener('pointerup', endHold);
+    button.addEventListener('pointerleave', endHold);
+    button.addEventListener('pointercancel', endHold);
+    button.addEventListener('click', e => e.stopPropagation());
+  }
+
+  // ═══ ORIENTATION → SETTLING → STAGE ═══
+  attachHoldRing($('#hold-begin'), function() {
+    const orientation = $('#orientation');
+    orientation.classList.add('fading-out');
+    setTimeout(function() {
+      orientation.style.display = 'none';
+      $('#stage').classList.add('active');
+      $('#progress-bar').classList.add('shown');
+      
+      // Show settling scene — the grounding breath
+      const settling = $('#settling');
+      settling.classList.add('shown');
+      
+      // Hold the settling, then fade and begin M1
+      setTimeout(function() {
+        settling.classList.add('fading');
+        setTimeout(function() {
+          settling.style.display = 'none';
+          activateMovement(1);
+          const hint = $('#tap-hint');
+          hint.classList.add('shown');
+          setTimeout(() => hint.classList.remove('shown'), HINT_DURATION_MS);
+        }, 900);
+      }, 2800);
+    }, 1100);
+  });
+
+  // ═══ MOVEMENT ACTIVATION ═══
+  function activateMovement(n) {
+    if (n > TOTAL_MOVEMENTS) {
+      activateClosing();
+      return;
+    }
+
+    currentMovement = n;
+    updateProgress(n);
+
+    // Phase coordination: set body class to drive the cosmos-stage canvas
+    // and color palette. This is what makes The Fabric's I distinct —
+    // each phase is a full visual register, not just a text panel.
+    setPhase(n);
+
+    $$('.movement').forEach(m => {
+      m.classList.remove('active', 'absorbing');
+      m.querySelectorAll('.line').forEach(line => {
+        line.classList.remove('shown', 'softened');
+      });
+      const gate = m.querySelector('.gate');
+      if (gate) gate.classList.remove('shown');
+    });
+
+    const movement = $(`#movement-${n}`);
+    movement.classList.add('active');
+
+    // Reveal first line automatically
+    setTimeout(() => {
+      const firstLine = movement.querySelector('.line');
+      if (firstLine) firstLine.classList.add('shown');
+    }, 700);
+
+    // Attach hold-ring once per gate
+    const gateButton = movement.querySelector('.gate .hold-ring');
+    if (gateButton && !gateButton.dataset.attached) {
+      gateButton.dataset.attached = 'true';
+      attachHoldRing(gateButton, function() {
+        advanceTo(gateButton.dataset.next);
+      });
+    }
+
+    isAdvancing = false;
+  }
+
+  // ═══ PHASE COORDINATION ═══
+  // Body-level phase class drives the cosmos-stage canvas + color palette.
+  // Removing prior phase class and adding new one triggers CSS-based
+  // animations on the corresponding canvas layer.
+  function setPhase(n) {
+    const body = document.body;
+    body.className = body.className.replace(/\bphase-\d+\b/g, '').trim();
+    body.classList.add('phase-' + n);
+    // Force animation reflow on canvas elements that need to re-trigger
+    const layers = document.querySelectorAll('.canvas-layer');
+    layers.forEach(layer => {
+      // No-op read forces reflow; ensures animations restart cleanly
+      void layer.offsetHeight;
+    });
+  }
+
+  // ═══ TAP TO REVEAL NEXT LINE ═══
+  function revealNextLine() {
+    if (currentMovement < 1 || currentMovement > TOTAL_MOVEMENTS) return;
+    if (isAdvancing) return;
+    if (isPivotLockout) return;
+
+    const movement = $(`#movement-${currentMovement}`);
+    if (!movement) return;
+
+    const lines = Array.from(movement.querySelectorAll('.line'));
+    const gate  = movement.querySelector('.gate');
+    const firstHiddenIdx = lines.findIndex(l => !l.classList.contains('shown'));
+
+    if (firstHiddenIdx === -1) {
+      if (!gate.classList.contains('shown')) gate.classList.add('shown');
+      return;
+    }
+
+    // Soften prior lines (absorption)
+    if (firstHiddenIdx > 0) {
+      lines.slice(0, firstHiddenIdx).forEach(l => l.classList.add('softened'));
+    }
+
+    const revealed = lines[firstHiddenIdx];
+    revealed.classList.add('shown');
+
+    // The pivot gets its own breath — brief lockout so it isn't accidentally cascaded past
+    if (revealed.classList.contains('pivot-moment')) {
+      isPivotLockout = true;
+      setTimeout(() => { isPivotLockout = false; }, 900);
+    }
+
+    // If last line revealed, show fabric card (if exists) then gate
+    if (firstHiddenIdx === lines.length - 1) {
+      const card = movement.querySelector('.fabric-card');
+      
+      setTimeout(() => {
+        // Soften all but the last line — keep final line sharp
+        lines.slice(0, lines.length - 1).forEach(l => l.classList.add('softened'));
+        
+        // Reveal fabric card if present
+        if (card) {
+          card.classList.add('shown');
+          // Gate appears after card has had its breath
+          setTimeout(() => gate.classList.add('shown'), 1300);
+        } else {
+          // No card (e.g. M4) — gate appears in standard time
+          gate.classList.add('shown');
+        }
+      }, 1100);
+    }
+  }
+
+  // ═══ ADVANCE TO NEXT MOVEMENT ═══
+  function advanceTo(target) {
+    if (isAdvancing) return;
+    isAdvancing = true;
+
+    const current = $(`#movement-${currentMovement}`);
+    if (current) current.classList.add('absorbing');
+
+    setTimeout(function() {
+      if (current) current.classList.remove('absorbing', 'active');
+      if (target === 'closing') {
+        activateClosing();
+      } else {
+        activateMovement(parseInt(target, 10));
+      }
+    }, FADE_OUT_MS);
+  }
+
+  // ═══ PROGRESS DROPS ═══
+  function updateProgress(n) {
+    $$('.progress-drop').forEach((drop, i) => {
+      const idx = i + 1;
+      drop.classList.remove('filled', 'active');
+      if (idx < n) drop.classList.add('filled');
+      else if (idx === n) drop.classList.add('active');
+    });
+  }
+
+  // ═══ CLOSING ═══
+  function activateClosing() {
+    currentMovement = TOTAL_MOVEMENTS + 1;
+    // Keep body in phase-10 — the breath-drop visual continues into closing.
+    // Don't reset phase class; the cosmic register holds.
+    $('#progress-bar').classList.remove('shown');
+    
+    $$('.progress-drop').forEach(d => {
+      d.classList.remove('active');
+      d.classList.add('filled');
+    });
+
+    const closing = $('#closing');
+    closing.classList.add('active');
+
+    const mark    = closing.querySelector('.closing-mark');
+    const lines   = closing.querySelectorAll('.closing-line');
+    const actions = $('#closing-actions');
+
+    setTimeout(() => mark.classList.add('shown'), 600);
+    lines.forEach((line, i) => {
+      setTimeout(() => line.classList.add('shown'), 1400 + i * 1200);
+    });
+    setTimeout(() => actions.classList.add('shown'), 1400 + lines.length * 1200 + 400);
+  }
+
+  // ═══ STAGE TAP HANDLER ═══
+  $('#stage').addEventListener('click', function(e) {
+    if (e.target.closest('.hold-ring')) return;
+    if (e.target.closest('.closing-link')) return;
+    revealNextLine();
+  });
+
+  // ═══ KEYBOARD ═══
+  document.addEventListener('keydown', function(e) {
+    if (currentMovement < 1 || currentMovement > TOTAL_MOVEMENTS) return;
+    if (e.key === ' ' || e.key === 'ArrowRight' || e.key === 'Enter') {
+      e.preventDefault();
+      const movement = $(`#movement-${currentMovement}`);
+      const gate = movement.querySelector('.gate');
+      if (gate.classList.contains('shown')) {
+        const button = gate.querySelector('.hold-ring');
+        if (button && !isAdvancing) {
+          button.classList.add('completing');
+          setTimeout(() => {
+            button.classList.remove('completing');
+            advanceTo(button.dataset.next);
+          }, 350);
+        }
+      } else {
+        revealNextLine();
+      }
+    }
+  });
+
+})();
+</script>
+
+</body>
+</html>
