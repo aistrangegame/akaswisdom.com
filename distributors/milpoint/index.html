@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talking Points — For Denys Redon, Milpoint</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&display=swap');
+
+  :root{
+    /* spine */
+    --paper:#FFFFFF; --stone-line:#E3DDD0; --divider:#ECE6DA;
+    --ink:#1E1E1E; --ink-2:#3A352E; --muted:#8A8377; --mid:#5C5C58;
+    --voice:#3B8234; --voice-dk:#2C6427;
+    --text-on-deep: rgba(255,255,255,.94);
+    /* Zorb identity tier */
+    --sig:#0A5A99; --sig-dk:#08456F; --sig-d:#5FA8DC;
+    --wash:#DCEDFB; --wash-bd:#BFDDF4; --deep:#0A3354; --spark:#CDE970;
+    /* type */
+    --font-serif:'Newsreader',Georgia,serif;
+    --font-sans:'Hanken Grotesk',system-ui,sans-serif;
+    --font-mono:'SF Mono',ui-monospace,Menlo,monospace;
+    /* spacing (8pt rhythm) */
+    --s-3:12px; --s-4:16px; --s-5:24px; --s-6:32px; --s-7:48px; --s-8:64px; --s-9:96px;
+    --r-pill:999px; --r-lg:16px;
+    --shadow-1: 0 1px 3px rgba(10,40,60,.08), 0 1px 2px rgba(10,40,60,.05);
+    --shadow-2: 0 14px 40px rgba(8,30,50,.20), 0 3px 10px rgba(8,30,50,.10);
+    --ease-soft: cubic-bezier(.4,0,.2,1); --dur-base:.25s;
+  }
+
+  *{ box-sizing:border-box; }
+  body{
+    margin:0; background:#D8E4EC; color:var(--ink);
+    font:400 16px/1.6 var(--font-sans); -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--sig-d); color:#fff; }
+  a{ color:var(--sig-dk); text-decoration-color:var(--wash-bd); text-underline-offset:3px; font-weight:700; transition:color var(--dur-base) var(--ease-soft); }
+  a:hover, a:focus-visible{ color:var(--ink); }
+  a:focus-visible{ outline:1.5px solid var(--sig); outline-offset:2px; border-radius:2px; }
+
+  .doc{ max-width:800px; margin:0 auto; background:var(--paper); box-shadow:var(--shadow-2); }
+  @media (max-width:600px){ .doc{ box-shadow:none; } }
+
+  .band{ padding:var(--s-7) var(--s-5); }
+  @media (min-width:640px){ .band{ padding:var(--s-9) var(--s-6); } }
+  .band--paper{ background:var(--paper); }
+  .band--wash{ background:var(--wash); }
+  .band--deep{ background:var(--deep); color:var(--text-on-deep); }
+
+  .masthead{ position:relative; overflow:hidden; }
+  .masthead::before{
+    content:""; position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 60% 55% at 88% 0%, rgba(59,130,52,.09), transparent 65%),
+      repeating-linear-gradient(45deg, rgba(255,255,255,.4) 0 2px, rgba(255,255,255,0) 2px 4px),
+      repeating-linear-gradient(-45deg, rgba(10,90,153,.06) 0 2px, rgba(10,90,153,0) 2px 4px);
+    pointer-events:none;
+  }
+  .masthead > *{ position:relative; }
+
+  .dot{ display:inline-block; width:9px; height:9px; border-radius:50%; background:var(--sig); box-shadow:inset 0 0 0 1px rgba(0,0,0,.12); margin-right:10px; vertical-align:middle; }
+
+  .eyebrow{
+    font:800 12.5px/1 var(--font-sans); letter-spacing:.18em; text-transform:uppercase;
+    color:var(--sig-dk); display:flex; align-items:center; gap:14px; margin:0 0 var(--s-4);
+  }
+  .eyebrow::after{ content:""; flex:1; max-width:56px; height:1px; background:var(--wash-bd); }
+  .band--paper .eyebrow{ color:var(--muted); }
+  .band--paper .eyebrow::after{ background:var(--stone-line); }
+  .band--deep .eyebrow{ color:var(--sig-d); }
+  .band--deep .eyebrow::after{ background:rgba(255,255,255,.22); }
+
+  h1{ font:500 clamp(34px,7vw,54px)/1.1 var(--font-serif); letter-spacing:-.02em; margin:0 0 var(--s-4); color:var(--sig-dk); }
+  h3{ font:600 25px/1.3 var(--font-serif); margin:0 0 var(--s-4); color:var(--ink); border-left:4px solid var(--sig); padding-left:14px; }
+  .context{ font:600 15px/1.5 var(--font-sans); color:var(--ink-2); margin:0 0 var(--s-6); max-width:46ch; }
+  .byline{ font:700 14px/1.5 var(--font-sans); color:var(--ink); margin-top:var(--s-6); padding-top:var(--s-5); border-top:1.5px solid var(--wash-bd); }
+
+  p{ margin:0 0 var(--s-4); max-width:64ch; }
+
+  .voice-line{ font:italic 500 22px/1.5 var(--font-serif); color:var(--voice); margin:var(--s-6) 0 0; max-width:48ch; }
+
+  /* organisations */
+  .org-grid{ display:grid; grid-template-columns:1fr; border-top:1px solid var(--divider); margin-top:var(--s-5); }
+  @media (min-width:560px){ .org-grid{ grid-template-columns:1fr 1fr; column-gap:var(--s-6); } }
+  .org{ padding:var(--s-4) 0; border-bottom:1px solid var(--divider); }
+  .org-name{ font:700 15px/1.4 var(--font-sans); color:var(--ink); }
+  .org-desc{ font:400 14px/1.5 var(--font-sans); color:var(--ink-2); margin-top:2px; }
+  .org-extra{ margin-top:var(--s-5); padding-top:var(--s-4); border-top:1px solid var(--divider); font:400 14px/1.6 var(--font-sans); color:var(--ink-2); max-width:64ch; }
+  .countries{ font:600 13.5px/1.5 var(--font-sans); color:var(--muted); margin-top:var(--s-3); }
+
+  /* badges */
+  .badge-row{ display:flex; flex-wrap:wrap; gap:var(--s-3); margin:var(--s-5) 0; }
+  .badge{ display:inline-flex; align-items:center; font:700 12px/1 var(--font-sans); letter-spacing:.02em; padding:8px 14px; border-radius:var(--r-pill); }
+  .badge--brand{ background:var(--wash); color:var(--sig-dk); border:1.5px solid var(--wash-bd); }
+  .badge--neutral{ background:#EFECE6; color:var(--ink-2); }
+  .badge--spark{ background:var(--spark); color:#0A3354; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; font-weight:800; }
+
+  /* callout card */
+  .card{ border-radius:var(--r-lg); padding:var(--s-5); margin-top:var(--s-5); }
+  .card--wash{ background:var(--wash); border:1.5px solid var(--wash-bd); }
+  .card-label{ font:800 12px/1.4 var(--font-sans); letter-spacing:.04em; text-transform:uppercase; color:var(--sig-dk); margin-bottom:8px; }
+  .card p{ margin-bottom:0; max-width:60ch; }
+  .card p + p{ margin-top:var(--s-3); }
+
+  /* stats */
+  .stat-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(190px,1fr)); gap:var(--s-7) var(--s-5); margin-top:var(--s-6); }
+  .stat-num{ font:600 clamp(26px,5vw,36px)/1.1 var(--font-serif); color:var(--sig-dk); letter-spacing:-.01em; }
+  .stat-label{ font:600 13.5px/1.5 var(--font-sans); color:var(--ink-2); margin-top:6px; max-width:30ch; }
+
+  /* applications */
+  .tag-row{ display:flex; flex-wrap:wrap; gap:var(--s-3); margin-top:var(--s-5); }
+  .tag{ font:600 13.5px/1 var(--font-sans); color:var(--sig-dk); background:var(--paper); border:1.5px solid var(--wash-bd); padding:9px 15px; border-radius:var(--r-pill); }
+
+  .closing{ max-width:540px; margin:0 auto; text-align:center; }
+  .closing .voice-line{ color:var(--text-on-deep); font-size:clamp(21px,4vw,27px); margin:0 auto; }
+
+  footer.band{ text-align:center; }
+  .footer-line{ font:700 12px/1.6 var(--font-mono); color:var(--sig-dk); letter-spacing:.03em; }
+
+  .verify{ font:600 12px/1.6 var(--font-sans); color:var(--muted); margin-top:var(--s-3); }
+
+  /* story section */
+  .pull-line{ font:600 20px/1.5 var(--font-serif); color:var(--sig-dk); margin:var(--s-6) 0 0; max-width:50ch; border-left:3px solid var(--sig); padding-left:16px; }
+
+  .divider{ display:flex; align-items:center; justify-content:center; gap:16px; margin-bottom:var(--s-6); }
+  .divider::before, .divider::after{ content:""; height:1px; width:48px; background:var(--stone-line); }
+  .band--wash .divider::before, .band--wash .divider::after{ background:var(--wash-bd); }
+  .divider span{ font:800 12px/1 var(--font-sans); letter-spacing:.2em; text-transform:uppercase; color:var(--sig-dk); }
+
+  .maker-quote{ border-left:3px solid var(--wash-bd); padding-left:var(--s-4); margin:var(--s-5) 0; }
+  .band--wash .maker-quote{ border-left-color:var(--sig-d); }
+  .maker-quote p{ font:italic 500 18px/1.5 var(--font-serif); color:var(--ink-2); margin:0 0 6px; max-width:56ch; }
+  .maker-quote cite{ display:block; font:700 12px/1.4 var(--font-sans); font-style:normal; letter-spacing:.03em; color:var(--muted); text-transform:uppercase; }
+
+  .fact-list{ margin:var(--s-5) 0 0; }
+  .fact{ padding:var(--s-3) 0; border-bottom:1px solid var(--divider); font:400 15px/1.5 var(--font-sans); color:var(--ink-2); }
+  .fact strong{ color:var(--ink); font-weight:700; }
+
+  .chain{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:var(--s-5) 0; }
+  .chain .step{ font:700 12.5px/1 var(--font-sans); color:var(--sig-dk); background:var(--paper); border:1.5px solid var(--wash-bd); padding:9px 14px; border-radius:var(--r-pill); }
+  .chain .arrow{ color:var(--sig-d); font-weight:400; font-size:14px; }
+
+  .yield-row{ display:flex; flex-wrap:wrap; gap:var(--s-6); margin:var(--s-5) 0; }
+  .yield-num{ font:600 26px/1.15 var(--font-serif); color:var(--sig-dk); }
+  .yield-label{ font:600 12.5px/1.5 var(--font-sans); color:var(--ink-2); max-width:22ch; margin-top:4px; }
+
+  @media print{
+    body{ background:#fff; }
+    .doc{ box-shadow:none; max-width:100%; }
+    .band--deep, .band--wash{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <header class="band band--wash masthead">
+    <p class="eyebrow"><span class="dot"></span>Talking Points · For Denys Redon, Milpoint</p>
+    <h1>A Road Already Walked</h1>
+    <p class="context">Les Rencontres de l'engagement — La Cité audacieuse, Paris · 15 September 2026</p>
+    <p class="byline">From Ashrey Sharma, AKAS Tex LLC</p>
+  </header>
+
+  <section class="band band--paper">
+    <p class="eyebrow">Already in motion</p>
+    <h3>Shortee is joining something already in motion</h3>
+    <p>On four continents, for more than a decade — the same road Shortee is walking now.</p>
+
+    <div class="org-grid">
+      <div class="org">
+        <div class="org-name"><a href="https://daysforgirls.org" target="_blank" rel="noopener">Days for Girls</a></div>
+        <div class="org-desc">Reusable menstrual kits with health education. US volunteer chapters sew, the organisation ships worldwide.</div>
+      </div>
+      <div class="org">
+        <div class="org-name"><a href="https://dignityperiod.org" target="_blank" rel="noopener">Dignity Period</a></div>
+        <div class="org-desc">Ethiopia and the United States.</div>
+      </div>
+      <div class="org">
+        <div class="org-name"><a href="https://mcc.org" target="_blank" rel="noopener">Mennonite Central Committee</a></div>
+        <div class="org-desc">International relief and development.</div>
+      </div>
+      <div class="org">
+        <div class="org-name"><a href="https://www.samaritanspurse.org/operation-christmas-child/" target="_blank" rel="noopener">Operation Christmas Child / Samaritan's Purse</a></div>
+        <div class="org-desc">Volunteers sew pads into gift boxes for teenage girls, every autumn.</div>
+      </div>
+      <div class="org">
+        <div class="org-name">Project Patricia</div>
+        <div class="org-desc">A Kansas City church ministry — pads sent with missionaries to Africa and Haiti.</div>
+      </div>
+      <div class="org">
+        <div class="org-name">Project Luangwa</div>
+        <div class="org-desc">Zambia — we helped solve international freight for them in 2016.</div>
+      </div>
+      <div class="org">
+        <div class="org-name"><a href="https://clothconnectionoutreach.org" target="_blank" rel="noopener">Cloth Connection Outreach</a></div>
+        <div class="org-desc">Free cloth pad kits sewn by volunteers across the US.</div>
+      </div>
+      <div class="org">
+        <div class="org-name"><a href="https://hubnspokenonprofit.org" target="_blank" rel="noopener">Hub N Spoke Nonprofit</a></div>
+        <div class="org-desc">Dignity kits, sewn by volunteers across many states.</div>
+      </div>
+    </div>
+
+    <p class="org-extra">Plus parish sewing circles, a hospice sewing group, and refugee women taught to sew the kits themselves.</p>
+    <p class="countries">Makers doing this work name Kenya, Ghana, Ethiopia, Guatemala, Malawi, South Sudan, Zambia, Senegal, Haiti, and Ecuador.</p>
+
+    <p class="pull-line">The impact is simple to say and hard to overstate: a girl gets to go to school, and stay in school.</p>
+  </section>
+
+  <section class="band band--wash">
+    <p class="eyebrow">What years of this work has shown</p>
+    <div class="stat-grid">
+      <div>
+        <div class="stat-num">16 years</div>
+        <div class="stat-label">Manufacturing in the USA, since 2010</div>
+      </div>
+      <div>
+        <div class="stat-num">12–13 years</div>
+        <div class="stat-label">Unbroken relationships with humanitarian partners</div>
+      </div>
+      <div>
+        <div class="stat-num">~333 girls</div>
+        <div class="stat-label">Served by every 50 yards of fabric one maker sews — her own arithmetic</div>
+      </div>
+      <div>
+        <div class="stat-num">3.9M+ / 179K</div>
+        <div class="stat-label">Reported reach — Days for Girls; Dignity Period, their own published figures</div>
+      </div>
+      <div>
+        <span class="badge badge--spark" style="margin-bottom:8px;">Samaritan's Purse figure</span>
+        <div class="stat-num">244M+</div>
+        <div class="stat-label">Shoebox gifts delivered by Operation Christmas Child since 1993</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--paper">
+    <p class="eyebrow">The fabric</p>
+    <h3>Zorb® 4D Stay Dry Dimple</h3>
+    <p>Absorbent core and waterproof barrier bonded into a single cut. One piece of fabric, not three layers — less sewing, less training, fewer ways to get it wrong in a workshop.</p>
+
+    <div class="badge-row">
+      <span class="badge badge--brand">No super absorbent polymers</span>
+      <span class="badge badge--brand">Ready to absorb, on contact</span>
+      <span class="badge badge--brand">~8× its weight, under 2 seconds</span>
+      <span class="badge badge--brand">Silver Plus · 50+ washes</span>
+      <span class="badge badge--neutral">Made in USA · AKAS Tex</span>
+      <span class="badge badge--neutral">CPSIA · Prop 65 · REACH · Forever Chemicals-Free</span>
+    </div>
+
+    <div class="card card--wash">
+      <div class="card-label">Why polyester, and why silver</div>
+      <p>These pads are hand-washed in cold water, often without soap, and dried in the open air. Cotton — the instinctive "natural" choice — holds moisture and won't dry fast in humid climates; polyester pushes water out and dries quickly. Silver Plus follows the same logic: where washing is imperfect, inhibiting bacteria on the fabric itself matters more, not less. Both calls were Denys's own, made for the conditions Shortee actually works in.</p>
+    </div>
+    <p class="verify">All specifications carry ±10% per textile manufacturing standards; we do not test absorbency in the finished, sewn product.</p>
+  </section>
+
+  <section class="band band--wash">
+    <p class="eyebrow">Many places it shows up</p>
+    <p>This isn't one product — it's a way of thinking about what goes against skin, going back to where the fabric started: baby care. The same fabric also serves:</p>
+    <div class="tag-row">
+      <span class="tag">Incontinence pads &amp; adult underwear</span>
+      <span class="tag">Hospice &amp; home-care bed pads</span>
+      <span class="tag">Nursing pads</span>
+      <span class="tag">Cloth diapers, inserts &amp; liners</span>
+      <span class="tag">Bibs &amp; burp cloths</span>
+      <span class="tag">Adaptive clothing</span>
+      <span class="tag">Pet care</span>
+      <span class="tag">Dignity Kits — pads, washcloths, soap, bundled</span>
+    </div>
+
+    <div class="card" style="background:var(--paper); border:1.5px solid var(--wash-bd);">
+      <div class="card-label">Proof it's not only menstrual</div>
+      <p>One example worth naming on its own: a prototype Zorb hand-ball is already in development for hyperhidrosis — heavy hand-sweating. Same fabric, same core property, a use case nobody in that room will expect.</p>
+    </div>
+  </section>
+
+  <section class="band band--paper">
+    <div class="divider"><span>The Story</span></div>
+    <p class="eyebrow">Every hand that came before</p>
+    <h3>You are not the first</h3>
+    <p>Somewhere right now, there is a shoebox being packed on a folding table in a church basement. Inside it, a small stack of pads — sewn by a woman who will never meet the girl who opens the box. She has made her peace with that. She is not the first, and neither is Shortee.</p>
+    <p>This company has been doing this work for more than a decade, through the hands of women who mostly don't know each other, sewing the same fabric into the same kind of dignity, again and again. A few of their names:</p>
+    <div class="fact-list">
+      <div class="fact"><strong>Pamela Killion</strong> — ten years, one fabric, one company.</div>
+      <div class="fact"><strong>Donna Terpstra</strong> — twelve unbroken years, sending barrier fabric to women's empowerment programs.</div>
+      <div class="fact"><strong>Cynthia S.</strong> — four years of Operation Christmas Child shoeboxes, sealed on faith they'll arrive.</div>
+    </div>
+    <div class="maker-quote">
+      <p class="voice-line" style="margin-top:0;">Sew with love in your heart.</p>
+      <cite>— Dianne Leach, the maker who wrote the arithmetic this whole story runs on</cite>
+    </div>
+  </section>
+
+  <section class="band band--wash">
+    <p class="eyebrow">The same hand</p>
+    <h3>Makers who have never met arrive at the same choice</h3>
+    <p>Teresa chose a dark brown barrier fabric for her Operation Christmas Child kits — the color would carry staining the girls couldn't wash out, in conditions where washing itself couldn't be guaranteed. She designed for a life she would never see.</p>
+    <div class="maker-quote">
+      <p>waterproof (bleedproof)</p>
+      <cite>— Kathleen Tiffin, choosing the same dark, Silver-treated fabric years later, on another continent, for Ghana</cite>
+    </div>
+    <p>Two words, and a technical spec had already been translated into the language of the people she was sewing for. That's not coincidence. That's what the constraint teaches everyone who actually listens to it.</p>
+  </section>
+
+  <section class="band band--paper">
+    <p class="eyebrow">Fifty yards</p>
+    <h3>The arithmetic is the whole point</h3>
+    <p>Dianne Leach wrote it down first: fifty yards of fabric does one thousand pads. It isn't a specification. It's the shape of what this work actually is — every yard converts, through someone's hands, into a unit of dignity.</p>
+    <div class="yield-row">
+      <div>
+        <div class="yield-num">50 yds → 1,000 pads</div>
+        <div class="yield-label">Dianne Leach's own arithmetic</div>
+      </div>
+      <div>
+        <div class="yield-num">25 yds → 250 pads</div>
+        <div class="yield-label">Rebecca Blackburn, sewn whole into Operation Christmas Child shoeboxes</div>
+      </div>
+    </div>
+    <p>One maker, SCL, kept a roll going toward a school in South Sudan after a real manufacturing flaw — delamination, mid-roll — and wrote that it was still <em>exactly what we need.</em> The commitment survived the flaw. That's the standard here: not perfect fabric, fabric that holds.</p>
+  </section>
+
+  <section class="band band--wash">
+    <p class="eyebrow">The hidden chain</p>
+    <h3>Nobody sees the whole chain. It holds anyway.</h3>
+    <div class="chain">
+      <span class="step">Maker</span><span class="arrow">→</span>
+      <span class="step">Pad</span><span class="arrow">→</span>
+      <span class="step">Shoebox</span><span class="arrow">→</span>
+      <span class="step">Shipping</span><span class="arrow">→</span>
+      <span class="step">Distribution</span><span class="arrow">→</span>
+      <span class="step">A girl's hands</span>
+    </div>
+    <p>At every stage, the work is hidden from the next. The maker never learns whether it worked. The girl at the far end can't write back — no internet, no review platform, no way to close the loop.</p>
+    <p class="pull-line">Their silence is not missing data. Their silence is the confirmation the grace reached them.</p>
+   <br> <p>Every maker in this community sews into that silence on purpose. They never expected a reply. The work was the prayer.</p>
+  </section>
+
+  <section class="band band--paper">
+    <p class="eyebrow">Welcome</p>
+    <h3>The chain has held before. It will hold with you.</h3>
+    <p>If Shortee is reading this because the work has just begun: you are not the first, you are not alone, and you are not improvising. The fabric has been ready longer than you've been looking for it. You didn't invent the shape of what you're about to do. You're joining it.</p>
+    <p>Twelve years. Ten years. Four years, and still counting. The chain has never broken. It won't start with you.</p>
+  </section>
+
+  <section class="band band--deep">
+    <div class="closing">
+      <p class="voice-line">What we put against our skin makes a difference — to these girls, and to our own lives.</p>
+    </div>
+  </section>
+
+  <footer class="band band--paper" style="padding-top:var(--s-6); padding-bottom:var(--s-6);">
+    <div class="footer-line">AKAS TEX LLC · ASH@WAZOODLE.COM</div>
+  </footer>
+
+</div>
+</body>
+</html>

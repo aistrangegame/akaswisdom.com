@@ -1,0 +1,1005 @@
+<!doctype html>
+<html lang="en" data-chassis="akas" data-brand="proeco" data-ground="paper" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Voice Map — it sounds like a family answering the phone | AKAS Wisdom</title>
+<meta name="description" content="Five voices, one phone call. Which voice a piece is in, how to sound like it, and the check before it ships — for anyone writing, filming or designing for Wazoodle and AKAS Tex.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<!--
+BRIEF (rupakarshini)
+ONE JOB       A writer, filmmaker or designer who has never met the family can pick the voice for a piece, sound like it, and check her own draft.
+WHO ARRIVES   Shelby, Brian, Chris, Scott, Revity; then the family.
+REGISTER      Ash (the walk) carrying Arch's frequency; real sentences from the five.
+RECOGNITION   "It sounds like a family answering the phone — and it takes five people to answer it."
+SHAPE         Guide ∘ Instrument (the chooser and the check are the guide; the five and the mix are the instrument).
+CHASSIS/WORLD akas · proeco · paper. Purpose + outcome at the door (ruled 8 Sep 2026); no four-line frame here.
+DEPTH         5 voices, 9 listeners, 1 rule; the Voice Library (Owl) is the source of truth, linked from every card.
+HOSTING       single-file HTML (akaswisdom.com). HAND: both.
+MOTION        the five answering, the frequency drawing, sentences arriving, faders rising, the loop on entry; reduced-motion = static.
+-->
+<style>
+/* ---- tokens/spine.css ---- */
+/* ============================================================
+   rupakarshini V3 — tokens/spine.css
+   THE SPINE. Role tokens. Both chassis obey this grammar.
+   Components reference ONLY spine tokens. Worlds fill them.
+   Scope: everything lives under [data-chassis][data-brand].
+   Load order: spine.css → scales.css → ONE world file → rk.css
+   ============================================================ */
+
+:root, [data-chassis] {
+  /* ---- GROUND (Neev) — what the page stands on ---------- */
+  --bg:            var(--w-ground);        /* page ground                    */
+  --surface:       var(--w-surface);       /* cards, panels, the raised plane */
+  --surface-2:     var(--w-surface-2);     /* quiet alternate band            */
+  --surface-wash:  var(--w-wash);          /* identity tint band              */
+  --surface-deep:  var(--w-deep);          /* the ONE deep band per page      */
+  --surface-hover: var(--w-hover);
+
+  /* ---- MEDIUM (Shweta) — what the reader reads through --- */
+  --fg:            var(--w-ink);           /* primary text                    */
+  --fg-2:          var(--w-ink-2);         /* secondary text                  */
+  --fg-muted:      var(--w-muted);         /* captions, tertiary (≥4.5:1)     */
+  --fg-eyebrow:    var(--w-muted);         /* RULING: eyebrow uses muted, never label */
+  --fg-on-deep:    var(--w-on-deep);       /* text on the deep band           */
+  --fg-on-action:  #FFFFFF;
+
+  /* text ladder — one hue, distance not darkness (chassis-independent) */
+  --t-high:    color-mix(in oklch, var(--fg) 92%, transparent);
+  --t-mid:     color-mix(in oklch, var(--fg) 80%, transparent);
+  --t-body:    color-mix(in oklch, var(--fg) 72%, transparent);
+  --t-soft:    color-mix(in oklch, var(--fg) 58%, transparent);
+  --t-whisper: color-mix(in oklch, var(--fg) 36%, transparent);
+  --t-ghost:   color-mix(in oklch, var(--fg) 20%, transparent);
+
+  /* ---- HOLD (Sid) — lines and edges ---------------------- */
+  --line:          var(--w-line);          /* hairline                        */
+  --line-strong:   var(--w-sig);           /* 3px authority rule              */
+  --line-wash:     var(--w-wash-bd);
+  --radius:        var(--w-radius, 12px);
+  --radius-sm:     calc(var(--radius) * .5);
+  --radius-lg:     calc(var(--radius) * 1.33);
+  --radius-pill:   999px;
+
+  /* ---- VOICE (Arch) — identity and speaking colour ------- */
+  --sig:           var(--w-sig);           /* identity signature              */
+  --sig-pressed:   var(--w-sig-dk);
+  --sig-tint:      var(--w-sig-d);
+  --voice:         var(--w-voice);         /* the chassis's speaking colour   */
+  --voice-pressed: var(--w-voice-dk);
+  --spark:         var(--w-spark);         /* earned once against deep        */
+
+  /* ---- CONSEQUENCE (Bindu) — one colour across the estate  */
+  --bindu:         #C0392B;                /* the point where something is decided */
+  --bindu-pressed: #9E2D21;
+  --action:        var(--bindu);           /* commerce buy · threshold crossed */
+  --action-fg:     #FFFFFF;
+
+  /* ---- STATUS — the system deliberately has no general alert colour */
+  --ok:            var(--w-voice);
+  --warn:          #B8860B;                /* goldenrod — Low stock only       */
+  --danger:        var(--bindu);
+  --info:          #2575B5;
+
+  /* ---- GRACE (Karishma) — readiness ------------------------ */
+  --ring:          color-mix(in oklch, var(--sig) 70%, white);
+  --ring-w:        2px;
+  --ring-offset:   2px;
+  --shadow-1: 0 1px 3px rgba(40,34,24,.06), 0 1px 2px rgba(40,34,24,.04);
+  --shadow-2: 0 10px 34px rgba(40,34,24,.16), 0 2px 8px rgba(40,34,24,.08);
+  --shadow-3: 0 24px 60px rgba(40,34,24,.20), 0 6px 16px rgba(40,34,24,.10);
+
+  /* ---- FONT FACES — chassis constant, world never changes -- */
+  --font-display:  var(--w-font-display);
+  --font-ui:       var(--w-font-ui);
+  --font-mono:     var(--w-font-mono);
+  --font-ceremony: var(--w-font-ceremony, var(--w-font-display));
+}
+
+/* Focus ring recipe — one rule for the whole estate (keyboard only) */
+:where([data-chassis]) :focus-visible {
+  outline: var(--ring-w) solid var(--ring);
+  outline-offset: var(--ring-offset);
+  border-radius: var(--radius-sm);
+}
+
+/* Foreground-pairing invariant: any surface must be used with its pair */
+[data-chassis] .on-deep  { color: var(--fg-on-deep); }
+[data-chassis] .on-deep .eyebrow { color: var(--sig-tint); }
+[data-chassis] .on-wash .eyebrow { color: var(--sig-pressed); }
+
+/* ---- tokens/scales.css ---- */
+/* ============================================================
+   rupakarshini V3 — tokens/scales.css
+   Fluid type (Utopia math, 360→1440, rem term always present so
+   WCAG 1.4.4 holds: every step max ≤ 2.5× min), measure, space,
+   band rhythm, width scale, motion vocabulary.
+   Both chassis share this file. Worlds may override --pace-*.
+   ============================================================ */
+
+:root, [data-chassis] {
+  /* ---- TYPE LADDER — 8 steps, ratio ~1.2 mobile → 1.25 desktop */
+  --fs-display: clamp(2.5rem,    1.281rem + 5.42vi, 4.75rem);  /* 40 → 76  */
+  --fs-h1:      clamp(2rem,      1.303rem + 3.10vi, 3.28rem);  /* 32 → 52  */
+  --fs-h2:      clamp(1.6rem,    1.211rem + 1.73vi, 2.32rem);  /* 26 → 37  */
+  --fs-h3:      clamp(1.28rem,   1.074rem + 0.91vi, 1.64rem);  /* 20 → 26  */
+  --fs-lg:      clamp(1.125rem,  1.014rem + 0.49vi, 1.33rem);  /* 18 → 21  */
+  --fs-body:    clamp(1rem,      0.958rem + 0.19vi, 1.11rem);  /* 16 → 17.7*/
+  --fs-ui:      clamp(0.875rem,  0.86rem  + 0.07vi, 0.9rem);   /* 14 → 14.4*/
+  --fs-sm:      0.8125rem;                                     /* 13 fixed */
+  --fs-eyebrow: 0.8125rem;                                     /* 13 — RULING (was 12) */
+  --fs-mono-floor: 0.6875rem;                                  /* 11 — never below */
+
+  /* optical size pinned per step (CSS can't read clamp result) */
+  --opsz-display: 72; --opsz-h: 36; --opsz-body: 16; --opsz-label: 10;
+
+  /* ---- LINE HEIGHT — inverse to size */
+  --lh-display: 1.05; --lh-h: 1.15; --lh-lg: 1.35; --lh-body: 1.6; --lh-ui: 1.4;
+  --ls-display: -0.02em; --ls-h: -0.01em; --ls-eyebrow: .18em; --ls-mono: .16em;
+
+  /* ---- WIDTH SCALE — density governs measure (Parrot ruling) */
+  --w-reading:    68ch;                              /* invariant for prose  */
+  --w-reading-b:  60ch;                              /* ASG contemplative    */
+  --w-instrument: 720px;                             /* 640–760 band         */
+  --w-column:     940px;                             /* the editorial column */
+  --w-breakout:   min(1440px, 100vw - 64px);         /* grids, media, tables */
+  --w-shell:      1320px;
+
+  /* ---- SPACE — 8-pt */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px;
+  --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px;
+  --gap-tight: var(--s-2); --gap: var(--s-4); --gap-loose: var(--s-5);
+  --pad-card: var(--s-5);
+
+  /* ---- BAND RHYTHM — RULING 72 / 60; scale, not one value */
+  --band-tight:  clamp(40px, 5vw, 56px);
+  --band:        clamp(60px, 6vw, 72px);
+  --band-deep:   clamp(72px, 8vw, 104px);
+  --silence:     40px;                               /* .silence run-out     */
+  --strata-1: 10px; --strata-2: 14px; --strata-3: 18px; /* the descent seam  */
+
+  /* ---- MOTION VOCABULARY — named, budgeted, reduced-motion gated */
+  --ease-out:  cubic-bezier(.22,.61,.36,1);
+  --ease-soft: cubic-bezier(.4,0,.2,1);
+  --dur-fast: .15s; --dur-base: .25s; --dur-slow: .5s;
+  --dur-breath: 6s;                                  /* ASG breathe loop     */
+  --rise-y: 24px;                                    /* rise/reveal travel   */
+  --veil-y: -8px;                                    /* veil entry travel    */
+  --hold-ms: 700;                                    /* hold-to-continue     */
+
+  /* ---- PACE — world overrides (still / measured / quick) */
+  --pace-dur: var(--dur-base);
+  --pace-y:   var(--rise-y);
+}
+
+/* Reduced motion: keep end states, remove travel */
+@media (prefers-reduced-motion: reduce) {
+  :root, [data-chassis] { --rise-y: 0px; --veil-y: 0px; --dur-breath: 0s; }
+}
+
+/* Named motions (chassis-independent). Used by rk.css. */
+@keyframes rk-rise   { from { opacity:0; transform:translateY(var(--rise-y)); } to { opacity:1; transform:none; } }
+@keyframes rk-seed   { from { opacity:0; letter-spacing:.06em; } to { opacity:1; letter-spacing:0; } }
+@keyframes rk-breathe{ 0%,100% { transform:scale(1); opacity:.85; } 50% { transform:scale(1.04); opacity:1; } }
+@keyframes rk-pulse  { 0%,100% { opacity:.55; } 50% { opacity:1; } }
+@keyframes rk-shimmer{ from { background-position: -200% 0; } to { background-position: 200% 0; } }
+@keyframes rk-descend{ from { transform:translateY(-6px); opacity:0; } to { transform:none; opacity:1; } }
+@keyframes rk-curtain{ from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
+@keyframes rk-mote   { 0% { transform:translate(0,0); opacity:0; } 20% { opacity:.6; } 100% { transform:translate(var(--mx,8px),var(--my,-40px)); opacity:0; } }
+@keyframes rk-blink  { 0%,92%,100% { transform:scaleY(1); } 96% { transform:scaleY(.08); } }
+
+/* ---- tokens/worlds/akas.css ---- */
+/* ============================================================
+   rupakarshini V3 — tokens/worlds/akas.css
+   CHASSIS A — AKAS / Wazoodle. Canon as amended in Parrot
+   (Design System table, Sep 2026), not the June zip.
+   Usage:  <html data-chassis="akas" data-brand="zorb">
+   Type is constant. Colour separates the brands.
+   ============================================================ */
+
+[data-chassis="akas"] {
+  /* ---- chassis constants (Sid) ---- */
+  --w-font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --w-font-ui:      'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --w-font-mono:    'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace; /* RULING: mono eyebrow face added */
+  --w-radius:       12px;
+
+  /* spine surfaces — warm stone (Neev) */
+  --w-ground:    #EFECE6;   /* page ground                       */
+  --w-surface:   #FFFFFF;   /* paper                             */
+  --w-surface-2: #E7E1D5;   /* stone                             */
+  --w-hover:     #F6F2E9;
+  --w-line:      #E3DDD0;
+  --w-divider:   #ECE6DA;
+
+  /* medium (Shweta) */
+  --w-ink:     #1E1E1E;
+  --w-ink-2:   #3A352E;
+  --w-muted:   #6F685C;     /* 5.2:1 on paper · 4.4 on stone — eyebrow lives here (measured; Parrot value #8A8377 was 3.75) */
+  --w-label:   #A8A095;     /* decorative only; NEVER for eyebrow (2.4:1) */
+  --w-on-deep: rgba(255,255,255,.92);
+
+  /* the chassis speaking colour */
+  --w-voice:    #3B8234;
+  --w-voice-dk: #2C6427;
+
+  /* body position default */
+  --body-default: both;
+}
+
+/* Paper-first variant for consumer LPEs and Brand Home (Revity Gen 2 lesson) */
+[data-chassis="akas"][data-ground="paper"] { --w-ground: #FFFFFF; --w-surface: #FBF9F4; }
+
+/* ---- THE EIGHT WORLDS — sig / sig-dk / sig-d / wash / wash-bd / deep / deep-hi / spark ---- */
+[data-chassis="akas"], [data-chassis="akas"][data-brand="house"] {
+  --w-sig:#1E5219; --w-sig-dk:#163D12; --w-sig-d:#6A9E66;
+  --w-wash:#E4EFE2; --w-wash-bd:#C8DEC4; --w-deep:#1A2E15; --w-deep-hi:#213A1B; --w-spark:#D4B800;
+  --pace: measured; --imagery: raw; --motion-budget: rise seed;
+}
+[data-chassis="akas"][data-brand="zorb"] {
+  --w-sig:#0A5A99; --w-sig-dk:#08456F; --w-sig-d:#5FA8DC;
+  --w-wash:#DCEDFB; --w-wash-bd:#BFDDF4; --w-deep:#0A3354; --w-deep-hi:#0E3E66; --w-spark:#CDE970;
+  --pace: quick; --imagery: annotated; --motion-budget: rise seed pulse;   /* clinical precision */
+}
+[data-chassis="akas"][data-brand="prosoft"] {
+  --w-sig:#006B8A; --w-sig-dk:#004E67; --w-sig-d:#5BB8D0;
+  --w-wash:#D4F0F5; --w-wash-bd:#8FD5E0; --w-deep:#003A48; --w-deep-hi:#004D60; --w-spark:#A78CE0;
+  --pace: still; --imagery: raw; --motion-budget: rise;                     /* silent, soft, permanent */
+}
+[data-chassis="akas"][data-brand="proeco"] {
+  --w-sig:#8A6800; --w-sig-dk:#6B5000; --w-sig-d:#C8A840;
+  --w-wash:#F5EDCC; --w-wash-bd:#DEC880; --w-deep:#2E2600; --w-deep-hi:#3A3200; --w-spark:#F0D040;
+  --pace: measured; --imagery: raw; --motion-budget: rise seed breathe;    /* rooted in earth */
+}
+[data-chassis="akas"][data-brand="procool"] {
+  --w-sig:#4A5A9E; --w-sig-dk:#364488; --w-sig-d:#9BA0D4;
+  --w-wash:#E8EAF5; --w-wash-bd:#C0C6E8; --w-deep:#0D1720; --w-deep-hi:#162232; --w-spark:#3FC6F4;
+  --pace: quick; --imagery: annotated; --motion-budget: rise shimmer;      /* cool precision */
+}
+[data-chassis="akas"][data-brand="supabsorb"] {
+  --w-sig:#1A7A3A; --w-sig-dk:#125A2A; --w-sig-d:#60B878;
+  --w-wash:#DDEEE4; --w-wash-bd:#B0D4BC;
+  --w-deep:#0B4A22; --w-deep-hi:#0F5A2A;                                     /* RULING: darkened from #0D672E — APCA Lc≥75 on deep */
+  --w-spark:#FFD200;
+  --pace: quick; --imagery: raw; --motion-budget: rise;                      /* built for the floor */
+}
+[data-chassis="akas"][data-brand="akastex"] {
+  --w-sig:#0E7E92; --w-sig-dk:#0A6072; --w-sig-d:#27C3DA;
+  --w-wash:#E6F6FB; --w-wash-bd:#A9EAF8; --w-deep:#16404F; --w-deep-hi:#1D4E5F; --w-spark:#D85326;
+  --pace: measured; --imagery: annotated; --motion-budget: rise seed descend; /* RULING: canon; get.akastex lineage retired */
+}
+[data-chassis="akas"][data-brand="silverarch"] {
+  --w-sig:#1A6B8E; --w-sig-dk:#134F6A; --w-sig-d:#60A8C8;
+  --w-wash:#D0EBF5; --w-wash-bd:#A0D0E8; --w-deep:#0D2535; --w-deep-hi:#112E41; --w-spark:#44D4B8;
+  --pace: still; --imagery: annotated; --motion-budget: rise pulse;         /* midnight steel */
+}
+/* Worlds-in-waiting inherit House until a character sheet exists */
+[data-chassis="akas"][data-brand="akastiq"],
+[data-chassis="akas"][data-brand="protec"],
+[data-chassis="akas"][data-brand="procare"] { /* inherits house */ }
+
+/* Family palette — crosses both chassis (archetype colours) */
+[data-chassis] {
+  --arch:#7A2F14; --arch-lt:#B8623F; --sid:#1B3A5C; --sid-lt:#4F7BA8;
+  --ash:#26421A; --ash-lt:#5E8A4E;  --shared:#4A4238; --akas:#2A2520; --waz:#8B5E3C;
+}
+
+/* ---- rk.css ---- */
+/* ============================================================
+   rupakarshini V3 — rk.css  ·  THE ELEMENT CORE (chassis-independent)
+   Requires: tokens/spine.css + tokens/scales.css + one world file.
+   Every class here is an element in references/elements.md.
+   No colour literals. No px type. Reduced motion respected.
+   ============================================================ */
+
+/* ---------- PAGE (Sid) ---------- */
+html[data-chassis] { font-size: 100%; -webkit-text-size-adjust: 100%; }   /* rem stays 16 — never scale the root */
+[data-chassis] { background: var(--bg); color: var(--fg); font-family: var(--font-ui); }
+body { margin: 0; font-size: var(--fs-body); line-height: var(--lh-body);
+  font-optical-sizing: auto; text-rendering: optimizeLegibility; }
+.rk-page { min-height: 100svh; }
+*, *::before, *::after { box-sizing: border-box; }
+img, video, canvas { max-width: 100%; height: auto; display: block; }
+
+/* ---------- WIDTH SCALE (Arch) — density governs measure ---------- */
+.rk-in        { width: min(var(--w-column), 100% - 2*var(--s-5)); margin-inline: auto; }
+.rk-reading   { max-width: var(--w-reading); }
+.rk-instrument{ width: min(var(--w-instrument), 100% - 2*var(--s-5)); margin-inline: auto; }
+.rk-breakout  { width: var(--w-breakout); margin-inline: auto; }
+.rk-full      { width: 100%; }
+
+/* ---------- HEAD RHYTHM: eyebrow → title → lede → rule ---------- */
+.eyebrow { font-family: var(--font-mono); font-size: var(--fs-eyebrow); font-weight: 600;
+  letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-eyebrow);
+  display: flex; align-items: center; gap: var(--s-3); margin: 0 0 var(--s-3); }
+.eyebrow::after { content: ""; flex: 0 0 64px; height: 1px; background: currentColor; opacity: .4; }
+.eyebrow.voice { color: var(--voice); }
+.title { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h2);
+  line-height: var(--lh-h); letter-spacing: var(--ls-h); margin: 0 0 var(--s-4);
+  font-variation-settings: 'opsz' var(--opsz-h); text-wrap: balance; }
+.title em { font-style: italic; color: var(--voice); }          /* CAP: 2 per page */
+.display { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-display);
+  line-height: var(--lh-display); letter-spacing: var(--ls-display);
+  font-variation-settings: 'opsz' var(--opsz-display); text-wrap: balance; margin: 0 0 var(--s-5); }
+.h1 { font-family: var(--font-display); font-size: var(--fs-h1); line-height: var(--lh-h); font-weight: 500; margin: 0 0 var(--s-4); text-wrap: balance; }
+.h3 { font-family: var(--font-display); font-size: var(--fs-h3); line-height: var(--lh-h); font-weight: 500; margin: 0 0 var(--s-3); }
+.lede { font-size: var(--fs-lg); line-height: var(--lh-lg); color: var(--fg-2); max-width: var(--w-reading); margin: 0 0 var(--s-5); text-wrap: pretty; }
+.rule { height: 1px; background: var(--line); border: 0; margin: var(--s-6) 0; }
+.seed { font-family: var(--font-display); font-style: italic; font-size: var(--fs-lg); color: var(--t-soft);
+  margin: 0 0 var(--s-5); animation: rk-seed var(--dur-slow) var(--ease-out) both; }   /* Sakshi: one line before a threshold */
+.ceremony { font-family: var(--font-ceremony); letter-spacing: .12em; text-transform: uppercase; font-weight: 400; }
+.prose > * + * { margin-top: var(--s-4); }
+.prose { max-width: var(--w-reading); color: var(--t-body); }
+.prose strong { color: var(--fg); }
+
+/* text ladder utilities */
+.t-high{color:var(--t-high)} .t-mid{color:var(--t-mid)} .t-body{color:var(--t-body)}
+.t-soft{color:var(--t-soft)} .t-whisper{color:var(--t-whisper)} .t-ghost{color:var(--t-ghost)}
+
+/* ---------- BANDS & SURFACE STEPPING (Neev) ---------- */
+.band { padding-block: var(--band); }
+.band.tight { padding-block: var(--band-tight); }
+.band.deep  { padding-block: var(--band-deep); background: var(--surface-deep); color: var(--fg-on-deep); }
+.band.deep .eyebrow { color: var(--sig-tint); }
+.band.deep .title em, .band.deep .voice { color: var(--spark); }
+.s-paper { background: var(--surface); } .s-ground { background: var(--bg); }
+.s-stone { background: var(--surface-2); } .s-wash { background: var(--surface-wash); }
+.s-wash .eyebrow { color: var(--sig-pressed); }
+.s-stone .eyebrow { color: var(--fg-2); }            /* stone measured 4.2:1 with muted — step up */
+.silence { height: var(--silence); }
+
+/* seams — a line, never a label */
+.seam { height: 1px; background: var(--line); }
+.descent { height: calc(var(--strata-1) + var(--strata-2) + var(--strata-3)); background:
+  linear-gradient(to bottom,
+    color-mix(in oklch, var(--surface-deep) 18%, var(--surface-wash)) 0 var(--strata-1),
+    color-mix(in oklch, var(--surface-deep) 45%, var(--surface-wash)) var(--strata-1) calc(var(--strata-1) + var(--strata-2)),
+    color-mix(in oklch, var(--surface-deep) 78%, var(--surface-wash)) calc(var(--strata-1) + var(--strata-2)) 100%); }
+.ascent { transform: scaleY(-1); }
+
+/* ---------- MOTION (Bindu) — floor: rise; ceiling: named budget ---------- */
+.rise { animation: rk-rise var(--pace-dur) var(--ease-out) both; }
+@supports (animation-timeline: view()) {
+  .rise { animation-timeline: view(); animation-range: entry 0% entry 35%; animation-duration: auto; }
+}
+@supports not (animation-timeline: view()) {
+  .rise { opacity: 0; transform: translateY(var(--rise-y)); transition: opacity var(--pace-dur) var(--ease-out), transform var(--pace-dur) var(--ease-out); animation: none; }
+  .rise.is-in, .no-js .rise { opacity: 1; transform: none; }
+}
+.veil { transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); opacity: 1; transform: none; }
+@starting-style { .veil { opacity: 0; transform: translateY(var(--veil-y)); } }
+.breathe { animation: rk-breathe var(--dur-breath) ease-in-out infinite; }
+.pulse   { animation: rk-pulse 2.4s ease-in-out infinite; }
+.curtain { animation: rk-curtain var(--dur-slow) var(--ease-soft) both; }
+@media (prefers-reduced-motion: reduce) {
+  .rise, .breathe, .pulse, .curtain, .seed { animation: none !important; opacity: 1 !important; transform: none !important; clip-path: none !important; }
+  .veil { transition: none; }
+}
+
+/* ---------- THRESHOLD · HOLD · GATE (Sakshi) ---------- */
+.hold { --p: 0; position: relative; display: inline-grid; place-items: center; width: 88px; height: 88px;
+  border-radius: 50%; border: 1px solid var(--line-wash); background: var(--surface); color: var(--fg-2);
+  font-family: var(--font-ui); font-size: var(--fs-sm); cursor: pointer; user-select: none; -webkit-user-select: none; touch-action: manipulation; }
+.hold::before { content: ""; position: absolute; inset: -4px; border-radius: 50%;
+  background: conic-gradient(var(--action) calc(var(--p) * 1turn), transparent 0); mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px)); -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px)); }
+.hold.is-done { border-color: var(--action); color: var(--action); }
+.threshold { position: relative; isolation: isolate; }
+.threshold > .veil-layer { position: absolute; inset: 0; background: var(--bg); z-index: 2; transition: opacity var(--dur-slow) var(--ease-out); }
+.threshold.is-open > .veil-layer { opacity: 0; pointer-events: none; }
+.gate[hidden] { display: none; }
+
+/* ---------- DOORS — "where this leads" (the seam between pages) ---------- */
+.doors { display: grid; gap: var(--s-3); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.door { display: block; padding: var(--s-4) var(--s-5); border-left: 2px solid var(--line-wash); background: var(--surface);
+  color: inherit; text-decoration: none; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; transition: border-color var(--dur-fast), background var(--dur-fast); }
+.door:hover { border-left-color: var(--sig); background: var(--surface-hover); }
+.door .eyebrow { margin-bottom: var(--s-1); } .door .eyebrow::after { display: none; }
+.door strong { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-lg); display: block; margin-bottom: var(--s-1); line-height: var(--lh-h); }
+.door { font-size: var(--fs-sm); color: var(--fg-2); }
+.door.rung { border-left-color: var(--sig); }          /* the Ladder's next rung — visible, never pushed */
+
+/* ---------- PROOF ELEMENTS ---------- */
+.stats { display: grid; gap: var(--s-6); grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); border-top: 1px solid var(--line); padding-top: var(--s-5); }
+.stat .n { font-family: var(--font-display); font-size: var(--fs-h1); line-height: 1; font-variation-settings: 'opsz' var(--opsz-display); }
+.stat .n .sp { color: var(--spark); }
+.stat .l { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); margin-top: var(--s-2); }
+.stat.rule { border-left: 2px solid var(--spark); padding-left: var(--s-4); border-top: 0; }
+.band.deep .stat .l { color: var(--t-soft); }
+.verify { display: grid; gap: var(--s-3); grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+.verify .v { padding: var(--s-4); border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); font-size: var(--fs-sm); }
+.verify .v b { display: block; font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--sig); margin-bottom: var(--s-1); }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--sig); vertical-align: middle; margin-right: var(--s-2); }
+.dot.voice { background: var(--voice); } .dot.warn { background: var(--warn); }
+
+/* ---------- CARDS & ROWS ---------- */
+.tile { display: flex; gap: var(--s-4); align-items: flex-start; }
+.tile .ic { flex: 0 0 36px; height: 36px; display: grid; place-items: center; border-radius: var(--radius-sm); background: var(--sig); color: #fff; }
+.tile h4 { margin: 0 0 var(--s-1); font-family: var(--font-ui); font-weight: 600; }
+.tile p { margin: 0; color: var(--fg-muted); font-size: var(--fs-sm); }
+.grid-2 { display: grid; gap: var(--s-7); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); align-items: center; }
+.grid-3 { display: grid; gap: var(--s-5); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.row { display: grid; gap: var(--s-6); grid-template-columns: minmax(0,1fr); align-items: center; }
+.row + .row { margin-top: var(--s-6); }
+@media (min-width: 720px) { .row { grid-template-columns: 200px minmax(0,1fr); } .row.flip { grid-template-columns: minmax(0,1fr) 200px; } .row.flip > :first-child { order: 2; } }
+.media { border-radius: var(--radius); background: var(--surface-2); overflow: hidden; aspect-ratio: 4/5; }
+.media.sq { aspect-ratio: 1; } .media.wide { aspect-ratio: 16/9; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: var(--pad-card); }
+.panel { border-radius: var(--radius-lg); padding: clamp(var(--s-6), 5vw, var(--s-8));
+  background: linear-gradient(135deg, var(--sig-pressed), var(--surface-deep) 60%, var(--surface-deep)); color: var(--fg-on-deep); }
+.panel .eyebrow { color: var(--spark); }
+
+/* ---------- SPEC TABLE — stops being a table under 700px ---------- */
+.spec { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: var(--fs-sm); }
+.spec th, .spec td { text-align: left; padding: var(--s-3) var(--s-3); border-bottom: 1px solid var(--line); vertical-align: top; }
+.spec th { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); font-weight: 600; }
+@media (max-width: 699px) {
+  .spec, .spec tbody, .spec tr, .spec td { display: block; }
+  .spec thead { display: none; }
+  .spec tr { padding: var(--s-3) 0; border-bottom: 1px solid var(--line); }
+  .spec td { border: 0; padding: var(--s-1) 0; }
+  .spec td::before { content: attr(data-col); display: block; font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); }
+}
+
+/* ---------- BUTTONS — one colour of consequence ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2); min-height: 44px; padding: 0 var(--s-5);
+  border-radius: var(--radius-pill); font-family: var(--font-ui); font-weight: 600; font-size: var(--fs-ui); text-decoration: none; cursor: pointer;
+  border: 1px solid transparent; transition: background var(--dur-fast), border-color var(--dur-fast), color var(--dur-fast); touch-action: manipulation; }
+.btn.act   { background: var(--action); color: var(--action-fg); }       /* Buy · Cross · Begin — LAW: only where consequence */
+.btn.act:hover { background: var(--bindu-pressed); }
+.btn.voice { background: var(--voice); color: #fff; }
+.btn.voice:hover { background: var(--voice-pressed); }
+.btn.sig   { background: var(--sig); color: #fff; }
+.btn.ghost { background: transparent; border-color: var(--line-wash); color: var(--fg); }
+.btn.ghost:hover { border-color: var(--sig); }
+.link { color: var(--sig); text-decoration: underline; text-decoration-color: color-mix(in oklch, var(--sig) 35%, transparent); text-underline-offset: 4px; }
+
+/* ---------- NAVIGATION ---------- */
+.rail { position: sticky; top: 0; z-index: 5; display: flex; gap: var(--s-4); overflow-x: auto; padding: var(--s-3) var(--s-5);
+  background: var(--bg); border-bottom: 1px solid var(--line); font-size: var(--fs-ui); font-weight: 700; scrollbar-width: none; }
+.rail a { color: var(--fg-muted); text-decoration: none; white-space: nowrap; padding: var(--s-1) 0; border-bottom: 2px solid transparent; }
+.rail a.is-active, .rail a:hover { color: var(--fg); border-bottom-color: var(--sig); }
+.family { display: flex; gap: var(--s-4); align-items: center; height: 36px; padding: 0 var(--s-5); font-family: var(--font-mono); font-size: var(--fs-mono-floor);
+  letter-spacing: var(--ls-mono); text-transform: uppercase; background: var(--surface-2); color: var(--fg-muted); overflow-x: auto; scrollbar-width: none; }
+.family a { color: inherit; text-decoration: none; white-space: nowrap; }
+.family a[aria-current="true"] { color: var(--fg); border-bottom: 1px solid var(--sig); }
+.marquee { overflow: hidden; white-space: nowrap; background: var(--surface-wash); padding: var(--s-2) 0; font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--sig-pressed); }
+.marquee > span { display: inline-block; padding-inline: var(--s-6); animation: rk-marquee 28s linear infinite; }
+@keyframes rk-marquee { to { transform: translateX(-50%); } }
+.bottom-nav { position: fixed; inset-inline: 0; bottom: 0; z-index: 6; display: grid; grid-auto-flow: column; gap: var(--s-2);
+  padding: var(--s-3) var(--s-4) calc(var(--s-3) + env(safe-area-inset-bottom)); background: color-mix(in oklch, var(--bg) 92%, transparent);
+  backdrop-filter: blur(12px); border-top: 1px solid var(--line); }
+.sticky-cta { position: sticky; bottom: 0; z-index: 6; padding: var(--s-3) var(--s-4) calc(var(--s-3) + env(safe-area-inset-bottom)); background: var(--surface); border-top: 1px solid var(--line); display: flex; gap: var(--s-3); align-items: center; }
+.sticky-cta .who { flex: 1; font-size: var(--fs-sm); color: var(--fg-muted); }
+@media (max-width: 600px) { .sticky-cta .who { display: none; } .sticky-cta .btn { flex: 1; } }
+
+/* ---------- INSTRUMENT PRIMITIVES ---------- */
+.counter { font-variant-numeric: tabular-nums; }
+details.acc { border-top: 1px solid var(--line); }
+details.acc summary { cursor: pointer; list-style: none; padding: var(--s-4) 0; font-family: var(--font-display); font-size: var(--fs-lg); display: flex; justify-content: space-between; }
+details.acc summary::-webkit-details-marker { display: none; }
+details.acc summary::after { content: "+"; color: var(--fg-muted); } details.acc[open] summary::after { content: "–"; }
+details.acc > :not(summary) { padding-bottom: var(--s-4); color: var(--t-body); }
+dialog.sheet { border: 0; border-radius: var(--radius-lg) var(--radius-lg) 0 0; padding: var(--s-6); width: min(720px, 100%); margin: auto auto 0; background: var(--surface); color: var(--fg); }
+dialog.sheet::backdrop { background: rgba(0,0,0,.45); }
+.field { display: grid; gap: var(--s-1); } .field label { font-size: var(--fs-sm); color: var(--fg-2); }
+.field input, .field select, .field textarea { min-height: 44px; padding: 0 var(--s-3); border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); color: var(--fg); font: inherit; }
+
+/* ---------- PRINT (the Package shape) ---------- */
+@media print {
+  .rise, .veil, .seed, .curtain { animation: none !important; opacity: 1 !important; transform: none !important; }
+  [data-chassis] { background: #fff; color: #000; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .rail, .bottom-nav, .sticky-cta, .marquee, .hold { display: none !important; }
+  .band { break-inside: avoid; } .pagebreak { break-before: page; }
+  h1, h2, .title, .display { break-after: avoid; } p { orphans: 3; widows: 3; }
+  @page { size: A4; margin: 18mm; }
+}
+
+/* ---- page ---- */
+/* ---- page-specific: Journey & Archetypes — silverarch, akas chassis, paper ground ---- */
+.rk-breakout { max-width: 1180px; margin-inline: auto; padding-inline: var(--s-5); }
+.alt { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h1); margin: 0 0 var(--s-4); color: var(--fg); text-wrap: balance; }
+.hd .display { max-width: 24ch; }
+.lede.big { font-size: var(--fs-h3); line-height: 1.4; color: var(--fg); max-width: 60ch; }
+.ft { font-family: var(--font-mono); font-size: var(--fs-sm); letter-spacing: .04em; color: var(--fg-muted); }
+.ft a { color: inherit; }
+.mono { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); }
+@keyframes pop { to { transform: none; opacity: 1; } }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+/* ---- the door: nine arrive ---- */
+.door-grid { display: grid; grid-template-columns: minmax(0, 40ch) 1fr; gap: var(--s-7); align-items: start; margin: var(--s-6) 0 var(--s-5); }
+@media (max-width: 900px) { .door-grid { grid-template-columns: 1fr; gap: var(--s-5); } }
+.arrive { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.arrive li { font-family: var(--font-display); font-size: var(--fs-h3); line-height: 1.25; color: var(--fg); padding: var(--s-2) 0 var(--s-2) var(--s-5); border-left: 2px solid var(--line); opacity: 0; transform: translateY(8px); animation: pop .6s var(--ease-out) forwards; animation-delay: calc(.3s + var(--i) * .3s); }
+.arrive li b { font-weight: 500; }
+.arrive li .who { display: block; font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); margin-top: 2px; }
+.arrive li.foot { font-family: var(--font-mono); font-size: var(--fs-sm); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--sig); border-left: 3px solid var(--sig); margin-top: var(--s-2); }
+.doorfig { margin: 0; position: sticky; top: var(--s-5); }
+.doorfig svg { width: 100%; height: auto; overflow: visible; }
+.doorfig .rail { stroke: var(--fg-2); stroke-width: 3; stroke-linecap: round; opacity: .35; }
+.doorfig .rung { stroke: var(--sig); stroke-width: 3; stroke-linecap: round; transform-box: fill-box; transform-origin: left; transform: scaleX(0); animation: pop .5s var(--ease-out) forwards; animation-delay: calc(.4s + var(--i) * .25s); }
+.doorfig .fig { fill: var(--sig); opacity: 0; transform: translateY(6px); animation: pop .5s var(--ease-out) forwards; animation-delay: calc(2.3s + var(--i) * .3s); }
+.doorfig .fig.stack { fill: var(--spark); }
+.doorfig .fig.zero { fill: none; stroke: var(--fg-muted); stroke-dasharray: 3 3; }
+.doorfig text { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: .08em; text-transform: uppercase; fill: var(--fg-muted); }
+.doorfig .lab { opacity: 0; animation: pop .5s var(--ease-out) forwards; animation-delay: calc(2.3s + var(--i) * .3s); }
+
+/* ---- the eight cards ---- */
+.cards8 { display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); align-items: start; }
+@media (max-width: 560px) { .cards8 { grid-template-columns: 1fr; } }
+.c8 { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 0 var(--s-5); }
+.c8 summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 72px 1fr; column-gap: var(--s-4); row-gap: var(--s-1); padding: var(--s-5) 0; align-items: start; min-height: 44px; }
+.c8 summary::-webkit-details-marker { display: none; }
+.c8 .ic { grid-row: span 2; width: 72px; height: 54px; }
+.c8 .ic svg { width: 100%; height: 100%; overflow: visible; }
+.c8 .ic * { fill: none; stroke: var(--sig); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.c8 .t { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h3); line-height: 1.15; color: var(--fg); }
+.c8 .s { grid-column: 2; font-size: var(--fs-lg); color: var(--fg-2); line-height: 1.4; }
+.c8[open] .t, .c8 summary:hover .t { color: var(--sig); }
+.c8 > p, .c8 > dl { margin: 0 0 var(--s-6) calc(72px + var(--s-4)); font-size: var(--fs-lg); line-height: 1.55; color: var(--fg); border-left: 3px solid var(--sig); padding-left: var(--s-4); }
+.c8 > p + p { margin-top: calc(-1 * var(--s-4)); }
+@media (max-width: 700px) { .c8 > p, .c8 > dl { margin-left: 0; } }
+.c8 .rungs line { stroke-width: 3; transform-box: fill-box; transform-origin: left; transform: scaleX(.3); opacity: .5; } .c8[open] .rungs line { animation: pop .4s var(--ease-out) forwards; animation-delay: calc(var(--i) * .15s); }
+.c8 .you { fill: var(--spark); stroke: none; opacity: 0; } .c8[open] .you { animation: pop .5s var(--ease-out) .9s forwards; }
+.c8 .steps path { stroke-dasharray: 60; stroke-dashoffset: 60; } .c8[open] .steps path { animation: draw .6s var(--ease-out) forwards; animation-delay: calc(var(--i) * .2s); }
+.c8 .doorw rect { fill: var(--sig); stroke: none; opacity: .25; } .c8[open] .doorw rect { animation: glow .5s var(--ease-out) forwards; animation-delay: calc(var(--i) * .2s); } @keyframes glow { to { opacity: 1; } }
+.c8 .plus { stroke: var(--spark); opacity: 0; } .c8[open] .plus { animation: pop .4s var(--ease-out) .8s forwards; }
+.c8 .zero { stroke-dasharray: 3 3; } .c8 .cross { opacity: 0; } .c8[open] .cross { animation: pop .4s var(--ease-out) .6s forwards; }
+.c8 .q { stroke-dasharray: 40; stroke-dashoffset: 40; } .c8[open] .q { animation: draw .6s var(--ease-out) .2s forwards; }
+.c8 .loops path { stroke-dasharray: 1; stroke-dashoffset: 1; } .c8[open] .loops path { animation: draw 1s var(--ease-out) forwards; animation-delay: calc(var(--i) * .5s); }
+.c8 .loops .back { stroke: var(--spark); }
+.c8 .chain circle { fill: var(--fg-muted); stroke: none; opacity: .5; } .c8[open] .chain circle { animation: fade .5s var(--ease-out) forwards; animation-delay: calc(.3s + var(--i) * .15s); } @keyframes fade { to { opacity: 0; transform: translateY(8px); } }
+.c8 .chain .keep { fill: var(--sig); opacity: 1; animation: none; }
+
+/* ---- the ladder (instrument) ---- */
+.chips { display: flex; flex-wrap: wrap; gap: var(--s-2); margin: var(--s-5) 0 var(--s-4); }
+.chip { min-height: 44px; padding: 0 var(--s-4); border: 1px solid var(--line); border-radius: var(--radius-pill); background: var(--surface); font-family: var(--font-ui); font-size: var(--fs-body); color: var(--fg); cursor: pointer; display: inline-flex; align-items: center; gap: var(--s-2); }
+.chip .n { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); color: var(--fg-muted); }
+.chip[aria-pressed="true"] { background: var(--sig); border-color: var(--sig); color: var(--fg-on-action); }
+.chip[aria-pressed="true"] .n { color: inherit; opacity: .8; }
+.chip.shadow { border-style: dashed; }
+.ladder { margin: var(--s-4) 0 var(--s-5); }
+.ladder svg { width: 100%; height: auto; overflow: visible; }
+.ladder .rail { stroke: var(--fg-2); stroke-width: 3; stroke-linecap: round; opacity: .3; }
+.ladder .rung { stroke: var(--fg-2); stroke-width: 3; stroke-linecap: round; opacity: .3; transition: opacity .4s, stroke .4s; }
+.ladder .rung.lit { stroke: var(--sig); opacity: 1; }
+.ladder .rung.hot { stroke: var(--spark); opacity: 1; }
+.ladder .rl { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: .08em; text-transform: uppercase; fill: var(--fg-muted); text-anchor: middle; cursor: pointer; }
+.ladder .rl.lit { fill: var(--sig); font-weight: 600; }
+.ladder .rz { cursor: pointer; fill: transparent; }
+.ladder .span { stroke: var(--sig); stroke-width: 10; stroke-linecap: round; opacity: .18; transition: opacity .4s; }
+.ladder .span.on { opacity: .9; }
+.ladder .span.stack { stroke: var(--spark); }
+.ladder .cnt { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: .06em; fill: var(--fg-2); text-anchor: middle; opacity: .6; transition: opacity .4s; }
+.ladder .cnt.on { opacity: 1; fill: var(--sig); font-weight: 600; }
+.ladder .house { fill: none; stroke: var(--fg-2); stroke-width: 2; opacity: .3; transition: opacity .4s, stroke .4s; } .ladder .house.on { stroke: var(--sig); opacity: 1; }
+.ladder .extract { fill: none; stroke: var(--fg-muted); stroke-width: 2; stroke-dasharray: 4 4; opacity: .5; }
+.ladder .pulse { fill: var(--spark); opacity: .9; animation: pulse 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes pulse { 0%,100% { transform: scale(1); opacity: .9; } 50% { transform: scale(1.6); opacity: .4; } }
+.panel { min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--s-5); margin-top: var(--s-4); display: grid; gap: var(--s-5); grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
+@media (max-width: 860px) { .panel { grid-template-columns: 1fr; } .panel > div { min-width: 0; } }
+@media (max-width: 560px) { .shares { grid-template-columns: 1fr; } .names li { grid-template-columns: 1fr; } .names .meta { text-align: left; } }
+.panel h3 { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h2); line-height: 1.1; margin: 0 0 var(--s-2); color: var(--fg); }
+.panel .line { font-family: var(--font-display); font-style: italic; font-size: var(--fs-h3); color: var(--sig); margin: 0 0 var(--s-4); }
+.panel dl { margin: 0; display: grid; gap: var(--s-2); font-size: var(--fs-body); line-height: var(--lh-body); color: var(--fg); }
+.panel dt { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); margin-top: var(--s-2); }
+.panel dd { margin: 0; }
+.shares { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); margin: var(--s-4) 0; }
+.share { border-top: 1px solid var(--line); padding-top: var(--s-2); }
+.share .big { font-family: var(--font-display); font-size: var(--fs-h1); line-height: 1; color: var(--fg); }
+.share .l { font-size: var(--fs-sm); color: var(--fg-muted); }
+.rhythm { display: flex; align-items: flex-end; gap: 3px; height: 44px; margin-top: var(--s-2); }
+.rhythm i { flex: 1; background: var(--sig); opacity: .75; border-radius: 2px 2px 0 0; min-height: 2px; transform-origin: bottom; animation: grow .6s var(--ease-out) both; }
+.rhythm i.s { background: var(--voice); }
+@keyframes grow { from { transform: scaleY(0); } }
+.rhythm-key { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: .06em; color: var(--fg-muted); text-transform: uppercase; }
+.names { margin: 0; padding: 0; list-style: none; display: grid; gap: 0; }
+.names li { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: var(--s-3); padding: var(--s-2) 0; border-top: 1px solid var(--line); font-size: var(--fs-body); line-height: 1.35; opacity: 0; animation: pop .4s var(--ease-out) forwards; animation-delay: calc(var(--i) * .05s); }
+.names li:first-child { border-top: 0; }
+.names .nm { color: var(--fg); font-weight: 600; }
+.names .as { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: .04em; color: var(--fg-muted); margin-left: var(--s-2); }
+.names .meta { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: .04em; color: var(--fg-2); text-align: right; white-space: normal; line-height: 1.4; }
+.names .tag { display: inline-block; white-space: nowrap; font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: .06em; text-transform: uppercase; color: var(--sig); border: 1px solid var(--line-wash); border-radius: var(--radius-pill); padding: 1px 6px; margin-left: var(--s-2); vertical-align: middle; }
+.names .tag.sp { color: var(--voice); }
+.comm { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: var(--s-3); }
+.comm > div { border: 1px solid var(--line); border-radius: var(--radius); padding: var(--s-3); background: var(--bg); opacity: 0; animation: pop .4s var(--ease-out) forwards; animation-delay: calc(var(--i) * .04s); }
+.comm .ch { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: .08em; text-transform: uppercase; color: var(--fg-muted); }
+.comm .tt { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-lg); line-height: 1.15; color: var(--fg); margin: 2px 0; }
+.comm .cn { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: .04em; color: var(--sig); }
+.comm .nn { font-size: var(--fs-sm); color: var(--fg-2); line-height: 1.3; margin-top: var(--s-1); }
+.walk { margin-top: var(--s-6); border-top: 1px solid var(--line); padding-top: var(--s-4); }
+.walk ol { list-style: none; margin: var(--s-3) 0 0; padding: 0; display: grid; grid-template-columns: repeat(7, 1fr); gap: var(--s-2); }
+@media (max-width: 760px) { .walk ol { grid-template-columns: repeat(4, 1fr); } }
+.walk li { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-2); border-top: 3px solid var(--line-wash); padding-top: var(--s-2); }
+.walk li b { display: block; font-family: var(--font-display); font-weight: 500; font-size: var(--fs-lg); text-transform: none; letter-spacing: 0; color: var(--fg); }
+.walk li.now { border-top-color: var(--sig); }
+
+/* ---- what the walk found (wash) ---- */
+.finds { display: grid; gap: var(--s-6); margin-top: var(--s-6); }
+@media (min-width: 820px) { .finds { grid-template-columns: repeat(3, 1fr); } }
+.find h4 { margin: 0 0 var(--s-2); font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h3); line-height: 1.2; color: var(--fg); }
+.find p { margin: 0; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--fg-2); max-width: 42ch; }
+.find .n { font-family: var(--font-display); font-size: var(--fs-h1); line-height: 1; color: var(--sig); margin-bottom: var(--s-2); }
+.ledger { margin-top: var(--s-7); padding-top: var(--s-5); border-top: 1px solid var(--line-wash); max-width: var(--w-reading); }
+.ledger h4 { margin: 0 0 var(--s-2); font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h3); color: var(--fg); }
+.ledger p { margin: 0 0 var(--s-3); font-size: var(--fs-body); line-height: var(--lh-body); color: var(--fg-2); }
+
+/* ---- coming home (deep) ---- */
+.home-grid { display: grid; gap: var(--s-7); grid-template-columns: 1fr 1.1fr; align-items: start; margin-top: var(--s-6); }
+@media (max-width: 860px) { .home-grid { grid-template-columns: 1fr; gap: var(--s-5); } .loop { max-width: 420px; } }
+.loop { margin: 0; } .loop svg { width: 100%; height: auto; overflow: visible; }
+.loop text { font-family: var(--font-mono); font-size: var(--fs-sm); letter-spacing: .08em; text-transform: uppercase; fill: var(--fg-on-deep); opacity: .8; text-anchor: middle; }
+.loop .arc { fill: none; stroke: var(--sig-tint); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.loop .arc.back { stroke: var(--spark); }
+.loop .node { fill: none; stroke: var(--sig-tint); stroke-width: 3; opacity: 0; }
+.loop .node.you { stroke: var(--spark); }
+.loop.is-in .node { animation: pop .6s var(--ease-out) forwards; animation-delay: calc(.2s + var(--i) * .3s); }
+.loop.is-in .arc.fwd { animation: draw 1.4s var(--ease-out) 1.2s forwards; }
+.loop.is-in .arc.back { animation: draw 1.4s var(--ease-out) 2.8s forwards; }
+.loop .again { opacity: 0; } .loop.is-in .again { animation: pop .8s var(--ease-out) 4.4s forwards; }
+.home-text { display: grid; gap: var(--s-6); }
+.hm h3 { margin: 0 0 var(--s-2); font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h2); line-height: 1.1; color: var(--fg-on-deep); }
+.hm p { margin: 0; font-size: var(--fs-lg); line-height: 1.55; color: var(--fg-on-deep); opacity: .9; }
+.band.deep .rule { background: color-mix(in oklch, var(--fg-on-deep) 25%, transparent); }
+.ask-line { font-size: var(--fs-h3); font-family: var(--font-display); color: var(--fg-on-deep); margin: 0 0 var(--s-4); max-width: var(--w-reading); }
+.ask-line em { color: var(--spark); font-style: italic; }
+.band.deep .last-line { font-family: var(--font-display); font-style: italic; font-size: var(--fs-h2); color: var(--fg-on-deep); margin: 0; }
+.band.deep .doors { margin-top: var(--s-7); }
+.band.deep .door { background: color-mix(in oklch, var(--fg-on-deep) 8%, transparent); border-color: var(--sig-tint); color: var(--fg-on-deep); }
+.band.deep .door strong { color: var(--fg-on-deep); }
+.band.deep .door:hover { border-left-color: var(--spark); background: color-mix(in oklch, var(--fg-on-deep) 14%, transparent); }
+.band.deep .stats { border-top-color: color-mix(in oklch, var(--fg-on-deep) 25%, transparent); margin-top: var(--s-6); }
+@media (prefers-reduced-motion: reduce) {
+  .arrive li, .doorfig *, .c8 *, .loop *, .names li, .comm div, .rhythm i, .ladder .pulse { animation: none; }
+  .arrive li, .doorfig .rung, .doorfig .fig, .doorfig .lab, .c8 .you, .c8 .plus, .c8 .cross, .loop .node, .loop .again, .names li, .comm div { opacity: 1; transform: none; }
+  .c8 .steps path, .c8 .q, .c8 .loops path, .loop .arc { stroke-dashoffset: 0; } .c8 .rungs line { transform: none; opacity: 1; }
+}
+@media print { .arrive li, .doorfig *, .loop .node, .loop .again, .names li, .comm div { animation: none; opacity: 1; transform: none; } .loop .arc { stroke-dashoffset: 0; } }
+/* ---- v2 additions ---- */
+.doorfig .ret { stroke: var(--sig-tint); stroke-width: 2; stroke-dasharray: 5 5; opacity: 0; animation: pop .8s var(--ease-out) 2.6s forwards; }
+.doorfig .fig.warm { fill: var(--spark); }
+.ladder .retpath { stroke: var(--sig-tint); stroke-width: 2; stroke-dasharray: 5 5; opacity: .6; }
+.ladder .span.warm { stroke: var(--spark); } .ladder .span.mid { stroke: var(--sig); } .ladder .span.gray { stroke: var(--fg-2); } .ladder .span.teal { stroke: var(--sig-tint); }
+.chip.warm[aria-pressed="true"] { background: var(--spark); border-color: var(--spark); color: var(--fg); }
+.chip.gray[aria-pressed="true"] { background: var(--fg-2); border-color: var(--fg-2); }
+.panel h3 .sub { display: block; font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); margin-top: var(--s-1); }
+.moves { display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: var(--s-6); }
+.mv { background: var(--bg); border: 1px solid var(--line-wash); border-radius: var(--radius-lg); padding: var(--s-4); }
+.mv .n { font-family: var(--font-display); font-size: var(--fs-h1); line-height: 1; color: var(--sig); }
+.mv h4 { margin: var(--s-1) 0 var(--s-2); font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h3); color: var(--fg); }
+.mv p { margin: 0 0 var(--s-3); font-size: var(--fs-sm); line-height: 1.45; color: var(--fg-2); }
+.mv ul { list-style: none; margin: 0; padding: 0; font-size: var(--fs-sm); line-height: 1.4; color: var(--fg); }
+.mv li { padding: 3px 0; border-top: 1px solid var(--line-wash); }
+.mv li b { font-weight: 600; }
+.whale { margin: var(--s-7) 0 0; padding-top: var(--s-5); border-top: 1px solid var(--line-wash); }
+.rhythm.big { height: 110px; gap: 6px; max-width: 620px; }
+.rhythm.big i { background: var(--spark); opacity: .9; }
+.whale .rhythm-key { max-width: 620px; }
+.whale .mono { margin-top: var(--s-3); max-width: var(--w-reading); text-transform: none; letter-spacing: .02em; font-size: var(--fs-sm); }
+@media (prefers-reduced-motion: reduce) { .doorfig .ret { animation: none; opacity: 1; } }
+
+.frame { margin: var(--s-5) 0 0; padding: var(--s-4) var(--s-5); border-left: 3px solid var(--sig); background: var(--surface); border-radius: 0 var(--radius) var(--radius) 0; max-width: 62ch; }
+.frame p { margin: 0; font-size: var(--fs-lg); line-height: 1.5; color: var(--fg); } .frame .eyebrow { margin-bottom: var(--s-2); } .frame b { font-weight: 600; color: var(--sig); }
+.readfirst { margin: var(--s-5) 0; max-width: 62ch; } .readfirst p { margin: 0; font-family: var(--font-display); font-size: var(--fs-h3); line-height: 1.35; color: var(--fg); } .readfirst .eyebrow { margin-bottom: var(--s-2); }
+
+/* ---- voice map ---- */
+.po { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); margin: var(--s-5) 0 0; max-width: 90ch; }
+.po > div { border-left: 3px solid var(--sig); padding: var(--s-2) var(--s-4); background: var(--surface); border-radius: 0 var(--radius) var(--radius) 0; }
+.po p { margin: 0; font-size: var(--fs-lg); line-height: 1.5; color: var(--fg); } .po .eyebrow { margin-bottom: var(--s-2); }
+@media (max-width: 760px) { .po { grid-template-columns: 1fr; } }
+.doorfig .freq { fill: none; stroke: var(--sig-tint); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.6s var(--ease-out) .2s forwards; }
+.doorfig .v circle { fill: none; stroke: var(--sig); stroke-width: 3; opacity: 0; animation: pop .5s var(--ease-out) forwards; animation-delay: calc(.8s + var(--i) * .35s); }
+.doorfig .ring path { fill: none; stroke: var(--fg-2); stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: .5; animation: draw 1.2s var(--ease-out) 2.8s forwards; }
+.chooser { display: grid; gap: var(--s-3); margin-top: var(--s-5); }
+.ch { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, .8fr) minmax(0, 1.2fr); gap: var(--s-4); align-items: center; padding: var(--s-4) var(--s-5); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); }
+.ch .k { font-family: var(--font-ui); font-size: var(--fs-lg); color: var(--fg); }
+.ch .v { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h2); line-height: 1; color: var(--sig); }
+.ch .v em { font-family: var(--font-mono); font-style: normal; font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); margin: 0 var(--s-1); }
+.ch .n { font-size: var(--fs-sm); color: var(--fg-2); line-height: 1.4; }
+@media (max-width: 700px) { .ch { grid-template-columns: 1fr; gap: var(--s-1); } .ch .v { font-size: var(--fs-h3); } }
+.chip.arch[aria-pressed="true"], .chip.ash[aria-pressed="true"], .chip.fabric[aria-pressed="true"], .chip.house[aria-pressed="true"], .chip.sid[aria-pressed="true"] { background: var(--sig); border-color: var(--sig); color: var(--fg-on-action); }
+.panel dd ul { margin: 0; padding-left: 1.1em; } .panel dd li { margin: 2px 0; }
+.says { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-2); }
+.says li { font-family: var(--font-display); font-size: var(--fs-h3); line-height: 1.3; color: var(--fg); border-left: 3px solid var(--sig); padding: var(--s-1) 0 var(--s-1) var(--s-4); opacity: 0; animation: pop .4s var(--ease-out) forwards; animation-delay: calc(var(--i) * .12s); }
+.panel .who { font-size: var(--fs-lg); color: var(--fg-2); margin: 0 0 var(--s-4); }
+.panel .door { display: block; margin-top: var(--s-3); }
+.check { margin-top: var(--s-7); padding: var(--s-5); border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); max-width: 74ch; }
+.check h3 { margin: 0 0 var(--s-4); font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h2); line-height: 1.1; color: var(--fg); }
+.check ol { margin: 0; padding-left: 1.4em; display: grid; gap: var(--s-3); }
+.check li { font-size: var(--fs-lg); line-height: 1.45; color: var(--fg); }
+.check li b { font-weight: 600; } .check li span { display: block; font-size: var(--fs-body); color: var(--fg-2); }
+.check .mono { margin-top: var(--s-4); text-transform: none; letter-spacing: .02em; font-size: var(--fs-sm); }
+.mix { background: var(--bg); border: 1px solid var(--line-wash); border-radius: var(--radius-lg); padding: var(--s-5); margin-top: var(--s-4); }
+.mix h3 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h2); line-height: 1.1; color: var(--fg); }
+.mix h3 .sub { display: block; font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); margin-top: var(--s-1); }
+.mix .line { font-family: var(--font-display); font-style: italic; font-size: var(--fs-h3); color: var(--sig); margin: var(--s-2) 0 var(--s-4); }
+.faders { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--s-3); max-width: 520px; }
+.fader { text-align: center; } .fader .track { height: 120px; display: flex; align-items: flex-end; border-bottom: 1px solid var(--line); }
+.fader i { display: block; width: 100%; background: var(--sig); opacity: .8; border-radius: 3px 3px 0 0; transform-origin: bottom; animation: grow .6s var(--ease-out) both; }
+.fader span { display: block; margin-top: var(--s-2); font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-2); }
+.mix .mono { margin-top: var(--s-4); }
+.ourside { margin-top: var(--s-6); max-width: 74ch; }
+.ourside .c8 summary { grid-template-columns: 1fr; } .ourside .c8 > p { margin-left: 0; }
+@media (prefers-reduced-motion: reduce) { .doorfig .freq, .doorfig .ring path, .doorfig .v circle, .says li, .fader i { animation: none; opacity: 1; stroke-dashoffset: 0; transform: none; } }
+
+</style>
+</head>
+<body class="rk-page">
+
+<header class="band s-paper hd" id="top">
+  <div class="rk-breakout">
+    <p class="eyebrow voice">The Voice Map · September 2026</p>
+    <h1 class="display">It sounds like a family answering the phone.</h1>
+    <p class="seed">Five people answer it. This page tells you which one is speaking, and how to sound like her.</p>
+
+    <div class="po">
+      <div><p class="eyebrow">Why this page exists</p><p>So anyone writing, filming or designing for us — Shelby, Brian, Chris, Revity, or one of us — can pick the right voice for a piece, sound like it, and check their own draft, without having met the family.</p></div>
+      <div><p class="eyebrow">Where you'll be when you've read it</p><p>You can name the five voices and tell them apart in one sentence each. You know which voice a product page, a spec, a film, a sale or an About page is written in. You can run a draft through the check before it ships.</p></div>
+    </div>
+
+    <div class="door-grid">
+      <ol class="arrive" aria-label="The five voices, as they answer">
+        <li style="--i:0"><b>Arch</b> explains how it works, and why we care.<span class="who">the phone call · the heart</span></li>
+        <li style="--i:1"><b>Sid</b> tells you which one to use.<span class="who">the recommendation · the hands</span></li>
+        <li style="--i:2"><b>Ash</b> tells you where you stand and what's next.<span class="who">the walk · the map</span></li>
+        <li style="--i:3"><b>The Fabric</b> says what it does, then goes quiet.<span class="who">the instrument · never sells</span></li>
+        <li style="--i:4"><b>The House</b> says who we are and where we draw our lines.<span class="who">the family, speaking as one</span></li>
+        <li class="foot" style="--i:5">— one rule under all five: if it wouldn't be said to a person who called, it doesn't ship.</li>
+      </ol>
+      <figure class="doorfig" aria-label="Five voices on one line, lighting in turn, with Arch's frequency drawn beneath all of them">
+        <svg viewBox="0 0 520 420" aria-hidden="true">
+          <path class="freq" pathLength="1" d="M20 330 C60 300 80 360 120 330 S180 300 220 330 S280 360 320 330 S380 300 420 330 S480 360 500 330"/>
+          <text class="lab" style="--i:5" x="260" y="365" text-anchor="middle">arch's frequency runs under all of it</text>
+          <g class="v" style="--i:0"><circle cx="70" cy="200" r="26"/><text class="lab" style="--i:0" x="70" y="250" text-anchor="middle">arch</text></g>
+          <g class="v" style="--i:1"><circle cx="165" cy="200" r="26"/><text class="lab" style="--i:1" x="165" y="250" text-anchor="middle">sid</text></g>
+          <g class="v" style="--i:2"><circle cx="260" cy="200" r="26"/><text class="lab" style="--i:2" x="260" y="250" text-anchor="middle">ash</text></g>
+          <g class="v" style="--i:3"><circle cx="355" cy="200" r="26"/><text class="lab" style="--i:3" x="355" y="250" text-anchor="middle">the fabric</text></g>
+          <g class="v" style="--i:4"><circle cx="450" cy="200" r="26"/><text class="lab" style="--i:4" x="450" y="250" text-anchor="middle">the house</text></g>
+          <g class="ring"><path pathLength="1" d="M40 110 L40 80 Q40 60 60 60 L460 60 Q480 60 480 80 L480 110"/></g>
+          <text class="lab" style="--i:4" x="260" y="42" text-anchor="middle">one phone call</text>
+        </svg>
+      </figure>
+    </div>
+
+    <p class="lede big">Everything we publish — a product page, a spec sheet, a film, a sale, an About page, an email — has to sound like the person who would have answered if you'd called. Warm, exact, honest about what it doesn't know, and never selling. Five people have answered that phone for fifteen years, and each one has a voice you can learn. This page is the short version. The full record of each voice lives in our library, linked from every card.</p>
+  </div>
+</header>
+
+<div class="seam"></div>
+
+<section class="band s-ground" id="which">
+  <div class="rk-breakout">
+    <p class="eyebrow">Question one</p>
+    <h2 class="title">Whose voice is this piece in?</h2>
+    <p class="lede">Find the kind of thing you're making. The voice is on the right. If two are named, the first is loudest and the second is inside it.</p>
+    <div class="chooser">
+      <div class="ch"><span class="k">A product page, a fabric story, a help article, a blog</span><span class="v arch">Arch</span><span class="n">with the Fabric's own lines inside it</span></div>
+      <div class="ch"><span class="k">A spec, a quote, a recommendation, a technical answer</span><span class="v sid">Sid</span><span class="n">two options, never five</span></div>
+      <div class="ch"><span class="k">A journey page, a brief, a map, a sale page, a welcome email</span><span class="v ash">Ash</span><span class="n">gratitude first, the next step visible</span></div>
+      <div class="ch"><span class="k">A label, a swatch card, a one-line description, the Voice Wall</span><span class="v fabric">The Fabric</span><span class="n">what it does, then quiet — or the maker's words, whole</span></div>
+      <div class="ch"><span class="k">The About page, a boundary, the origin, the signature</span><span class="v house">The House</span><span class="n">one family, said once</span></div>
+      <div class="ch"><span class="k">An email reply</span><span class="v arch">Arch <em>or</em> Sid</span><span class="n">Arch below five hundred yards, Sid above it</span></div>
+      <div class="ch"><span class="k">Social, Instagram, a story post</span><span class="v arch">Arch</span><span class="n">her Joy, and the maker's words unparaphrased</span></div>
+      <div class="ch"><span class="k">AKAS Tex industries, services, partner resources</span><span class="v sid">Sid</span><span class="n">with the House's certification and made-in-USA line</span></div>
+      <div class="ch"><span class="k">A film</span><span class="v">Whoever would be on the phone</span><span class="n">with that person — see the nine, below</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="band s-paper" id="how">
+  <div class="rk-breakout">
+    <p class="eyebrow">Question two</p>
+    <h2 class="title">How do I sound like her?</h2>
+    <p class="lede">Tap a voice. Real sentences, not descriptions of sentences. Every card links to the full record.</p>
+    <div class="chips" id="vchips" role="group" aria-label="The five voices"></div>
+    <div class="panel" id="vpanel" aria-live="polite"></div>
+
+    <div class="check">
+      <p class="eyebrow">Before it ships</p>
+      <h3>Five questions. All five have to be yes.</h3>
+      <ol>
+        <li><b>Would this be said to a person who called?</b> <span>If it sounds like copy, it isn't ours.</span></li>
+        <li><b>Is the mechanism explained before the benefit — and the limit flagged before the claim?</b> <span>Arch's rule. No impact without the cause; no certification without the exact standard.</span></li>
+        <li><b>Is the answer first, and are there two options, not five?</b> <span>Sid's rule. Recommend, then stop.</span></li>
+        <li><b>Does the reader know where she stands and what the next step is — without being pushed?</b> <span>Ash's rule. The next rung visible, never sold.</span></li>
+        <li><b>Does the fabric only claim what it does, and is every customer's sentence her own?</b> <span>The Fabric's rule. No 'best', no 'you'll love', no tidied review.</span></li>
+      </ol>
+      <p class="mono">And the House's one: could all four of them sign it, and would none of them add to it? If so, it can carry the family name.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band s-wash" id="nine">
+  <div class="rk-breakout">
+    <p class="eyebrow">For depth</p>
+    <h2 class="title">Who is on the other end of the call.</h2>
+    <p class="lede">Nine kinds of customer come through the two doors. Each one hears all five voices — at different volumes. This is the mix. Use it to choose the voice for a film, or to check that a page is speaking to the person it's for.</p>
+    <div class="chips" id="achips" role="group" aria-label="The nine customers"></div>
+    <div class="mix" id="mix" aria-live="polite"></div>
+    <div class="ourside">
+      <p class="eyebrow">For our side</p>
+      <details class="c8"><summary><span class="t">The architecture under this page.</span><span class="s">Five modes, always simultaneous · the reading comes first · the tics are the voice · the Creator is never named.</span></summary>
+        <p>Every piece carries five modes at once — Teaching, Protective, Joy, Invitation, Witness — at different volumes, and the reader's situation sets the mix; nobody is diagnosed (the Journey Map's rule: coverage, not routing). In every voice the reading comes before the words: Arch reads what the person is carrying, Ash reads the whole and where she stands in it, the Fabric reads which of the six sentences the body spoke. Ash's "right?" is a consent check, sixty-five times per ten thousand words, not a tic. And across nearly seven thousand reviews nobody once says AKAS Tex — they say Zorb, they say Wazoodle, they name the person who answered — and that silence is the House's whole voice. The full records, the four older domain registers, and the eight brand voices are in the library.</p></details>
+    </div>
+  </div>
+</section>
+
+<div class="descent"></div>
+
+<section class="band deep" id="home">
+  <div class="rk-breakout">
+    <p class="eyebrow">Coming home</p>
+    <h2 class="title">You've met the five. <em>Here's the one thing they share.</em></h2>
+    <div class="home-grid">
+      <figure class="loop" aria-label="A caller, five voices answering, one line back">
+        <svg viewBox="0 0 520 400" aria-hidden="true">
+          <g class="node you" style="--i:0"><circle cx="70" cy="200" r="26"/></g><text x="70" y="250">the caller</text>
+          <g class="node" style="--i:1"><circle cx="330" cy="80" r="18"/></g><text x="330" y="52">arch</text>
+          <g class="node" style="--i:2"><circle cx="400" cy="140" r="18"/></g><text x="452" y="146">sid</text>
+          <g class="node" style="--i:3"><circle cx="420" cy="220" r="18"/></g><text x="472" y="226">ash</text>
+          <g class="node" style="--i:4"><circle cx="400" cy="300" r="18"/></g><text x="466" y="306">the fabric</text>
+          <g class="node" style="--i:5"><circle cx="330" cy="360" r="18"/></g><text x="330" y="392">the house</text>
+          <path class="arc fwd" pathLength="1" d="M96 190 Q200 100 312 88 M96 196 Q240 150 382 144 M96 200 Q250 210 402 220 M96 206 Q240 260 382 296 M96 212 Q200 300 312 352"/>
+          <path class="arc back" pathLength="1" d="M300 200 Q180 200 100 200"/>
+          <text class="again" x="200" y="330" style="opacity:.8">one answer, in the voice that fits the call</text>
+        </svg>
+      </figure>
+      <div class="home-text">
+        <div class="hm"><h3>The reading comes first.</h3><p>Before a single word, every one of the five reads the person: what is she carrying, where does she stand, which of the six sentences did her body speak. The words come after. If a draft skips the reading, it will sound like copy no matter whose vocabulary it borrows.</p></div>
+        <div class="hm"><h3>Nobody hears one voice.</h3><p>A page carries all five at once, at different volumes, and the reader's situation sets the mix. The Healer hears the Fabric first; the Manufacturer hears Sid and nothing else; the Innovator hears Ash. Same words. Write the whole, and each one finds her own volume.</p></div>
+        <div class="hm"><h3>Every voice has a moment it stops explaining.</h3><p>Arch: <em>I already did.</em> Sid: <em>we never use any chemicals to enhance any feature.</em> Ash: <em>it was difficult the whole time.</em> The Fabric: <em>the body never knows what happened.</em> The House: <em>we are one family with two doors.</em> When your draft reaches a line like that, let it land and stop.</p></div>
+        <div class="hm"><h3>Read it through this before it ships.</h3><p>The five questions above are the filter. Not a tone guide — a test. The next thing anyone writes for us, in words, film or design, goes through it first.</p></div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat rule"><div class="n">5</div><div class="l">voices, each with a full record in the library</div></div>
+      <div class="stat rule"><div class="n">9</div><div class="l">kinds of customer, each hearing a different mix</div></div>
+      <div class="stat rule"><div class="n">5</div><div class="l">questions before anything ships</div></div>
+      <div class="stat rule"><div class="n"><span class="sp">1</span></div><div class="l">rule under all of it</div></div>
+    </div>
+    <div class="rule"></div>
+    <p class="ask-line">The question every voice is answering is the one the caller asked: <em>What are you making?</em></p>
+    <p class="last-line">It sounds like a family answering the phone. Now it can sound like that in your hands too.</p>
+    <div class="doors">
+      <a class="door rung" href="https://airtable.com/app0wlaaxqXGBjWsw/tbl01DX6nwRis2QiX" target="_blank" rel="noopener"><span class="eyebrow">Now</span><strong>The Voice Library</strong>The full record of every voice — registers, rules, vocabulary, the generation protocol — to read or to copy into your tools.</a>
+      <a class="door" href="customer-map.html"><span class="eyebrow">Its sibling</span><strong>The Customer Map</strong>Who buys from us, and how far they walk — nine kinds, two walks, by name.</a>
+      <a class="door" href="video-map.html"><span class="eyebrow">Its sibling</span><strong>The Video Map</strong>Thirteen films, and whose voice each is in.</a>
+      <a class="door" href="content-universe.html"><span class="eyebrow">Its sibling</span><strong>The Content Universe</strong>Everything we intend to write, and who each piece is for.</a>
+    </div>
+  </div>
+</section>
+
+<footer class="band tight s-paper">
+  <div class="rk-in ft">The Voice Map · snapshot 8 Sep 2026 · AKAS Tex LLC, Bensalem PA · crafted by Ashrey with Claude · questions: <a href="mailto:ash@wazoodle.com">ash@wazoodle.com</a>
+      <a class="door" href="sitemaps.html"><span class="eyebrow">Its sibling</span><strong>The Sitemaps</strong>Every page on both websites — its door, its reader, its walk, its voice, its shape, its sources — and which are ready to build.</a>
+    </div>
+</footer>
+
+<script>
+const LIB='https://airtable.com/app0wlaaxqXGBjWsw/tbl01DX6nwRis2QiX/';
+const V=[
+ {k:'Arch',cls:'arch',id:'recDHQ7eezB7pk8vp',line:'Explains how it works, and why we care.',opens:'With the problem or the question, then an everyday picture of it \u2014 a paper towel, a sponge \u2014 then the mechanism, then what to do, then thanks.',
+  says:['\u201cI don\u2019t know how that compares, but our carbon footprint is very small.\u201d','\u201cBefore you read that, my thought is that\u2026\u201d','\u201cI am sorry, we are not into diapers \u2014 the above are just recommendations for the fabric regardless of their use.\u201d','\u201cHappy sewing!\u201d'],
+  always:['Mechanism before benefit \u2014 never the impact without what causes it','The limit flagged before the claim: \u201cto the best of my knowledge\u201d, \u201cplease verify with your supplier\u201d','A warmth layer in every technical piece \u2014 an analogy, an aside, a thank-you','We for the family and the work; I for personal accountability'],
+  never:['Lecture, or treat the reader as needing to be taught','Overclaim, or use a word without an everyday translation','Perform warmth without substance behind it','Apologize for expertise or the CEO title'],
+  lalita:'When she stops explaining and declares: \u201cI already did.\u201d',
+  goal:'\u201cEasy to work with.\u201d \u2014 a customer\u2019s review. The complexity was real; none of it landed on the reader.',
+  who:'The Healer, the Guardian and the Householder hear her loudest. Every product page is in her voice.'},
+ {k:'Sid',cls:'sid',id:'reca36ubjl3nMGkDS',line:'Tells you which one to use.',opens:'With the answer. Context after, if at all. Requirements restated when there are several, YES against each one confirmed.',
+  says:['\u201cI would suggest\u2026 >> [link]\u201d','\u201cThis IS waterproof. This IS NOT waterproof.\u201d','\u201cYes!! The Certified Food Safe uses a film that is Food Contact Safe.\u201d','\u201cPlease let me know if you have any questions.\u201d'],
+  always:['Solution first','Two options, three at most, split by use case \u2014 never five','Categorical on facts; dual units, exact numbers (300 GSM / 9 oz per square yard)','The direct line and the MOQ before any custom work'],
+  never:['Explain the mechanism when the outcome will do','Use an analogy \u2014 that is Arch\u2019s','Write a warmth paragraph \u2014 warmth is a brief opener and a phone number','Qualify a recommendation after making it'],
+  lalita:'Rarely. Once: \u201cwe never use any chemicals to enhance any features of the fabric.\u201d Then back to the spec.',
+  goal:'The customer has the right fabric and no follow-up question.',
+  who:'The Provider, the Manufacturer and the Distributor hear him loudest. Above five hundred yards, he is the phone.'},
+ {k:'Ash',cls:'ash',id:'recBEl1FhsQGH3oCG',line:'Tells you where you stand and what\u2019s next.',opens:'Mid-motion \u2014 \u201cSo the idea here is\u2026\u201d \u2014 with the destination first and the cost second. On a sale or a launch, with thirteen years of thanks before any offer.',
+  says:['\u201cWhen you tell your story backwards it almost sounds like everything is easy. But it wasn\u2019t easy. It was difficult the whole time.\u201d','\u201cWe don\u2019t make finished products. We are creators of the fabric.\u201d','\u201cWe are intentionally going to slow customers down.\u201d','\u201cWe are all here together. One step at a time.\u201d'],
+  always:['Orient before informing: you are here, this is the whole, here is the next step','Gratitude before any ask','Hold both truths when two are true; never collapse a paradox for a cleaner line','Close with the human \u2014 the next rung visible, never pushed'],
+  never:['Open with product or price','Create urgency, scarcity or a countdown','Claim to know the maker\u2019s craft','Let a system \u2014 AI help, a website \u2014 be positioned as replacing the person'],
+  lalita:'When the softeners fall away: \u201cThe success you\u2019re going to get here is a foregone conclusion.\u201d',
+  goal:'\u201cOkay, okay \u2014 I am at the right place.\u201d The reader recognises where she stands before anything is asked of her.',
+  who:'The Explorer arriving and the Innovator climbing hear him loudest. Every journey page and every map is in his voice.'},
+ {k:'The Fabric',cls:'fabric',id:'recPGNgKPF5Z5m56D',line:'Says what it does, then goes quiet.',opens:'With its function \u2014 catches, holds, moves, blocks \u2014 and the partner it works with. Then one line pointed at the reader. Then nothing.',
+  says:['\u201cYou are not looking for something to absorb. You are looking for something that will not let go.\u201d (Zorb)','\u201cThe line that protects everything is drawn once \u2014 and holds.\u201d (ProSoft)','\u201cSome things are not meant to be held. They are meant to move.\u201d (ProCool)','\u201cThe body never knows what happened. That is the point.\u201d'],
+  always:['Function first; fibre content belongs to the spec table','Name the stack: ProCool \u2192 Zorb \u2192 ProSoft PUL','Let the proof be the problem that stopped happening','Every customer\u2019s sentence whole and attributed \u2014 never tidied'],
+  never:['Pitch \u2014 no \u201cbest\u201d, no \u201cyou\u2019ll love\u201d, no exclamation of its own','Claim beyond its physics','Show how it is made \u2014 outcome only','Take credit: \u201cthe pad held\u201d, not \u201cZorb held the pad\u201d'],
+  lalita:'At the end of a story, when the role lifts off and the line is about the reader: \u201cWhat holds you completely leaves no evidence.\u201d',
+  goal:'The maker forgets the fabric is there.',
+  who:'The Healer hears it first \u2014 the body that cannot wait. Everyone else hears it through Arch or the makers.'},
+ {k:'The House',cls:'house',id:'recfuA4Kle1KHDWQ3',line:'Says who we are and where we draw our lines.',opens:'In the family plural, once. Who we are, since when, what we make and where, what we don\u2019t do. Then it stops and another voice picks up.',
+  says:['\u201cWe are one family with two doors.\u201d','\u201cWe do not import fabrics. We make everything in the USA. That\u2019s a mission for us.\u201d','\u201cWe don\u2019t ship to India, China, Pakistan or Sri Lanka, and we don\u2019t assist orders routed there.\u201d','\u201cI already did.\u201d'],
+  always:['Declare; never explain','State a boundary as identity, with no justification paragraph','Count time in years, exactly','Let the fabric, the store and the person be named instead of the House'],
+  never:['Sell, recommend, teach or walk \u2014 it stands, the others move','Use \u201cwe\u201d as a corporate mask \u2014 it is four named people or nothing','Say \u201cour own mill\u201d \u2014 made in the USA, domestic supply chain, finished in Bensalem','Claim a certification or a green claim the evidence can\u2019t carry'],
+  lalita:'Its native register. Every House line is a declaration.',
+  goal:'The customer trusts it completely and has never said its name.',
+  who:'The Distributor and the Extractor hear it first. Everyone else meets it once \u2014 at the top of a page, or at the end.'}
+];
+const A=[
+ {k:'The Explorer',sub:'asks for what isn\u2019t there yet',mix:{Arch:.6,Sid:.9,Ash:.5,Fabric:.2,House:.3},mode:'Teaching \u00b7 Invitation',where:'email, the phone, Custom & Development'},
+ {k:'The Healer',sub:'makes for her own body',mix:{Arch:.8,Sid:.2,Ash:.2,Fabric:1,House:.1},mode:'Protective \u00b7 Witness',where:'product page, Fabric Finder, help docs'},
+ {k:'The Guardian',sub:'makes for a body she loves',mix:{Arch:1,Sid:.5,Ash:.5,Fabric:.6,House:.2},mode:'Protective \u00b7 Teaching \u00b7 Joy',where:'product page, the wholesale door, the films'},
+ {k:'The Provider',sub:'makes for people she\u2019ll never meet',mix:{Arch:.6,Sid:.9,Ash:.3,Fabric:.4,House:.5},mode:'Teaching \u00b7 Invitation \u00b7 Witness',where:'wholesale, humanitarian pages, uniforms'},
+ {k:'The Householder',sub:'makes things that replace the disposable',mix:{Arch:1,Sid:.3,Ash:.3,Fabric:.7,House:.2},mode:'Joy \u00b7 Teaching',where:'FoodSAFE pages, household collections, Instagram'},
+ {k:'The Manufacturer',sub:'buys by the roll, to a spec',mix:{Arch:.3,Sid:1,Ash:.2,Fabric:.5,House:.7},mode:'Teaching \u00b7 Protective \u2014 no Joy',where:'AKAS Tex industries, services, the spec table'},
+ {k:'The Distributor',sub:'carries our cloth onward',mix:{Arch:.4,Sid:.7,Ash:.2,Fabric:.3,House:1},mode:'Invitation \u00b7 Protective',where:'partner resources, brand assets, the price list'},
+ {k:'The Innovator',sub:'built something that didn\u2019t exist, on our fabric',mix:{Arch:.7,Sid:.5,Ash:1,Fabric:.4,House:.3},mode:'Witness \u00b7 Invitation \u00b7 Joy',where:'the journey page, Custom & Development, the films'},
+ {k:'The Extractor',sub:'took the development elsewhere',mix:{Arch:0,Sid:.3,Ash:0,Fabric:0,House:1},mode:'Protective \u00b7 silence',where:'nowhere public except the line'}
+];
+const vchips=document.getElementById('vchips'),vpanel=document.getElementById('vpanel'),achips=document.getElementById('achips'),mix=document.getElementById('mix');
+V.forEach((v,i)=>{const b=document.createElement('button');b.type='button';b.className='chip '+v.cls;b.setAttribute('aria-pressed','false');b.textContent=v.k;b.addEventListener('click',()=>voice(i));vchips.appendChild(b);});
+function voice(i){const v=V[i];vchips.querySelectorAll('.chip').forEach((c,j)=>c.setAttribute('aria-pressed',j===i?'true':'false'));
+ vpanel.innerHTML=`<div><h3>${v.k}</h3><p class="line">${v.line}</p><dl><dt>How it opens</dt><dd>${v.opens}</dd><dt>Always</dt><dd><ul>${v.always.map(x=>`<li>${x}</li>`).join('')}</ul></dd><dt>Never</dt><dd><ul>${v.never.map(x=>`<li>${x}</li>`).join('')}</ul></dd><dt>The moment it stops explaining</dt><dd>${v.lalita}</dd><dt>You know it\u2019s working when</dt><dd>${v.goal}</dd></dl></div><div><p class="mono">real sentences \u00b7 hers, not ours</p><ul class="says">${v.says.map((s,j)=>`<li style="--i:${j}">${s}</li>`).join('')}</ul><p class="mono" style="margin-top:var(--s-4)">who hears it loudest</p><p class="who">${v.who}</p><a class="door rung" href="${LIB}${v.id}" target="_blank" rel="noopener"><span class="eyebrow">The full record</span><strong>${v.k} in the Voice Library</strong>Registers, structural moves, vocabulary, the generation protocol \u2014 to read or copy into your tools.</a></div>`;
+ if(window.innerWidth<860) vpanel.scrollIntoView({behavior:'smooth',block:'start'});}
+voice(0);
+A.forEach((a,i)=>{const b=document.createElement('button');b.type='button';b.className='chip';b.setAttribute('aria-pressed','false');b.innerHTML=`${a.k} <span class="n">${a.sub}</span>`;b.addEventListener('click',()=>arch(i));achips.appendChild(b);});
+function arch(i){const a=A[i];achips.querySelectorAll('.chip').forEach((c,j)=>c.setAttribute('aria-pressed',j===i?'true':'false'));
+ const order=['Arch','Sid','Ash','Fabric','House'];const cls={Arch:'arch',Sid:'sid',Ash:'ash',Fabric:'fabric',House:'house'};const label={Fabric:'The Fabric',House:'The House'};
+ const loud=order.filter(k=>a.mix[k]>=.9).map(k=>label[k]||k);
+ mix.innerHTML=`<div class="mixhead"><h3>${a.k} <span class="sub">${a.sub}</span></h3><p class="line">Loudest: ${loud.join(' and ')||'\u2014'} \u00b7 the mode she hears: ${a.mode}</p></div><div class="faders">${order.map((k,j)=>`<div class="fader ${cls[k]}"><div class="track"><i style="height:${Math.max(4,a.mix[k]*100)}%;animation-delay:${j*.08}s"></i></div><span>${label[k]||k}</span></div>`).join('')}</div><p class="mono">where she\u2019s met \u00b7 ${a.where}</p>`;}
+arch(1);
+(function(){const el=document.querySelector('.loop');if(!el)return;const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){el.classList.add('is-in');io.disconnect();}}),{threshold:.35});io.observe(el);})();
+
+</script>
+<script>
+/* rupakarshini V3 — rk.js · shared runtime. Optional. Every element degrades without it. */
+(function () {
+  const d = document, root = d.documentElement; root.classList.remove('no-js');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* rise fallback (no animation-timeline support) */
+  if (!CSS.supports('animation-timeline: view()')) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { threshold: .12 });
+    d.querySelectorAll('.rise').forEach(el => io.observe(el));
+  }
+
+  /* hold-to-continue: press held for --hold-ms (default 700) → is-done → emits 'hold:done'; opens [data-threshold] target */
+  d.querySelectorAll('.hold').forEach(h => {
+    const ms = +getComputedStyle(h).getPropertyValue('--hold-ms') || 700; let t0 = 0, raf = 0;
+    const tick = () => { const p = Math.min(1, (performance.now() - t0) / ms); h.style.setProperty('--p', p);
+      if (p >= 1) { done(); } else raf = requestAnimationFrame(tick); };
+    const start = e => { e.preventDefault(); h.classList.remove('is-done'); t0 = performance.now(); raf = requestAnimationFrame(tick); };
+    const stop = () => { cancelAnimationFrame(raf); if (!h.classList.contains('is-done')) h.style.setProperty('--p', 0); };
+    const done = () => { cancelAnimationFrame(raf); h.classList.add('is-done'); h.style.setProperty('--p', 1);
+      if (navigator.vibrate && !reduce) navigator.vibrate(18);                                   /* enhancement only (no iOS) */
+      const target = h.dataset.threshold && d.querySelector(h.dataset.threshold);
+      if (target) { target.classList.add('is-open'); target.querySelectorAll('.gate[hidden]').forEach(g => g.hidden = false); }
+      if (h.dataset.remember) try { localStorage.setItem('rk:' + h.dataset.remember, '1'); } catch (_) {}
+      h.dispatchEvent(new CustomEvent('hold:done', { bubbles: true })); };
+    h.addEventListener('pointerdown', start); ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => h.addEventListener(ev, stop));
+    h.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); done(); } });
+    h.setAttribute('role', 'button'); h.tabIndex = 0;
+    if (h.dataset.remember) try { if (localStorage.getItem('rk:' + h.dataset.remember)) done(); } catch (_) {}
+  });
+
+  /* rail scroll-spy */
+  const rail = d.querySelector('.rail'); if (rail) {
+    const links = [...rail.querySelectorAll('a[href^="#"]')]; const secs = links.map(a => d.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const spy = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-40% 0px -55% 0px' });
+    secs.forEach(s => spy.observe(s));
+  }
+
+  /* counter: <span class="counter" data-to="300" data-suffix="+"> */
+  d.querySelectorAll('.counter[data-to]').forEach(c => {
+    const to = +c.dataset.to, suf = c.dataset.suffix || '', pre = c.dataset.prefix || '';
+    if (reduce) { c.textContent = pre + to.toLocaleString() + suf; return; }
+    const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; io.disconnect(); const t0 = performance.now(), dur = 900;
+      const step = () => { const p = Math.min(1, (performance.now() - t0) / dur), v = Math.round(to * (1 - Math.pow(1 - p, 3))); c.textContent = pre + v.toLocaleString() + suf; if (p < 1) requestAnimationFrame(step); }; step(); }), { threshold: .5 });
+    io.observe(c);
+  });
+
+  /* wake lock for performances: <body data-wake> */
+  if (root.querySelector('[data-wake]') && 'wakeLock' in navigator) {
+    let lock; const get = async () => { try { lock = await navigator.wakeLock.request('screen'); } catch (_) {} };
+    get(); d.addEventListener('visibilitychange', () => { if (d.visibilityState === 'visible') get(); });
+  }
+
+  /* harness hook: body[data-harness] loads harness/dc.js */
+  if (root.querySelector('[data-harness]')) { const s = d.createElement('script'); s.src = root.querySelector('[data-harness]').dataset.harness || 'harness/dc.js'; d.body.appendChild(s); }
+})();
+
+</script>
+</body>
+</html>

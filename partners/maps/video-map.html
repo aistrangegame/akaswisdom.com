@@ -1,0 +1,1390 @@
+<!doctype html>
+<html lang="en" data-chassis="akas" data-brand="akastex" data-ground="paper" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="recognition" content="Here are the thirteen. Touch one and it opens.">
+<title>The ARC Video Map — thirteen videos | AKAS Wisdom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+/* ---- tokens/spine.css ---- */
+/* ============================================================
+   rupakarshini V3 — tokens/spine.css
+   THE SPINE. Role tokens. Both chassis obey this grammar.
+   Components reference ONLY spine tokens. Worlds fill them.
+   Scope: everything lives under [data-chassis][data-brand].
+   Load order: spine.css → scales.css → ONE world file → rk.css
+   ============================================================ */
+
+:root, [data-chassis] {
+  /* ---- GROUND (Neev) — what the page stands on ---------- */
+  --bg:            var(--w-ground);        /* page ground                    */
+  --surface:       var(--w-surface);       /* cards, panels, the raised plane */
+  --surface-2:     var(--w-surface-2);     /* quiet alternate band            */
+  --surface-wash:  var(--w-wash);          /* identity tint band              */
+  --surface-deep:  var(--w-deep);          /* the ONE deep band per page      */
+  --surface-hover: var(--w-hover);
+
+  /* ---- MEDIUM (Shweta) — what the reader reads through --- */
+  --fg:            var(--w-ink);           /* primary text                    */
+  --fg-2:          var(--w-ink-2);         /* secondary text                  */
+  --fg-muted:      var(--w-muted);         /* captions, tertiary (≥4.5:1)     */
+  --fg-eyebrow:    var(--w-muted);         /* RULING: eyebrow uses muted, never label */
+  --fg-on-deep:    var(--w-on-deep);       /* text on the deep band           */
+  --fg-on-action:  #FFFFFF;
+
+  /* text ladder — one hue, distance not darkness (chassis-independent) */
+  --t-high:    color-mix(in oklch, var(--fg) 92%, transparent);
+  --t-mid:     color-mix(in oklch, var(--fg) 80%, transparent);
+  --t-body:    color-mix(in oklch, var(--fg) 72%, transparent);
+  --t-soft:    color-mix(in oklch, var(--fg) 58%, transparent);
+  --t-whisper: color-mix(in oklch, var(--fg) 36%, transparent);
+  --t-ghost:   color-mix(in oklch, var(--fg) 20%, transparent);
+
+  /* ---- HOLD (Sid) — lines and edges ---------------------- */
+  --line:          var(--w-line);          /* hairline                        */
+  --line-strong:   var(--w-sig);           /* 3px authority rule              */
+  --line-wash:     var(--w-wash-bd);
+  --radius:        var(--w-radius, 12px);
+  --radius-sm:     calc(var(--radius) * .5);
+  --radius-lg:     calc(var(--radius) * 1.33);
+  --radius-pill:   999px;
+
+  /* ---- VOICE (Arch) — identity and speaking colour ------- */
+  --sig:           var(--w-sig);           /* identity signature              */
+  --sig-pressed:   var(--w-sig-dk);
+  --sig-tint:      var(--w-sig-d);
+  --voice:         var(--w-voice);         /* the chassis's speaking colour   */
+  --voice-pressed: var(--w-voice-dk);
+  --spark:         var(--w-spark);         /* earned once against deep        */
+
+  /* ---- CONSEQUENCE (Bindu) — one colour across the estate  */
+  --bindu:         #C0392B;                /* the point where something is decided */
+  --bindu-pressed: #9E2D21;
+  --action:        var(--bindu);           /* commerce buy · threshold crossed */
+  --action-fg:     #FFFFFF;
+
+  /* ---- STATUS — the system deliberately has no general alert colour */
+  --ok:            var(--w-voice);
+  --warn:          #B8860B;                /* goldenrod — Low stock only       */
+  --danger:        var(--bindu);
+  --info:          #2575B5;
+
+  /* ---- GRACE (Karishma) — readiness ------------------------ */
+  --ring:          color-mix(in oklch, var(--sig) 70%, white);
+  --ring-w:        2px;
+  --ring-offset:   2px;
+  --shadow-1: 0 1px 3px rgba(40,34,24,.06), 0 1px 2px rgba(40,34,24,.04);
+  --shadow-2: 0 10px 34px rgba(40,34,24,.16), 0 2px 8px rgba(40,34,24,.08);
+  --shadow-3: 0 24px 60px rgba(40,34,24,.20), 0 6px 16px rgba(40,34,24,.10);
+
+  /* ---- FONT FACES — chassis constant, world never changes -- */
+  --font-display:  var(--w-font-display);
+  --font-ui:       var(--w-font-ui);
+  --font-mono:     var(--w-font-mono);
+  --font-ceremony: var(--w-font-ceremony, var(--w-font-display));
+}
+
+/* Focus ring recipe — one rule for the whole estate (keyboard only) */
+:where([data-chassis]) :focus-visible {
+  outline: var(--ring-w) solid var(--ring);
+  outline-offset: var(--ring-offset);
+  border-radius: var(--radius-sm);
+}
+
+/* Foreground-pairing invariant: any surface must be used with its pair */
+[data-chassis] .on-deep  { color: var(--fg-on-deep); }
+[data-chassis] .on-deep .eyebrow { color: var(--sig-tint); }
+[data-chassis] .on-wash .eyebrow { color: var(--sig-pressed); }
+
+/* ---- tokens/scales.css ---- */
+/* ============================================================
+   rupakarshini V3 — tokens/scales.css
+   Fluid type (Utopia math, 360→1440, rem term always present so
+   WCAG 1.4.4 holds: every step max ≤ 2.5× min), measure, space,
+   band rhythm, width scale, motion vocabulary.
+   Both chassis share this file. Worlds may override --pace-*.
+   ============================================================ */
+
+:root, [data-chassis] {
+  /* ---- TYPE LADDER — 8 steps, ratio ~1.2 mobile → 1.25 desktop */
+  --fs-display: clamp(2.5rem,    1.281rem + 5.42vi, 4.75rem);  /* 40 → 76  */
+  --fs-h1:      clamp(2rem,      1.303rem + 3.10vi, 3.28rem);  /* 32 → 52  */
+  --fs-h2:      clamp(1.6rem,    1.211rem + 1.73vi, 2.32rem);  /* 26 → 37  */
+  --fs-h3:      clamp(1.28rem,   1.074rem + 0.91vi, 1.64rem);  /* 20 → 26  */
+  --fs-lg:      clamp(1.125rem,  1.014rem + 0.49vi, 1.33rem);  /* 18 → 21  */
+  --fs-body:    clamp(1rem,      0.958rem + 0.19vi, 1.11rem);  /* 16 → 17.7*/
+  --fs-ui:      clamp(0.875rem,  0.86rem  + 0.07vi, 0.9rem);   /* 14 → 14.4*/
+  --fs-sm:      0.8125rem;                                     /* 13 fixed */
+  --fs-eyebrow: 0.8125rem;                                     /* 13 — RULING (was 12) */
+  --fs-mono-floor: 0.6875rem;                                  /* 11 — never below */
+
+  /* optical size pinned per step (CSS can't read clamp result) */
+  --opsz-display: 72; --opsz-h: 36; --opsz-body: 16; --opsz-label: 10;
+
+  /* ---- LINE HEIGHT — inverse to size */
+  --lh-display: 1.05; --lh-h: 1.15; --lh-lg: 1.35; --lh-body: 1.6; --lh-ui: 1.4;
+  --ls-display: -0.02em; --ls-h: -0.01em; --ls-eyebrow: .18em; --ls-mono: .16em;
+
+  /* ---- WIDTH SCALE — density governs measure (Parrot ruling) */
+  --w-reading:    68ch;                              /* invariant for prose  */
+  --w-reading-b:  60ch;                              /* ASG contemplative    */
+  --w-instrument: 720px;                             /* 640–760 band         */
+  --w-column:     940px;                             /* the editorial column */
+  --w-breakout:   min(1440px, 100vw - 64px);         /* grids, media, tables */
+  --w-shell:      1320px;
+
+  /* ---- SPACE — 8-pt */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px;
+  --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px;
+  --gap-tight: var(--s-2); --gap: var(--s-4); --gap-loose: var(--s-5);
+  --pad-card: var(--s-5);
+
+  /* ---- BAND RHYTHM — RULING 72 / 60; scale, not one value */
+  --band-tight:  clamp(40px, 5vw, 56px);
+  --band:        clamp(60px, 6vw, 72px);
+  --band-deep:   clamp(72px, 8vw, 104px);
+  --silence:     40px;                               /* .silence run-out     */
+  --strata-1: 10px; --strata-2: 14px; --strata-3: 18px; /* the descent seam  */
+
+  /* ---- MOTION VOCABULARY — named, budgeted, reduced-motion gated */
+  --ease-out:  cubic-bezier(.22,.61,.36,1);
+  --ease-soft: cubic-bezier(.4,0,.2,1);
+  --dur-fast: .15s; --dur-base: .25s; --dur-slow: .5s;
+  --dur-breath: 6s;                                  /* ASG breathe loop     */
+  --rise-y: 24px;                                    /* rise/reveal travel   */
+  --veil-y: -8px;                                    /* veil entry travel    */
+  --hold-ms: 700;                                    /* hold-to-continue     */
+
+  /* ---- PACE — world overrides (still / measured / quick) */
+  --pace-dur: var(--dur-base);
+  --pace-y:   var(--rise-y);
+}
+
+/* Reduced motion: keep end states, remove travel */
+@media (prefers-reduced-motion: reduce) {
+  :root, [data-chassis] { --rise-y: 0px; --veil-y: 0px; --dur-breath: 0s; }
+}
+
+/* Named motions (chassis-independent). Used by rk.css. */
+@keyframes rk-rise   { from { opacity:0; transform:translateY(var(--rise-y)); } to { opacity:1; transform:none; } }
+@keyframes rk-seed   { from { opacity:0; letter-spacing:.06em; } to { opacity:1; letter-spacing:0; } }
+@keyframes rk-breathe{ 0%,100% { transform:scale(1); opacity:.85; } 50% { transform:scale(1.04); opacity:1; } }
+@keyframes rk-pulse  { 0%,100% { opacity:.55; } 50% { opacity:1; } }
+@keyframes rk-shimmer{ from { background-position: -200% 0; } to { background-position: 200% 0; } }
+@keyframes rk-descend{ from { transform:translateY(-6px); opacity:0; } to { transform:none; opacity:1; } }
+@keyframes rk-curtain{ from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
+@keyframes rk-mote   { 0% { transform:translate(0,0); opacity:0; } 20% { opacity:.6; } 100% { transform:translate(var(--mx,8px),var(--my,-40px)); opacity:0; } }
+@keyframes rk-blink  { 0%,92%,100% { transform:scaleY(1); } 96% { transform:scaleY(.08); } }
+
+/* ---- tokens/worlds/akas.css ---- */
+/* ============================================================
+   rupakarshini V3 — tokens/worlds/akas.css
+   CHASSIS A — AKAS / Wazoodle. Canon as amended in Parrot
+   (Design System table, Sep 2026), not the June zip.
+   Usage:  <html data-chassis="akas" data-brand="zorb">
+   Type is constant. Colour separates the brands.
+   ============================================================ */
+
+[data-chassis="akas"] {
+  /* ---- chassis constants (Sid) ---- */
+  --w-font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --w-font-ui:      'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --w-font-mono:    'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace; /* RULING: mono eyebrow face added */
+  --w-radius:       12px;
+
+  /* spine surfaces — warm stone (Neev) */
+  --w-ground:    #EFECE6;   /* page ground                       */
+  --w-surface:   #FFFFFF;   /* paper                             */
+  --w-surface-2: #E7E1D5;   /* stone                             */
+  --w-hover:     #F6F2E9;
+  --w-line:      #E3DDD0;
+  --w-divider:   #ECE6DA;
+
+  /* medium (Shweta) */
+  --w-ink:     #1E1E1E;
+  --w-ink-2:   #3A352E;
+  --w-muted:   #6F685C;     /* 5.2:1 on paper · 4.4 on stone — eyebrow lives here (measured; Parrot value #8A8377 was 3.75) */
+  --w-label:   #A8A095;     /* decorative only; NEVER for eyebrow (2.4:1) */
+  --w-on-deep: rgba(255,255,255,.92);
+
+  /* the chassis speaking colour */
+  --w-voice:    #3B8234;
+  --w-voice-dk: #2C6427;
+
+  /* body position default */
+  --body-default: both;
+}
+
+/* Paper-first variant for consumer LPEs and Brand Home (Revity Gen 2 lesson) */
+[data-chassis="akas"][data-ground="paper"] { --w-ground: #FFFFFF; --w-surface: #FBF9F4; }
+
+/* ---- THE EIGHT WORLDS — sig / sig-dk / sig-d / wash / wash-bd / deep / deep-hi / spark ---- */
+[data-chassis="akas"], [data-chassis="akas"][data-brand="house"] {
+  --w-sig:#1E5219; --w-sig-dk:#163D12; --w-sig-d:#6A9E66;
+  --w-wash:#E4EFE2; --w-wash-bd:#C8DEC4; --w-deep:#1A2E15; --w-deep-hi:#213A1B; --w-spark:#D4B800;
+  --pace: measured; --imagery: raw; --motion-budget: rise seed;
+}
+[data-chassis="akas"][data-brand="zorb"] {
+  --w-sig:#0A5A99; --w-sig-dk:#08456F; --w-sig-d:#5FA8DC;
+  --w-wash:#DCEDFB; --w-wash-bd:#BFDDF4; --w-deep:#0A3354; --w-deep-hi:#0E3E66; --w-spark:#CDE970;
+  --pace: quick; --imagery: annotated; --motion-budget: rise seed pulse;   /* clinical precision */
+}
+[data-chassis="akas"][data-brand="prosoft"] {
+  --w-sig:#006B8A; --w-sig-dk:#004E67; --w-sig-d:#5BB8D0;
+  --w-wash:#D4F0F5; --w-wash-bd:#8FD5E0; --w-deep:#003A48; --w-deep-hi:#004D60; --w-spark:#A78CE0;
+  --pace: still; --imagery: raw; --motion-budget: rise;                     /* silent, soft, permanent */
+}
+[data-chassis="akas"][data-brand="proeco"] {
+  --w-sig:#8A6800; --w-sig-dk:#6B5000; --w-sig-d:#C8A840;
+  --w-wash:#F5EDCC; --w-wash-bd:#DEC880; --w-deep:#2E2600; --w-deep-hi:#3A3200; --w-spark:#F0D040;
+  --pace: measured; --imagery: raw; --motion-budget: rise seed breathe;    /* rooted in earth */
+}
+[data-chassis="akas"][data-brand="procool"] {
+  --w-sig:#4A5A9E; --w-sig-dk:#364488; --w-sig-d:#9BA0D4;
+  --w-wash:#E8EAF5; --w-wash-bd:#C0C6E8; --w-deep:#0D1720; --w-deep-hi:#162232; --w-spark:#3FC6F4;
+  --pace: quick; --imagery: annotated; --motion-budget: rise shimmer;      /* cool precision */
+}
+[data-chassis="akas"][data-brand="supabsorb"] {
+  --w-sig:#1A7A3A; --w-sig-dk:#125A2A; --w-sig-d:#60B878;
+  --w-wash:#DDEEE4; --w-wash-bd:#B0D4BC;
+  --w-deep:#0B4A22; --w-deep-hi:#0F5A2A;                                     /* RULING: darkened from #0D672E — APCA Lc≥75 on deep */
+  --w-spark:#FFD200;
+  --pace: quick; --imagery: raw; --motion-budget: rise;                      /* built for the floor */
+}
+[data-chassis="akas"][data-brand="akastex"] {
+  --w-sig:#0E7E92; --w-sig-dk:#0A6072; --w-sig-d:#27C3DA;
+  --w-wash:#E6F6FB; --w-wash-bd:#A9EAF8; --w-deep:#16404F; --w-deep-hi:#1D4E5F; --w-spark:#D85326;
+  --pace: measured; --imagery: annotated; --motion-budget: rise seed descend; /* RULING: canon; get.akastex lineage retired */
+}
+[data-chassis="akas"][data-brand="silverarch"] {
+  --w-sig:#1A6B8E; --w-sig-dk:#134F6A; --w-sig-d:#60A8C8;
+  --w-wash:#D0EBF5; --w-wash-bd:#A0D0E8; --w-deep:#0D2535; --w-deep-hi:#112E41; --w-spark:#44D4B8;
+  --pace: still; --imagery: annotated; --motion-budget: rise pulse;         /* midnight steel */
+}
+/* Worlds-in-waiting inherit House until a character sheet exists */
+[data-chassis="akas"][data-brand="akastiq"],
+[data-chassis="akas"][data-brand="protec"],
+[data-chassis="akas"][data-brand="procare"] { /* inherits house */ }
+
+/* Family palette — crosses both chassis (archetype colours) */
+[data-chassis] {
+  --arch:#7A2F14; --arch-lt:#B8623F; --sid:#1B3A5C; --sid-lt:#4F7BA8;
+  --ash:#26421A; --ash-lt:#5E8A4E;  --shared:#4A4238; --akas:#2A2520; --waz:#8B5E3C;
+}
+
+/* ---- rk.css ---- */
+/* ============================================================
+   rupakarshini V3 — rk.css  ·  THE ELEMENT CORE (chassis-independent)
+   Requires: tokens/spine.css + tokens/scales.css + one world file.
+   Every class here is an element in references/elements.md.
+   No colour literals. No px type. Reduced motion respected.
+   ============================================================ */
+
+/* ---------- PAGE (Sid) ---------- */
+html[data-chassis] { font-size: 100%; -webkit-text-size-adjust: 100%; }   /* rem stays 16 — never scale the root */
+[data-chassis] { background: var(--bg); color: var(--fg); font-family: var(--font-ui); }
+body { margin: 0; font-size: var(--fs-body); line-height: var(--lh-body);
+  font-optical-sizing: auto; text-rendering: optimizeLegibility; }
+.rk-page { min-height: 100svh; }
+*, *::before, *::after { box-sizing: border-box; }
+img, video, canvas { max-width: 100%; height: auto; display: block; }
+
+/* ---------- WIDTH SCALE (Arch) — density governs measure ---------- */
+.rk-in        { width: min(var(--w-column), 100% - 2*var(--s-5)); margin-inline: auto; }
+.rk-reading   { max-width: var(--w-reading); }
+.rk-instrument{ width: min(var(--w-instrument), 100% - 2*var(--s-5)); margin-inline: auto; }
+.rk-breakout  { width: var(--w-breakout); margin-inline: auto; }
+.rk-full      { width: 100%; }
+
+/* ---------- HEAD RHYTHM: eyebrow → title → lede → rule ---------- */
+.eyebrow { font-family: var(--font-mono); font-size: var(--fs-eyebrow); font-weight: 600;
+  letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-eyebrow);
+  display: flex; align-items: center; gap: var(--s-3); margin: 0 0 var(--s-3); }
+.eyebrow::after { content: ""; flex: 0 0 64px; height: 1px; background: currentColor; opacity: .4; }
+.eyebrow.voice { color: var(--voice); }
+.title { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h2);
+  line-height: var(--lh-h); letter-spacing: var(--ls-h); margin: 0 0 var(--s-4);
+  font-variation-settings: 'opsz' var(--opsz-h); text-wrap: balance; }
+.title em { font-style: italic; color: var(--voice); }          /* CAP: 2 per page */
+.display { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-display);
+  line-height: var(--lh-display); letter-spacing: var(--ls-display);
+  font-variation-settings: 'opsz' var(--opsz-display); text-wrap: balance; margin: 0 0 var(--s-5); }
+.h1 { font-family: var(--font-display); font-size: var(--fs-h1); line-height: var(--lh-h); font-weight: 500; margin: 0 0 var(--s-4); text-wrap: balance; }
+.h3 { font-family: var(--font-display); font-size: var(--fs-h3); line-height: var(--lh-h); font-weight: 500; margin: 0 0 var(--s-3); }
+.lede { font-size: var(--fs-lg); line-height: var(--lh-lg); color: var(--fg-2); max-width: var(--w-reading); margin: 0 0 var(--s-5); text-wrap: pretty; }
+.rule { height: 1px; background: var(--line); border: 0; margin: var(--s-6) 0; }
+.seed { font-family: var(--font-display); font-style: italic; font-size: var(--fs-lg); color: var(--t-soft);
+  margin: 0 0 var(--s-5); animation: rk-seed var(--dur-slow) var(--ease-out) both; }   /* Sakshi: one line before a threshold */
+.ceremony { font-family: var(--font-ceremony); letter-spacing: .12em; text-transform: uppercase; font-weight: 400; }
+.prose > * + * { margin-top: var(--s-4); }
+.prose { max-width: var(--w-reading); color: var(--t-body); }
+.prose strong { color: var(--fg); }
+
+/* text ladder utilities */
+.t-high{color:var(--t-high)} .t-mid{color:var(--t-mid)} .t-body{color:var(--t-body)}
+.t-soft{color:var(--t-soft)} .t-whisper{color:var(--t-whisper)} .t-ghost{color:var(--t-ghost)}
+
+/* ---------- BANDS & SURFACE STEPPING (Neev) ---------- */
+.band { padding-block: var(--band); }
+.band.tight { padding-block: var(--band-tight); }
+.band.deep  { padding-block: var(--band-deep); background: var(--surface-deep); color: var(--fg-on-deep); }
+.band.deep .eyebrow { color: var(--sig-tint); }
+.band.deep .title em, .band.deep .voice { color: var(--spark); }
+.s-paper { background: var(--surface); } .s-ground { background: var(--bg); }
+.s-stone { background: var(--surface-2); } .s-wash { background: var(--surface-wash); }
+.s-wash .eyebrow { color: var(--sig-pressed); }
+.s-stone .eyebrow { color: var(--fg-2); }            /* stone measured 4.2:1 with muted — step up */
+.silence { height: var(--silence); }
+
+/* seams — a line, never a label */
+.seam { height: 1px; background: var(--line); }
+.descent { height: calc(var(--strata-1) + var(--strata-2) + var(--strata-3)); background:
+  linear-gradient(to bottom,
+    color-mix(in oklch, var(--surface-deep) 18%, var(--surface-wash)) 0 var(--strata-1),
+    color-mix(in oklch, var(--surface-deep) 45%, var(--surface-wash)) var(--strata-1) calc(var(--strata-1) + var(--strata-2)),
+    color-mix(in oklch, var(--surface-deep) 78%, var(--surface-wash)) calc(var(--strata-1) + var(--strata-2)) 100%); }
+.ascent { transform: scaleY(-1); }
+
+/* ---------- MOTION (Bindu) — floor: rise; ceiling: named budget ---------- */
+.rise { animation: rk-rise var(--pace-dur) var(--ease-out) both; }
+@supports (animation-timeline: view()) {
+  .rise { animation-timeline: view(); animation-range: entry 0% entry 35%; animation-duration: auto; }
+}
+@supports not (animation-timeline: view()) {
+  .rise { opacity: 0; transform: translateY(var(--rise-y)); transition: opacity var(--pace-dur) var(--ease-out), transform var(--pace-dur) var(--ease-out); animation: none; }
+  .rise.is-in, .no-js .rise { opacity: 1; transform: none; }
+}
+.veil { transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); opacity: 1; transform: none; }
+@starting-style { .veil { opacity: 0; transform: translateY(var(--veil-y)); } }
+.breathe { animation: rk-breathe var(--dur-breath) ease-in-out infinite; }
+.pulse   { animation: rk-pulse 2.4s ease-in-out infinite; }
+.curtain { animation: rk-curtain var(--dur-slow) var(--ease-soft) both; }
+@media (prefers-reduced-motion: reduce) {
+  .rise, .breathe, .pulse, .curtain, .seed { animation: none !important; opacity: 1 !important; transform: none !important; clip-path: none !important; }
+  .veil { transition: none; }
+}
+
+/* ---------- THRESHOLD · HOLD · GATE (Sakshi) ---------- */
+.hold { --p: 0; position: relative; display: inline-grid; place-items: center; width: 88px; height: 88px;
+  border-radius: 50%; border: 1px solid var(--line-wash); background: var(--surface); color: var(--fg-2);
+  font-family: var(--font-ui); font-size: var(--fs-sm); cursor: pointer; user-select: none; -webkit-user-select: none; touch-action: manipulation; }
+.hold::before { content: ""; position: absolute; inset: -4px; border-radius: 50%;
+  background: conic-gradient(var(--action) calc(var(--p) * 1turn), transparent 0); mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px)); -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px)); }
+.hold.is-done { border-color: var(--action); color: var(--action); }
+.threshold { position: relative; isolation: isolate; }
+.threshold > .veil-layer { position: absolute; inset: 0; background: var(--bg); z-index: 2; transition: opacity var(--dur-slow) var(--ease-out); }
+.threshold.is-open > .veil-layer { opacity: 0; pointer-events: none; }
+.gate[hidden] { display: none; }
+
+/* ---------- DOORS — "where this leads" (the seam between pages) ---------- */
+.doors { display: grid; gap: var(--s-3); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.door { display: block; padding: var(--s-4) var(--s-5); border-left: 2px solid var(--line-wash); background: var(--surface);
+  color: inherit; text-decoration: none; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; transition: border-color var(--dur-fast), background var(--dur-fast); }
+.door:hover { border-left-color: var(--sig); background: var(--surface-hover); }
+.door .eyebrow { margin-bottom: var(--s-1); } .door .eyebrow::after { display: none; }
+.door strong { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-lg); display: block; margin-bottom: var(--s-1); line-height: var(--lh-h); }
+.door { font-size: var(--fs-sm); color: var(--fg-2); }
+.door.rung { border-left-color: var(--sig); }          /* the Ladder's next rung — visible, never pushed */
+
+/* ---------- PROOF ELEMENTS ---------- */
+.stats { display: grid; gap: var(--s-6); grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); border-top: 1px solid var(--line); padding-top: var(--s-5); }
+.stat .n { font-family: var(--font-display); font-size: var(--fs-h1); line-height: 1; font-variation-settings: 'opsz' var(--opsz-display); }
+.stat .n .sp { color: var(--spark); }
+.stat .l { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); margin-top: var(--s-2); }
+.stat.rule { border-left: 2px solid var(--spark); padding-left: var(--s-4); border-top: 0; }
+.band.deep .stat .l { color: var(--t-soft); }
+.verify { display: grid; gap: var(--s-3); grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+.verify .v { padding: var(--s-4); border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); font-size: var(--fs-sm); }
+.verify .v b { display: block; font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--sig); margin-bottom: var(--s-1); }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--sig); vertical-align: middle; margin-right: var(--s-2); }
+.dot.voice { background: var(--voice); } .dot.warn { background: var(--warn); }
+
+/* ---------- CARDS & ROWS ---------- */
+.tile { display: flex; gap: var(--s-4); align-items: flex-start; }
+.tile .ic { flex: 0 0 36px; height: 36px; display: grid; place-items: center; border-radius: var(--radius-sm); background: var(--sig); color: #fff; }
+.tile h4 { margin: 0 0 var(--s-1); font-family: var(--font-ui); font-weight: 600; }
+.tile p { margin: 0; color: var(--fg-muted); font-size: var(--fs-sm); }
+.grid-2 { display: grid; gap: var(--s-7); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); align-items: center; }
+.grid-3 { display: grid; gap: var(--s-5); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.row { display: grid; gap: var(--s-6); grid-template-columns: minmax(0,1fr); align-items: center; }
+.row + .row { margin-top: var(--s-6); }
+@media (min-width: 720px) { .row { grid-template-columns: 200px minmax(0,1fr); } .row.flip { grid-template-columns: minmax(0,1fr) 200px; } .row.flip > :first-child { order: 2; } }
+.media { border-radius: var(--radius); background: var(--surface-2); overflow: hidden; aspect-ratio: 4/5; }
+.media.sq { aspect-ratio: 1; } .media.wide { aspect-ratio: 16/9; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: var(--pad-card); }
+.panel { border-radius: var(--radius-lg); padding: clamp(var(--s-6), 5vw, var(--s-8));
+  background: linear-gradient(135deg, var(--sig-pressed), var(--surface-deep) 60%, var(--surface-deep)); color: var(--fg-on-deep); }
+.panel .eyebrow { color: var(--spark); }
+
+/* ---------- SPEC TABLE — stops being a table under 700px ---------- */
+.spec { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: var(--fs-sm); }
+.spec th, .spec td { text-align: left; padding: var(--s-3) var(--s-3); border-bottom: 1px solid var(--line); vertical-align: top; }
+.spec th { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); font-weight: 600; }
+@media (max-width: 699px) {
+  .spec, .spec tbody, .spec tr, .spec td { display: block; }
+  .spec thead { display: none; }
+  .spec tr { padding: var(--s-3) 0; border-bottom: 1px solid var(--line); }
+  .spec td { border: 0; padding: var(--s-1) 0; }
+  .spec td::before { content: attr(data-col); display: block; font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); }
+}
+
+/* ---------- BUTTONS — one colour of consequence ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2); min-height: 44px; padding: 0 var(--s-5);
+  border-radius: var(--radius-pill); font-family: var(--font-ui); font-weight: 600; font-size: var(--fs-ui); text-decoration: none; cursor: pointer;
+  border: 1px solid transparent; transition: background var(--dur-fast), border-color var(--dur-fast), color var(--dur-fast); touch-action: manipulation; }
+.btn.act   { background: var(--action); color: var(--action-fg); }       /* Buy · Cross · Begin — LAW: only where consequence */
+.btn.act:hover { background: var(--bindu-pressed); }
+.btn.voice { background: var(--voice); color: #fff; }
+.btn.voice:hover { background: var(--voice-pressed); }
+.btn.sig   { background: var(--sig); color: #fff; }
+.btn.ghost { background: transparent; border-color: var(--line-wash); color: var(--fg); }
+.btn.ghost:hover { border-color: var(--sig); }
+.link { color: var(--sig); text-decoration: underline; text-decoration-color: color-mix(in oklch, var(--sig) 35%, transparent); text-underline-offset: 4px; }
+
+/* ---------- NAVIGATION ---------- */
+.rail { position: sticky; top: 0; z-index: 5; display: flex; gap: var(--s-4); overflow-x: auto; padding: var(--s-3) var(--s-5);
+  background: var(--bg); border-bottom: 1px solid var(--line); font-size: var(--fs-ui); font-weight: 700; scrollbar-width: none; }
+.rail a { color: var(--fg-muted); text-decoration: none; white-space: nowrap; padding: var(--s-1) 0; border-bottom: 2px solid transparent; }
+.rail a.is-active, .rail a:hover { color: var(--fg); border-bottom-color: var(--sig); }
+.family { display: flex; gap: var(--s-4); align-items: center; height: 36px; padding: 0 var(--s-5); font-family: var(--font-mono); font-size: var(--fs-mono-floor);
+  letter-spacing: var(--ls-mono); text-transform: uppercase; background: var(--surface-2); color: var(--fg-muted); overflow-x: auto; scrollbar-width: none; }
+.family a { color: inherit; text-decoration: none; white-space: nowrap; }
+.family a[aria-current="true"] { color: var(--fg); border-bottom: 1px solid var(--sig); }
+.marquee { overflow: hidden; white-space: nowrap; background: var(--surface-wash); padding: var(--s-2) 0; font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--sig-pressed); }
+.marquee > span { display: inline-block; padding-inline: var(--s-6); animation: rk-marquee 28s linear infinite; }
+@keyframes rk-marquee { to { transform: translateX(-50%); } }
+.bottom-nav { position: fixed; inset-inline: 0; bottom: 0; z-index: 6; display: grid; grid-auto-flow: column; gap: var(--s-2);
+  padding: var(--s-3) var(--s-4) calc(var(--s-3) + env(safe-area-inset-bottom)); background: color-mix(in oklch, var(--bg) 92%, transparent);
+  backdrop-filter: blur(12px); border-top: 1px solid var(--line); }
+.sticky-cta { position: sticky; bottom: 0; z-index: 6; padding: var(--s-3) var(--s-4) calc(var(--s-3) + env(safe-area-inset-bottom)); background: var(--surface); border-top: 1px solid var(--line); display: flex; gap: var(--s-3); align-items: center; }
+.sticky-cta .who { flex: 1; font-size: var(--fs-sm); color: var(--fg-muted); }
+@media (max-width: 600px) { .sticky-cta .who { display: none; } .sticky-cta .btn { flex: 1; } }
+
+/* ---------- INSTRUMENT PRIMITIVES ---------- */
+.counter { font-variant-numeric: tabular-nums; }
+details.acc { border-top: 1px solid var(--line); }
+details.acc summary { cursor: pointer; list-style: none; padding: var(--s-4) 0; font-family: var(--font-display); font-size: var(--fs-lg); display: flex; justify-content: space-between; }
+details.acc summary::-webkit-details-marker { display: none; }
+details.acc summary::after { content: "+"; color: var(--fg-muted); } details.acc[open] summary::after { content: "–"; }
+details.acc > :not(summary) { padding-bottom: var(--s-4); color: var(--t-body); }
+dialog.sheet { border: 0; border-radius: var(--radius-lg) var(--radius-lg) 0 0; padding: var(--s-6); width: min(720px, 100%); margin: auto auto 0; background: var(--surface); color: var(--fg); }
+dialog.sheet::backdrop { background: rgba(0,0,0,.45); }
+.field { display: grid; gap: var(--s-1); } .field label { font-size: var(--fs-sm); color: var(--fg-2); }
+.field input, .field select, .field textarea { min-height: 44px; padding: 0 var(--s-3); border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); color: var(--fg); font: inherit; }
+
+/* ---------- PRINT (the Package shape) ---------- */
+@media print {
+  .rise, .veil, .seed, .curtain { animation: none !important; opacity: 1 !important; transform: none !important; }
+  [data-chassis] { background: #fff; color: #000; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .rail, .bottom-nav, .sticky-cta, .marquee, .hold { display: none !important; }
+  .band { break-inside: avoid; } .pagebreak { break-before: page; }
+  h1, h2, .title, .display { break-after: avoid; } p { orphans: 3; widows: 3; }
+  @page { size: A4; margin: 18mm; }
+}
+
+/* ---- page ---- */
+
+
+/* ---- page-specific: ARC Video Map v3 — the room reads it from across a table. Big type; each card opens in place with a moving picture. Declared over the 40-line budget: thirteen SVG animations, each with a reduced-motion frame. ---- */
+.hd .display { max-width: 20ch; }
+.rk-breakout { max-width: 1180px; margin-inline: auto; padding-inline: var(--s-5); }
+.alt { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h1); margin: var(--s-8) 0 var(--s-4); color: var(--fg); }
+.alt:first-child { margin-top: 0; }
+.vc { border-top: 1px solid var(--line); }
+.vc:last-of-type { border-bottom: 1px solid var(--line); }
+.vc summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 4ch 1fr; column-gap: var(--s-4); row-gap: var(--s-1); padding: var(--s-5) 0; align-items: baseline; min-height: 44px; }
+.vc summary::-webkit-details-marker { display: none; }
+.vc summary .n { font-family: var(--font-mono); font-size: var(--fs-lg); color: var(--sig); grid-row: span 2; align-self: start; padding-top: .35em; }
+.vc summary .t { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h2); line-height: 1.1; }
+.vc summary .s { grid-column: 2; font-family: var(--font-display); font-style: italic; font-size: var(--fs-lg); color: var(--fg-2); }
+.vc summary:hover .t, .vc summary:focus-visible .t { color: var(--sig); }
+.vc summary:focus-visible { outline: 2px solid var(--sig); outline-offset: 4px; }
+.vc[open] summary .t { color: var(--sig); }
+.vc .body { display: grid; gap: var(--s-6); grid-template-columns: 1fr; padding: 0 0 var(--s-7) calc(4ch + var(--s-4)); align-items: start; }
+.info { grid-template-columns: 1.2fr 1fr; column-gap: var(--s-7); }
+.info .big { grid-column: 1; grid-row: span 3; }
+.info dl, .info .btn { grid-column: 2; }
+.vis { margin: 0; background: var(--surface); border: 1px solid var(--line-wash); border-radius: var(--radius-lg); padding: var(--s-4); }
+.vis svg { width: 100%; height: auto; max-height: 340px; display: block; overflow: visible; margin-inline: auto; }
+.vis text { font-family: var(--font-mono); font-size: calc(22 * var(--vb)); letter-spacing: .06em; text-transform: uppercase; fill: var(--fg-2); text-anchor: middle; }
+.vis .cap { fill: var(--sig); }
+.info { display: grid; gap: var(--s-5); }
+.info .big { margin: 0; font-size: var(--fs-lg); line-height: 1.5; color: var(--fg); }
+.info dl { margin: 0; display: grid; gap: var(--s-3); }
+.info dt { font-family: var(--font-mono); font-size: var(--fs-base); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); }
+.info dd { margin: 0; font-size: var(--fs-lg); color: var(--fg-2); line-height: 1.45; }
+.info dd.say { font-family: var(--font-display); font-style: italic; font-size: var(--fs-h3); color: var(--fg); border-left: 3px solid var(--sig); padding-left: var(--s-4); }
+.info .btn { justify-self: start; }
+.ft { font-size: var(--fs-base); color: var(--fg-muted); }
+/* --- the pictures --- SVG text is sized in viewBox units, not the type scale: --vb = one viewBox unit */
+.vis { --vb: 1px; }
+.vis .draw { fill: none; stroke: var(--sig); stroke-width: 3; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.vc[open] .vis .draw { animation: draw 1.4s var(--ease-out) forwards; }
+.vc[open] .vis .draw.d2 { animation-delay: .6s; } .vc[open] .vis .draw.d3 { animation-delay: 1.1s; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+.vis .pop circle { fill: var(--surface); stroke: var(--sig); stroke-width: 3; transform-box: fill-box; transform-origin: center; transform: scale(0); }
+.vis .pop text { opacity: 0; font-size: calc(26 * var(--vb)); fill: var(--fg); }
+.vc[open] .vis .pop circle, .vc[open] .vis .pop text { animation: pop .5s var(--ease-out) forwards; animation-delay: calc(.5s + var(--i) * .3s); }
+@keyframes pop { to { transform: none; opacity: 1; } }
+.vis .motes circle { fill: var(--fg-muted); opacity: .5; }
+.vc[open] .vis .motes circle { animation: drift 3s ease-in-out infinite alternate; animation-delay: var(--d); }
+@keyframes drift { to { transform: translate(18px, -10px); opacity: .15; } }
+.vis .route { fill: none; stroke: var(--fg-muted); stroke-width: 2; stroke-dasharray: 6 8; }
+.vis .dot { fill: var(--sig); }
+.vis .plane path, .vis .truck rect, .vis .truck circle { fill: var(--sig); }
+.vis .truck circle { fill: var(--fg); }
+.vis .ground { fill: var(--surface-2); } .vis .mat { fill: var(--surface-wash); stroke: var(--sig); stroke-width: 2; }
+.vis .drips circle, .vis .drip circle, .vis .rain circle { fill: var(--sig); }
+.vc[open] .vis .drips circle { animation: fall 2.4s ease-in infinite; animation-delay: var(--d); }
+.vc[open] .vis .spread ellipse { fill: var(--sig); opacity: .35; animation: spread 2.4s ease-out infinite; animation-delay: var(--d); }
+@keyframes fall { 0% { transform: translateY(0); opacity: 1; } 55% { transform: translateY(126px); opacity: 1; } 60%, 100% { transform: translateY(126px); opacity: 0; } }
+@keyframes spread { 0% { rx: 0; opacity: .5; } 60% { rx: 60px; opacity: .25; } 100% { rx: 90px; opacity: 0; } }
+.vis .env rect { fill: var(--surface-wash); stroke: var(--sig); stroke-width: 2; } .vis .env .flap { fill: none; stroke: var(--sig); stroke-width: 2; }
+.vis .swatch rect { fill: var(--sig); opacity: .9; } .vis .swatch text { fill: var(--surface); font-size: calc(44 * var(--vb)); }
+.vc[open] .vis .swatch { animation: rise-out 1.6s var(--ease-out) .4s forwards; }
+@keyframes rise-out { to { transform: translateY(-70px); } }
+.vis .answer { opacity: 0; fill: var(--sig); font-size: calc(24 * var(--vb)); }
+.vc[open] .vis .answer { animation: pop 1s var(--ease-out) 1.8s forwards; }
+.vis .rail { stroke: var(--fg-muted); stroke-width: 4; }
+.vis .rungs line { stroke: var(--sig); stroke-width: 6; stroke-linecap: round; transform-box: fill-box; transform-origin: left; transform: scaleX(0); }
+.vis .rungs text { opacity: 0; text-anchor: start; fill: var(--fg); font-size: calc(22 * var(--vb)); }
+.vc[open] .vis .rungs line, .vc[open] .vis .rungs text { animation: pop .5s var(--ease-out) forwards; animation-delay: calc(.3s + var(--i) * .28s); }
+.vis .arrow { fill: none; stroke: var(--sig); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; marker-end: none; }
+.vc[open] .vis .arrow.a1 { animation: draw 1s var(--ease-out) .4s forwards; } .vc[open] .vis .arrow.a2 { animation: draw 1s var(--ease-out) 1.5s forwards; }
+.vis .cloth { fill: var(--surface-wash); stroke: var(--line-wash); } .vis .cloth.top { fill: var(--sig); opacity: .35; }
+.vc[open] .vis .drip circle { animation: fall1 3s ease-in infinite; }
+@keyframes fall1 { 0% { transform: translateY(0); opacity: 1; } 40% { transform: translateY(112px); opacity: 1; } 45%, 100% { transform: translateY(112px); opacity: 0; } }
+.vis .soak { fill: var(--sig); opacity: 0; }
+.vc[open] .vis .soak { animation: soak 3s ease-out infinite; }
+@keyframes soak { 0%, 40% { rx: 0; opacity: 0; } 45% { opacity: .55; } 70% { rx: 170px; opacity: .35; } 100% { rx: 220px; opacity: 0; } }
+.vis .film { stroke: var(--sig); stroke-width: 6; stroke-linecap: round; }
+.vc[open] .vis .rain circle { animation: fallb 2.6s ease-in infinite; animation-delay: var(--d); }
+@keyframes fallb { 0% { transform: translateY(0); opacity: 1; } 45% { transform: translateY(100px); opacity: 1; } 50%, 100% { transform: translateY(100px); opacity: 0; } }
+.vc[open] .vis .bead ellipse { fill: var(--sig); opacity: .8; animation: bead 2.6s ease-out infinite; animation-delay: var(--d); }
+@keyframes bead { 0% { rx: 0; opacity: .8; } 30% { rx: 16px; opacity: .8; } 70% { rx: 24px; transform: translateX(60px); opacity: .5; } 100% { rx: 26px; transform: translateX(120px); opacity: 0; } }
+.vis .wick circle { fill: var(--sig); }
+.vc[open] .vis .wick circle { animation: wick 2.4s ease-out infinite; animation-delay: var(--d); }
+@keyframes wick { 0% { transform: translateY(0); opacity: 1; } 60% { transform: translateY(-70px); opacity: .8; } 100% { transform: translateY(-120px); opacity: 0; } }
+.vis .soil { stroke: var(--fg-muted); stroke-width: 3; }
+.vis .plant { transform: translateX(var(--x)); transform-box: view-box; }
+.vis .plant line { stroke: var(--sig); stroke-width: 4; stroke-linecap: round; } .vis .plant circle { fill: var(--surface); stroke: var(--sig); stroke-width: 2; }
+.vc[open] .vis .plant { transform-origin: 0 200px; animation: sway 3.2s ease-in-out infinite alternate; animation-delay: var(--d); }
+@keyframes sway { from { transform: translateX(var(--x)) rotate(-5deg); } to { transform: translateX(var(--x)) rotate(6deg); } }
+.vis .table, .vis .leg { stroke: var(--fg-muted); stroke-width: 4; stroke-linecap: round; }
+.vis .box rect { fill: var(--surface-wash); stroke: var(--sig); stroke-width: 2; }
+.vis .pads rect { fill: var(--sig); opacity: 0; transform: translateY(-60px); }
+.vc[open] .vis .pads rect { animation: settle .6s var(--ease-out) forwards; animation-delay: var(--d); }
+@keyframes settle { to { transform: none; opacity: .9; } }
+.vis .inbox rect { fill: var(--surface-wash); stroke: var(--sig); stroke-width: 2; } .vis .inbox line { stroke: var(--sig); stroke-width: 2; }
+.vis .line rect { fill: var(--sig); opacity: .8; }
+.vc[open] .vis .line.l1 rect { animation: type 1s var(--ease-out) .4s forwards; } .vc[open] .vis .line.l2 rect { animation: type 1s var(--ease-out) 1.2s forwards; } .vc[open] .vis .line.l3 rect { animation: type .7s var(--ease-out) 2s forwards; --w: 220px; }
+@keyframes type { to { width: var(--w, 480px); } }
+@media (prefers-reduced-motion: reduce) { .vc[open] .vis * { animation: none; } .vis .draw { stroke-dashoffset: 0; } .vis .pop circle, .vis .rungs line { transform: none; } .vis .pop text, .vis .rungs text, .vis .answer, .vis .pads rect { opacity: 1; transform: none; } .vis .arrow { stroke-dashoffset: 0; } .vis .line rect { width: 480px; } }
+@media (max-width: 860px) { .vc .body { padding-left: 0; } .info { grid-template-columns: 1fr; } .info .big, .info dl, .info .btn { grid-column: 1; grid-row: auto; } .vc summary { grid-template-columns: 3ch 1fr; } .vc summary .t { font-size: var(--fs-h3); } .vis text { font-size: calc(26 * var(--vb)); } }
+
+.recipes { display: grid; gap: var(--s-3); }
+.rc { border-top: 1px solid var(--line); background: var(--surface); border-left: 4px solid var(--sig); padding: 0 var(--s-5); }
+.rc summary { list-style: none; cursor: pointer; display: grid; gap: var(--s-1); padding: var(--s-5) 0; min-height: 44px; }
+.rc summary::-webkit-details-marker { display: none; }
+.rc .t { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h2); color: var(--sig); line-height: 1.1; }
+.rc .s { font-family: var(--font-display); font-style: italic; font-size: var(--fs-lg); color: var(--fg-2); }
+.rc ol { margin: 0 0 var(--s-6); padding-left: 1.6em; display: grid; gap: var(--s-2); font-size: var(--fs-lg); color: var(--fg); line-height: 1.45; }
+.rc li::marker { font-family: var(--font-mono); color: var(--fg-muted); }
+.rc li.no { color: var(--bindu); list-style: "✕  "; margin-top: var(--s-2); }
+.note { font-size: var(--fs-lg); color: var(--fg-2); max-width: var(--w-reading); margin: var(--s-6) 0 0; }
+.lede.big { font-size: var(--fs-lg); max-width: var(--w-reading); }
+.filters { display: grid; gap: var(--s-3); grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); margin: var(--s-6) 0 var(--s-4); }
+.filters input { grid-column: 1 / -1; }
+.filters input, .filters select { min-height: 48px; font: inherit; font-size: var(--fs-base); padding: 0 var(--s-3); border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); color: var(--fg); }
+.counts { font-family: var(--font-mono); font-size: var(--fs-base); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); margin-bottom: var(--s-4); }
+.counts span { color: var(--sig); }
+.list { display: grid; }
+.row-v { display: grid; grid-template-columns: 1fr auto; gap: var(--s-2) var(--s-5); padding: var(--s-4) 0; border-top: 1px solid var(--line); align-items: baseline; }
+.row-v .t { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h3); line-height: 1.15; }
+.row-v .m { font-family: var(--font-mono); font-size: var(--fs-base); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); grid-column: 1; }
+.row-v .st { font-family: var(--font-mono); font-size: var(--fs-base); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--sig); grid-row: span 2; align-self: center; }
+.row-v .st.written { color: var(--fg-on-action); background: var(--sig); padding: 4px 10px; border-radius: 999px; }
+.dial { display: grid; grid-template-columns: auto 1fr auto; gap: var(--s-5); align-items: center; margin: var(--s-6) 0 var(--s-5); font-size: var(--fs-lg); }
+.dial input { width: 100%; accent-color: var(--sig); }
+.dial output { font-family: var(--font-display); font-size: var(--fs-h1); color: var(--sig); line-height: 1; min-width: 2ch; text-align: right; }
+@media (max-width: 860px) { .filters { grid-template-columns: 1fr 1fr; } .filters input { grid-column: span 2; } .row-v { grid-template-columns: 1fr; } .row-v .st { grid-row: auto; justify-self: start; } .dial { grid-template-columns: 1fr auto; } .dial label { grid-column: span 2; } }
+
+.groups { display: grid; gap: var(--s-4); }
+.grp { border-radius: var(--radius-lg); background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--sig); overflow: hidden; }
+.grp > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 1fr auto; gap: var(--s-1) var(--s-5); padding: var(--s-5) var(--s-6); align-items: center; min-height: 44px; }
+.grp > summary::-webkit-details-marker { display: none; }
+.grp .gt { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h2); line-height: 1.1; color: var(--fg); }
+.grp .gs { grid-column: 1; font-size: var(--fs-lg); color: var(--fg-2); }
+.grp .gt { grid-column: 1; grid-row: 1; }
+.grp .gn { grid-column: 2; grid-row: 1 / span 2; font-family: var(--font-display); font-size: var(--fs-h1); color: var(--sig); line-height: 1; }
+.grp[open] > summary { background: var(--surface-wash); }
+.grp .items { padding: 0 var(--s-6) var(--s-4); }
+.it { border-top: 1px solid var(--line); }
+.it > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 1fr auto; gap: var(--s-1) var(--s-4); padding: var(--s-4) 0; align-items: baseline; min-height: 44px; }
+.it > summary::-webkit-details-marker { display: none; }
+.it .t { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h3); line-height: 1.15; }
+.it .m { grid-column: 1; font-size: var(--fs-base); color: var(--fg-muted); }
+.it .t { grid-column: 1; grid-row: 1; }
+.it .st { grid-column: 2; grid-row: 1 / span 2; align-self: center; font-family: var(--font-mono); font-size: var(--fs-base); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--sig); }
+.it .st.written, .it .st.next { color: var(--fg-on-action); background: var(--sig); padding: 4px 12px; border-radius: 999px; }
+.it .c { margin: 0 0 var(--s-5); font-size: var(--fs-lg); line-height: 1.5; color: var(--fg); max-width: var(--w-reading); border-left: 3px solid var(--sig); padding-left: var(--s-4); }
+.it > summary:hover .t { color: var(--sig); }
+.rc .fam { display: block; margin-top: var(--s-2); font-size: var(--fs-base); color: var(--fg-muted); line-height: 1.5; }
+.rc .rbody { padding-bottom: var(--s-6); }
+.rc .moment { font-size: var(--fs-lg); line-height: 1.5; margin: 0 0 var(--s-5); padding: var(--s-4) var(--s-5); background: var(--surface-wash); border-radius: var(--radius); color: var(--fg); }
+.rc ol li b { color: var(--fg); }
+.rc ol li.no { color: var(--bindu); }
+@media (max-width: 860px) { .grp > summary, .it > summary { grid-template-columns: 1fr; } .grp .gn, .it .st { grid-row: auto; justify-self: start; } }
+
+/* ---- the door: the call ---- */
+.hd .display { max-width: 24ch; }
+.call { margin: var(--s-6) 0 var(--s-5); }
+.call svg { width: 100%; height: auto; display: block; overflow: visible; --vb: 1px; }
+.call .ground { stroke: var(--fg-muted); stroke-width: 3; }
+.call .mo { opacity: 0; transform: translateY(14px); animation: pop .6s var(--ease-out) forwards; animation-delay: calc(.3s + var(--i) * .45s); }
+.call .mo rect, .call .mo path, .call .mo line, .call .mo circle, .call .mo ellipse { fill: none; stroke: var(--sig); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.call .mo .wet { fill: var(--sig); stroke: none; opacity: .6; }
+.call .mo .fade { opacity: .35; }
+.call .mo .k { font-family: var(--font-mono); font-size: calc(11 * var(--vb)); fill: var(--sig); stroke: none; text-anchor: middle; }
+.call .mo text { font-family: var(--font-display); font-style: italic; font-size: calc(18 * var(--vb)); fill: var(--fg); text-anchor: middle; }
+.call .fabric { fill: none; stroke: var(--sig); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.6s var(--ease-out) 3.6s forwards; }
+.call .fab-l { font-family: var(--font-mono); font-size: calc(15 * var(--vb)); letter-spacing: .08em; text-transform: uppercase; fill: var(--sig); text-anchor: middle; opacity: 0; animation: pop .8s var(--ease-out) 4.6s forwards; }
+.call-list { display: none; list-style: none; margin: var(--s-4) 0 0; padding: 0; }
+.call-list li { font-family: var(--font-display); font-style: italic; font-size: var(--fs-h3); color: var(--fg); padding: var(--s-2) 0; border-top: 1px solid var(--line); opacity: 0; transform: translateY(8px); animation: pop .5s var(--ease-out) forwards; animation-delay: calc(.3s + var(--i) * .35s); }
+.call-list li.fab { font-family: var(--font-mono); font-style: normal; font-size: var(--fs-base); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--sig); border-top: 3px solid var(--sig); }
+@media (max-width: 700px) { .call svg text { display: none; } .call svg { max-height: 120px; } .call-list { display: block; } }
+/* ---- the eight cards ---- */
+.cards8 { display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); align-items: start; }
+@media (max-width: 560px) { .cards8 { grid-template-columns: 1fr; } }
+.c8 { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 0 var(--s-5); }
+.c8 summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 72px 1fr; column-gap: var(--s-4); row-gap: var(--s-1); padding: var(--s-5) 0; align-items: start; min-height: 44px; }
+.c8 summary::-webkit-details-marker { display: none; }
+.c8 .ic { grid-row: span 2; width: 72px; height: 54px; }
+.c8 .ic svg { width: 100%; height: 100%; overflow: visible; }
+.c8 .ic * { fill: none; stroke: var(--sig); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.c8 .t { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h3); line-height: 1.15; color: var(--fg); }
+.c8 .s { grid-column: 2; font-size: var(--fs-lg); color: var(--fg-2); line-height: 1.4; }
+.c8[open] .t, .c8 summary:hover .t { color: var(--sig); }
+.c8 > p { margin: 0 0 var(--s-6) calc(72px + var(--s-4)); font-size: var(--fs-lg); line-height: 1.55; color: var(--fg); border-left: 3px solid var(--sig); padding-left: var(--s-4); }
+@media (max-width: 700px) { .c8 > p { margin-left: 0; } }
+/* icon motion on open */
+.c8 .doors rect { fill: var(--sig); stroke: none; opacity: .25; } .c8[open] .doors rect { animation: pop .5s var(--ease-out) forwards; animation-delay: calc(var(--i) * .15s); opacity: .25; }
+@keyframes glow { to { opacity: 1; } } .c8[open] .doors rect { animation-name: glow; }
+.c8 .hero { stroke: var(--fg); } .c8[open] .shield { fill: var(--sig); fill-opacity: .12; transition: fill-opacity .6s; }
+.c8 .rungs line { stroke-width: 3; transform-box: fill-box; transform-origin: left; transform: scaleX(.3); opacity: .5; } .c8[open] .rungs line { animation: pop .4s var(--ease-out) forwards; animation-delay: calc(var(--i) * .15s); }
+.c8 .you { fill: var(--spark); stroke: none; opacity: 0; } .c8[open] .you { animation: pop .5s var(--ease-out) 1s forwards; }
+.c8 .fan rect { transform-box: fill-box; transform-origin: bottom center; transform: rotate(calc(var(--r) * .35)); transition: transform .7s var(--ease-out); } .c8[open] .fan rect { transform: rotate(var(--r)); }
+.c8 .lines line { stroke-dasharray: 40; stroke-dashoffset: 40; opacity: .5; } .c8[open] .lines line { animation: draw .6s var(--ease-out) .2s forwards; }
+.c8 .many circle { opacity: 0; } .c8[open] .many circle { animation: pop .4s var(--ease-out) forwards; animation-delay: calc(.5s + var(--i) * .12s); }
+.c8 .one { fill: var(--sig); }
+.c8 .out path { opacity: 0; } .c8[open] .out path { animation: pop .5s var(--ease-out) forwards; animation-delay: calc(.2s + var(--i) * .25s); }
+.c8 .line { stroke-dasharray: 1; stroke-dashoffset: 0; } .c8 .q { font-family: var(--font-display); font-size: calc(26 * 1px); fill: var(--spark); stroke: none; text-anchor: middle; }
+.c8 .above, .c8 .below { opacity: .4; } .c8[open] .below { animation: pulse-up 1.6s ease-in-out infinite alternate; }
+@keyframes pulse-up { to { transform: translateY(-10px); opacity: 1; } }
+.c8 .pts circle { fill: var(--sig); stroke: none; transition: transform .8s var(--ease-out); transform-box: view-box; } .c8[open] .pts circle { transform: translate(calc((40px - var(--cx, 40px)) * 0), 0); }
+.c8[open] .pts circle:nth-child(1) { transform: translate(22px, 14px); } .c8[open] .pts circle:nth-child(2) { transform: translate(-22px, 14px); } .c8[open] .pts circle:nth-child(3) { transform: translate(24px, -14px); } .c8[open] .pts circle:nth-child(4) { transform: translate(-24px, -14px); } .c8[open] .pts circle:nth-child(5) { transform: translate(0, -18px); }
+.c8 .centre { fill: var(--surface); }
+/* ---- coming home ---- */
+.home-grid { display: grid; gap: var(--s-7); grid-template-columns: 1fr 1.1fr; align-items: start; margin-top: var(--s-6); }
+.tree { margin: 0; } .tree svg { width: 100%; height: auto; overflow: visible; --vb: 1px; }
+.tree .soil { stroke: var(--sig-tint); stroke-width: 2; opacity: .5; }
+.tree .roots path, .tree .trunk, .tree .branches path, .tree .last path { fill: none; stroke: var(--sig-tint); stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.tree .roots path { stroke-width: 4; opacity: .6; } .tree .trunk { stroke-width: 12; } .tree .branches path { stroke-width: 6; } .tree .last path { stroke-width: 5; stroke: var(--spark); }
+.tree.is-in .roots path { animation: draw 1.4s var(--ease-out) forwards; }
+.tree.is-in .trunk { animation: draw 1.2s var(--ease-out) 1.2s forwards; }
+.tree.is-in .branches path { animation: draw .9s var(--ease-out) forwards; animation-delay: calc(2.2s + var(--i) * .2s); }
+.tree .leaves circle { fill: var(--sig-tint); opacity: 0; transform-box: fill-box; transform-origin: center; transform: scale(0); }
+.tree.is-in .leaves circle { animation: pop .5s var(--ease-out) forwards; animation-delay: calc(3s + var(--i) * .12s); }
+.tree .last circle { fill: var(--spark); opacity: 0; transform-box: fill-box; transform-origin: center; transform: scale(0); }
+.tree.is-in .last path { animation: draw .8s var(--ease-out) 4.6s forwards; } .tree.is-in .last circle { animation: pop .6s var(--ease-out) 5.3s forwards; }
+.tree .tl { font-family: var(--font-mono); font-size: calc(16 * var(--vb)); letter-spacing: .08em; text-transform: uppercase; fill: var(--fg-on-deep); opacity: .8; text-anchor: middle; }
+.home-text { display: grid; gap: var(--s-6); }
+.hm h3 { margin: 0 0 var(--s-2); font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h2); line-height: 1.1; color: var(--fg-on-deep); }
+.hm p { margin: 0; font-size: var(--fs-lg); line-height: 1.55; color: var(--fg-on-deep); opacity: .9; }
+.silver { display: grid; grid-template-columns: 140px 1fr; gap: var(--s-4); align-items: center; margin: var(--s-3) 0; }
+.silver svg { width: 100%; height: auto; } .silver .sw { fill: var(--surface-wash); } .silver .stripes line { stroke: var(--fg-muted); stroke-width: 6; }
+.silver .wash .n { display: block; font-family: var(--font-display); font-size: var(--fs-h2); color: var(--fg-on-deep); line-height: 1; }
+.silver .wash .n b { color: var(--spark); font-weight: 500; }
+.silver .wash .l { font-family: var(--font-mono); font-size: var(--fs-base); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--sig-tint); }
+.ask-line { font-size: var(--fs-h3); font-family: var(--font-display); color: var(--fg-on-deep); margin: 0 0 var(--s-4); max-width: var(--w-reading); }
+.ask-line em { color: var(--spark); font-style: italic; }
+.home-doors { margin-top: var(--s-7); }
+.band.deep .door { background: color-mix(in oklch, var(--fg-on-deep) 8%, transparent); border-color: var(--sig-tint); color: var(--fg-on-deep); }
+.band.deep .door strong { color: var(--fg-on-deep); }
+.band.deep .last-line { font-family: var(--font-display); font-style: italic; font-size: var(--fs-h2); color: var(--fg-on-deep); margin: 0; }
+.band.deep .ask-line { color: var(--fg-on-deep); }
+@media (max-width: 860px) { .home-grid { grid-template-columns: 1fr; gap: var(--s-5); } .tree { max-width: 360px; margin-inline: auto; } .silver { grid-template-columns: 120px 1fr; } }
+@media (prefers-reduced-motion: reduce) { .call .mo, .call .fabric, .call .fab-l, .c8 *, .tree * { animation: none; } .call .mo, .call .fab-l, .tree .leaves circle, .tree .last circle, .c8 .many circle, .c8 .out path, .c8 .you { opacity: 1; transform: none; } .call .fabric, .tree .roots path, .tree .trunk, .tree .branches path, .tree .last path { stroke-dashoffset: 0; } .c8 .rungs line { transform: none; } }
+
+.po { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); margin: var(--s-5) 0 0; max-width: 90ch; }
+.po > div { border-left: 3px solid var(--sig); padding: var(--s-2) var(--s-4); background: var(--surface); border-radius: 0 var(--radius) var(--radius) 0; }
+.po p { margin: 0; font-size: var(--fs-lg); line-height: 1.5; color: var(--fg); } .po .eyebrow { margin-bottom: var(--s-2); }
+@media (max-width: 760px) { .po { grid-template-columns: 1fr; } }
+.readfirst { margin: var(--s-5) 0; max-width: 62ch; } .readfirst p { margin: 0; font-family: var(--font-display); font-size: var(--fs-h3); line-height: 1.35; color: var(--fg); } .readfirst .eyebrow { margin-bottom: var(--s-2); }
+.filters { max-width: 100%; } .filters > * { max-width: 100%; box-sizing: border-box; min-width: 0; } .filters input, .filters select { width: 100%; }
+</style>
+</head>
+<!--
+BRIEF (rupakarshini V3) — v3 after Ashrey's reading audit: no framing, no numbers, big type, each video opens in place with a visual that moves.
+ONE JOB       A team in one room looks at each of thirteen videos, sees the picture, reads the essentials in large type, and opens the working document.
+RECOGNITION   Here are the thirteen. Touch one and it opens.
+SHAPE         S2 Navigator (four rungs, thirteen rooms). Each room is a native <details> — opens in place, no dialog, no JS required.
+CHASSIS/WORLD akas · akastex · paper. TYPE: body at --fs-lg; titles at h2; nothing below --fs-base except the mono eyebrow.
+MOTION        one animated SVG per video (CSS keyframes only; reduced-motion = static frame). Declared over the house budget by design — the picture is the point.
+-->
+<body class="rk-page">
+
+<header class="band s-paper hd" id="top">
+  <div class="rk-breakout">
+    <p class="eyebrow voice">The ARC Video Map · September 2026</p>
+    <h1 class="display">Before the fabric, there was a need.</h1>
+<div class="po"><div><p class="eyebrow">Why this page exists</p><p>So the people filming for us know which thirteen films both websites will carry, what each one is for, who it is for, and the one rule under all of them — before a camera is picked up.</p></div><div><p class="eyebrow">Where you'll be when you've read it</p><p>You can name the thirteen, say which of the two sites and which kind of customer each serves, know the beats and the boundaries of any one of them, and open its working brief.</p></div></div>
+<div class="readfirst"><p class="eyebrow">If you read one thing</p><p>The customer is the hero and the fabric is the support. Thirteen films, one rule, and every one of them begins where a real person’s need did.</p></div>
+
+    <figure class="call" aria-label="Seven moments before the fabric existed: a baby soaking through at three in the morning; a barrier that crackled in a quiet room; a pad that stayed wet; a treatment that washed out; joggers that surrendered by noon; a thousand bags used once; a spill that reached the drain first">
+      <svg viewBox="0 0 1100 260" aria-hidden="true">
+        <line class="ground" x1="0" y1="230" x2="1100" y2="230"/>
+        <g class="mo" style="--i:0"><g transform="translate(80,0)"><rect x="-26" y="182" width="52" height="30" rx="4"/><line x1="-26" y1="196" x2="26" y2="196"/><circle cx="0" cy="170" r="7"/></g><text x="80" y="160">a baby, 3 a.m.</text></g>
+        <g class="mo" style="--i:1"><g transform="translate(240,0)"><path d="M-28 212 L-10 180 L8 212 L26 180"/></g><text x="240" y="128">a crackle in a quiet room</text></g>
+        <g class="mo" style="--i:2"><g transform="translate(400,0)"><rect x="-30" y="190" width="60" height="22" rx="11"/><circle cx="0" cy="201" r="5" class="wet"/></g><text x="400" y="160">a pad, still wet</text></g>
+        <g class="mo" style="--i:3"><g transform="translate(560,0)"><rect x="-26" y="180" width="52" height="32" rx="3"/><line class="fade" x1="-16" y1="190" x2="16" y2="190"/><line class="fade" x1="-16" y1="202" x2="16" y2="202"/></g><text x="560" y="128">a treatment that washed out</text></g>
+        <g class="mo" style="--i:4"><g transform="translate(720,0)"><path d="M-20 178 L-24 212 M20 178 L24 212 M-20 178 L20 178"/><path class="sag" d="M-24 212 Q0 222 24 212"/></g><text x="720" y="160">joggers, gone by noon</text></g>
+        <g class="mo" style="--i:5"><g transform="translate(880,0)"><rect x="-22" y="184" width="44" height="28" rx="3"/><rect x="-22" y="178" width="44" height="6"/><text class="k" x="0" y="204">×1000</text></g><text x="880" y="128">a thousand bags, used once</text></g>
+        <g class="mo" style="--i:6"><g transform="translate(1030,0)"><ellipse cx="0" cy="212" rx="26" ry="6"/><path d="M-6 178 Q0 168 6 178 Q0 190 -6 178 Z"/></g><text x="1030" y="160">a spill at the drain</text></g>
+        <path class="fabric" pathLength="1" d="M20 50 Q550 10 1080 50"/>
+        <text class="fab-l" x="550" y="90">and between the body and the world — a fabric</text>
+      </svg>
+      <ol class="call-list" aria-hidden="true"><li style="--i:0">a baby, 3 a.m.</li><li style="--i:1">a crackle in a quiet room</li><li style="--i:2">a pad, still wet</li><li style="--i:3">a treatment that washed out</li><li style="--i:4">joggers, gone by noon</li><li style="--i:5">a thousand bags, used once</li><li style="--i:6">a spill at the drain</li><li class="fab" style="--i:7">and between the body and the world — a fabric</li></ol>
+    </figure>
+    <p class="lede big">Every fabric this family makes answered a body that was already asking. The videos start there — not with the cloth, with the asking. Here is how we'll tell it, what we know, and what we're asking of each other.</p>
+  </div>
+</header>
+
+<div class="seam"></div>
+
+<section class="band s-ground" id="before">
+  <div class="rk-breakout">
+    <h2 class="alt">Before the map</h2>
+    <div class="cards8">
+
+      <details class="c8"><summary><span class="ic"><svg viewBox="0 0 80 60"><rect class="a" x="4" y="16" width="30" height="40" rx="3"/><rect class="a" x="46" y="26" width="30" height="30" rx="3"/><g class="doors"><rect x="8" y="34" width="8" height="14" style="--i:0"/><rect x="20" y="34" width="8" height="14" style="--i:1"/><rect x="50" y="40" width="8" height="12" style="--i:2"/><rect x="62" y="40" width="8" height="12" style="--i:3"/></g></svg></span><span class="t">What this is.</span><span class="s">Videos for two websites and four social doors, made from stories that already exist.</span></summary>
+        <p>akastex.com and wazoodle.com are the library — every page there has a place for a video, and the map below says which. YouTube Shorts, Reels, Stories and TikTok are the doors — short cuts that lead back to the library. Two brands, one family. Nothing is filmed twice: the same day's footage is cut for the page and for the door. What you'll find below is what we know, laid out so you can make from it.</p></details>
+
+      <details class="c8"><summary><span class="ic"><svg viewBox="0 0 80 60"><path class="shield" d="M40 8 L62 16 L60 36 Q52 52 40 56 Q28 52 20 36 L18 16 Z"/><circle class="hero" cx="40" cy="26" r="6"/><path class="hero" d="M30 46 Q40 34 50 46"/></svg></span><span class="t">The one rule.</span><span class="s">The customer is the hero. The fabric is the support.</span></summary>
+        <p>Every video is about the person making something, and what they made. The fabric is the armour, never the protagonist — even in the product films. There is one exception, and it's deliberate: the family's own story. There, Sid, Arch and Ashrey are the heroes, because it's theirs. Hold both at once; they don't cancel.</p></details>
+
+      <details class="c8"><summary><span class="ic"><svg viewBox="0 0 80 60"><line class="rail" x1="26" y1="58" x2="26" y2="4"/><line class="rail" x1="54" y1="58" x2="54" y2="4"/><g class="rungs"><line x1="26" y1="50" x2="54" y2="50" style="--i:0"/><line x1="26" y1="40" x2="54" y2="40" style="--i:1"/><line x1="26" y1="30" x2="54" y2="30" style="--i:2"/><line x1="26" y1="20" x2="54" y2="20" style="--i:3"/><line x1="26" y1="10" x2="54" y2="10" style="--i:4"/></g><circle class="you" cx="66" cy="40" r="4"/></svg></span><span class="t">Where our story meets your story.</span><span class="s">A maker finds their own rung in the family's climb.</span></summary>
+        <p>Swatch, yards, roll, print, colour, bulk, development. Every customer is standing on one of those rungs, and the family climbed all of them. The journey films exist so a viewer can find their own place in the story and see the next step already walked. It isn't for the faint of heart, and it says so.</p></details>
+
+      <details class="c8"><summary><span class="ic"><svg viewBox="0 0 80 60"><g class="fan"><rect x="34" y="18" width="12" height="30" rx="2" style="--r:-32deg"/><rect x="34" y="18" width="12" height="30" rx="2" style="--r:-16deg"/><rect x="34" y="18" width="12" height="30" rx="2" style="--r:0deg"/><rect x="34" y="18" width="12" height="30" rx="2" style="--r:16deg"/><rect x="34" y="18" width="12" height="30" rx="2" style="--r:32deg"/></g></svg></span><span class="t">The fabric speaks — and so does everyone else.</span><span class="s">Forms are a menu, not a decision. Shelby's to choose.</span></summary>
+        <p>The fabric as narrator, waking on the needle bed and discovering what it's for. An office-style series with the family, who are funnier than they know. The observational camera at the bench, hands and cloth. A chorus of makers in their own footage. The witness — no narrator at all, only their words on screen. All of these are true to the material. Which ones, and where, is the conversation we're here to have.</p></details>
+
+      <details class="c8"><summary><span class="ic"><svg viewBox="0 0 80 60"><circle class="one" cx="40" cy="14" r="8"/><g class="many"><circle cx="16" cy="46" r="5" style="--i:0"/><circle cx="28" cy="46" r="5" style="--i:1"/><circle cx="40" cy="46" r="5" style="--i:2"/><circle cx="52" cy="46" r="5" style="--i:3"/><circle cx="64" cy="46" r="5" style="--i:4"/></g><g class="lines"><line x1="40" y1="22" x2="16" y2="40"/><line x1="40" y1="22" x2="28" y2="40"/><line x1="40" y1="22" x2="40" y2="40"/><line x1="40" y1="22" x2="52" y2="40"/><line x1="40" y1="22" x2="64" y2="40"/></g></svg></span><span class="t">Shoot once, cut downward.</span><span class="s">One day with the family makes four films. One day with a fabric makes a master and every cut beneath it.</span></summary>
+        <p>A conversation is recorded once and broken into stories — for a brand, a person, a product, a journey — never re-shot. A fabric family runs one recipe on one day, and every product under it inherits the cut. That's why the library below is large and the shoot list is short.</p></details>
+
+      <details class="c8"><summary><span class="ic"><svg viewBox="0 0 80 60"><rect class="page" x="26" y="10" width="28" height="40" rx="3"/><line class="pl" x1="32" y1="20" x2="48" y2="20"/><line class="pl" x1="32" y1="28" x2="48" y2="28"/><line class="pl" x1="32" y1="36" x2="44" y2="36"/><g class="out"><path d="M22 30 L6 30 M10 26 L6 30 L10 34" style="--i:0"/><path d="M58 30 L74 30 M70 26 L74 30 L70 34" style="--i:1"/></g></svg></span><span class="t">Website first, social from it.</span><span class="s">The product page is the primary asset. Social is where it travels.</span></summary>
+        <p>A page holds layers — a viewer peels back as deep as they want. Social is the shallowest layer sent out to find them. Every short cut points home to a page. And every page is a place a cut can come home to.</p></details>
+
+      <details class="c8"><summary><span class="ic"><svg viewBox="0 0 80 60"><line class="line" pathLength="1" x1="8" y1="38" x2="72" y2="38"/><text class="q" x="40" y="26">?</text><path class="above" d="M14 30 Q20 18 26 30" /><path class="below" d="M54 46 Q60 58 66 46" /></svg></span><span class="t">Where's the line?</span><span class="s">Today, we show what the fabric does — not how it's made. Should that change, and where?</span></summary>
+        <p>Our starting positions, offered for discussion: no process on camera, no machines, no cross-sections — because what the fabric is made of is what competitors look for. Suppliers unnamed — except where the name is the story: the US Cotton Trust Protocol, the wool. Customers' words verbatim, dated, never re-voiced. And in the humanitarian film, the recipients are never filmed as proof. Where would a camera below the line help more than it costs? That's a real question.</p></details>
+
+      <details class="c8"><summary><span class="ic"><svg viewBox="0 0 80 60"><circle class="centre" cx="40" cy="30" r="7"/><g class="pts"><circle cx="10" cy="10" r="4" style="--i:0"/><circle cx="70" cy="10" r="4" style="--i:1"/><circle cx="8" cy="50" r="4" style="--i:2"/><circle cx="72" cy="50" r="4" style="--i:3"/><circle cx="40" cy="56" r="4" style="--i:4"/></g></svg></span><span class="t">Everyone brings something.</span><span class="s">We bring the information and the architecture. You bring the rest.</span></summary>
+        <p>Shelby: the forms and the eye. Brian: the structure across the set, and how each cut lands. Chris and Revity: the pages every cut points to. Sid and Arch: the stories, and the yes. We'll only find the walk by walking it — and it starts in this room. The first thing it needs is one conversation day with the family; four films come from it.</p></details>
+
+    </div>
+  </div>
+</section>
+
+<section class="band s-paper" id="map">
+  <div class="rk-breakout">
+
+    <h2 class="alt">The Journey</h2>
+
+    <details class="vc" id="v01" data-brand="akastex">
+      <summary><span class="n">01</span><span class="t">The AKAS Journey</span><span class="s">Every five years. Nobody planned it.</span></summary>
+      <div class="body">
+        <figure class="vis">
+          <svg viewBox="0 0 800 160" aria-hidden="true">
+            <line class="draw" x1="40" y1="80" x2="760" y2="80" pathLength="1"/>
+            <g class="pop" style="--i:0"><circle cx="40" cy="80" r="10"/><text x="40" y="128">2002</text></g>
+            <g class="pop" style="--i:1"><circle cx="220" cy="80" r="10"/><text x="220" y="128">2007</text></g>
+            <g class="pop" style="--i:2"><circle cx="400" cy="80" r="10"/><text x="400" y="128">2012</text></g>
+            <g class="pop" style="--i:3"><circle cx="580" cy="80" r="10"/><text x="580" y="128">2017</text></g>
+            <g class="pop" style="--i:4"><circle cx="760" cy="80" r="10"/><text x="760" y="128">2022</text></g>
+          </svg>
+        </figure>
+        <div class="info">
+          <p class="big">The master story of the family and the company, told once, in full, by the people who lived it. The word · AKAS Tex · Wazoodle · the first sorbents · SupAbsorb.</p>
+          <dl>
+            <dt>Length</dt><dd>5–8 minutes. Three chapter cuts — the pandemic, the rescue, the second call — come from the same day.</dd>
+            <dt>On camera</dt><dd>Sid and Arch, braided, never merged. Ashrey as the witness between them.</dd>
+            <dt>Only the family can say</dt><dd class="say">El Chico, May 30, 1980 — engaged the same day. How.</dd>
+            <dt>Lives on</dt><dd>AKAS Home · The Dream · About · Journey hub · Wazoodle Our Dream</dd>
+          </dl>
+          <a class="btn sig" href="https://docs.google.com/document/d/1KUAUgqChpz36pUPA6_3JjRVfehlllXmsVVasvE-eKzQ/edit" target="_blank" rel="noopener" data-doc="video-01-akas-journey">Open the working document</a>
+        </div>
+      </div>
+    </details>
+
+    <details class="vc" id="v02">
+      <summary><span class="n">02</span><span class="t">The Pandemic Journey</span><span class="s">One search result existed. It was hers.</span></summary>
+      <div class="body">
+        <figure class="vis">
+          <svg viewBox="0 0 800 220" aria-hidden="true">
+            <g class="mask">
+              <path class="draw" pathLength="1" d="M240 70 Q400 30 560 70 L560 160 Q400 200 240 160 Z"/>
+              <path class="draw d2" pathLength="1" d="M240 70 Q400 30 560 70 M240 100 Q400 60 560 100 M240 130 Q400 90 560 130"/>
+              <path class="draw d3" pathLength="1" d="M240 90 Q170 80 150 120 Q170 160 240 140 M560 90 Q630 80 650 120 Q630 160 560 140"/>
+            </g>
+            <g class="motes">
+              <circle cx="60" cy="60" r="4" style="--d:0s"/><circle cx="90" cy="150" r="3" style="--d:.6s"/><circle cx="740" cy="70" r="4" style="--d:.3s"/><circle cx="720" cy="170" r="3" style="--d:.9s"/><circle cx="120" cy="100" r="3" style="--d:1.2s"/>
+            </g>
+          </svg>
+        </figure>
+        <div class="info">
+          <p class="big">Demand from the inbox and supply from the floor, told as one chapter. 500 orders on Friday, 1,000 on Saturday, a news crew on Sunday. Four machines flat out. Millions of masks — and not one claim the fabric couldn't stand behind.</p>
+          <dl>
+            <dt>Length</dt><dd>4–6 minutes.</dd>
+            <dt>On camera</dt><dd>Arch at the inbox. Sid on the floor. Ashrey on the 72-hour windows.</dd>
+            <dt>Only the family can say</dt><dd class="say">Who first said the diaper knit could be a mask layer — and what the year cost.</dd>
+            <dt>Lives on</dt><dd>AKAS COVID Journey · Impact · Made in USA</dd>
+          </dl>
+          <a class="btn sig" href="https://docs.google.com/document/d/1wkhjRaa5YnTEosyfm5Hi_yPJ6i4W53ewlxAYdWAiG1s/edit" target="_blank" rel="noopener" data-doc="video-02-pandemic-journey">Open the working document</a>
+        </div>
+      </div>
+    </details>
+
+    <details class="vc" id="v03">
+      <summary><span class="n">03</span><span class="t">The Wazoodle Buying Journey</span><span class="s">The lawyers said don't. Arch said: the only way is up.</span></summary>
+      <div class="body">
+        <figure class="vis">
+          <svg viewBox="0 0 800 220" aria-hidden="true">
+            <path id="fl" class="route" pathLength="1" d="M120 170 Q400 20 680 120"/>
+            <circle cx="120" cy="170" r="8" class="dot"/><text x="120" y="205">Bensalem</text>
+            <circle cx="680" cy="120" r="8" class="dot"/><text x="680" y="155">Toronto</text>
+            <g class="plane" opacity="0"><set attributeName="opacity" to="1" begin="0.4s" fill="freeze"/><path d="M0-6 L16 0 L0 6 L4 0 Z"/><animateMotion dur="3.2s" begin="0.4s" fill="freeze" rotate="auto"><mpath href="#fl"/></animateMotion></g>
+            <g class="truck" opacity="0"><set attributeName="opacity" to="1" begin="4s" fill="freeze"/><rect x="-22" y="-14" width="30" height="20" rx="3"/><rect x="8" y="-8" width="14" height="14" rx="2"/><circle cx="-12" cy="9" r="4"/><circle cx="12" cy="9" r="4"/><animateMotion dur="3.2s" begin="4s" fill="freeze" keyPoints="1;0" keyTimes="0;1" calcMode="linear" rotate="auto-reverse"><mpath href="#fl"/></animateMotion></g>
+          </svg>
+        </figure>
+        <div class="info">
+          <p class="big">Six days in August 2012, with a clock. Thursday the flight. Friday the deal. Saturday the truck. Sunday home. Monday unload. Tuesday shipping from Pennsylvania. Why there are two companies and one family.</p>
+          <dl>
+            <dt>Length</dt><dd>3–4 minutes. The funniest of the set without trying.</dd>
+            <dt>On camera</dt><dd>All three.</dd>
+            <dt>Only the family can say</dt><dd class="say">Why six days — chosen, or forced? Who made the first call?</dd>
+            <dt>Lives on</dt><dd>AKAS Wazoodle Buying Journey · Zorb Origin · Wazoodle Our Dream</dd>
+          </dl>
+          <a class="btn sig" href="https://docs.google.com/document/d/1QFuhQtap5nUgowKh6CO-JmcLAXeAzySU9Uw-JgzZ9a4/edit" target="_blank" rel="noopener" data-doc="video-03-wazoodle-buying-journey">Open the working document</a>
+        </div>
+      </div>
+    </details>
+
+    <details class="vc" id="v04" data-brand="supabsorb">
+      <summary><span class="n">04</span><span class="t">The Second Call</span><span class="s">The earth asked too. And the same hands answered.</span></summary>
+      <div class="body">
+        <figure class="vis">
+          <svg viewBox="0 0 800 220" aria-hidden="true">
+            <rect class="ground" x="0" y="170" width="800" height="50"/>
+            <rect class="mat" x="230" y="140" width="340" height="30" rx="6"/>
+            <g class="drips"><circle cx="300" cy="20" r="7" style="--d:0s"/><circle cx="400" cy="20" r="7" style="--d:.8s"/><circle cx="500" cy="20" r="7" style="--d:1.6s"/></g>
+            <g class="spread"><ellipse cx="300" cy="155" rx="0" ry="6" style="--d:1.2s"/><ellipse cx="400" cy="155" rx="0" ry="6" style="--d:2s"/><ellipse cx="500" cy="155" rx="0" ry="6" style="--d:2.8s"/></g>
+          </svg>
+        </figure>
+        <div class="info">
+          <p class="big">Why a family that makes fabric for babies also makes the mat that catches the spill. It traces straight to 2009 — chemical waste reaching the ground, a refusal, and an engineer who then built the thing that protects it.</p>
+          <dl>
+            <dt>Length</dt><dd>3–5 minutes.</dd>
+            <dt>On camera</dt><dd>Sid. Arch's refusal opens it.</dd>
+            <dt>Only the family can say</dt><dd class="say">The first mat. Which product came first, who the first customer was, how Sid found the industry at all.</dd>
+            <dt>Lives on</dt><dd>AKAS SupAbsorb Origin · SupAbsorb Journey · supabsorb.com</dd>
+          </dl>
+          <a class="btn sig" href="https://docs.google.com/document/d/1Nf1nvfyCK1YG13zRrsmQK9m7T4eCAY_6xDjskaguvpg/edit" target="_blank" rel="noopener" data-doc="video-04-second-call">Open the working document</a>
+        </div>
+      </div>
+    </details>
+
+    <h2 class="alt">The Making</h2>
+
+    <details class="vc" id="v05">
+      <summary><span class="n">05</span><span class="t">Does This Exist?</span><span class="s">Somebody asked, and the fabric stayed.</span></summary>
+      <div class="body">
+        <figure class="vis">
+          <svg viewBox="0 0 800 220" aria-hidden="true">
+            <g class="env"><rect x="290" y="80" width="220" height="130" rx="8"/><path class="flap" d="M290 80 L400 160 L510 80"/></g>
+            <g class="swatch"><rect x="350" y="120" width="100" height="70" rx="4"/><text x="400" y="163">?</text></g>
+            <text class="answer" x="400" y="52">it already exists</text>
+          </svg>
+        </figure>
+        <div class="info">
+          <p class="big">New product development, told as the Explorer's story — not a capability list. A sample came in the mail; the fabric was read off the cloth; approved on fifteen yards; still shipping sixteen years later. Seventy-five styles, every one because somebody asked.</p>
+          <dl>
+            <dt>Length</dt><dd>3–4 minutes.</dd>
+            <dt>On camera</dt><dd>Sid's hands on finished cloth. Customers in their own words. Never the machine.</dd>
+            <dt>Only the family can say</dt><dd class="say">The poolside moment, 2018 — the one origin that begins inside the engineer's own eye.</dd>
+            <dt>Lives on</dt><dd>AKAS New Product Development · Services · Explorer Gallery · Wazoodle Custom &amp; Development</dd>
+          </dl>
+          <a class="btn sig" href="https://docs.google.com/document/d/1K-4AYJtgKTe3aFPM9CefBuqDZc4rOOYNpBaSfymyvRE/edit" target="_blank" rel="noopener" data-doc="video-05-does-this-exist">Open the working document</a>
+        </div>
+      </div>
+    </details>
+
+    <details class="vc" id="v06">
+      <summary><span class="n">06</span><span class="t">The Ladder</span><span class="s">Seven rungs, and nobody ever published them.</span></summary>
+      <div class="body">
+        <figure class="vis">
+          <svg viewBox="0 0 800 260" aria-hidden="true">
+            <line class="rail" x1="240" y1="240" x2="240" y2="20"/><line class="rail" x1="560" y1="240" x2="560" y2="20"/>
+            <g class="rungs">
+              <g style="--i:0"><line x1="240" y1="230" x2="560" y2="230"/><text x="600" y="235">swatch</text></g>
+              <g style="--i:1"><line x1="240" y1="197" x2="560" y2="197"/><text x="600" y="202">yards</text></g>
+              <g style="--i:2"><line x1="240" y1="164" x2="560" y2="164"/><text x="600" y="169">roll</text></g>
+              <g style="--i:3"><line x1="240" y1="131" x2="560" y2="131"/><text x="600" y="136">custom print</text></g>
+              <g style="--i:4"><line x1="240" y1="98" x2="560" y2="98"/><text x="600" y="103">custom colour</text></g>
+              <g style="--i:5"><line x1="240" y1="65" x2="560" y2="65"/><text x="600" y="70">bulk · 500 yards</text></g>
+              <g style="--i:6"><line x1="240" y1="32" x2="560" y2="32"/><text x="600" y="37">development</text></g>
+            </g>
+          </svg>
+        </figure>
+        <div class="info">
+          <p class="big">Swatch. Yards. Roll. Custom print. Custom colour. Bulk. Development. Every rung existed for fifteen years and none were published — people found the next step by accident, by asking, or not at all.</p>
+          <dl>
+            <dt>Length</dt><dd>90 seconds to 2 minutes.</dd>
+            <dt>On camera</dt><dd>Arch for the swatch and yards. Sid for the crossing and above.</dd>
+            <dt>Only the family can say</dt><dd class="say">Who answers the five-hundred-yard call today. The first customer you remember outgrowing Wazoodle.</dd>
+            <dt>Lives on</dt><dd>AKAS Journey hub · Wazoodle The Path · Grow · Wholesale</dd>
+          </dl>
+          <a class="btn sig" href="https://docs.google.com/document/d/19YUMA56m3ePmoN9i-LhZEciw7isMQlc5UPUl4AlvGuU/edit" target="_blank" rel="noopener" data-doc="video-06-the-ladder">Open the working document</a>
+        </div>
+      </div>
+    </details>
+
+    <details class="vc" id="v13">
+      <summary><span class="n">13</span><span class="t">Swatch First</span><span class="s">The same walk in both directions.</span></summary>
+      <div class="body">
+        <figure class="vis">
+          <svg viewBox="0 0 800 220" aria-hidden="true">
+            <g class="env"><rect x="80" y="70" width="200" height="120" rx="8"/><path class="flap" d="M80 70 L180 140 L280 70"/></g>
+            <g class="env e2"><rect x="520" y="70" width="200" height="120" rx="8"/><path class="flap" d="M520 70 L620 140 L720 70"/></g>
+            <path class="arrow a1" pathLength="1" d="M300 100 L500 100"/><path class="arrow a2" pathLength="1" d="M500 160 L300 160"/>
+            <text x="180" y="212">your swatch</text><text x="620" y="212">your sample</text>
+          </svg>
+        </figure>
+        <div class="info">
+          <p class="big">No wholesale order until you've bought a swatch. No custom fabric until we've walked a development process — and that starts with a sample. If you're buying, start with a swatch. If you're asking us to make something, send us a sample. The maker and the creator walk exactly the same way.</p>
+          <dl>
+            <dt>Length</dt><dd>90 seconds to 2 minutes, in two halves that rhyme.</dd>
+            <dt>On camera</dt><dd>A maker's hands, then Sid's. Two envelopes, two tables.</dd>
+            <dt>Only the family can say</dt><dd class="say">The swatch Arch remembers first — two dollars that became a business.</dd>
+            <dt>Lives on</dt><dd>Wazoodle Swatch Kits · Fabric Finders · The Path · AKAS Wazoodle Journey · NPD · Contact</dd>
+          </dl>
+          <a class="btn sig" href="https://docs.google.com/document/d/1bO3c8fYgsg19DWCzWhhj0Ci_h3L_skUwYEYoEEOoL8k/edit" target="_blank" rel="noopener" data-doc="video-13-swatch-first">Open the working document</a>
+        </div>
+      </div>
+    </details>
+
+    <h2 class="alt">The Fabrics</h2>
+
+    <details class="vc" id="v09" data-brand="zorb">
+      <summary><span class="n">09</span><span class="t">Zorb Original</span><span class="s">It was ready before you were.</span></summary>
+      <div class="body">
+        <figure class="vis">
+          <svg viewBox="0 0 800 220" aria-hidden="true">
+            <rect class="cloth" x="150" y="120" width="500" height="60" rx="8"/>
+            <rect class="cloth top" x="150" y="112" width="500" height="10" rx="4"/>
+            <g class="drip"><circle cx="400" cy="20" r="9"/></g>
+            <ellipse class="soak" cx="400" cy="150" rx="0" ry="18"/>
+            <text class="cap" x="400" y="210">under two seconds · ten times its weight</text>
+          </svg>
+        </figure>
+        <div class="info">
+          <p class="big">The origin fabric, and the one most likely to be misused. Sell the thinness — eight layers of flannel in 0.080″ — and make the enclosure rule impossible to miss. The test is the customers' own: running water, the wring, the white shirt.</p>
+          <dl>
+            <dt>Length</dt><dd>60–90 seconds, plus a 15–30 second demonstration for every product under it. The format the other families repeat.</dd>
+            <dt>On camera</dt><dd>Hands, water, cloth. The customers' words as text.</dd>
+            <dt>Only the family can say</dt><dd class="say">The one question Arch asks back: what are you enclosing it with?</dd>
+            <dt>Lives on</dt><dd>Zorb Original collection and products · the Zorb gateway · AKAS Z-054</dd>
+          </dl>
+          <a class="btn sig" href="https://docs.google.com/document/d/17Pe15UBwP7CEZFauWBfz4aW2aWCrVv2QOeNM190aoZU/edit" target="_blank" rel="noopener" data-doc="video-09-zorb-original">Open the working document</a>
+        </div>
+      </div>
+    </details>
+
+    <details class="vc" id="v10" data-brand="prosoft">
+      <summary><span class="n">10</span><span class="t">ProSoft 1 mil ECO-PUL</span><span class="s">The bond is permanent.</span></summary>
+      <div class="body">
+        <figure class="vis">
+          <svg viewBox="0 0 800 220" aria-hidden="true">
+            <rect class="cloth" x="150" y="120" width="500" height="50" rx="8"/>
+            <line class="film" x1="150" y1="120" x2="650" y2="120"/>
+            <g class="rain"><circle cx="280" cy="10" r="7" style="--d:0s"/><circle cx="400" cy="10" r="7" style="--d:.5s"/><circle cx="520" cy="10" r="7" style="--d:1s"/></g>
+            <g class="bead"><ellipse cx="280" cy="114" rx="0" ry="5" style="--d:.9s"/><ellipse cx="400" cy="114" rx="0" ry="5" style="--d:1.4s"/><ellipse cx="520" cy="114" rx="0" ry="5" style="--d:1.9s"/></g>
+            <text class="cap" x="400" y="210">the back stays dry</text>
+          </svg>
+        </figure>
+        <div class="info">
+          <p class="big">The default barrier, thirteen variants. Hear that it makes no sound. See the tap test. Then two identical seams under the tap — one unsealed and leaking, one taped and holding. The bond told by what is not in it: no solvents, no VOCs, no residue.</p>
+          <dl>
+            <dt>Length</dt><dd>60–90 seconds, plus the demonstration.</dd>
+            <dt>On camera</dt><dd>A microphone, a tap, two seams, a worn-out cover with the barrier intact.</dd>
+            <dt>Only the family can say</dt><dd class="say">The call Arch has had a hundred times — "the back is wet" — and what she asks first.</dd>
+            <dt>Lives on</dt><dd>1 mil ECO-PUL collection, thirteen products · ProSoft gateway · the Waterproof door · AKAS Z-010</dd>
+          </dl>
+          <a class="btn sig" href="https://docs.google.com/document/d/1WUoI32N8Cb11FoEewRZqepJ_wOuRW41zLH0wpL5TkBA/edit" target="_blank" rel="noopener" data-doc="video-10-prosoft-1mil-ecopul">Open the working document</a>
+        </div>
+      </div>
+    </details>
+
+    <details class="vc" id="v11" data-brand="procool">
+      <summary><span class="n">11</span><span class="t">ProCool Performance Interlock</span><span class="s">The feel is the fabric.</span></summary>
+      <div class="body">
+        <figure class="vis">
+          <svg viewBox="0 0 800 220" aria-hidden="true">
+            <rect class="cloth" x="150" y="110" width="500" height="40" rx="8"/>
+            <g class="wick"><circle cx="260" cy="150" r="5" style="--d:0s"/><circle cx="330" cy="150" r="5" style="--d:.4s"/><circle cx="400" cy="150" r="5" style="--d:.8s"/><circle cx="470" cy="150" r="5" style="--d:1.2s"/><circle cx="540" cy="150" r="5" style="--d:1.6s"/></g>
+            <text class="cap" x="400" y="200">moisture in one face · out the other</text>
+          </svg>
+        </figure>
+        <div class="info">
+          <p class="big">The foundation of the whole ProCool brand — the number every other tier is measured against. Transport, then time: water in one face and out the other; a hundredth-wash swatch beside a first-cut swatch, identical. And the one thing that ends it — a single dryer sheet.</p>
+          <dl>
+            <dt>Length</dt><dd>60–90 seconds, plus the demonstration.</dd>
+            <dt>On camera</dt><dd>Two swatches side by side. A shirt in a hotel sink. Edges lying flat under a rotary cutter.</dd>
+            <dt>Only the family can say</dt><dd class="say">The first question Arch asks when a fabric "stopped wicking": softener?</dd>
+            <dt>Lives on</dt><dd>ProCool Interlock collection, twelve products · ProCool gateway · Wicking and Stay-Dry doors · AKAS Z-040</dd>
+          </dl>
+          <a class="btn sig" href="https://docs.google.com/document/d/1g-K8cOsrgluHoSU8JDpVkUkoddUaoDo9tMf5-vmAMec/edit" target="_blank" rel="noopener" data-doc="video-11-procool-interlock">Open the working document</a>
+        </div>
+      </div>
+    </details>
+
+    <details class="vc" id="v12" data-brand="proeco">
+      <summary><span class="n">12</span><span class="t">ProECO Organic Cotton Interlock</span><span class="s">The feel is pure.</span></summary>
+      <div class="body">
+        <figure class="vis">
+          <svg viewBox="0 0 800 220" aria-hidden="true">
+            <line class="soil" x1="0" y1="200" x2="800" y2="200"/>
+            <g class="field">
+              <g class="plant" style="--d:0s;--x:140px"><line x1="0" y1="200" x2="0" y2="120"/><circle cx="0" cy="112" r="14"/><circle cx="-12" cy="120" r="9"/><circle cx="12" cy="120" r="9"/></g>
+              <g class="plant" style="--d:.3s;--x:260px"><line x1="0" y1="200" x2="0" y2="105"/><circle cx="0" cy="97" r="15"/><circle cx="-13" cy="106" r="10"/><circle cx="13" cy="106" r="10"/></g>
+              <g class="plant" style="--d:.6s;--x:400px"><line x1="0" y1="200" x2="0" y2="112"/><circle cx="0" cy="104" r="15"/><circle cx="-13" cy="113" r="10"/><circle cx="13" cy="113" r="10"/></g>
+              <g class="plant" style="--d:.9s;--x:540px"><line x1="0" y1="200" x2="0" y2="108"/><circle cx="0" cy="100" r="14"/><circle cx="-12" cy="108" r="9"/><circle cx="12" cy="108" r="9"/></g>
+              <g class="plant" style="--d:1.2s;--x:660px"><line x1="0" y1="200" x2="0" y2="120"/><circle cx="0" cy="112" r="13"/><circle cx="-11" cy="120" r="9"/><circle cx="11" cy="120" r="9"/></g>
+            </g>
+            <text class="cap" x="400" y="60">what are you? cotton. what else? nothing.</text>
+          </svg>
+        </figure>
+        <div class="info">
+          <p class="big">The fabric to hand a first-time knit sewer. No wrong side. Flat edges. A straight stitch on standard settings. And after one hot wash — the customers' word — butter. 100% organic cotton, US Cotton Trust Protocol, and nothing added.</p>
+          <dl>
+            <dt>Length</dt><dd>60–90 seconds, plus the demonstration.</dd>
+            <dt>On camera</dt><dd>A real first-time knit sewer at a home machine, and the moment the seam runs straight.</dd>
+            <dt>Only the family can say</dt><dd class="say">Why Arch hands the nervous first-timer interlock — "this is the one I'd hand you."</dd>
+            <dt>Lives on</dt><dd>OC Interlock collection · ProECO gateway · the Organic door · AKAS Z-036</dd>
+          </dl>
+          <a class="btn sig" href="https://docs.google.com/document/d/1won_SfKjsaZmJiYXnDMq_G9R63iHJ8V2qx-7GxD3jgk/edit" target="_blank" rel="noopener" data-doc="video-12-proeco-oc-interlock">Open the working document</a>
+        </div>
+      </div>
+    </details>
+
+    <h2 class="alt">The Makers</h2>
+
+    <details class="vc" id="v08">
+      <summary><span class="n">08</span><span class="t">The Ones Who Sew Across Water</span><span class="s">Sew with love in your heart.</span></summary>
+      <div class="body">
+        <figure class="vis">
+          <svg viewBox="0 0 800 220" aria-hidden="true">
+            <line class="table" x1="120" y1="170" x2="680" y2="170"/><line class="leg" x1="150" y1="170" x2="140" y2="215"/><line class="leg" x1="650" y1="170" x2="660" y2="215"/>
+            <g class="box"><rect x="340" y="110" width="120" height="60" rx="4"/><rect class="lid" x="332" y="102" width="136" height="14" rx="3"/></g>
+            <g class="pads"><rect x="360" y="150" width="80" height="8" rx="4" style="--d:.3s"/><rect x="360" y="140" width="80" height="8" rx="4" style="--d:.9s"/><rect x="360" y="130" width="80" height="8" rx="4" style="--d:1.5s"/><rect x="360" y="120" width="80" height="8" rx="4" style="--d:2.1s"/></g>
+            <text class="cap" x="400" y="60">fifty yards · a thousand pads · 333 girls</text>
+          </svg>
+        </figure>
+        <div class="info">
+          <p class="big">Somewhere right now a shoebox is being packed on a folding table in a church basement. Twenty-plus makers sewing pads for girls who would otherwise miss school. Thirteen more for Operation Christmas Child. A twelve-year relationship. And this August, three women in Paris who spent a year looking for a fabric sold by the yard for fifteen years.</p>
+          <dl>
+            <dt>Length</dt><dd>4–6 minutes. A chorus film — many hands, one hand.</dd>
+            <dt>On camera</dt><dd>Hands at folding tables. Denys Redon and Ashrey on the chain nobody engineered. Never the recipients as proof.</dd>
+            <dt>Only the family can say</dt><dd class="say">The discount that once existed, why it ended, and what remains — said plainly if asked.</dd>
+            <dt>Lives on</dt><dd>Wazoodle Book of Makers · Impact · Buying for a Programme · AKAS Impact · Milpoint · the ELLE France articles</dd>
+          </dl>
+          <a class="btn sig" href="https://docs.google.com/document/d/1sVbbW5wZsM0LXRi9o7jkrjQlrNQ2raUKKAiySQTNM38/edit" target="_blank" rel="noopener" data-doc="video-08-humanitarian-makers">Open the working document</a>
+        </div>
+      </div>
+    </details>
+
+    <details class="vc" id="v07">
+      <summary><span class="n">07</span><span class="t">An Email Came Back</span><span class="s">Someone is still answering the email.</span></summary>
+      <div class="body">
+        <figure class="vis">
+          <svg viewBox="0 0 800 220" aria-hidden="true">
+            <g class="inbox"><rect x="120" y="60" width="560" height="120" rx="10"/><line x1="120" y1="100" x2="680" y2="100"/></g>
+            <g class="line l1"><rect x="150" y="118" width="0" height="10" rx="5"/></g>
+            <g class="line l2"><rect x="150" y="140" width="0" height="10" rx="5"/></g>
+            <g class="line l3"><rect x="150" y="162" width="0" height="10" rx="5"/></g>
+            <text class="cap" x="400" y="210">not a form letter. a person.</text>
+          </svg>
+        </figure>
+        <div class="info">
+          <p class="big">Wazoodle's rebirth from the maker's side of the inbox. Same website, same name that had swallowed their money — then an email came back. A refund months after it was written off. An extra swatch in the box. The community forgave one kept promise at a time, and said so.</p>
+          <dl>
+            <dt>Length</dt><dd>2–3 minutes.</dd>
+            <dt>On camera</dt><dd>Arch at the inbox as the constant image. The customers' reviews arriving one at a time, dated, in their own words.</dd>
+            <dt>Only the family can say</dt><dd class="say">The first email Arch answered from the old inbox — and when the extra swatch became a habit.</dd>
+            <dt>Lives on</dt><dd>Wazoodle About the Family · Our Dream · Wall of Love · AKAS Wazoodle Buying Journey</dd>
+          </dl>
+          <a class="btn sig" href="https://docs.google.com/document/d/1D7IXBf3wcwbH05CcMeYFHDI-SLdKYtHPkpcGOJivsVI/edit" target="_blank" rel="noopener" data-doc="video-07-an-email-came-back">Open the working document</a>
+        </div>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+
+
+<section class="band s-ground" id="recipes">
+  <div class="rk-breakout">
+    <h2 class="alt">The recipes</h2>
+    <p class="lede big">A fabric family is shown by what it does. Six things a fabric can do, six recipes. Brian's standard shot list is the spine of every one — the furled sheet, the family together, stretch, behaviour in water, the result after water, cutting, sewing, against skin or food, lifestyle, the completed product — and each recipe adds the shots that only that function can earn. Pick the recipe, put the family on the table, run it, next family.</p>
+    <div class="stack-wrap">
+      <div class="stack" aria-label="An absorbent product is three jobs, not one fabric">
+        <div class="layer l1" data-chassis="akas" data-brand="procool"><span>the dry face</span></div>
+        <div class="layer l2" data-chassis="akas" data-brand="zorb"><span>the core</span></div>
+        <div class="layer l3" data-chassis="akas" data-brand="prosoft"><span>the barrier</span></div>
+        <div class="layer l4" data-chassis="akas" data-brand="proeco"><span>the cotton</span></div>
+      </div>
+      <p class="stack-cap">Three jobs, not one fabric — and each recipe films one of them.</p>
+    </div>
+    <div class="recipes">
+
+      <details class="rc" data-brand="zorb"><summary><span class="t">Absorbent</span><span class="s">Capture, spread, hold. Nine Zorb families.</span><span class="fam">Zorb Original · 3D Stay Dry Dimple · 3D Stay Dry LITE · 3D Bamboo Dimple · 3D Organic Cotton Dimple · 3D Diamond · 4D Stay Dry CORE · 4D Cotton CORE · Microfiber Terry</span></summary>
+        <div class="rbody">
+          <p class="moment"><b>The moment that sells it:</b> dyed water poured onto the face and gone in under two seconds — then the wring, then the white shirt pressed to it, dry.</p>
+          <ol>
+            <li><b>The furled sheet.</b> The bolt unrolled and flowing, then furled. Zorb Original is stiff off the bolt — show it; the stiffness is the before-state, and the wash beat pays it off.</li>
+            <li><b>The family together.</b> Every family in this recipe as a swatch fan, so the generations read as one structure: Original hides inside; 3D has a finished face; 4D has the barrier laminated on; Microfiber is the towel.</li>
+            <li><b>Both faces.</b> For 3D and 4D only: the dimpled face, then the back. For Original there is no face to show — it is enclosed — and the film says so.</li>
+            <li><b>Stretch.</b> Minimal in both directions. One pull, held and released, so nobody expects a knit.</li>
+            <li><b>Water in.</b> The customers' own test — dye the water so the camera can see it. Under two seconds on the face. Ten times its weight, held.</li>
+            <li><b>The result after water.</b> Lift it: the weight is visible. Wring it. Press it to a white shirt — dry. For 3D Stay Dry: touch the face while the core is full — the face is dry.</li>
+            <li><b>Held while you slept.</b> A pad, an insert, a cage liner lifted after hours. Nothing came through. For Silver variants: after a day, no smell — the earthquake review.</li>
+            <li><b>The wash.</b> The stiff piece and the same piece after one hot wash, side by side — pillow-soft. Then a swatch after a year of washes: still working. Absorption improves with washing; say it once.</li>
+            <li><b>Cutting.</b> Scissors, a marker traced straight onto it, and the stiff piece used as its own template for the fleece and cotton that will cover it.</li>
+            <li><b>Sewing.</b> Walking foot, moderate speed; layers tiered an inch smaller each; bar-tacked. For 4D CORE: the seam sealed, because the barrier is on it.</li>
+            <li><b>The sandwich.</b> Assembled by hand — fleece, Zorb, PUL. Then flannel over it for a pad. Then fleece both sides for a cage liner. This is the enclosure rule made visible without a warning label.</li>
+            <li><b>Against the body.</b> A baby in a diaper, a guinea pig on a liner, a person's hand on a pad — always with the fabric enclosed, never bare against skin.</li>
+            <li><b>Lifestyle.</b> The finished thing in the life it holds: the diaper bag, the cage, the drawer of pads, the humanitarian folding table.</li>
+            <li><b>The completed products.</b> Inserts, pads, liners, bibs, towels — with the fabric named on screen.</li>
+            <li class="no"><b>Never:</b> cross-sections, microscopy, fibre ratios, how Ready-AbZORB or the knit are made. The camera shows the outcome; the line between what we show and what we keep sits below it.</li>
+          </ol>
+        </div></details>
+
+      <details class="rc" data-brand="prosoft"><summary><span class="t">Waterproof</span><span class="s">The barrier that breathes. Every laminated family.</span><span class="fam">1 mil ECO-PUL · 2 mil · Lightweight · FoodSAFE PUL · MediPUL · MediCORE · MediCORE Absorbent · Stretch-FIT PUL · Cotton Fleece PUL · OC Fleece PUL · OC Interlock PUL · OC Twill PUL · OC Sherpa PUL · Stretch-FIT OC Jersey PUL · Bamboo Fleece PUL · Bamboo Loop Terry PUL · ProCool Fleece PUL · Zorb 4D CORE (both)</span></summary>
+        <div class="rbody">
+          <p class="moment"><b>The moment that sells it:</b> two identical seams under the tap — the unsealed one leaks at every stitch, the taped one holds. Nobody films this, and it is the whole practical lesson.</p>
+          <ol>
+            <li><b>The furled sheet.</b> The bolt flowing — and then crushed beside a microphone. No sound. That silence is what people notice first and what they can't get from a photo.</li>
+            <li><b>The family together.</b> The plain barriers fanned (1 mil, 2 mil, Lightweight, Stretch-FIT), then the laminates — the face fabric with the barrier on its back: fleece, interlock, twill, sherpa, jersey, bamboo. One film, many faces.</li>
+            <li><b>Both faces.</b> Turned in the hand, twice: the textile face, then the film. Which face goes where is the maker's decision, and the recipe shows it in a pad (film out), a wet bag (film in), a cover (film in).</li>
+            <li><b>Stretch.</b> 10% crosswise on the plain barriers; 4-way on Stretch-FIT — held, released, the recovery visible.</li>
+            <li><b>Water on the film.</b> Rain on the film side: it beads and runs off. Then the tap: the back stays dry. For the laminates, water on the textile face wets the face and stops at the film — show the stop.</li>
+            <li><b>The result after water.</b> Lift it; the back is dry to the touch. Then breathe through it: a cloud on a cold glass held behind it — waterproof and still breathing.</li>
+            <li><b>The seam.</b> Two identical seams under the tap: unsealed leaks, taped holds. Then the tape being applied. Clips on the film side, never pins.</li>
+            <li><b>The last layer.</b> A worn-out diaper cover — elastic gone, cotton thinned — and the barrier still holding under the tap. Longevity shown, not claimed.</li>
+            <li><b>Cutting.</b> Rotary cutter on the film side down; the edges don't fray, so a cut piece can be a finished piece — the castor-oil pack wrap with no stitch.</li>
+            <li><b>Sewing.</b> Film side down against the feed dogs; standard needle; the seam tape beside the fabric in every shot where a seam is made.</li>
+            <li><b>Against the body.</b> A cover on a baby, a pad backing in a hand, a wet bag opened. For MediPUL: a gown, a bed pad, an institutional laundry cart.</li>
+            <li><b>Lifestyle.</b> The outdoor cover in weather; the bag in the diaper bag; the go-kart seat; the NICU blanket shell.</li>
+            <li><b>The completed products.</b> Covers, wet bags, pads, bed pads, gowns, liners — with the fabric named.</li>
+            <li class="no"><b>Never:</b> the lamination line, film spec, temperatures, or any bond described by what holds it together. The bond is told by absence — no solvents, no VOCs, no residue.</li>
+          </ol>
+        </div></details>
+
+      <details class="rc" data-brand="procool"><summary><span class="t">Stay-dry · wicking</span><span class="s">Moisture in one face, out the other. Every ProCool family, plus ProTEC.</span><span class="fam">Performance Interlock · Jersey Mesh · Pique Mesh · Lightweight · TransWICK LITE · TransWICK X-FIT Jersey · TransWICK X-FIT Mesh · Nylon Interlock · 360 Stretch-FIT · Supima Jersey · ProTEC Fleece</span></summary>
+        <div class="rbody">
+          <p class="moment"><b>The moment that sells it:</b> dyed water on the skin face, travelling through and arriving at the outer face — while a dry finger rests on the skin side.</p>
+          <ol>
+            <li><b>The furled sheet.</b> The bolt flowing; both faces identical on the interlocks, the mesh structure visible on the meshes, the brushed face on ProTEC.</li>
+            <li><b>The family together.</b> The tiers fanned by what they do: Foundation (Interlock, the baseline number), the meshes (air), TransWICK (the fastest), X-FIT (the stretch), Nylon (wet strength), 360 (four-way), Supima (cotton feel), ProTEC (the fleece that sends moisture through).</li>
+            <li><b>Both faces.</b> Turned; identical on interlock. For ProTEC, the brushed face against skin and the flat face outward.</li>
+            <li><b>Stretch.</b> 35% crosswise on Interlock, held and released with the edge lying flat — no curl. Four-way on 360 and X-FIT with the recovery visible. Nylon pulled wet: it doesn't give.</li>
+            <li><b>Water on the face.</b> Dyed water on the skin face; it enters, travels, and arrives at the outer face. On a mesh, the air behind it — a hand held behind the fabric, visible through it.</li>
+            <li><b>The result after water.</b> A dry finger on the skin side while the outer face is still wet. Then the hang: a wet shirt on a hanger, dry by morning — time-lapse.</li>
+            <li><b>Still new.</b> A hundredth-wash swatch beside a first-cut swatch: same surface, same colour, no pilling. The feel is the fibre, not a finish.</li>
+            <li><b>The one vulnerability.</b> A softened swatch beside a clean one: water sits on the softened one and won't move. One dryer sheet ends it, permanently. This is the shot that saves the customer.</li>
+            <li><b>Opacity.</b> Standard and Heavy held to a light — where a light colour shows through, and the weight that doesn't.</li>
+            <li><b>Cutting.</b> Rotary cutter, flat edges, no curl — the shot that answers "I've never sewn a knit."</li>
+            <li><b>Sewing.</b> Standard settings, no walking foot; a 70/10 needle on a serger for the golf dress; ballpoint on the stretch tiers.</li>
+            <li><b>Against the body.</b> A running top in the heat; period underwear with a smooth face; a child's tee; a cat pad of ProCool over Zorb; a mask liner; a fursuit interior.</li>
+            <li><b>Lifestyle.</b> The walk with the dogs in eighty degrees; the hotel sink; the travel bag; the sports field.</li>
+            <li><b>The completed products.</b> Tops, jerseys, liners, underwear, linings — with the fabric named.</li>
+            <li class="no"><b>Never:</b> knit construction, how the fibre channels are made, tier numbers stated against each other except as multiples of the baseline.</li>
+          </ol>
+        </div></details>
+
+      <details class="rc" data-brand="proeco"><summary><span class="t">Organic · natural</span><span class="s">What are you? Cotton. What else? Nothing. Every ProECO base family.</span><span class="fam">Organic Cotton Interlock · Jersey · Fleece · French Terry · Sherpa · Twill · Rib · Bamboo Jersey · Bamboo Fleece · Bamboo French Terry · Bamboo Lining Fleece · Bamboo Loop Terry · Bamboo Sherpa · Merino Interlock · Merino Jersey · Recycled Cotton Jersey (ReInspire) · Linen</span></summary>
+        <div class="rbody">
+          <p class="moment"><b>The moment that sells it:</b> the swatch off the bolt beside the same swatch after one hot wash — measured smaller, felt softer — and the hand moving across it. "Like butter."</p>
+          <ol>
+            <li><b>The furled sheet.</b> The bolt flowing; the fibre named on screen in one word — cotton, bamboo, merino, linen.</li>
+            <li><b>The family together.</b> Fanned by construction, because that is how a maker chooses: interlock (both sides the same), jersey (the T-shirt), fleece and sherpa (the pile), French terry and loop terry (the loops), twill (the woven), rib (the cuff). Then the fibres beside each other: cotton, bamboo, merino, recycled, linen.</li>
+            <li><b>Both faces.</b> Turned. Interlock: no wrong side — a pin marking an arbitrary one. Fleece and terry: the pile, then the flat face. Sherpa: the deep pile.</li>
+            <li><b>Stretch.</b> 30% crosswise on the interlock with no spandex; the rib's recovery; the merino's give. The jersey's edge curling — shown honestly — beside the interlock's flat edge.</li>
+            <li><b>Water on the face.</b> Natural fibres absorb and hold rather than transport: show it plainly — the drop darkening the cotton, the bamboo taking it fast, the merino taking it into the fibre while the surface still feels dry. This is the honest contrast with the wicking recipe, not a weakness.</li>
+            <li><b>The result after water.</b> The wet swatch on the line; the dry time compared, fairly, across cotton, bamboo, merino.</li>
+            <li><b>The wash.</b> Off the bolt beside washed. Measured: 7–8% length, 3–4% width on the interlock; the merino's two-wash rule shown, because nothing else in the catalogue needs it. Then the hand across "butter."</li>
+            <li><b>The beginner.</b> A first-time knit sewer, genuinely — the flat edge under the rotary cutter, the straight seam on standard settings, and the moment it works. The page's own definition of success.</li>
+            <li><b>Cutting.</b> Pre-wash first — the mandatory step shown as the first step. Then the cut.</li>
+            <li><b>Sewing.</b> Straight stitch or narrow zigzag; ballpoint needle; serged edges for the fleeces; the merino sewn slowly.</li>
+            <li><b>Against the skin.</b> A baby's bib and sleep sack; a T-shirt dress; a pad face-up; a nappy soaker of doubled merino.</li>
+            <li><b>The verification stack.</b> Five cards, one at a time: organic · US Cotton Trust Protocol · SustainSafe · CPSIA · Forever-Chemicals-Free. For merino: mulesing-free. For ReInspire: where the cotton came from.</li>
+            <li><b>Lifestyle.</b> The garment worn; the nursery; the pouch with food in it for the FoodSAFE variants.</li>
+            <li><b>The completed products.</b> Garments, baby clothing, pads, soakers, home textiles — with the fabric named.</li>
+            <li class="no"><b>Never:</b> knit construction; any implication of GOTS or OEKO-TEX; "naturally antibacterial" for bamboo or merino; a cotton field the family did not grow.</li>
+          </ol>
+        </div></details>
+
+      <details class="rc" data-brand="procool"><summary><span class="t">Stretch-FIT</span><span class="s">Four-way stretch with recovery — for the product that moves with a body.</span><span class="fam">360 Stretch-FIT · TransWICK X-FIT Jersey · X-FIT Mesh · Stretch-FIT OC Jersey · Stretch-FIT OC Fleece · Stretch-FIT OC French Terry · OC Rib · Stretch-FIT PUL · Stretch-FIT OC Jersey PUL</span></summary>
+        <div class="rbody">
+          <p class="moment"><b>The moment that sells it:</b> the fabric stretched against a ruler in both directions, released, and back to the mark — then the body wearing it bending, sitting, running, and nothing announcing itself.</p>
+          <ol>
+            <li><b>The furled sheet.</b> The bolt flowing — and then the stretch in four directions, held, released.</li>
+            <li><b>The family together.</b> Fanned by what carries the stretch: the ProCool stretch tiers (wicking and stretch), the organic Stretch-FIT tiers (cotton and stretch), the rib (recovery for cuffs and bands), and the two Stretch-FIT barriers (waterproof and stretch).</li>
+            <li><b>Stretch, measured.</b> Against a ruler: the percentage stated per fabric, both directions. Then the return. Then a second pull after a wash — the recovery holds.</li>
+            <li><b>The waterproof stretch.</b> Stretch-FIT PUL under the tap while stretched: the barrier holds at full extension. This is the shot that makes period underwear and training pants believable.</li>
+            <li><b>Water on the face.</b> For the wicking tiers, the transport shot from the wicking recipe; for the organic tiers, the honest natural-fibre shot. Stretch changes nothing about what the fibre does.</li>
+            <li><b>Cutting.</b> Weights, not pins; the fabric relaxed on the table before the cut, so the piece matches the pattern.</li>
+            <li><b>Sewing.</b> Ballpoint or stretch needle; a zigzag or serger seam that stretches with the fabric — the seam pulled after sewing, nothing pops. Elastic applied to the rib.</li>
+            <li><b>Against the body in motion.</b> Period underwear, training pants, activewear, a swim rash guard, a cycling jersey — bending, sitting, running, swimming. The camera stays with the body.</li>
+            <li><b>Lifestyle.</b> The gym, the pool, the playground, the morning.</li>
+            <li><b>The completed products.</b> Underwear, activewear, swimwear, training pants, cuffs — with the fabric named.</li>
+            <li class="no"><b>Never:</b> fibre ratios beyond the label, Lycra content as a number we don't publish, knit construction.</li>
+          </ol>
+        </div></details>
+
+      <details class="rc" data-brand="house"><summary><span class="t">FoodSAFE</span><span class="s">Certify the fabric, not the chemical — the door that crosses every brand.</span><span class="fam">FoodSAFE PUL · ProCool FoodSAFE Interlock and Jersey Mesh · Nylon Interlock FoodSAFE · ProECO OC Interlock FoodSAFE · Merino Interlock FoodSAFE · every variant carrying 21 CFR 177.1680 and 175.300</span></summary>
+        <div class="rbody">
+          <p class="moment"><b>The moment that sells it:</b> food in contact — bread under a bowl cover, cheese in a pouch, a bib at a mouth — and then the six-day test the customers already ran.</p>
+            <ol>
+            <li><b>The family together, across brands.</b> This is the one recipe where the fan crosses brands: a barrier, a wicking knit, a cotton interlock, a merino — one door. Show the door, not a brand.</li>
+            <li><b>Both faces.</b> For FoodSAFE PUL: which face touches the food (the film), which faces out. For the knits: either.</li>
+            <li><b>Food in contact.</b> The pouch with a sandwich; the bowl cover over dough; the bib; the lunch-bag liner; the produce bag. Real food, real kitchen.</li>
+            <li><b>The six-day test.</b> Cheese in a FoodSAFE pouch beside cheese in plastic, opened after six days — the customers' own experiment, repeated on camera without commentary.</li>
+            <li><b>The wipe, the wash, the reuse.</b> Wiped clean; washed; used again. The reusable kitchen in three shots.</li>
+            <li><b>The certificate.</b> As a card: FDA 21 CFR 177.1680 and 175.300. Then the second card, always: <i>the fabric certificate is not the product certificate.</i></li>
+            <li><b>Sewing.</b> The same as the base fabric; for the PUL, the seam sealed; for a heat-sealed pouch, the seal.</li>
+            <li><b>Lifestyle.</b> The sourdough community; the lunchbox; the camping kitchen; the commercial food service line.</li>
+            <li><b>The completed products.</b> Pouches, covers, bibs, bags, wraps — with the fabric named and the certification shown once.</li>
+            <li class="no"><b>Never:</b> "FDA approved"; 175.320; any variant that doesn't carry the certificate; the chemistry of the treatment.</li>
+          </ol>
+        </div></details>
+
+    </div>
+    <p class="note">Hook-and-loop (AKAStiq) and the sorbent mats (SupAbsorb) each get a recipe of their own in round two: the loop that holds under a hundred pulls; the mat that takes the spill on a floor.</p>
+  </div>
+</section>
+
+<section class="band s-paper" id="library">
+  <div class="rk-breakout">
+    <h2 class="alt">The library</h2>
+    <p class="lede big">Everything both websites will want, in groups. Open a group to see what's in it; open a video to read what it's about. Search and filter, and the counts follow.</p>
+    <div class="filters" role="group" aria-label="Filter the library">
+      <input id="q" class="fq" type="search" aria-label="Search a video, a fabric, a page">
+      <select id="fsite" aria-label="Website"><option value="">Both websites</option><option>AKAS</option><option>Wazoodle</option></select>
+      <select id="faud" aria-label="Audience"><option value="">Every audience</option><option>Everyone</option><option>Maker</option><option>Explorer</option><option>Becoming</option><option>Climber</option><option>Institutional buyer</option><option>Carrier</option><option>Mission</option></select>
+      <select id="ffn" aria-label="Function"><option value="">Every function</option><option value="absorbent">Absorbent</option><option value="waterproof">Waterproof</option><option value="wicking">Stay-dry · wicking</option><option value="organic">Organic · natural</option><option value="stretch">Stretch-FIT</option><option value="hook-loop">Hook &amp; loop</option><option value="sorbent">Sorbent</option></select>
+      <select id="fst" aria-label="Status"><option value="">Every status</option><option value="written">Written</option><option value="next">Next</option><option value="round two">Round two</option><option value="library">Library</option></select>
+    </div>
+    <div class="counts"><b id="cAll">0</b> videos · <b id="cA">0</b> for akastex.com · <b id="cW">0</b> for wazoodle.com</div>
+    <div id="groups" class="groups"></div>
+  </div>
+</section>
+
+
+<div class="descent"></div>
+
+<section class="band deep" id="home">
+  <div class="rk-breakout">
+    <p class="eyebrow">Coming home</p>
+    <h2 class="title">You've walked the thirteen, the recipes, the library. <em>Here's what you already knew.</em></h2>
+    <div class="home-grid">
+      <figure class="tree" aria-label="A tree: roots draw first, then the trunk, then the canopy fills with leaves, and one last leaf arrives — every film adds a branch">
+        <svg viewBox="0 0 520 620" aria-hidden="true">
+          <line class="soil" x1="20" y1="430" x2="500" y2="430"/>
+          <g class="roots">
+            <path pathLength="1" d="M260 430 Q250 470 200 500 Q160 520 140 580"/>
+            <path pathLength="1" d="M260 430 Q270 480 320 505 Q370 525 385 585"/>
+            <path pathLength="1" d="M260 430 Q262 490 258 560"/>
+            <path pathLength="1" d="M228 480 Q190 490 170 540"/>
+            <path pathLength="1" d="M292 482 Q330 495 350 545"/>
+          </g>
+          <path class="trunk" pathLength="1" d="M260 430 Q262 340 258 240"/>
+          <g class="branches">
+            <path pathLength="1" d="M259 300 Q220 280 190 240" style="--i:0"/>
+            <path pathLength="1" d="M259 280 Q300 260 330 220" style="--i:1"/>
+            <path pathLength="1" d="M258 250 Q230 210 200 180" style="--i:2"/>
+            <path pathLength="1" d="M258 240 Q290 200 320 160" style="--i:3"/>
+            <path pathLength="1" d="M258 240 Q258 200 262 150" style="--i:4"/>
+          </g>
+          <g class="leaves">
+            <circle cx="186" cy="236" r="16" style="--i:0"/><circle cx="332" cy="216" r="16" style="--i:1"/><circle cx="198" cy="178" r="15" style="--i:2"/><circle cx="322" cy="158" r="15" style="--i:3"/><circle cx="262" cy="148" r="17" style="--i:4"/>
+            <circle cx="150" cy="210" r="13" style="--i:5"/><circle cx="366" cy="190" r="13" style="--i:6"/><circle cx="230" cy="140" r="13" style="--i:7"/><circle cx="296" cy="122" r="13" style="--i:8"/><circle cx="170" cy="150" r="12" style="--i:9"/><circle cx="352" cy="130" r="12" style="--i:10"/><circle cx="262" cy="104" r="12" style="--i:11"/>
+          </g>
+          <g class="last"><path pathLength="1" d="M262 150 Q300 110 340 80"/><circle cx="346" cy="76" r="14"/></g>
+          <text class="tl" x="120" y="606">roots · AKAS</text>
+          <text class="tl" x="300" y="345">trunk · Wazoodle</text>
+          <text class="tl" x="400" y="60">every film adds a branch</text>
+        </svg>
+      </figure>
+      <div class="home-text">
+        <div class="hm"><h3>The need was always first.</h3><p>Every fabric in this building answered a body that was already asking — a baby at three in the morning, a girl in a classroom, a floor with a spill on it. That's where every film begins: not with the fabric, with the asking.</p></div>
+        <div class="hm"><h3>Every destruction came before its creation.</h3><p>A poisoned ground became a refusal, and the refusal became AKAS. A brand people warned each other about became an inbox that answered, and the answering became trust. A pandemic closed the mills and showed what the fabrics had been for all along. The crises are the doorways. Film the doorways.</p></div>
+        <div class="hm"><h3>Roots, trunk, canopy.</h3><p>AKAS is the roots — unseen, holding. Wazoodle is the trunk — every promise moves through it. The canopy is what a maker learns with her own hands: that she can make what the market said didn't exist. The films are the fruit.</p></div>
+        <div class="hm"><h3>One fabric already finished.</h3>
+          <div class="silver"><svg viewBox="0 0 160 100" aria-hidden="true"><rect class="sw" x="4" y="4" width="152" height="92" rx="8"/><g class="stripes"><line x1="4" y1="28" x2="156" y2="28"/><line x1="4" y1="50" x2="156" y2="50"/><line x1="4" y1="72" x2="156" y2="72"/></g></svg><div class="wash"><span class="n">wash <b id="washN">1</b></span><span class="l">the same</span></div></div>
+          <p>Silver knitted into the yarn, grey stripes you can see — protection that isn't a treatment, so it can't wash out. Wash one, wash five hundred, the same. No reviews, because nobody needed to come back. That's the standard everything else is measured against: protection so complete it stops needing to be tended.</p></div>
+      </div>
+    </div>
+    <div class="rule"></div>
+    <p class="ask-line">So the question the page hands back is the first question either website asks: <em>What are you making?</em></p>
+    <p class="last-line">The tree is still growing. Every film adds a branch.</p>
+    <div class="doors home-doors"><a class="door rung" href="#map"><span class="eyebrow">Now</span><strong>Back to the thirteen</strong>Open a card. Read its document. Say what you see. That's the meeting.</a></div>
+  </div>
+</section>
+
+<footer class="band tight s-paper">
+  <div class="rk-in ft">The ARC Video Map · AKAS Tex LLC, Bensalem PA · crafted by Ashrey with Claude</div>
+</footer>
+
+
+<script>
+(function(){ document.documentElement.classList.remove('no-js');
+  /* one open at a time keeps the room on one video */
+  const all=[...document.querySelectorAll('details.vc')];
+  all.forEach(d=>d.addEventListener('toggle',()=>{ if(d.open){ all.forEach(o=>{ if(o!==d) o.open=false; }); d.scrollIntoView({behavior:'smooth',block:'start'}); const svg=d.querySelector('svg'); if(svg&&svg.setCurrentTime){ svg.pauseAnimations(); svg.setCurrentTime(0); svg.unpauseAnimations(); } } }));
+})();
+</script>
+<script>
+(function(){
+  const LIB=[{"t": "The AKAS Journey", "site": "AKAS", "kind": "journey", "len": "5–8 min", "aud": "Everyone at the door", "st": "written", "fn": "", "brand": "", "c": "The master story of the family and the company — the five-year chain, the refusal, the six days, the second call — told once by the people who lived it. One conversation day; three chapter cuts come from it."}, {"t": "The Pandemic Journey", "site": "AKAS", "kind": "journey", "len": "4–6 min", "aud": "Institutional buyer", "st": "written", "fn": "", "brand": "", "c": "Demand from the inbox and supply from the floor as one chapter: 500 orders on Friday, 1,000 on Saturday, a news crew on Sunday; four machines flat out; millions of masks."}, {"t": "The Wazoodle Buying Journey", "site": "AKAS", "kind": "journey", "len": "3–4 min", "aud": "Everyone at the door", "st": "written", "fn": "", "brand": "", "c": "Six days in August 2012 with a clock — Thursday the flight, Saturday the truck, Tuesday shipping. Why there are two companies and one family."}, {"t": "The Second Call", "site": "AKAS", "kind": "journey", "len": "3–5 min", "aud": "Institutional buyer", "st": "written", "fn": "", "brand": "", "c": "Why a family that makes fabric for babies also makes the mat that catches the spill: 2009, chemical waste reaching the ground, a refusal, and the engineer who built the answer."}, {"t": "Does This Exist?", "site": "AKAS", "kind": "making", "len": "3–4 min", "aud": "Explorer", "st": "written", "fn": "", "brand": "", "c": "New product development as the Explorer's story. A sample came in the mail, was read off the cloth, approved on fifteen yards, and is still shipping. Seventy-five styles, every one because somebody asked."}, {"t": "The Ladder", "site": "AKAS", "kind": "making", "len": "90s–2 min", "aud": "Becoming · Climber", "st": "written", "fn": "", "brand": "", "c": "Swatch, yards, roll, custom print, custom colour, bulk, development. Seven rungs that existed for fifteen years and were never published — here they are, present, never pushed."}, {"t": "Swatch First", "site": "Wazoodle", "kind": "making", "len": "90s–2 min", "aud": "Maker · Explorer", "st": "written", "fn": "", "brand": "", "c": "No wholesale order until you've bought a swatch; no custom fabric until a development walk that starts with a sample. The maker and the creator walk the same way, in both directions."}, {"t": "An Email Came Back", "site": "Wazoodle", "kind": "makers", "len": "2–3 min", "aud": "Maker", "st": "written", "fn": "", "brand": "", "c": "Wazoodle's rebirth from the maker's side of the inbox: the same name that had swallowed their money, and then a reply. The community forgave one kept promise at a time."}, {"t": "The Ones Who Sew Across Water", "site": "Wazoodle", "kind": "makers", "len": "4–6 min", "aud": "Mission", "st": "written", "fn": "", "brand": "", "c": "The humanitarian makers — pads for girls who'd otherwise miss school, shoeboxes, a twelve-year relationship, and this August's three women in Paris. The recipients are never filmed as proof."}, {"t": "What Are You Making?", "site": "Both", "kind": "site", "len": "30s", "aud": "Everyone at the door", "st": "round two", "fn": "", "brand": "", "c": "The thirty-second front door for both sites — the first question handed to the visitor, cut last from everything else."}, {"t": "The Three Jobs — wicking face, absorbent core, waterproof barrier", "site": "Both", "kind": "site", "len": "60s", "aud": "Maker", "st": "round two", "fn": "", "brand": "", "c": "One sixty-second explainer: an absorbent product is three jobs, not one fabric. Serves both brand hubs, three Technologies pages, three shop doors and every Fabric Finder cluster."}, {"t": "How We Test", "site": "AKAS", "kind": "proof", "len": "2–3 min", "aud": "Institutional buyer", "st": "round two", "fn": "", "brand": "", "c": "Sid at the bench: speed in, capacity held, retention under pressure — the syringe method, the independent labs, the shrinkage method he wrote up. The test is filmable; the making is not."}, {"t": "Thirteen Brands, One Build", "site": "AKAS", "kind": "site", "len": "60s", "aud": "Everyone at the door", "st": "round two", "fn": "", "brand": "", "c": "The body map in sixty seconds — twelve brands that protect a body, one that protects the ground — each with its threshold line."}, {"t": "Certifications as permissions", "site": "AKAS", "kind": "proof", "len": "45s", "aud": "Institutional buyer", "st": "round two", "fn": "", "brand": "", "c": "CPSIA, FDA food-contact, Berry, NFSI, UPF, Class 1 — what each one permits a maker to do, and the GOTS/OEKO-TEX position stated plainly."}, {"t": "Supporting the Explorer Economy", "site": "AKAS", "kind": "makers", "len": "2–3 min", "aud": "Becoming", "st": "round two", "fn": "", "brand": "", "c": "The Etsy economy — 'your home business helps mine' — 118 named brands, the WAHM years, and the line: before it becomes a business, it's always a person."}, {"t": "Sustainability Through Reusables", "site": "AKAS", "kind": "site", "len": "60s", "aud": "Everyone", "st": "round two", "fn": "", "brand": "", "c": "Sustainability as investment, not cost: the Honest No, REPREVE's twelve bottles a yard, ReInspire, 90% recycled mats, the reusable kitchen."}, {"t": "Become a Distributor", "site": "AKAS", "kind": "making", "len": "60s", "aud": "Carrier", "st": "round two", "fn": "", "brand": "", "c": "In the buyer's own language: Santiago with a suitcase, Rainbow, Milpoint at Frankfurt, and the export machinery behind them."}, {"t": "The Colour & Print Programme", "site": "AKAS", "kind": "making", "len": "60s", "aud": "Climber", "st": "round two", "fn": "", "brand": "", "c": "Lab dips, strike-offs, a print going from art to rolled goods; the per-fabric brackets as an invitation, never a site-wide minimum."}, {"t": "The Selection-Regret Story", "site": "AKAS", "kind": "making", "len": "60–90s", "aud": "Maker", "st": "round two", "fn": "", "brand": "", "c": "The wrong-fabric regret Arch or Sid prevented — or couldn't — and the five-step decision that prevents it. Swatch first is the universal preventer."}, {"t": "The Partner Story", "site": "AKAS", "kind": "journey", "len": "60–90s", "aud": "Becoming · Climber", "st": "round two", "fn": "", "brand": "", "c": "The time a customer's business, not their fabric, was in trouble — forecasting by friendship, the price that held."}, {"t": "Annual Requirements — can I get this every month?", "site": "Wazoodle", "kind": "making", "len": "60s", "aud": "Becoming", "st": "round two", "fn": "", "brand": "", "c": "The monthly-supply front door as a named thing: SoCo Studio's fourteen rolls, the in-stock programme that buys time against the lead-time."}, {"t": "The maker stream (Wall of Love · Wall of Creations · Book of Makers)", "site": "Wazoodle", "kind": "makers", "len": "continuous", "aud": "Maker", "st": "round two", "fn": "", "brand": "", "c": "Not a film — a practice. Remote interviews and makers' own footage, gathered continuously into the Wall of Love, the Wall of Creations and the Book of Makers. The only thing that grows without a shoot."}, {"t": "Zorb Origin", "site": "AKAS", "kind": "origin", "len": "2–3 min", "aud": "Everyone", "st": "round two", "fn": "", "brand": "", "c": "'We bought this one.' The Canadian birth, Jen and the third dimension, Dear Megan and Ready-AbZORB, who asked for 4D."}, {"t": "ProSoft Origin", "site": "AKAS", "kind": "origin", "len": "2–3 min", "aud": "Everyone", "st": "round two", "fn": "", "brand": "", "c": "The birth of ECO — when lamination went solvent-free and what prompted it (told by absence, under STD-22); the five core fabrics; MediPUL's gown lineage."}, {"t": "ProCool Origin", "site": "AKAS", "kind": "origin", "len": "2–3 min", "aud": "Everyone", "st": "round two", "fn": "", "brand": "", "c": "The poolside moment of 2018 in Sid's own voice; Gigi's bra and the military; the Missouri question only the founders can settle."}, {"t": "ProECO Origin", "site": "AKAS", "kind": "origin", "len": "2–3 min", "aud": "Everyone", "st": "round two", "fn": "", "brand": "", "c": "The certification decision in the founders' words; ReInspire V1 to V2; the hemp story; the fibre partnerships."}, {"t": "SupAbsorb Origin (brand cut)", "site": "AKAS", "kind": "origin", "len": "60s", "aud": "Institutional buyer", "st": "round two", "fn": "", "brand": "", "c": "A sixty-second brand cut from The Second Call — the refusal, the first sorbents, the registration."}, {"t": "Zorb — brand gateway cut", "site": "Wazoodle", "kind": "gateway", "len": "60s", "aud": "Maker", "st": "round two", "fn": "", "brand": "Zorb", "c": "A sixty-second cut for the Zorb gateway on wazoodle.com — the brand's threshold line and its origin, cut from the AKAS origin film once it exists."}, {"t": "ProSoft PUL — brand gateway cut", "site": "Wazoodle", "kind": "gateway", "len": "60s", "aud": "Maker", "st": "round two", "fn": "", "brand": "ProSoft PUL", "c": "A sixty-second cut for the ProSoft PUL gateway on wazoodle.com — the brand's threshold line and its origin, cut from the AKAS origin film once it exists."}, {"t": "ProCool — brand gateway cut", "site": "Wazoodle", "kind": "gateway", "len": "60s", "aud": "Maker", "st": "round two", "fn": "", "brand": "ProCool", "c": "A sixty-second cut for the ProCool gateway on wazoodle.com — the brand's threshold line and its origin, cut from the AKAS origin film once it exists."}, {"t": "ProECO — brand gateway cut", "site": "Wazoodle", "kind": "gateway", "len": "60s", "aud": "Maker", "st": "round two", "fn": "", "brand": "ProECO", "c": "A sixty-second cut for the ProECO gateway on wazoodle.com — the brand's threshold line and its origin, cut from the AKAS origin film once it exists."}, {"t": "ProTEC — brand gateway cut", "site": "Wazoodle", "kind": "gateway", "len": "60s", "aud": "Maker", "st": "round two", "fn": "", "brand": "ProTEC", "c": "A sixty-second cut for the ProTEC gateway on wazoodle.com — the brand's threshold line and its origin, cut from the AKAS origin film once it exists."}, {"t": "AKAStiq — brand gateway cut", "site": "Wazoodle", "kind": "gateway", "len": "60s", "aud": "Maker", "st": "round two", "fn": "", "brand": "AKAStiq", "c": "A sixty-second cut for the AKAStiq gateway on wazoodle.com — the brand's threshold line and its origin, cut from the AKAS origin film once it exists."}, {"t": "SupAbsorb Tech — brand gateway cut", "site": "Wazoodle", "kind": "gateway", "len": "60s", "aud": "Maker", "st": "round two", "fn": "", "brand": "SupAbsorb Tech", "c": "A sixty-second cut for the SupAbsorb Tech gateway on wazoodle.com — the brand's threshold line and its origin, cut from the AKAS origin film once it exists."}, {"t": "Silver Arch — brand gateway cut", "site": "Wazoodle", "kind": "gateway", "len": "60s", "aud": "Maker", "st": "round two", "fn": "", "brand": "Silver Arch", "c": "A sixty-second cut for the Silver Arch gateway on wazoodle.com — the brand's threshold line and its origin, cut from the AKAS origin film once it exists."}, {"t": "1 mil ECO-PUL (Z-10) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "written", "fn": "waterproof", "brand": "ProSoft", "c": "The bond is permanent. A 60–90 second family master in the waterproof recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "2 mil ECO-PUL (Z-11) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "waterproof", "brand": "ProSoft", "c": "The thicker film for institutional laundering. A 60–90 second family master in the waterproof recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "360 Stretch-FIT (Z-12) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "wicking", "brand": "ProCool", "c": "Four-way stretch that wicks. A 60–90 second family master in the stay-dry / wicking recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Bamboo Fleece (Z-13) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "organic", "brand": "ProECO", "c": "Bamboo fleece — the pile. A 60–90 second family master in the organic / natural recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Bamboo French Terry (Z-14) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "organic", "brand": "ProECO", "c": "Bamboo French terry — the loops. A 60–90 second family master in the organic / natural recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Bamboo Jersey (Z-15) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "organic", "brand": "ProECO", "c": "Bamboo jersey — the T-shirt. A 60–90 second family master in the organic / natural recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Bamboo Lining Fleece (Z-16) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "organic", "brand": "ProECO", "c": "Bamboo lining fleece. A 60–90 second family master in the organic / natural recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Bamboo Loop Terry (Z-17) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "organic", "brand": "ProECO", "c": "Bamboo loop terry (the sitemap spells it 'Loop Tery' — flag for correction). A 60–90 second family master in the organic / natural recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Bamboo Sherpa (Z-18) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "organic", "brand": "ProECO", "c": "Bamboo sherpa — the deep pile. A 60–90 second family master in the organic / natural recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Supima Cotton Jersey (Z-19) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "wicking", "brand": "ProCool", "c": "Cotton feel with wicking — Supima. A 60–90 second family master in the stay-dry / wicking recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "ProCool Pique Mesh (Z-21) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "wicking", "brand": "ProCool", "c": "The pique mesh — the polo. A 60–90 second family master in the stay-dry / wicking recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Food Safe PUL (Z-22) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "waterproof", "brand": "ProSoft", "c": "The barrier that may touch food. A 60–90 second family master in the waterproof recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "EZ Peel Loop (Z-23) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "hook-loop", "brand": "AKAStiq", "c": "EZ Peel — discontinued; respectful succession. A 60–90 second family master in the hook-and-loop recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Lightweight (Z-24) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "organic", "brand": "ProSoft", "c": "The lightest barrier for garments and linings. A 60–90 second family master in the organic / natural recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Linen (Z-25) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "organic", "brand": "ProECO", "c": "Linen (the sitemap spells it 'Lilen' — flag for correction). A 60–90 second family master in the organic / natural recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "MediCORE PUL (Z-26) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "waterproof", "brand": "ProSoft", "c": "The medical barrier with the absorbent core laminated on. A 60–90 second family master in the waterproof recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "MediPUL (Z-27) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "waterproof", "brand": "ProSoft", "c": "The medical barrier — cite the pathway, never 'FDA approved'. A 60–90 second family master in the waterproof recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Merino Wool Jersey (Z-28) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "organic", "brand": "ProECO", "c": "Merino jersey. A 60–90 second family master in the organic / natural recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Merino Wool Interlock (Z-29) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "organic", "brand": "ProECO", "c": "Merino interlock — the approachable merino; W-220 needs two washes. A 60–90 second family master in the organic / natural recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Zorb Microfiber Terry (Z-30) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "absorbent", "brand": "Zorb", "c": "The absorbency in a towel. A 60–90 second family master in the absorbent recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Nylon Interlock (Z-31) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "wicking", "brand": "ProCool", "c": "Nylon: 85–90% of its strength when soaked — uniforms and jerseys. A 60–90 second family master in the stay-dry / wicking recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Organic Cotton Fleece (Z-32) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "organic", "brand": "ProECO", "c": "Organic cotton fleece. A 60–90 second family master in the organic / natural recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Stretch-FIT Organic Cotton Fleece (Z-33) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "stretch", "brand": "ProECO", "c": "Stretch-FIT organic cotton fleece. A 60–90 second family master in the Stretch-FIT recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Organic Cotton Rib (Z-34) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "stretch", "brand": "ProECO", "c": "Organic cotton rib — the cuff, the band. A 60–90 second family master in the Stretch-FIT recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Organic Cotton French Terry (Z-35) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "organic", "brand": "ProECO", "c": "Organic cotton French terry. A 60–90 second family master in the organic / natural recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Organic Cotton Interlock (Z-36) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "written", "fn": "organic", "brand": "ProECO", "c": "The feel is pure. A 60–90 second family master in the organic / natural recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Stretch-FIT Organic Cotton Jersey (Z-37) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "stretch", "brand": "ProECO", "c": "Stretch-FIT organic cotton jersey. A 60–90 second family master in the Stretch-FIT recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Organic Cotton Sherpa (Z-38) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "organic", "brand": "ProECO", "c": "Organic cotton sherpa. A 60–90 second family master in the organic / natural recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Organic Cotton Twill (Z-39) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "organic", "brand": "ProECO", "c": "Organic cotton twill — the woven. A 60–90 second family master in the organic / natural recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "ProCool Interlock (Z-40) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "written", "fn": "wicking", "brand": "ProCool", "c": "The feel is the fabric. A 60–90 second family master in the stay-dry / wicking recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "ProCool Jersey Mesh (Z-41) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "wicking", "brand": "ProCool", "c": "The airy wicking mesh. A 60–90 second family master in the stay-dry / wicking recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "ProCool Lightweight (Z-42) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "wicking", "brand": "ProCool", "c": "The lightest wicking knit. A 60–90 second family master in the stay-dry / wicking recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "ProTEC Fleece (Z-43) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "wicking", "brand": "ProTEC", "c": "The fleece that sends moisture through to the core — the classic diaper liner. A 60–90 second family master in the stay-dry / wicking recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "TransWICK LITE (Z-44) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "wicking", "brand": "ProCool", "c": "TransWICK at its lightest — the fastest transport tier. A 60–90 second family master in the stay-dry / wicking recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "TransWICK X-FIT Jersey (Z-45) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "wicking", "brand": "ProCool", "c": "The stretch jersey that wicks fastest. A 60–90 second family master in the stay-dry / wicking recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "TransWICK X-FIT Performance Mesh (Z-46) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "wicking", "brand": "ProCool", "c": "The stretch mesh that wicks fastest. A 60–90 second family master in the stay-dry / wicking recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "AKAStiq Wide Loop (Z-47) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "hook-loop", "brand": "AKAStiq", "c": "The wide loop that holds — AKAStiq. A 60–90 second family master in the hook-and-loop recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Zorb® 3D Bamboo Dimple (Z-48) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "absorbent", "brand": "Zorb", "c": "The softness absorbs. A 60–90 second family master in the absorbent recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Zorb 3D Organic Cotton Dimple (Z-49) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "absorbent", "brand": "Zorb", "c": "Organic cotton face over the Zorb core. A 60–90 second family master in the absorbent recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Zorb 3D Diamond (Z-50) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "absorbent", "brand": "Zorb", "c": "Both sides work. A 60–90 second family master in the absorbent recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Zorb 3D Stay Dry Dimple (Z-51) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "next", "fn": "absorbent", "brand": "Zorb", "c": "The surface stays dry. The only fabric with a full FILL run, a MOD-19 video brief and 212 verified reviews — first after the four. A 60–90 second family master in the absorbent recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Zorb 4D Cotton Dimple CORE PUL (Z-52) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "waterproof", "brand": "Zorb", "c": "The layers are already one — with cotton against the skin. A 60–90 second family master in the waterproof recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Zorb 4D Stay Dry Dimple CORE PUL (Z-53) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "waterproof", "brand": "Zorb", "c": "The layers are already one. A 60–90 second family master in the waterproof recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Zorb Original (Z-54) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "written", "fn": "absorbent", "brand": "Zorb", "c": "It was ready before you were. A 60–90 second family master in the absorbent recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Recycled Cotton Jersey (Z-55) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "organic", "brand": "ProECO", "c": "ReInspire — recycled cotton, where the cotton came from. A 60–90 second family master in the organic / natural recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "MediCORE Absorbent PUL (Z-56) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "waterproof", "brand": "ProSoft", "c": "MediCORE with the absorbent layer. A 60–90 second family master in the waterproof recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "ProCool Fleece PUL (Z-57) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "waterproof", "brand": "ProCool", "c": "ProCool with the barrier on its back. A 60–90 second family master in the waterproof recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Zorb 3D Stay Dry Dimple LITE Fabric (Z-61) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "absorbent", "brand": "Zorb", "c": "The lighter Stay Dry Dimple — same face, less weight. A 60–90 second family master in the absorbent recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Cotton Fleece PUL (Z-65) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "waterproof", "brand": "other", "c": "Cotton fleece with the barrier. A 60–90 second family master in the waterproof recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Organic Cotton Fleece PUL (Z-66) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "waterproof", "brand": "ProECO", "c": "Organic cotton fleece with the barrier. A 60–90 second family master in the waterproof recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Organic Cotton Interlock PUL (Z-67) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "waterproof", "brand": "ProECO", "c": "Organic cotton interlock with the barrier. A 60–90 second family master in the waterproof recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Stretch-FIT Organic Cotton Jersey PUL (Z-68) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "waterproof", "brand": "ProSoft", "c": "Stretch-FIT organic cotton jersey with the barrier. A 60–90 second family master in the waterproof recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Organic Cotton Sherpa PUL (Z-69) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "waterproof", "brand": "ProECO", "c": "Organic cotton sherpa with the barrier. A 60–90 second family master in the waterproof recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Organic Cotton Twill PUL (Z-70) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "waterproof", "brand": "ProECO", "c": "Organic cotton twill with the barrier. A 60–90 second family master in the waterproof recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Bamboo Fleece PUL (Z-71) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "waterproof", "brand": "ProECO", "c": "Bamboo fleece with the barrier. A 60–90 second family master in the waterproof recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Bamboo Loop Terry PUL (Z-72) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "waterproof", "brand": "ProECO", "c": "Bamboo loop terry with the barrier. A 60–90 second family master in the waterproof recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "ProSoft Stretch-FIT PUL (Z-74) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "waterproof", "brand": "ProSoft", "c": "Four-way stretch, waterproof — period underwear and training pants. A 60–90 second family master in the waterproof recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "AKAStiq EZ Peel Loop (Z-75) — family master + demonstration", "site": "Both", "kind": "family", "len": "60–90s + 15–30s", "aud": "Maker", "st": "library", "fn": "hook-loop", "brand": "AKAStiq", "c": "AKAStiq EZ Peel Loop — discontinued; respectful succession. A 60–90 second family master in the hook-and-loop recipe, cut to a 15–30 second demonstration for every product under it and for its AKAS Z-style page."}, {"t": "Waterproof — shop door cut", "site": "Wazoodle", "kind": "door", "len": "20–30s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 20–30 second recognition cut for the shop door, assembled from the family masters' tests. No new footage."}, {"t": "Absorbent — shop door cut", "site": "Wazoodle", "kind": "door", "len": "20–30s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 20–30 second recognition cut for the shop door, assembled from the family masters' tests. No new footage."}, {"t": "Wicking & Cooling — shop door cut", "site": "Wazoodle", "kind": "door", "len": "20–30s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 20–30 second recognition cut for the shop door, assembled from the family masters' tests. No new footage."}, {"t": "Stay-Dry — shop door cut", "site": "Wazoodle", "kind": "door", "len": "20–30s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 20–30 second recognition cut for the shop door, assembled from the family masters' tests. No new footage."}, {"t": "Stretch & Recovery — shop door cut", "site": "Wazoodle", "kind": "door", "len": "20–30s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 20–30 second recognition cut for the shop door, assembled from the family masters' tests. No new footage."}, {"t": "Organic Cotton — shop door cut", "site": "Wazoodle", "kind": "door", "len": "20–30s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 20–30 second recognition cut for the shop door, assembled from the family masters' tests. No new footage."}, {"t": "Bamboo — shop door cut", "site": "Wazoodle", "kind": "door", "len": "20–30s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 20–30 second recognition cut for the shop door, assembled from the family masters' tests. No new footage."}, {"t": "Recycled — shop door cut", "site": "Wazoodle", "kind": "door", "len": "20–30s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 20–30 second recognition cut for the shop door, assembled from the family masters' tests. No new footage."}, {"t": "FoodSAFE — shop door cut", "site": "Wazoodle", "kind": "door", "len": "20–30s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 20–30 second recognition cut for the shop door, assembled from the family masters' tests. No new footage."}, {"t": "Silver Plus Antimicrobial — shop door cut", "site": "Wazoodle", "kind": "door", "len": "20–30s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 20–30 second recognition cut for the shop door, assembled from the family masters' tests. No new footage."}, {"t": "Deals · Seconds · Grab Bags — shop door cut", "site": "Wazoodle", "kind": "door", "len": "20–30s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 20–30 second recognition cut for the shop door, assembled from the family masters' tests. No new footage."}, {"t": "Baby & Child Care — cluster cut (26 finders inherit)", "site": "Wazoodle", "kind": "cluster", "len": "30–60s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 30–60 second crossing cut: what fabrics fit this family of things, and in what stack — from the three-jobs explainer and the family masters. Every finder in the cluster carries it, plus a maker's own footage where one exists."}, {"t": "Food Storage & Kitchen — cluster cut (18 finders inherit)", "site": "Wazoodle", "kind": "cluster", "len": "30–60s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 30–60 second crossing cut: what fabrics fit this family of things, and in what stack — from the three-jobs explainer and the family masters. Every finder in the cluster carries it, plus a maker's own footage where one exists."}, {"t": "Everyday Apparel — cluster cut (15 finders inherit)", "site": "Wazoodle", "kind": "cluster", "len": "30–60s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 30–60 second crossing cut: what fabrics fit this family of things, and in what stack — from the three-jobs explainer and the family masters. Every finder in the cluster carries it, plus a maker's own footage where one exists."}, {"t": "Medical & Healthcare — cluster cut (15 finders inherit)", "site": "Wazoodle", "kind": "cluster", "len": "30–60s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 30–60 second crossing cut: what fabrics fit this family of things, and in what stack — from the three-jobs explainer and the family masters. Every finder in the cluster carries it, plus a maker's own footage where one exists."}, {"t": "Home Textiles & Décor — cluster cut (13 finders inherit)", "site": "Wazoodle", "kind": "cluster", "len": "30–60s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 30–60 second crossing cut: what fabrics fit this family of things, and in what stack — from the three-jobs explainer and the family masters. Every finder in the cluster carries it, plus a maker's own footage where one exists."}, {"t": "Pet Care — cluster cut (13 finders inherit)", "site": "Wazoodle", "kind": "cluster", "len": "30–60s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 30–60 second crossing cut: what fabrics fit this family of things, and in what stack — from the three-jobs explainer and the family masters. Every finder in the cluster carries it, plus a maker's own footage where one exists."}, {"t": "Menstrual, Incontinence & Personal Hygiene — cluster cut (13 finders inherit)", "site": "Wazoodle", "kind": "cluster", "len": "30–60s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 30–60 second crossing cut: what fabrics fit this family of things, and in what stack — from the three-jobs explainer and the family masters. Every finder in the cluster carries it, plus a maker's own footage where one exists."}, {"t": "Commercial Food Service — cluster cut (12 finders inherit)", "site": "Wazoodle", "kind": "cluster", "len": "30–60s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 30–60 second crossing cut: what fabrics fit this family of things, and in what stack — from the three-jobs explainer and the family masters. Every finder in the cluster carries it, plus a maker's own footage where one exists."}, {"t": "Gym, Fitness & Sports Gear — cluster cut (10 finders inherit)", "site": "Wazoodle", "kind": "cluster", "len": "30–60s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 30–60 second crossing cut: what fabrics fit this family of things, and in what stack — from the three-jobs explainer and the family masters. Every finder in the cluster carries it, plus a maker's own footage where one exists."}, {"t": "Hats, Accessories & Small Items — cluster cut (7 finders inherit)", "site": "Wazoodle", "kind": "cluster", "len": "30–60s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 30–60 second crossing cut: what fabrics fit this family of things, and in what stack — from the three-jobs explainer and the family masters. Every finder in the cluster carries it, plus a maker's own footage where one exists."}, {"t": "Swimwear & Water Sports — cluster cut (7 finders inherit)", "site": "Wazoodle", "kind": "cluster", "len": "30–60s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 30–60 second crossing cut: what fabrics fit this family of things, and in what stack — from the three-jobs explainer and the family masters. Every finder in the cluster carries it, plus a maker's own footage where one exists."}, {"t": "Athletic & Performance Wear — cluster cut (7 finders inherit)", "site": "Wazoodle", "kind": "cluster", "len": "30–60s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 30–60 second crossing cut: what fabrics fit this family of things, and in what stack — from the three-jobs explainer and the family masters. Every finder in the cluster carries it, plus a maker's own footage where one exists."}, {"t": "Cleaning & Household — cluster cut (7 finders inherit)", "site": "Wazoodle", "kind": "cluster", "len": "30–60s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 30–60 second crossing cut: what fabrics fit this family of things, and in what stack — from the three-jobs explainer and the family masters. Every finder in the cluster carries it, plus a maker's own footage where one exists."}, {"t": "Bags, Storage & Organization — cluster cut (7 finders inherit)", "site": "Wazoodle", "kind": "cluster", "len": "30–60s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 30–60 second crossing cut: what fabrics fit this family of things, and in what stack — from the three-jobs explainer and the family masters. Every finder in the cluster carries it, plus a maker's own footage where one exists."}, {"t": "Outdoor & Specialty — cluster cut (7 finders inherit)", "site": "Wazoodle", "kind": "cluster", "len": "30–60s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 30–60 second crossing cut: what fabrics fit this family of things, and in what stack — from the three-jobs explainer and the family masters. Every finder in the cluster carries it, plus a maker's own footage where one exists."}, {"t": "Automotive & Outdoor — cluster cut (5 finders inherit)", "site": "Wazoodle", "kind": "cluster", "len": "30–60s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 30–60 second crossing cut: what fabrics fit this family of things, and in what stack — from the three-jobs explainer and the family masters. Every finder in the cluster carries it, plus a maker's own footage where one exists."}, {"t": "Personal Care & Accessories — cluster cut (4 finders inherit)", "site": "Wazoodle", "kind": "cluster", "len": "30–60s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 30–60 second crossing cut: what fabrics fit this family of things, and in what stack — from the three-jobs explainer and the family masters. Every finder in the cluster carries it, plus a maker's own footage where one exists."}, {"t": "Outerwear & Layers — cluster cut (4 finders inherit)", "site": "Wazoodle", "kind": "cluster", "len": "30–60s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 30–60 second crossing cut: what fabrics fit this family of things, and in what stack — from the three-jobs explainer and the family masters. Every finder in the cluster carries it, plus a maker's own footage where one exists."}, {"t": "Underwear & Intimates — cluster cut (4 finders inherit)", "site": "Wazoodle", "kind": "cluster", "len": "30–60s", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "A 30–60 second crossing cut: what fabrics fit this family of things, and in what stack — from the three-jobs explainer and the family masters. Every finder in the cluster carries it, plus a maker's own footage where one exists."}, {"t": "Baby & Child Care — industry cut", "site": "AKAS", "kind": "industry", "len": "30–45s", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "A 30–45 second cut for the AKAS Industry page, assembled from the maker chorus and the family films. Authority, not endorsement; never new footage first."}, {"t": "Apparel & Clothing — industry cut", "site": "AKAS", "kind": "industry", "len": "30–45s", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "A 30–45 second cut for the AKAS Industry page, assembled from the maker chorus and the family films. Authority, not endorsement; never new footage first."}, {"t": "Industrial Safety & Absorbents — industry cut", "site": "AKAS", "kind": "industry", "len": "30–45s", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "A 30–45 second cut for the AKAS Industry page, assembled from the maker chorus and the family films. Authority, not endorsement; never new footage first."}, {"t": "Pet Care — industry cut", "site": "AKAS", "kind": "industry", "len": "30–45s", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "A 30–45 second cut for the AKAS Industry page, assembled from the maker chorus and the family films. Authority, not endorsement; never new footage first."}, {"t": "Athletic & Fitness — industry cut", "site": "AKAS", "kind": "industry", "len": "30–45s", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "A 30–45 second cut for the AKAS Industry page, assembled from the maker chorus and the family films. Authority, not endorsement; never new footage first."}, {"t": "Food & Beverage — industry cut", "site": "AKAS", "kind": "industry", "len": "30–45s", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "A 30–45 second cut for the AKAS Industry page, assembled from the maker chorus and the family films. Authority, not endorsement; never new footage first."}, {"t": "Healthcare & Medical — industry cut", "site": "AKAS", "kind": "industry", "len": "30–45s", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "A 30–45 second cut for the AKAS Industry page, assembled from the maker chorus and the family films. Authority, not endorsement; never new footage first."}, {"t": "Hygiene & Care — industry cut", "site": "AKAS", "kind": "industry", "len": "30–45s", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "A 30–45 second cut for the AKAS Industry page, assembled from the maker chorus and the family films. Authority, not endorsement; never new footage first."}, {"t": "Defense / Military / Government — industry cut", "site": "AKAS", "kind": "industry", "len": "30–45s", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "A 30–45 second cut for the AKAS Industry page, assembled from the maker chorus and the family films. Authority, not endorsement; never new footage first."}, {"t": "Outdoor Recreation — industry cut", "site": "AKAS", "kind": "industry", "len": "30–45s", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "A 30–45 second cut for the AKAS Industry page, assembled from the maker chorus and the family films. Authority, not endorsement; never new footage first."}, {"t": "Industrial Manufacturing — industry cut", "site": "AKAS", "kind": "industry", "len": "30–45s", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "A 30–45 second cut for the AKAS Industry page, assembled from the maker chorus and the family films. Authority, not endorsement; never new footage first."}, {"t": "Incontinence — industry cut", "site": "AKAS", "kind": "industry", "len": "30–45s", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "A 30–45 second cut for the AKAS Industry page, assembled from the maker chorus and the family films. Authority, not endorsement; never new footage first."}, {"t": "Furniture & Home Decor — industry cut", "site": "AKAS", "kind": "industry", "len": "30–45s", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "A 30–45 second cut for the AKAS Industry page, assembled from the maker chorus and the family films. Authority, not endorsement; never new footage first."}, {"t": "Swim & Waterwear — industry cut", "site": "AKAS", "kind": "industry", "len": "30–45s", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "A 30–45 second cut for the AKAS Industry page, assembled from the maker chorus and the family films. Authority, not endorsement; never new footage first."}, {"t": "Home Essentials — industry cut", "site": "AKAS", "kind": "industry", "len": "30–45s", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "A 30–45 second cut for the AKAS Industry page, assembled from the maker chorus and the family films. Authority, not endorsement; never new footage first."}, {"t": "Hospitality — industry cut", "site": "AKAS", "kind": "industry", "len": "30–45s", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "A 30–45 second cut for the AKAS Industry page, assembled from the maker chorus and the family films. Authority, not endorsement; never new footage first."}, {"t": "Marley's Monsters — client case study", "site": "AKAS", "kind": "case", "len": "2–3 min", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "The one true climb: a two-yard sample in April 2019, twenty rolls on a pallet by March 2021. A 2–3 minute institutional case study, remote interview."}, {"t": "Crockett USA — client case study", "site": "AKAS", "kind": "case", "len": "2–3 min", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "A contract sewing house building product lines on the fabrics — the institutional maker. A 2–3 minute institutional case study, remote interview."}, {"t": "SoCo Studio — client case study", "site": "AKAS", "kind": "case", "len": "2–3 min", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "Fourteen rolls forecast by friendship; the annual-requirements customer. A 2–3 minute institutional case study, remote interview."}, {"t": "Blushproof — client case study", "site": "AKAS", "kind": "case", "len": "2–3 min", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "Period underwear built on Stretch-FIT and the three jobs. A 2–3 minute institutional case study, remote interview."}, {"t": "Koala Clip — client case study", "site": "AKAS", "kind": "case", "len": "2–3 min", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "An activewear accessory brand that found its fabric here. A 2–3 minute institutional case study, remote interview."}, {"t": "Idaho Sewing (Berry) — client case study", "site": "AKAS", "kind": "case", "len": "2–3 min", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "Berry-compliant sewing for government — why the paperwork is the product. A 2–3 minute institutional case study, remote interview."}, {"t": "Wicked Sheets — client case study", "site": "AKAS", "kind": "case", "len": "2–3 min", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "Six months to the right layer — moisture-wicking bedding. A 2–3 minute institutional case study, remote interview."}, {"t": "Venus Matters — client case study", "site": "AKAS", "kind": "case", "len": "2–3 min", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "From retail customer to co-developer. A 2–3 minute institutional case study, remote interview."}, {"t": "David Clark — client case study", "site": "AKAS", "kind": "case", "len": "2–3 min", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "Aviation headsets and the lining nobody sees. A 2–3 minute institutional case study, remote interview."}, {"t": "Superior Glove — client case study", "site": "AKAS", "kind": "case", "len": "2–3 min", "aud": "Institutional buyer", "st": "library", "fn": "", "brand": "", "c": "The cryogenic glove that came in the mail in 2010 — still shipping. A 2–3 minute institutional case study, remote interview."}, {"t": "Rag Rug — mat demonstration", "site": "AKAS", "kind": "mat", "len": "15–30s", "aud": "Institutional buyer", "st": "library", "fn": "sorbent", "brand": "SupAbsorb Tech", "c": "The reusable floor mat that takes oil, water and coolant and washes out. A 15–30 second demonstration on a floor, for the SupAbsorb product page."}, {"t": "StickyBack — mat demonstration", "site": "AKAS", "kind": "mat", "len": "15–30s", "aud": "Institutional buyer", "st": "library", "fn": "sorbent", "brand": "SupAbsorb Tech", "c": "Repositionable adhesive backing, leak-proof, 80% recycled — the highest in the segment. A 15–30 second demonstration on a floor, for the SupAbsorb product page."}, {"t": "Railroad Mat — mat demonstration", "site": "AKAS", "kind": "mat", "len": "15–30s", "aud": "Institutional buyer", "st": "library", "fn": "sorbent", "brand": "SupAbsorb Tech", "c": "Ultra heavy duty for track and yard — forklift-rated. A 15–30 second demonstration on a floor, for the SupAbsorb product page."}, {"t": "Universal Meltblown — mat demonstration", "site": "AKAS", "kind": "mat", "len": "15–30s", "aud": "Institutional buyer", "st": "library", "fn": "sorbent", "brand": "SupAbsorb Tech", "c": "The general-purpose sorbent for every liquid. A 15–30 second demonstration on a floor, for the SupAbsorb product page."}, {"t": "BSM Barrier — mat demonstration", "site": "AKAS", "kind": "mat", "len": "15–30s", "aud": "Institutional buyer", "st": "library", "fn": "sorbent", "brand": "SupAbsorb Tech", "c": "The barrier mat that stops the spill from reaching the ground. A 15–30 second demonstration on a floor, for the SupAbsorb product page."}, {"t": "Ultra Heavy Duty — mat demonstration", "site": "AKAS", "kind": "mat", "len": "15–30s", "aud": "Institutional buyer", "st": "library", "fn": "sorbent", "brand": "SupAbsorb Tech", "c": "The commercial-grade mat for the worst floor in the plant. A 15–30 second demonstration on a floor, for the SupAbsorb product page."}, {"t": "W-level product cuts — ~120 functional variants (Silver · weight tier · FoodSAFE · CORE · REPREVE), derived from the family masters; colourways and prints inherit", "site": "Wazoodle", "kind": "product", "len": "15–30s each", "aud": "Maker", "st": "library", "fn": "", "brand": "", "c": "Only a functional difference earns its own cut — Silver or Standard, a weight tier, FoodSAFE, a barrier present or absent, REPREVE. Colourways, prints, widths and formats inherit the family's cut with their own swatch in frame."}, {"t": "Milpoint — partnership short", "site": "AKAS", "kind": "makers", "len": "60s", "aud": "Carrier", "st": "library", "fn": "", "brand": "", "c": "From first call to Frankfurt; Denys Redon; the friendship layer under a distribution relationship."}];
+  const GROUPS=[["journey", "The Journey", "The family's own story — the will."], ["origin", "Brand origins", "Where each brand came from, in the founders' voices."], ["making", "The Making", "The Explorer told no, the ladder, the swatch in both directions."], ["makers", "The Makers", "The people who sew with it — and the stream that never ends."], ["site", "Site films", "The doors and explainers both sites share."], ["proof", "Proof", "How we test, and what the certificates permit."], ["gateway", "Brand gateway cuts", "Sixty seconds at the door of each brand on wazoodle.com."], ["family", "Fabric family masters", "One per family, in its recipe. Fifty-eight."], ["product", "Product cuts", "The variants that earn their own cut."], ["door", "Shop door cuts", "Waterproof, Absorbent, Stay-Dry, Organic, FoodSAFE, Silver — assembled from the masters."], ["cluster", "Fabric Finder cluster cuts", "What fits this family of things, in what stack."], ["industry", "Industry cuts", "For the AKAS Industry pages — from the chorus and the families."], ["case", "Client case studies", "The institutional makers, in their own words."], ["mat", "Mat demonstrations", "SupAbsorb, on a floor."]];
+  const els={q:q,site:fsite,aud:faud,fn:ffn,st:fst};
+  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  function render(){
+    const t=els.q.value.trim().toLowerCase(), s=els.site.value, a=els.aud.value, f=els.fn.value, st=els.st.value;
+    const out=LIB.filter(v=> (!t||(v.t+' '+v.brand+' '+v.aud+' '+v.c).toLowerCase().includes(t)) && (!s||v.site===s||v.site==='Both') && (!a||v.aud.includes(a)||(a==='Everyone'&&v.aud.startsWith('Everyone'))) && (!f||v.fn===f) && (!st||v.st===st));
+    groups.innerHTML=GROUPS.map(([k,name,sub])=>{ const items=out.filter(v=>v.kind===k); if(!items.length) return '';
+      return `<details class="grp"${t||s||a||f||st?' open':''}><summary><span class="gt">${name}</span><span class="gn">${items.length}</span><span class="gs">${sub}</span></summary><div class="items">${items.map(v=>`<details class="it"><summary><span class="t">${esc(v.t)}</span><span class="st ${v.st.replace(' ','-')}">${v.st}</span><span class="m">${v.site==='Both'?'both sites':v.site==='AKAS'?'akastex.com':'wazoodle.com'} · ${v.len} · ${esc(v.aud)}${v.brand?' · '+esc(v.brand):''}</span></summary><p class="c">${esc(v.c)}</p></details>`).join('')}</div></details>`; }).join('')||'<p class="note">Nothing matches. Clear a filter.</p>';
+    cAll.textContent=out.length; cA.textContent=out.filter(v=>v.site!=='Wazoodle').length; cW.textContent=out.filter(v=>v.site!=='AKAS').length;
+  }
+  Object.values(els).forEach(e=>e.addEventListener('input',render)); render();
+})();
+</script>
+<script>
+(function(){ const t=document.querySelector('.tree'); if(!t) return; if(!('IntersectionObserver' in window)){ t.classList.add('is-in'); return; }
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ t.classList.add('is-in'); io.disconnect(); wash(); } }),{threshold:.3}); io.observe(t);
+  function wash(){ const el=document.getElementById('washN'); if(!el) return; const T=6000, t0=performance.now(); (function f(now){ const p=Math.min(1,(now-t0)/T); el.textContent=Math.max(1,Math.round(1+499*(1-Math.pow(1-p,3)))); if(p<1) requestAnimationFrame(f); })(t0); } })();
+</script>
+</body></html>

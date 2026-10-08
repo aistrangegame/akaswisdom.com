@@ -1,0 +1,851 @@
+<!doctype html>
+<html lang="en" data-chassis="akas" data-brand="prosoft" data-ground="paper" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>What They Made — eleven years of customer evidence · Wazoodle Fabrics</title>
+<meta name="description" content="What Wazoodle customers have made, in their own words and photographs, 2015-2026 - and where the picture is still missing.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Hanken+Grotesk:wght@400;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   rupakarshini V3 — tokens/spine.css
+   THE SPINE. Role tokens. Both chassis obey this grammar.
+   Components reference ONLY spine tokens. Worlds fill them.
+   Scope: everything lives under [data-chassis][data-brand].
+   Load order: spine.css → scales.css → ONE world file → rk.css
+   ============================================================ */
+
+:root, [data-chassis] {
+  /* ---- GROUND (Neev) — what the page stands on ---------- */
+  --bg:            var(--w-ground);        /* page ground                    */
+  --surface:       var(--w-surface);       /* cards, panels, the raised plane */
+  --surface-2:     var(--w-surface-2);     /* quiet alternate band            */
+  --surface-wash:  var(--w-wash);          /* identity tint band              */
+  --surface-deep:  var(--w-deep);          /* the ONE deep band per page      */
+  --surface-hover: var(--w-hover);
+
+  /* ---- MEDIUM (Shweta) — what the reader reads through --- */
+  --fg:            var(--w-ink);           /* primary text                    */
+  --fg-2:          var(--w-ink-2);         /* secondary text                  */
+  --fg-muted:      var(--w-muted);         /* captions, tertiary (≥4.5:1)     */
+  --fg-eyebrow:    var(--w-muted);         /* RULING: eyebrow uses muted, never label */
+  --fg-on-deep:    var(--w-on-deep);       /* text on the deep band           */
+  --fg-on-action:  #FFFFFF;
+
+  /* text ladder — one hue, distance not darkness (chassis-independent) */
+  --t-high:    color-mix(in oklch, var(--fg) 92%, transparent);
+  --t-mid:     color-mix(in oklch, var(--fg) 80%, transparent);
+  --t-body:    color-mix(in oklch, var(--fg) 72%, transparent);
+  --t-soft:    color-mix(in oklch, var(--fg) 58%, transparent);
+  --t-whisper: color-mix(in oklch, var(--fg) 36%, transparent);
+  --t-ghost:   color-mix(in oklch, var(--fg) 20%, transparent);
+
+  /* ---- HOLD (Sid) — lines and edges ---------------------- */
+  --line:          var(--w-line);          /* hairline                        */
+  --line-strong:   var(--w-sig);           /* 3px authority rule              */
+  --line-wash:     var(--w-wash-bd);
+  --radius:        var(--w-radius, 12px);
+  --radius-sm:     calc(var(--radius) * .5);
+  --radius-lg:     calc(var(--radius) * 1.33);
+  --radius-pill:   999px;
+
+  /* ---- VOICE (Arch) — identity and speaking colour ------- */
+  --sig:           var(--w-sig);           /* identity signature              */
+  --sig-pressed:   var(--w-sig-dk);
+  --sig-tint:      var(--w-sig-d);
+  --voice:         var(--w-voice);         /* the chassis's speaking colour   */
+  --voice-pressed: var(--w-voice-dk);
+  --spark:         var(--w-spark);         /* earned once against deep        */
+
+  /* ---- CONSEQUENCE (Bindu) — one colour across the estate  */
+  --bindu:         #C0392B;                /* the point where something is decided */
+  --bindu-pressed: #9E2D21;
+  --action:        var(--bindu);           /* commerce buy · threshold crossed */
+  --action-fg:     #FFFFFF;
+
+  /* ---- STATUS — the system deliberately has no general alert colour */
+  --ok:            var(--w-voice);
+  --warn:          #B8860B;                /* goldenrod — Low stock only       */
+  --danger:        var(--bindu);
+  --info:          #2575B5;
+
+  /* ---- GRACE (Karishma) — readiness ------------------------ */
+  --ring:          color-mix(in oklch, var(--sig) 70%, white);
+  --ring-w:        2px;
+  --ring-offset:   2px;
+  --shadow-1: 0 1px 3px rgba(40,34,24,.06), 0 1px 2px rgba(40,34,24,.04);
+  --shadow-2: 0 10px 34px rgba(40,34,24,.16), 0 2px 8px rgba(40,34,24,.08);
+  --shadow-3: 0 24px 60px rgba(40,34,24,.20), 0 6px 16px rgba(40,34,24,.10);
+
+  /* ---- FONT FACES — chassis constant, world never changes -- */
+  --font-display:  var(--w-font-display);
+  --font-ui:       var(--w-font-ui);
+  --font-mono:     var(--w-font-mono);
+  --font-ceremony: var(--w-font-ceremony, var(--w-font-display));
+}
+
+/* Focus ring recipe — one rule for the whole estate (keyboard only) */
+:where([data-chassis]) :focus-visible {
+  outline: var(--ring-w) solid var(--ring);
+  outline-offset: var(--ring-offset);
+  border-radius: var(--radius-sm);
+}
+
+/* Foreground-pairing invariant: any surface must be used with its pair */
+[data-chassis] .on-deep  { color: var(--fg-on-deep); }
+[data-chassis] .on-deep .eyebrow { color: var(--sig-tint); }
+[data-chassis] .on-wash .eyebrow { color: var(--sig-pressed); }
+/* ============================================================
+   rupakarshini V3 — tokens/scales.css
+   Fluid type (Utopia math, 360→1440, rem term always present so
+   WCAG 1.4.4 holds: every step max ≤ 2.5× min), measure, space,
+   band rhythm, width scale, motion vocabulary.
+   Both chassis share this file. Worlds may override --pace-*.
+   ============================================================ */
+
+:root, [data-chassis] {
+  /* ---- TYPE LADDER — 8 steps, ratio ~1.2 mobile → 1.25 desktop */
+  --fs-display: clamp(2.5rem,    1.281rem + 5.42vi, 4.75rem);  /* 40 → 76  */
+  --fs-h1:      clamp(2rem,      1.303rem + 3.10vi, 3.28rem);  /* 32 → 52  */
+  --fs-h2:      clamp(1.6rem,    1.211rem + 1.73vi, 2.32rem);  /* 26 → 37  */
+  --fs-h3:      clamp(1.28rem,   1.074rem + 0.91vi, 1.64rem);  /* 20 → 26  */
+  --fs-lg:      clamp(1.125rem,  1.014rem + 0.49vi, 1.33rem);  /* 18 → 21  */
+  --fs-body:    clamp(1rem,      0.958rem + 0.19vi, 1.11rem);  /* 16 → 17.7*/
+  --fs-ui:      clamp(0.875rem,  0.86rem  + 0.07vi, 0.9rem);   /* 14 → 14.4*/
+  --fs-sm:      0.8125rem;                                     /* 13 fixed */
+  --fs-eyebrow: 0.8125rem;                                     /* 13 — RULING (was 12) */
+  --fs-mono-floor: 0.6875rem;                                  /* 11 — never below */
+
+  /* optical size pinned per step (CSS can't read clamp result) */
+  --opsz-display: 72; --opsz-h: 36; --opsz-body: 16; --opsz-label: 10;
+
+  /* ---- LINE HEIGHT — inverse to size */
+  --lh-display: 1.05; --lh-h: 1.15; --lh-lg: 1.35; --lh-body: 1.6; --lh-ui: 1.4;
+  --ls-display: -0.02em; --ls-h: -0.01em; --ls-eyebrow: .18em; --ls-mono: .16em;
+
+  /* ---- WIDTH SCALE — density governs measure (Parrot ruling) */
+  --w-reading:    68ch;                              /* invariant for prose  */
+  --w-reading-b:  60ch;                              /* ASG contemplative    */
+  --w-instrument: 720px;                             /* 640–760 band         */
+  --w-column:     940px;                             /* the editorial column */
+  --w-breakout:   min(1440px, 100vw - 64px);         /* grids, media, tables */
+  --w-shell:      1320px;
+
+  /* ---- SPACE — 8-pt */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px;
+  --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px;
+  --gap-tight: var(--s-2); --gap: var(--s-4); --gap-loose: var(--s-5);
+  --pad-card: var(--s-5);
+
+  /* ---- BAND RHYTHM — RULING 72 / 60; scale, not one value */
+  --band-tight:  clamp(40px, 5vw, 56px);
+  --band:        clamp(60px, 6vw, 72px);
+  --band-deep:   clamp(72px, 8vw, 104px);
+  --silence:     40px;                               /* .silence run-out     */
+  --strata-1: 10px; --strata-2: 14px; --strata-3: 18px; /* the descent seam  */
+
+  /* ---- MOTION VOCABULARY — named, budgeted, reduced-motion gated */
+  --ease-out:  cubic-bezier(.22,.61,.36,1);
+  --ease-soft: cubic-bezier(.4,0,.2,1);
+  --dur-fast: .15s; --dur-base: .25s; --dur-slow: .5s;
+  --dur-breath: 6s;                                  /* ASG breathe loop     */
+  --rise-y: 24px;                                    /* rise/reveal travel   */
+  --veil-y: -8px;                                    /* veil entry travel    */
+  --hold-ms: 700;                                    /* hold-to-continue     */
+
+  /* ---- PACE — world overrides (still / measured / quick) */
+  --pace-dur: var(--dur-base);
+  --pace-y:   var(--rise-y);
+}
+
+/* Reduced motion: keep end states, remove travel */
+@media (prefers-reduced-motion: reduce) {
+  :root, [data-chassis] { --rise-y: 0px; --veil-y: 0px; --dur-breath: 0s; }
+}
+
+/* Named motions (chassis-independent). Used by rk.css. */
+@keyframes rk-rise   { from { opacity:0; transform:translateY(var(--rise-y)); } to { opacity:1; transform:none; } }
+@keyframes rk-seed   { from { opacity:0; letter-spacing:.06em; } to { opacity:1; letter-spacing:0; } }
+@keyframes rk-breathe{ 0%,100% { transform:scale(1); opacity:.85; } 50% { transform:scale(1.04); opacity:1; } }
+@keyframes rk-pulse  { 0%,100% { opacity:.55; } 50% { opacity:1; } }
+@keyframes rk-shimmer{ from { background-position: -200% 0; } to { background-position: 200% 0; } }
+@keyframes rk-descend{ from { transform:translateY(-6px); opacity:0; } to { transform:none; opacity:1; } }
+@keyframes rk-curtain{ from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
+@keyframes rk-mote   { 0% { transform:translate(0,0); opacity:0; } 20% { opacity:.6; } 100% { transform:translate(var(--mx,8px),var(--my,-40px)); opacity:0; } }
+@keyframes rk-blink  { 0%,92%,100% { transform:scaleY(1); } 96% { transform:scaleY(.08); } }
+/* ============================================================
+   rupakarshini V3 — tokens/worlds/akas.css
+   CHASSIS A — AKAS / Wazoodle. Canon as amended in Parrot
+   (Design System table, Sep 2026), not the June zip.
+   Usage:  <html data-chassis="akas" data-brand="zorb">
+   Type is constant. Colour separates the brands.
+   ============================================================ */
+
+[data-chassis="akas"] {
+  /* ---- chassis constants (Sid) ---- */
+  --w-font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --w-font-ui:      'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --w-font-mono:    'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace; /* RULING: mono eyebrow face added */
+  --w-radius:       12px;
+
+  /* spine surfaces — warm stone (Neev) */
+  --w-ground:    #EFECE6;   /* page ground                       */
+  --w-surface:   #FFFFFF;   /* paper                             */
+  --w-surface-2: #E7E1D5;   /* stone                             */
+  --w-hover:     #F6F2E9;
+  --w-line:      #E3DDD0;
+  --w-divider:   #ECE6DA;
+
+  /* medium (Shweta) */
+  --w-ink:     #1E1E1E;
+  --w-ink-2:   #3A352E;
+  --w-muted:   #6F685C;     /* 5.2:1 on paper · 4.4 on stone — eyebrow lives here (measured; Parrot value #8A8377 was 3.75) */
+  --w-label:   #A8A095;     /* decorative only; NEVER for eyebrow (2.4:1) */
+  --w-on-deep: rgba(255,255,255,.92);
+
+  /* the chassis speaking colour */
+  --w-voice:    #3B8234;
+  --w-voice-dk: #2C6427;
+
+  /* body position default */
+  --body-default: both;
+}
+
+/* Paper-first variant for consumer LPEs and Brand Home (Revity Gen 2 lesson) */
+[data-chassis="akas"][data-ground="paper"] { --w-ground: #FFFFFF; --w-surface: #FBF9F4; }
+
+/* ---- THE EIGHT WORLDS — sig / sig-dk / sig-d / wash / wash-bd / deep / deep-hi / spark ---- */
+[data-chassis="akas"], [data-chassis="akas"][data-brand="house"] {
+  --w-sig:#1E5219; --w-sig-dk:#163D12; --w-sig-d:#6A9E66;
+  --w-wash:#E4EFE2; --w-wash-bd:#C8DEC4; --w-deep:#1A2E15; --w-deep-hi:#213A1B; --w-spark:#D4B800;
+  --pace: measured; --imagery: raw; --motion-budget: rise seed;
+}
+[data-chassis="akas"][data-brand="zorb"] {
+  --w-sig:#0A5A99; --w-sig-dk:#08456F; --w-sig-d:#5FA8DC;
+  --w-wash:#DCEDFB; --w-wash-bd:#BFDDF4; --w-deep:#0A3354; --w-deep-hi:#0E3E66; --w-spark:#CDE970;
+  --pace: quick; --imagery: annotated; --motion-budget: rise seed pulse;   /* clinical precision */
+}
+[data-chassis="akas"][data-brand="prosoft"] {
+  --w-sig:#006B8A; --w-sig-dk:#004E67; --w-sig-d:#5BB8D0;
+  --w-wash:#D4F0F5; --w-wash-bd:#8FD5E0; --w-deep:#003A48; --w-deep-hi:#004D60; --w-spark:#A78CE0;
+  --pace: still; --imagery: raw; --motion-budget: rise;                     /* silent, soft, permanent */
+}
+[data-chassis="akas"][data-brand="proeco"] {
+  --w-sig:#8A6800; --w-sig-dk:#6B5000; --w-sig-d:#C8A840;
+  --w-wash:#F5EDCC; --w-wash-bd:#DEC880; --w-deep:#2E2600; --w-deep-hi:#3A3200; --w-spark:#F0D040;
+  --pace: measured; --imagery: raw; --motion-budget: rise seed breathe;    /* rooted in earth */
+}
+[data-chassis="akas"][data-brand="procool"] {
+  --w-sig:#4A5A9E; --w-sig-dk:#364488; --w-sig-d:#9BA0D4;
+  --w-wash:#E8EAF5; --w-wash-bd:#C0C6E8; --w-deep:#0D1720; --w-deep-hi:#162232; --w-spark:#3FC6F4;
+  --pace: quick; --imagery: annotated; --motion-budget: rise shimmer;      /* cool precision */
+}
+[data-chassis="akas"][data-brand="supabsorb"] {
+  --w-sig:#1A7A3A; --w-sig-dk:#125A2A; --w-sig-d:#60B878;
+  --w-wash:#DDEEE4; --w-wash-bd:#B0D4BC;
+  --w-deep:#0B4A22; --w-deep-hi:#0F5A2A;                                     /* RULING: darkened from #0D672E — APCA Lc≥75 on deep */
+  --w-spark:#FFD200;
+  --pace: quick; --imagery: raw; --motion-budget: rise;                      /* built for the floor */
+}
+[data-chassis="akas"][data-brand="akastex"] {
+  --w-sig:#0E7E92; --w-sig-dk:#0A6072; --w-sig-d:#27C3DA;
+  --w-wash:#E6F6FB; --w-wash-bd:#A9EAF8; --w-deep:#16404F; --w-deep-hi:#1D4E5F; --w-spark:#D85326;
+  --pace: measured; --imagery: annotated; --motion-budget: rise seed descend; /* RULING: canon; get.akastex lineage retired */
+}
+[data-chassis="akas"][data-brand="silverarch"] {
+  --w-sig:#1A6B8E; --w-sig-dk:#134F6A; --w-sig-d:#60A8C8;
+  --w-wash:#D0EBF5; --w-wash-bd:#A0D0E8; --w-deep:#0D2535; --w-deep-hi:#112E41; --w-spark:#44D4B8;
+  --pace: still; --imagery: annotated; --motion-budget: rise pulse;         /* midnight steel */
+}
+/* Worlds-in-waiting inherit House until a character sheet exists */
+[data-chassis="akas"][data-brand="akastiq"],
+[data-chassis="akas"][data-brand="protec"],
+[data-chassis="akas"][data-brand="procare"] { /* inherits house */ }
+
+/* Family palette — crosses both chassis (archetype colours) */
+[data-chassis] {
+  --arch:#7A2F14; --arch-lt:#B8623F; --sid:#1B3A5C; --sid-lt:#4F7BA8;
+  --ash:#26421A; --ash-lt:#5E8A4E;  --shared:#4A4238; --akas:#2A2520; --waz:#8B5E3C;
+}
+/* ============================================================
+   rupakarshini V3 — rk.css  ·  THE ELEMENT CORE (chassis-independent)
+   Requires: tokens/spine.css + tokens/scales.css + one world file.
+   Every class here is an element in references/elements.md.
+   No colour literals. No px type. Reduced motion respected.
+   ============================================================ */
+
+/* ---------- PAGE (Sid) ---------- */
+html[data-chassis] { font-size: 100%; -webkit-text-size-adjust: 100%; }   /* rem stays 16 — never scale the root */
+[data-chassis] { background: var(--bg); color: var(--fg); font-family: var(--font-ui); }
+body { margin: 0; font-size: var(--fs-body); line-height: var(--lh-body);
+  font-optical-sizing: auto; text-rendering: optimizeLegibility; }
+.rk-page { min-height: 100svh; }
+*, *::before, *::after { box-sizing: border-box; }
+img, video, canvas { max-width: 100%; height: auto; display: block; }
+
+/* ---------- WIDTH SCALE (Arch) — density governs measure ---------- */
+.rk-in        { width: min(var(--w-column), 100% - 2*var(--s-5)); margin-inline: auto; }
+.rk-reading   { max-width: var(--w-reading); }
+.rk-instrument{ width: min(var(--w-instrument), 100% - 2*var(--s-5)); margin-inline: auto; }
+.rk-breakout  { width: var(--w-breakout); margin-inline: auto; }
+.rk-full      { width: 100%; }
+
+/* ---------- HEAD RHYTHM: eyebrow → title → lede → rule ---------- */
+.eyebrow { font-family: var(--font-mono); font-size: var(--fs-eyebrow); font-weight: 600;
+  letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-eyebrow);
+  display: flex; align-items: center; gap: var(--s-3); margin: 0 0 var(--s-3); }
+.eyebrow::after { content: ""; flex: 0 0 64px; height: 1px; background: currentColor; opacity: .4; }
+.eyebrow.voice { color: var(--voice); }
+.title { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h2);
+  line-height: var(--lh-h); letter-spacing: var(--ls-h); margin: 0 0 var(--s-4);
+  font-variation-settings: 'opsz' var(--opsz-h); text-wrap: balance; }
+.title em { font-style: italic; color: var(--voice); }          /* CAP: 2 per page */
+.display { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-display);
+  line-height: var(--lh-display); letter-spacing: var(--ls-display);
+  font-variation-settings: 'opsz' var(--opsz-display); text-wrap: balance; margin: 0 0 var(--s-5); }
+.h1 { font-family: var(--font-display); font-size: var(--fs-h1); line-height: var(--lh-h); font-weight: 500; margin: 0 0 var(--s-4); text-wrap: balance; }
+.h3 { font-family: var(--font-display); font-size: var(--fs-h3); line-height: var(--lh-h); font-weight: 500; margin: 0 0 var(--s-3); }
+.lede { font-size: var(--fs-lg); line-height: var(--lh-lg); color: var(--fg-2); max-width: var(--w-reading); margin: 0 0 var(--s-5); text-wrap: pretty; }
+.rule { height: 1px; background: var(--line); border: 0; margin: var(--s-6) 0; }
+.seed { font-family: var(--font-display); font-style: italic; font-size: var(--fs-lg); color: var(--t-soft);
+  margin: 0 0 var(--s-5); animation: rk-seed var(--dur-slow) var(--ease-out) both; }   /* Sakshi: one line before a threshold */
+.ceremony { font-family: var(--font-ceremony); letter-spacing: .12em; text-transform: uppercase; font-weight: 400; }
+.prose > * + * { margin-top: var(--s-4); }
+.prose { max-width: var(--w-reading); color: var(--t-body); }
+.prose strong { color: var(--fg); }
+
+/* text ladder utilities */
+.t-high{color:var(--t-high)} .t-mid{color:var(--t-mid)} .t-body{color:var(--t-body)}
+.t-soft{color:var(--t-soft)} .t-whisper{color:var(--t-whisper)} .t-ghost{color:var(--t-ghost)}
+
+/* ---------- BANDS & SURFACE STEPPING (Neev) ---------- */
+.band { padding-block: var(--band); }
+.band.tight { padding-block: var(--band-tight); }
+.band.deep  { padding-block: var(--band-deep); background: var(--surface-deep); color: var(--fg-on-deep); }
+.band.deep .eyebrow { color: var(--sig-tint); }
+.band.deep .title em, .band.deep .voice { color: var(--spark); }
+.s-paper { background: var(--surface); } .s-ground { background: var(--bg); }
+.s-stone { background: var(--surface-2); } .s-wash { background: var(--surface-wash); }
+.s-wash .eyebrow { color: var(--sig-pressed); }
+.s-stone .eyebrow { color: var(--fg-2); }            /* stone measured 4.2:1 with muted — step up */
+.silence { height: var(--silence); }
+
+/* seams — a line, never a label */
+.seam { height: 1px; background: var(--line); }
+.descent { height: calc(var(--strata-1) + var(--strata-2) + var(--strata-3)); background:
+  linear-gradient(to bottom,
+    color-mix(in oklch, var(--surface-deep) 18%, var(--surface-wash)) 0 var(--strata-1),
+    color-mix(in oklch, var(--surface-deep) 45%, var(--surface-wash)) var(--strata-1) calc(var(--strata-1) + var(--strata-2)),
+    color-mix(in oklch, var(--surface-deep) 78%, var(--surface-wash)) calc(var(--strata-1) + var(--strata-2)) 100%); }
+.ascent { transform: scaleY(-1); }
+
+/* ---------- MOTION (Bindu) — floor: rise; ceiling: named budget ---------- */
+.rise { animation: rk-rise var(--pace-dur) var(--ease-out) both; }
+@supports (animation-timeline: view()) {
+  .rise { animation-timeline: view(); animation-range: entry 0% entry 35%; animation-duration: auto; }
+}
+@supports not (animation-timeline: view()) {
+  .rise { opacity: 0; transform: translateY(var(--rise-y)); transition: opacity var(--pace-dur) var(--ease-out), transform var(--pace-dur) var(--ease-out); animation: none; }
+  .rise.is-in, .no-js .rise { opacity: 1; transform: none; }
+}
+.veil { transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); opacity: 1; transform: none; }
+@starting-style { .veil { opacity: 0; transform: translateY(var(--veil-y)); } }
+.breathe { animation: rk-breathe var(--dur-breath) ease-in-out infinite; }
+.pulse   { animation: rk-pulse 2.4s ease-in-out infinite; }
+.curtain { animation: rk-curtain var(--dur-slow) var(--ease-soft) both; }
+@media (prefers-reduced-motion: reduce) {
+  .rise, .breathe, .pulse, .curtain, .seed { animation: none !important; opacity: 1 !important; transform: none !important; clip-path: none !important; }
+  .veil { transition: none; }
+}
+
+/* ---------- THRESHOLD · HOLD · GATE (Sakshi) ---------- */
+.hold { --p: 0; position: relative; display: inline-grid; place-items: center; width: 88px; height: 88px;
+  border-radius: 50%; border: 1px solid var(--line-wash); background: var(--surface); color: var(--fg-2);
+  font-family: var(--font-ui); font-size: var(--fs-sm); cursor: pointer; user-select: none; -webkit-user-select: none; touch-action: manipulation; }
+.hold::before { content: ""; position: absolute; inset: -4px; border-radius: 50%;
+  background: conic-gradient(var(--action) calc(var(--p) * 1turn), transparent 0); mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px)); -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px)); }
+.hold.is-done { border-color: var(--action); color: var(--action); }
+.threshold { position: relative; isolation: isolate; }
+.threshold > .veil-layer { position: absolute; inset: 0; background: var(--bg); z-index: 2; transition: opacity var(--dur-slow) var(--ease-out); }
+.threshold.is-open > .veil-layer { opacity: 0; pointer-events: none; }
+.gate[hidden] { display: none; }
+
+/* ---------- DOORS — "where this leads" (the seam between pages) ---------- */
+.doors { display: grid; gap: var(--s-3); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.door { display: block; padding: var(--s-4) var(--s-5); border-left: 2px solid var(--line-wash); background: var(--surface);
+  color: inherit; text-decoration: none; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; transition: border-color var(--dur-fast), background var(--dur-fast); }
+.door:hover { border-left-color: var(--sig); background: var(--surface-hover); }
+.door .eyebrow { margin-bottom: var(--s-1); } .door .eyebrow::after { display: none; }
+.door strong { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-lg); display: block; margin-bottom: var(--s-1); line-height: var(--lh-h); }
+.door { font-size: var(--fs-sm); color: var(--fg-2); }
+.door.rung { border-left-color: var(--sig); }          /* the Ladder's next rung — visible, never pushed */
+
+/* ---------- PROOF ELEMENTS ---------- */
+.stats { display: grid; gap: var(--s-6); grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); border-top: 1px solid var(--line); padding-top: var(--s-5); }
+.stat .n { font-family: var(--font-display); font-size: var(--fs-h1); line-height: 1; font-variation-settings: 'opsz' var(--opsz-display); }
+.stat .n .sp { color: var(--spark); }
+.stat .l { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); margin-top: var(--s-2); }
+.stat.rule { border-left: 2px solid var(--spark); padding-left: var(--s-4); border-top: 0; }
+.band.deep .stat .l { color: var(--t-soft); }
+.verify { display: grid; gap: var(--s-3); grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+.verify .v { padding: var(--s-4); border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); font-size: var(--fs-sm); }
+.verify .v b { display: block; font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--sig); margin-bottom: var(--s-1); }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--sig); vertical-align: middle; margin-right: var(--s-2); }
+.dot.voice { background: var(--voice); } .dot.warn { background: var(--warn); }
+
+/* ---------- CARDS & ROWS ---------- */
+.tile { display: flex; gap: var(--s-4); align-items: flex-start; }
+.tile .ic { flex: 0 0 36px; height: 36px; display: grid; place-items: center; border-radius: var(--radius-sm); background: var(--sig); color: #fff; }
+.tile h4 { margin: 0 0 var(--s-1); font-family: var(--font-ui); font-weight: 600; }
+.tile p { margin: 0; color: var(--fg-muted); font-size: var(--fs-sm); }
+.grid-2 { display: grid; gap: var(--s-7); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); align-items: center; }
+.grid-3 { display: grid; gap: var(--s-5); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.row { display: grid; gap: var(--s-6); grid-template-columns: minmax(0,1fr); align-items: center; }
+.row + .row { margin-top: var(--s-6); }
+@media (min-width: 720px) { .row { grid-template-columns: 200px minmax(0,1fr); } .row.flip { grid-template-columns: minmax(0,1fr) 200px; } .row.flip > :first-child { order: 2; } }
+.media { border-radius: var(--radius); background: var(--surface-2); overflow: hidden; aspect-ratio: 4/5; }
+.media.sq { aspect-ratio: 1; } .media.wide { aspect-ratio: 16/9; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: var(--pad-card); }
+.panel { border-radius: var(--radius-lg); padding: clamp(var(--s-6), 5vw, var(--s-8));
+  background: linear-gradient(135deg, var(--sig-pressed), var(--surface-deep) 60%, var(--surface-deep)); color: var(--fg-on-deep); }
+.panel .eyebrow { color: var(--spark); }
+
+/* ---------- SPEC TABLE — stops being a table under 700px ---------- */
+.spec { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: var(--fs-sm); }
+.spec th, .spec td { text-align: left; padding: var(--s-3) var(--s-3); border-bottom: 1px solid var(--line); vertical-align: top; }
+.spec th { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); font-weight: 600; }
+@media (max-width: 699px) {
+  .spec, .spec tbody, .spec tr, .spec td { display: block; }
+  .spec thead { display: none; }
+  .spec tr { padding: var(--s-3) 0; border-bottom: 1px solid var(--line); }
+  .spec td { border: 0; padding: var(--s-1) 0; }
+  .spec td::before { content: attr(data-col); display: block; font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); }
+}
+
+/* ---------- BUTTONS — one colour of consequence ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2); min-height: 44px; padding: 0 var(--s-5);
+  border-radius: var(--radius-pill); font-family: var(--font-ui); font-weight: 600; font-size: var(--fs-ui); text-decoration: none; cursor: pointer;
+  border: 1px solid transparent; transition: background var(--dur-fast), border-color var(--dur-fast), color var(--dur-fast); touch-action: manipulation; }
+.btn.act   { background: var(--action); color: var(--action-fg); }       /* Buy · Cross · Begin — LAW: only where consequence */
+.btn.act:hover { background: var(--bindu-pressed); }
+.btn.voice { background: var(--voice); color: #fff; }
+.btn.voice:hover { background: var(--voice-pressed); }
+.btn.sig   { background: var(--sig); color: #fff; }
+.btn.ghost { background: transparent; border-color: var(--line-wash); color: var(--fg); }
+.btn.ghost:hover { border-color: var(--sig); }
+.link { color: var(--sig); text-decoration: underline; text-decoration-color: color-mix(in oklch, var(--sig) 35%, transparent); text-underline-offset: 4px; }
+
+/* ---------- NAVIGATION ---------- */
+.rail { position: sticky; top: 0; z-index: 5; display: flex; gap: var(--s-4); overflow-x: auto; padding: var(--s-3) var(--s-5);
+  background: var(--bg); border-bottom: 1px solid var(--line); font-size: var(--fs-ui); font-weight: 700; scrollbar-width: none; }
+.rail a { color: var(--fg-muted); text-decoration: none; white-space: nowrap; padding: var(--s-1) 0; border-bottom: 2px solid transparent; }
+.rail a.is-active, .rail a:hover { color: var(--fg); border-bottom-color: var(--sig); }
+.family { display: flex; gap: var(--s-4); align-items: center; height: 36px; padding: 0 var(--s-5); font-family: var(--font-mono); font-size: var(--fs-mono-floor);
+  letter-spacing: var(--ls-mono); text-transform: uppercase; background: var(--surface-2); color: var(--fg-muted); overflow-x: auto; scrollbar-width: none; }
+.family a { color: inherit; text-decoration: none; white-space: nowrap; }
+.family a[aria-current="true"] { color: var(--fg); border-bottom: 1px solid var(--sig); }
+.marquee { overflow: hidden; white-space: nowrap; background: var(--surface-wash); padding: var(--s-2) 0; font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--sig-pressed); }
+.marquee > span { display: inline-block; padding-inline: var(--s-6); animation: rk-marquee 28s linear infinite; }
+@keyframes rk-marquee { to { transform: translateX(-50%); } }
+.bottom-nav { position: fixed; inset-inline: 0; bottom: 0; z-index: 6; display: grid; grid-auto-flow: column; gap: var(--s-2);
+  padding: var(--s-3) var(--s-4) calc(var(--s-3) + env(safe-area-inset-bottom)); background: color-mix(in oklch, var(--bg) 92%, transparent);
+  backdrop-filter: blur(12px); border-top: 1px solid var(--line); }
+.sticky-cta { position: sticky; bottom: 0; z-index: 6; padding: var(--s-3) var(--s-4) calc(var(--s-3) + env(safe-area-inset-bottom)); background: var(--surface); border-top: 1px solid var(--line); display: flex; gap: var(--s-3); align-items: center; }
+.sticky-cta .who { flex: 1; font-size: var(--fs-sm); color: var(--fg-muted); }
+@media (max-width: 600px) { .sticky-cta .who { display: none; } .sticky-cta .btn { flex: 1; } }
+
+/* ---------- INSTRUMENT PRIMITIVES ---------- */
+.counter { font-variant-numeric: tabular-nums; }
+details.acc { border-top: 1px solid var(--line); }
+details.acc summary { cursor: pointer; list-style: none; padding: var(--s-4) 0; font-family: var(--font-display); font-size: var(--fs-lg); display: flex; justify-content: space-between; }
+details.acc summary::-webkit-details-marker { display: none; }
+details.acc summary::after { content: "+"; color: var(--fg-muted); } details.acc[open] summary::after { content: "–"; }
+details.acc > :not(summary) { padding-bottom: var(--s-4); color: var(--t-body); }
+dialog.sheet { border: 0; border-radius: var(--radius-lg) var(--radius-lg) 0 0; padding: var(--s-6); width: min(720px, 100%); margin: auto auto 0; background: var(--surface); color: var(--fg); }
+dialog.sheet::backdrop { background: rgba(0,0,0,.45); }
+.field { display: grid; gap: var(--s-1); } .field label { font-size: var(--fs-sm); color: var(--fg-2); }
+.field input, .field select, .field textarea { min-height: 44px; padding: 0 var(--s-3); border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); color: var(--fg); font: inherit; }
+
+/* ---------- PRINT (the Package shape) ---------- */
+@media print {
+  .rise, .veil, .seed, .curtain { animation: none !important; opacity: 1 !important; transform: none !important; }
+  [data-chassis] { background: #fff; color: #000; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .rail, .bottom-nav, .sticky-cta, .marquee, .hold { display: none !important; }
+  .band { break-inside: avoid; } .pagebreak { break-before: page; }
+  h1, h2, .title, .display { break-after: avoid; } p { orphans: 3; widows: 3; }
+  @page { size: A4; margin: 18mm; }
+}
+
+
+/* ---- page-specific (What They Made) ---- */
+.plainlist { list-style:none; margin:var(--s-4) 0 0; padding:0; }
+.plainlist li { display:flex; justify-content:space-between; gap:var(--s-4);
+  padding:var(--s-3) 0; border-bottom:1px solid var(--line); font-size:var(--fs-sm); }
+.plainlist li b { font-family:var(--font-ui); font-weight:600; color:var(--fg); }
+.plainlist li b { min-width:0; }
+.plainlist li span { color:var(--fg-muted); text-align:right; flex:0 0 auto; white-space:nowrap; }
+.plainlist.cols { columns:2; column-gap:var(--s-7); }
+.plainlist.cols li { break-inside:avoid; }
+@media (max-width:700px){ .plainlist.cols { columns:1; } .plainlist li { flex-direction:column; gap:var(--s-1); } .plainlist li span { text-align:left; white-space:normal; } }
+.spec tr[data-state="dark"] td:first-child strong { color:var(--fg-muted); }
+.spec tr[data-state="dark"] td:last-child { color:var(--action); font-weight:600; }
+.spec tbody tr:hover { background:var(--surface-hover); }
+.card .eyebrow { margin-bottom:var(--s-3); }
+.card .prose { font-size:var(--fs-sm); }
+#evidence .grid-3 .card .prose { font-family:var(--font-display); font-size:var(--fs-body); font-style:italic; color:var(--t-body); }
+.band.deep .stat .l { color:color-mix(in oklch, var(--fg-on-deep) 74%, transparent); }
+.band.deep .stats { border-top-color:color-mix(in oklch, var(--fg-on-deep) 28%, transparent); }
+.band.deep .stat .n { color:var(--fg-on-deep); }
+.band.deep .stat .n .sp { color:var(--spark); }
+.band.deep .prose strong { color:var(--fg-on-deep); }
+@media (max-width:640px){ .family { height:auto; flex-wrap:wrap; padding-block:var(--s-2); row-gap:var(--s-2); } }
+
+</style>
+</head>
+<body class="rk-page">
+<nav class="family" aria-label="The two doors">
+  <a href="#top" aria-current="true">What They Made</a>
+  <a href="#evidence">Evidence</a>
+  <a href="#instrument">Communities</a>
+  <a href="#finding">The shape</a>
+  <a href="#missing">What&rsquo;s missing</a>
+</nav>
+
+<header id="top" class="band s-paper">
+  <div class="rk-in">
+    <p class="eyebrow">Wazoodle Fabrics &middot; eleven years of customer evidence</p>
+    <h1 class="display">What They Made</h1>
+    <p class="seed">We didn&rsquo;t decide who these people are. They told us, for eleven years.</p>
+    <div class="grid-2" style="margin-top:var(--s-7)">
+      <div class="card">
+        <p class="eyebrow">Why this page exists</p>
+        <p class="prose">Every other map we have is us describing ourselves &mdash; what we intend to write, what we intend to film, who we believe our customers are. This one is the other direction. It is made entirely of what customers wrote and photographed, unprompted, between 2015 and today. It shows what they have already proven, and where the picture is still missing.</p>
+      </div>
+      <div class="card">
+        <p class="eyebrow">Where you&rsquo;ll be when you&rsquo;ve read it</p>
+        <p class="prose">You&rsquo;ll know these are real people making real things, with their names on them. You&rsquo;ll know which parts of the range they have already proven and which they haven&rsquo;t. And you&rsquo;ll know exactly where one photograph would change something &mdash; with the reason it is missing, not just the fact that it is.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="seam"></div>
+
+<section id="claim" class="band s-ground">
+  <div class="rk-in">
+    <p class="eyebrow">How this is counted</p>
+    <h2 class="title">Everything here is <em>theirs</em>, not ours</h2>
+    <div class="prose">
+      <p>Two bodies of material, kept separate because they behave differently.</p>
+      <p><strong>What people said.</strong> 6,829 written voices across six places they reached us &mdash; our own store, Google, Etsy, our wall of customer stories, and the box at checkout where people tell us what they are about to make. Two-thirds of those people wrote a review after the fact; the rest told us their intention before they had sewn a stitch. Only 390 did both.</p>
+      <p><strong>What people showed.</strong> 931 photographs and videos customers posted or sent us &mdash; mostly Instagram, some Etsy, some Google, and 39 that simply arrived by email because somebody wanted us to see what they&rsquo;d made.</p>
+      <p><strong>What we did with it.</strong> We matched both to the 182 things a person can make from our cloth. Where the match was clear, it is linked and you can open the record. Where it wasn&rsquo;t, it is left blank and counted. <strong>A hole on this page is a real hole</strong> &mdash; we would rather show you one than fill it with a guess.</p>
+      <p class="t-soft">Two honesties about dates. Most checkout notes carry the date we imported them, not the date they were written, so nothing on this page reads a trend from those. The timeline further down uses only the 1,022 reviews that carry a real date. And the industrial sorbent side of the business is not on this map at all &mdash; different customers, different proof, a different conversation.</p>
+    </div>
+  </div>
+</section>
+
+<div class="silence"></div>
+
+<section id="evidence" class="band s-paper">
+  <div class="rk-in">
+    <p class="eyebrow">The evidence</p>
+    <h2 class="title">Eleven years, in their words</h2>
+    <div class="stats" style="margin-bottom:var(--s-7)">
+      <div class="stat"><div class="n"><span class="counter" data-to="6829">6,829</span></div><div class="l">written voices</div></div>
+      <div class="stat"><div class="n"><span class="counter" data-to="931">931</span></div><div class="l">photographs &amp; videos</div></div>
+      <div class="stat"><div class="n"><span class="counter" data-to="544">544</span></div><div class="l">named things people make</div></div>
+      <div class="stat rule"><div class="n"><span class="counter" data-to="84">84</span></div><div class="l">of 182 applications now carry a customer&rsquo;s picture</div></div>
+    </div>
+
+    <h3 class="h3">Some of the people</h3>
+    <p class="prose t-soft">Their own words, from the box at checkout. Real names, as they gave them, with the cloth they bought.</p>
+    <div class="grid-3" style="margin-top:var(--s-5)">
+      <div class="card"><p class="eyebrow">Kathleen Tiffin &middot; Zorb&reg; Original</p><p class="prose">&ldquo;Absorbing layer to collect blood in reusable menstrual pads. To be used by girls in Ghana.&rdquo;</p></div>
+      <div class="card"><p class="eyebrow">klay arsenault &middot; Zorb&reg; 3D Bamboo Dimple</p><p class="prose">&ldquo;making absorbent underwear for a teen with Ulcerative Colitis &mdash; to avoid embarrassments at school&rdquo;</p></div>
+      <div class="card"><p class="eyebrow">Rachel Nash &middot; ProSoft MediCORE&reg;</p><p class="prose">&ldquo;Headrests in a Dental Office, need to stand up to sanitizer wipes multiple times a day!&rdquo;</p></div>
+      <div class="card"><p class="eyebrow">Danielle Koch &middot; Zorb&reg; Original</p><p class="prose">&ldquo;Guinea pig fleece liners; their cage is very big: 2 feet by 4 feet!&rdquo;</p></div>
+      <div class="card"><p class="eyebrow">Deborah Crawford &middot; Zorb&reg; 3D Stay Dry Dimple</p><p class="prose">&ldquo;I have a small microgreen growing unit and the wicking fabric that comes with it just falls apart&hellip;&rdquo;</p></div>
+      <div class="card"><p class="eyebrow">Susanna Liben &middot; ProSoft&reg; Organic Cotton PUL</p><p class="prose">&ldquo;When I travel I like to cover the mattress in hotels because I am allergic to the scented products&hellip;&rdquo;</p></div>
+      <div class="card"><p class="eyebrow">Carole Berkoff &middot; ProSoft FoodSAFE&reg; PUL</p><p class="prose">&ldquo;Using with cute cotton fabric for bowl covers to cut down on plastic wrap&rdquo;</p></div>
+      <div class="card"><p class="eyebrow">Kim VB &middot; The Pachamama Project</p><p class="prose">&ldquo;Reusable sanitary pads for The Pachamama Project to help end period poverty for female refugees&rdquo;</p></div>
+      <div class="card"><p class="eyebrow">Heather&rsquo;s Place &middot; ProCool&reg;</p><p class="prose">&ldquo;a specialized non-scratch protective casing for custom part made by an aerospace firm&rdquo;</p></div>
+    </div>
+
+    <hr class="rule">
+
+    <h3 class="h3">And the long tail, which is the point</h3>
+    <p class="prose">Of the 544 named things, eight occur more than twenty times and 1,372 of the customers&rsquo; own phrasings occur exactly once. The head is product nouns. The people are in the tail.</p>
+    <p class="prose" style="font-family:var(--font-display);font-size:var(--fs-lg);line-height:1.7">Cider Press Chute &middot; Snake Soaker &middot; Urostomy Pouch Shield &middot; Hard Hat Sweatband &middot; Go-Kart Seat Cushion &middot; Sourdough Starter Cover &middot; Wheelchair Seat Cover &middot; Feeding Tube Pad &middot; Hula Hoop Huggie &middot; Cat Perch Cover &middot; Breast Prosthetic Liner &middot; Banneton Cover &middot; Fursuit Paw Lining &middot; Garden Sleeve Protector &middot; Rat Cage Mat &middot; Coffee Filter &middot; Industrial Machine Cover &middot; Medical Skin-Fold Liner</p>
+  </div>
+</section>
+
+<div class="silence"></div>
+
+<section id="timeline" class="band s-stone">
+  <div class="rk-in">
+    <p class="eyebrow">What changed</p>
+    <h2 class="title">The nursery, then the kitchen</h2>
+    <p class="prose">1,022 reviews carry both a real date and a named use, spanning 2015 to 2026. Read across that span, what customers make has moved.</p>
+    <div class="grid-2" style="margin-top:var(--s-6)">
+      <div class="card">
+        <p class="eyebrow">2015 &ndash; 2019 &middot; 458 stated uses</p>
+        <table class="spec"><tbody>
+          <tr><td data-col="Use">Diaper &amp; diapering parts</td><td data-col="Count">113 &mdash; a quarter of everything</td></tr>
+          <tr><td data-col="Use">Menstrual pads</td><td data-col="Count">38</td></tr>
+          <tr><td data-col="Use">Snack bags</td><td data-col="Count">19</td></tr>
+          <tr><td data-col="Use">Bowl covers</td><td data-col="Count">none</td></tr>
+        </tbody></table>
+      </div>
+      <div class="card">
+        <p class="eyebrow">2022 &ndash; 2026 &middot; 840 stated uses</p>
+        <table class="spec"><tbody>
+          <tr><td data-col="Use">Snack bags</td><td data-col="Count">69 &mdash; now first</td></tr>
+          <tr><td data-col="Use">Menstrual pads</td><td data-col="Count">44</td></tr>
+          <tr><td data-col="Use">Bowl covers</td><td data-col="Count">23, from nothing</td></tr>
+          <tr><td data-col="Use">Diaper &amp; diapering parts</td><td data-col="Count">41 &mdash; about 5%</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+    <p class="prose" style="margin-top:var(--s-5)">Cloth diapering was a quarter of everything people told us they were making. It is now around a twentieth. Food storage went from marginal to the largest single thing. Incontinence pads roughly quadrupled &mdash; the same care, aimed at a different body.</p>
+  </div>
+</section>
+
+<div class="silence"></div>
+
+<section id="instrument" class="band s-paper">
+  <div class="rk-in">
+    <p class="eyebrow">By community</p>
+    <h2 class="title">Where the proof is, and where it isn&rsquo;t</h2>
+    <p class="prose">Eighteen maker communities, 182 things a person can make. For each one: how many pictures exist, how many applications have both a picture and someone saying they made it, how many have the words but no picture, and how many have neither.</p>
+  </div>
+  <div class="rk-breakout" style="margin-top:var(--s-6)">
+      <table class="spec">
+        <thead><tr><th>Community</th><th>Applications</th><th>Pictures</th><th>Proven</th><th>Said, not shown</th><th>Neither</th></tr></thead>
+        <tbody>
+        <tr data-state="proven"><td data-col="Community"><strong>Menstrual, Incontinence & Personal Hygiene</strong></td><td data-col="Applications">13</td><td data-col="Pictures">344</td><td data-col="Proven">8</td><td data-col="Said, not shown">2</td><td data-col="Neither">1</td></tr>
+<tr data-state="proven"><td data-col="Community"><strong>Food Storage & Kitchen</strong></td><td data-col="Applications">18</td><td data-col="Pictures">210</td><td data-col="Proven">10</td><td data-col="Said, not shown">3</td><td data-col="Neither">4</td></tr>
+<tr data-state="proven"><td data-col="Community"><strong>Baby & Child Care</strong></td><td data-col="Applications">26</td><td data-col="Pictures">155</td><td data-col="Proven">13</td><td data-col="Said, not shown">7</td><td data-col="Neither">3</td></tr>
+<tr data-state="partial"><td data-col="Community"><strong>Pet Care</strong></td><td data-col="Applications">13</td><td data-col="Pictures">61</td><td data-col="Proven">6</td><td data-col="Said, not shown">1</td><td data-col="Neither">4</td></tr>
+<tr data-state="proven"><td data-col="Community"><strong>Bags, Storage & Organization</strong></td><td data-col="Applications">7</td><td data-col="Pictures">51</td><td data-col="Proven">6</td><td data-col="Said, not shown">0</td><td data-col="Neither">1</td></tr>
+<tr data-state="proven"><td data-col="Community"><strong>Hats, Accessories & Small Items</strong></td><td data-col="Applications">7</td><td data-col="Pictures">28</td><td data-col="Proven">4</td><td data-col="Said, not shown">1</td><td data-col="Neither">2</td></tr>
+<tr data-state="partial"><td data-col="Community"><strong>Everyday Apparel</strong></td><td data-col="Applications">15</td><td data-col="Pictures">21</td><td data-col="Proven">6</td><td data-col="Said, not shown">5</td><td data-col="Neither">3</td></tr>
+<tr data-state="partial"><td data-col="Community"><strong>Home Textiles & Décor</strong></td><td data-col="Applications">13</td><td data-col="Pictures">18</td><td data-col="Proven">4</td><td data-col="Said, not shown">3</td><td data-col="Neither">4</td></tr>
+<tr data-state="proven"><td data-col="Community"><strong>Personal Care & Accessories</strong></td><td data-col="Applications">4</td><td data-col="Pictures">17</td><td data-col="Proven">3</td><td data-col="Said, not shown">0</td><td data-col="Neither">1</td></tr>
+<tr data-state="proven"><td data-col="Community"><strong>Outerwear & Layers</strong></td><td data-col="Applications">4</td><td data-col="Pictures">11</td><td data-col="Proven">2</td><td data-col="Said, not shown">0</td><td data-col="Neither">1</td></tr>
+<tr data-state="proven"><td data-col="Community"><strong>Underwear & Intimates</strong></td><td data-col="Applications">4</td><td data-col="Pictures">10</td><td data-col="Proven">2</td><td data-col="Said, not shown">1</td><td data-col="Neither">1</td></tr>
+<tr data-state="partial"><td data-col="Community"><strong>Cleaning & Household</strong></td><td data-col="Applications">7</td><td data-col="Pictures">7</td><td data-col="Proven">2</td><td data-col="Said, not shown">3</td><td data-col="Neither">1</td></tr>
+<tr data-state="dark"><td data-col="Community"><strong>Gym, Fitness & Sports Gear</strong></td><td data-col="Applications">10</td><td data-col="Pictures">2</td><td data-col="Proven">0</td><td data-col="Said, not shown">0</td><td data-col="Neither">8</td></tr>
+<tr data-state="partial"><td data-col="Community"><strong>Swimwear & Water Sports</strong></td><td data-col="Applications">7</td><td data-col="Pictures">2</td><td data-col="Proven">2</td><td data-col="Said, not shown">0</td><td data-col="Neither">5</td></tr>
+<tr data-state="partial"><td data-col="Community"><strong>Medical & Healthcare</strong></td><td data-col="Applications">15</td><td data-col="Pictures">1</td><td data-col="Proven">1</td><td data-col="Said, not shown">2</td><td data-col="Neither">12</td></tr>
+<tr data-state="dark"><td data-col="Community"><strong>Athletic & Performance Wear</strong></td><td data-col="Applications">7</td><td data-col="Pictures">0</td><td data-col="Proven">0</td><td data-col="Said, not shown">4</td><td data-col="Neither">3</td></tr>
+<tr data-state="dark"><td data-col="Community"><strong>Automotive & Outdoor</strong></td><td data-col="Applications">5</td><td data-col="Pictures">0</td><td data-col="Proven">0</td><td data-col="Said, not shown">0</td><td data-col="Neither">5</td></tr>
+<tr data-state="dark"><td data-col="Community"><strong>Outdoor & Specialty</strong></td><td data-col="Applications">7</td><td data-col="Pictures">0</td><td data-col="Proven">0</td><td data-col="Said, not shown">1</td><td data-col="Neither">6</td></tr>
+        </tbody>
+      </table>
+  </div>
+  <div class="rk-in">
+    <div class="grid-2" style="margin-top:var(--s-7)">
+      <div>
+        <p class="eyebrow">Most photographed</p>
+        <ul class="plainlist"><li><b>Reusable Menstrual Pads</b><span>186 pictures · written</span></li>
+<li><b>Snack Bags, Sandwich Bags & Reusable Food Storage Bags</b><span>154 pictures · written</span></li>
+<li><b>Incontinence Pads</b><span>68 pictures · written</span></li>
+<li><b>Cloth Diapers</b><span>55 pictures · written</span></li>
+<li><b>Diaper Inserts & Boosters</b><span>33 pictures · written</span></li>
+<li><b>Period Underwear</b><span>29 pictures · written</span></li>
+<li><b>Panty Liners (Reusable)</b><span>29 pictures · written</span></li>
+<li><b>Zipper Pouches</b><span>24 pictures · no page text yet</span></li>
+<li><b>Bowl Covers</b><span>20 pictures · written</span></li>
+<li><b>Wet Bags & Swim Bags</b><span>20 pictures · no page text yet</span></li>
+<li><b>Face Masks (Reusable)</b><span>15 pictures · no page text yet</span></li>
+<li><b>Baby Changing Pads</b><span>13 pictures · written</span></li>
+<li><b>Dog Diapers & Belly Bands</b><span>13 pictures · written</span></li>
+<li><b>Hats & Caps</b><span>12 pictures · no page text yet</span></li></ul>
+      </div>
+      <div>
+        <p class="eyebrow">Written by us, never photographed</p>
+        <p class="prose t-soft">Four pages carry our text and not one customer picture. Adult Bibs. Dental Bibs &amp; Procedure Drapes. Diaper Pail Liners. Pet Crate Pads &amp; Liners.</p>
+        <p class="prose">Three of the four are institutional or clinical. Makers photograph what they made for a person they love; nobody photographs a dental drape. The fourth is the one worth a second look &mdash; diaper pail liners sit in the middle of the most photographed community we have, and still drew nothing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="descent"></div>
+
+<section id="finding" class="band deep">
+  <div class="rk-in">
+    <p class="eyebrow">What the shape says</p>
+    <h2 class="title">The corpus is <em>domestic</em></h2>
+    <div class="prose" style="color:var(--fg-on-deep)">
+      <p>Set the light communities beside the dark ones and the pattern is not random. People photograph babies, periods, pets, kitchens and bags. They do not photograph athletic wear, cars, the outdoors, or a gym.</p>
+      <p>That is not a gap in our collecting. It is a fact about who takes the photograph. The domestic maker is making something for a person they love, and the picture is part of the giving. The performance buyer is making something to <strong>work</strong> &mdash; and a thing that works does not get posted.</p>
+      <p><strong>Which is why the dark half is not an absence of customers.</strong> In Athletic &amp; Performance Wear, four applications have people telling us at checkout exactly what they are making &mdash; leggings, sweatbands, athletic tops &mdash; and not one photograph exists. They are here. They buy. They don&rsquo;t post.</p>
+    </div>
+    <div class="stats" style="margin-top:var(--s-7)">
+      <div class="stat"><div class="n"><span class="sp">33</span></div><div class="l">applications where they said it and nobody showed it</div></div>
+      <div class="stat"><div class="n">61</div><div class="l">applications with a customer picture and no page text yet</div></div>
+      <div class="stat"><div class="n">27</div><div class="l">of 182 pages we have actually written</div></div>
+    </div>
+    <p class="prose" style="color:var(--fg-on-deep);margin-top:var(--s-5)"><strong>The customers documented these applications before we did.</strong> Sixty-one pages already hold a photograph of the thing and no words about it.</p>
+  </div>
+</section>
+
+<div class="descent ascent"></div>
+
+<section id="missing" class="band s-wash">
+  <div class="rk-in">
+    <p class="eyebrow">For the people who help us tell this</p>
+    <h2 class="title">Where the picture is missing</h2>
+    <p class="lede">Three asks, and they are different from each other. We are not asking for ideas about where customers might be. We already know where they are. We are asking for help getting the picture.</p>
+
+    <div class="grid-3" style="margin-top:var(--s-6)">
+      <div class="card">
+        <p class="eyebrow">One &middot; the harvest</p>
+        <p class="prose"><strong>33 applications</strong> where customers state at checkout what they are making, and no photograph exists. These are not prospects. They are buyers, named, with the cloth already in their hands. The whole list is below.</p>
+      </div>
+      <div class="card">
+        <p class="eyebrow">Two &middot; routes we already have</p>
+        <p class="prose"><strong>39 pictures arrived by email</strong>, unprompted, because someone wanted us to see. Nobody designed that. And referral is already live in the record &mdash; one maker appears four times as the stated reason for a purchase; another customer simply wrote &ldquo;Starfish Emb sent me.&rdquo;</p>
+      </div>
+      <div class="card">
+        <p class="eyebrow">Three &middot; two streams, kept apart</p>
+        <p class="prose">What we hold is <strong>maker-made, product-in-use</strong> &mdash; playful, handmade, on a kitchen table. <strong>Lifestyle</strong> is a different register with a different source: commissioned or influencer, and it will not arrive free. Quoting for one when we meant the other is the expensive mistake.</p>
+      </div>
+    </div>
+
+    <h3 class="h3" style="margin-top:var(--s-7)">The harvest list &mdash; said, never shown</h3>
+    <ul class="plainlist cols"><li><b>Nightgowns & Sleep Shirts</b><span>Everyday Apparel · 9 said it</span></li>
+<li><b>Baby Swaddles</b><span>Baby & Child Care · 8 said it</span></li>
+<li><b>Pillow Covers & Cases</b><span>Home Textiles & Décor · 8 said it</span></li>
+<li><b>Baby Washcloths & Wipes</b><span>Baby & Child Care · 8 said it</span></li>
+<li><b>Medical Pillow Covers & Protectors</b><span>Medical & Healthcare · 4 said it</span></li>
+<li><b>Leggings & Yoga Pants</b><span>Athletic & Performance Wear · 4 said it</span></li>
+<li><b>Undershirts & Camisoles</b><span>Underwear & Intimates · 3 said it</span></li>
+<li><b>Chair Pads & Seat Cushions (Dining)</b><span>Home Textiles & Décor · 3 said it</span></li>
+<li><b>Crib & Bassinet Accessories</b><span>Baby & Child Care · 2 said it</span></li>
+<li><b>Button-Up Shirts & Blouses</b><span>Everyday Apparel · 2 said it</span></li>
+<li><b>Patch & Craft Display Boards</b><span>Hats, Accessories & Small Items · 2 said it</span></li>
+<li><b>Quiet Books & Interactive Fabric Books</b><span>Baby & Child Care · 2 said it</span></li>
+<li><b>Skirts</b><span>Everyday Apparel · 2 said it</span></li>
+<li><b>Baby Toys</b><span>Baby & Child Care · 2 said it</span></li>
+<li><b>Pet Toys</b><span>Pet Care · 2 said it</span></li>
+<li><b>Coasters & Mug Rugs</b><span>Food Storage & Kitchen · 2 said it</span></li>
+<li><b>Sweatbands & Athletic Accessories</b><span>Athletic & Performance Wear · 1 said it</span></li>
+<li><b>Medical Scrubs</b><span>Medical & Healthcare · 1 said it</span></li>
+<li><b>Shower Curtains & Liners</b><span>Cleaning & Household · 1 said it</span></li>
+<li><b>Seed Starting & Transplant Covers</b><span>Outdoor & Specialty · 1 said it</span></li>
+<li><b>Art & Breakfast Smocks (Child)</b><span>Baby & Child Care · 1 said it</span></li>
+<li><b>Cushion Covers (Furniture)</b><span>Home Textiles & Décor · 1 said it</span></li>
+<li><b>Robes & Loungewear</b><span>Everyday Apparel · 1 said it</span></li>
+<li><b>Everyday Aprons</b><span>Food Storage & Kitchen · 1 said it</span></li>
+<li><b>Adult Bibs</b><span>Menstrual, Incontinence & Personal Hygiene · 1 said it</span></li>
+<li><b>Baby Hats & Caps</b><span>Baby & Child Care · 1 said it</span></li>
+<li><b>Produce Bags</b><span>Food Storage & Kitchen · 1 said it</span></li>
+<li><b>Wheelchair Seat Covers & Pads</b><span>Menstrual, Incontinence & Personal Hygiene · 1 said it</span></li>
+<li><b>Athletic Tops & Performance Shirts</b><span>Athletic & Performance Wear · 1 said it</span></li>
+<li><b>Sports Jerseys & Uniforms</b><span>Athletic & Performance Wear · 1 said it</span></li>
+<li><b>Bathrobes</b><span>Cleaning & Household · 1 said it</span></li>
+<li><b>Bath Mats & Shower Mats</b><span>Cleaning & Household · 1 said it</span></li>
+<li><b>Pajamas & Sleepwear</b><span>Everyday Apparel · 1 said it</span></li></ul>
+
+    <hr class="rule">
+    <h3 class="h3">And the four communities that are genuinely dark</h3>
+    <div class="prose">
+      <p><strong>Automotive &amp; Outdoor</strong> &mdash; 5 of 5 applications with neither a word nor a picture. <strong>Outdoor &amp; Specialty</strong> &mdash; 6 of 7. <strong>Medical &amp; Healthcare</strong> &mdash; 12 of 15. <strong>Gym, Fitness &amp; Sports Gear</strong> &mdash; 8 of 10.</p>
+      <p>These are not the same problem as the harvest list. Here there is no photograph <strong>and</strong> no maker statement, which means either we are not reaching those people or they arrive through a door we haven&rsquo;t built. That is a strategy question, not a content one, and it is the one we&rsquo;d most like to think about together.</p>
+    </div>
+  </div>
+</section>
+
+<div class="silence"></div>
+
+<section id="home" class="band s-ground">
+  <div class="rk-in">
+    <p class="eyebrow">Coming home</p>
+    <h2 class="title">A picture is the shape of caring</h2>
+    <div class="prose">
+      <p>Kathleen Tiffin&rsquo;s nine words about girls in Ghana are not marketing material. Neither is klay arsenault&rsquo;s teenager with ulcerative colitis, or Danielle Koch measuring a guinea pig cage at two feet by four. They wrote those sentences into a checkout box because somebody asked what they were making, and then nobody read them for years.</p>
+      <p>This page is the reading. It is also the first honest count of what we can and cannot show &mdash; and the four dark communities are on it deliberately, because a proof page that hides its holes is not proof.</p>
+    </div>
+    <div class="doors" style="margin-top:var(--s-7)">
+      <a class="door" href="#instrument"><p class="eyebrow">By community</p><strong>The full picture, community by community</strong>Eighteen communities, 182 applications, the count for each.</a>
+      <a class="door rung" href="#missing"><p class="eyebrow">The next rung</p><strong>Where the picture is missing</strong>33 applications, two harvest routes we already have, and the four dark communities.</a>
+      <a class="door" href="#claim"><p class="eyebrow">How this is counted</p><strong>What the numbers mean</strong>Where every figure comes from, and what is deliberately excluded.</a>
+    </div>
+    <p class="eyebrow" style="margin-top:var(--s-7)">The other maps</p>
+    <div class="doors">
+      <a class="door" href="sitemaps.html"><strong>The Sitemaps</strong>Every page on both sites, its reader, its voice, its sources.</a>
+      <a class="door" href="customer-map.html"><strong>The Customer Map</strong>Who our customers are, by kind and by name.</a>
+      <a class="door" href="content-universe.html"><strong>The Content Universe</strong>Everything we intend to write, sorted by reader.</a>
+      <a class="door" href="video-map.html"><strong>The Video Map</strong>The thirteen films, what each is for, who it is for.</a>
+      <a class="door" href="voice-map.html"><strong>The Voice Map</strong>Whose voice a piece is in, and how to sound like it.</a>
+      <a class="door" href="design-map.html"><strong>The Design Map</strong>The rule, the laws, and the correction that earned each.</a>
+    </div>
+    <p class="prose t-soft" style="margin-top:var(--s-6)">For our side: every node on this page resolves to a live record &mdash; the page, the document, the piece, the film, the photograph itself. Counts are a snapshot of 9 September 2026 and rewrite themselves as the records grow.</p>
+  </div>
+</section>
+
+<script>
+/* rupakarshini V3 — rk.js · shared runtime. Optional. Every element degrades without it. */
+(function () {
+  const d = document, root = d.documentElement; root.classList.remove('no-js');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* rise fallback (no animation-timeline support) */
+  if (!CSS.supports('animation-timeline: view()')) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { threshold: .12 });
+    d.querySelectorAll('.rise').forEach(el => io.observe(el));
+  }
+
+  /* hold-to-continue: press held for --hold-ms (default 700) → is-done → emits 'hold:done'; opens [data-threshold] target */
+  d.querySelectorAll('.hold').forEach(h => {
+    const ms = +getComputedStyle(h).getPropertyValue('--hold-ms') || 700; let t0 = 0, raf = 0;
+    const tick = () => { const p = Math.min(1, (performance.now() - t0) / ms); h.style.setProperty('--p', p);
+      if (p >= 1) { done(); } else raf = requestAnimationFrame(tick); };
+    const start = e => { e.preventDefault(); h.classList.remove('is-done'); t0 = performance.now(); raf = requestAnimationFrame(tick); };
+    const stop = () => { cancelAnimationFrame(raf); if (!h.classList.contains('is-done')) h.style.setProperty('--p', 0); };
+    const done = () => { cancelAnimationFrame(raf); h.classList.add('is-done'); h.style.setProperty('--p', 1);
+      if (navigator.vibrate && !reduce) navigator.vibrate(18);                                   /* enhancement only (no iOS) */
+      const target = h.dataset.threshold && d.querySelector(h.dataset.threshold);
+      if (target) { target.classList.add('is-open'); target.querySelectorAll('.gate[hidden]').forEach(g => g.hidden = false); }
+      if (h.dataset.remember) try { localStorage.setItem('rk:' + h.dataset.remember, '1'); } catch (_) {}
+      h.dispatchEvent(new CustomEvent('hold:done', { bubbles: true })); };
+    h.addEventListener('pointerdown', start); ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => h.addEventListener(ev, stop));
+    h.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); done(); } });
+    h.setAttribute('role', 'button'); h.tabIndex = 0;
+    if (h.dataset.remember) try { if (localStorage.getItem('rk:' + h.dataset.remember)) done(); } catch (_) {}
+  });
+
+  /* rail scroll-spy */
+  const rail = d.querySelector('.rail'); if (rail) {
+    const links = [...rail.querySelectorAll('a[href^="#"]')]; const secs = links.map(a => d.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const spy = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-40% 0px -55% 0px' });
+    secs.forEach(s => spy.observe(s));
+  }
+
+  /* counter: <span class="counter" data-to="300" data-suffix="+"> */
+  d.querySelectorAll('.counter[data-to]').forEach(c => {
+    const to = +c.dataset.to, suf = c.dataset.suffix || '', pre = c.dataset.prefix || '';
+    if (reduce) { c.textContent = pre + to.toLocaleString() + suf; return; }
+    const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; io.disconnect(); const t0 = performance.now(), dur = 900;
+      const step = () => { const p = Math.min(1, (performance.now() - t0) / dur), v = Math.round(to * (1 - Math.pow(1 - p, 3))); c.textContent = pre + v.toLocaleString() + suf; if (p < 1) requestAnimationFrame(step); }; step(); }), { threshold: .5 });
+    io.observe(c);
+  });
+
+  /* wake lock for performances: <body data-wake> */
+  if (root.querySelector('[data-wake]') && 'wakeLock' in navigator) {
+    let lock; const get = async () => { try { lock = await navigator.wakeLock.request('screen'); } catch (_) {} };
+    get(); d.addEventListener('visibilitychange', () => { if (d.visibilityState === 'visible') get(); });
+  }
+
+  /* harness hook: body[data-harness] loads harness/dc.js */
+  if (root.querySelector('[data-harness]')) { const s = d.createElement('script'); s.src = root.querySelector('[data-harness]').dataset.harness || 'harness/dc.js'; d.body.appendChild(s); }
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,1030 @@
+<!doctype html>
+<html lang="en" data-chassis="akas" data-brand="silverarch" data-ground="paper" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Customer Map — who buys from us, and how far they walk | AKAS Wisdom</title>
+<meta name="description" content="Who buys from Wazoodle and AKAS Tex: nine kinds of customer by name, the cloth ladder and the mats programme, how they arrive, how they move, what they make and what they buy. Snapshot 8 Sep 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<!--
+BRIEF (rupakarshini)
+ONE JOB       The room sees in three seconds that the nine are distances on one ladder the family climbed first, then opens any kind to the real names behind it.
+WHO ARRIVES   Chris/Revity (the doors to build), Shelby/Brian (the people to film), Sid and Arch (their own customers, named).
+REGISTER      Arch — plain, from inside; altitude: the family looking at its own ledger with the maker in view.
+RECOGNITION   "Everyone begins by asking — and the nine are where the question ends up standing." STRANGER'S CHAIR: Wazoodle / AKAS Tex only, no internal names (no store/factory, no Book, no codes); four-line frame at the door; read-this-first before the lede.
+SHAPE         Recognition ∘ Instrument (the ladder is the instrument; the nine, the walk and the close are the telling).
+CHASSIS/WORLD akas · silverarch · paper. TYPE: body at --fs-lg; titles at h2.
+DEPTH         1,297 humans by kind (One Book, RPC) · 727 named makers in 26 communities (Book of Makers, Owl) · snapshot 8 Sep 2026, Makayla Law: every number from a live pull.
+HOSTING       single-file HTML (akaswisdom.com). HAND: both.
+MOTION        the nine arriving (staggered), the ladder drawing, the pulse on the crossing, names arriving, the two loops on entry; reduced-motion = static.
+-->
+<style>
+/* ---- tokens/spine.css ---- */
+/* ============================================================
+   rupakarshini V3 — tokens/spine.css
+   THE SPINE. Role tokens. Both chassis obey this grammar.
+   Components reference ONLY spine tokens. Worlds fill them.
+   Scope: everything lives under [data-chassis][data-brand].
+   Load order: spine.css → scales.css → ONE world file → rk.css
+   ============================================================ */
+
+:root, [data-chassis] {
+  /* ---- GROUND (Neev) — what the page stands on ---------- */
+  --bg:            var(--w-ground);        /* page ground                    */
+  --surface:       var(--w-surface);       /* cards, panels, the raised plane */
+  --surface-2:     var(--w-surface-2);     /* quiet alternate band            */
+  --surface-wash:  var(--w-wash);          /* identity tint band              */
+  --surface-deep:  var(--w-deep);          /* the ONE deep band per page      */
+  --surface-hover: var(--w-hover);
+
+  /* ---- MEDIUM (Shweta) — what the reader reads through --- */
+  --fg:            var(--w-ink);           /* primary text                    */
+  --fg-2:          var(--w-ink-2);         /* secondary text                  */
+  --fg-muted:      var(--w-muted);         /* captions, tertiary (≥4.5:1)     */
+  --fg-eyebrow:    var(--w-muted);         /* RULING: eyebrow uses muted, never label */
+  --fg-on-deep:    var(--w-on-deep);       /* text on the deep band           */
+  --fg-on-action:  #FFFFFF;
+
+  /* text ladder — one hue, distance not darkness (chassis-independent) */
+  --t-high:    color-mix(in oklch, var(--fg) 92%, transparent);
+  --t-mid:     color-mix(in oklch, var(--fg) 80%, transparent);
+  --t-body:    color-mix(in oklch, var(--fg) 72%, transparent);
+  --t-soft:    color-mix(in oklch, var(--fg) 58%, transparent);
+  --t-whisper: color-mix(in oklch, var(--fg) 36%, transparent);
+  --t-ghost:   color-mix(in oklch, var(--fg) 20%, transparent);
+
+  /* ---- HOLD (Sid) — lines and edges ---------------------- */
+  --line:          var(--w-line);          /* hairline                        */
+  --line-strong:   var(--w-sig);           /* 3px authority rule              */
+  --line-wash:     var(--w-wash-bd);
+  --radius:        var(--w-radius, 12px);
+  --radius-sm:     calc(var(--radius) * .5);
+  --radius-lg:     calc(var(--radius) * 1.33);
+  --radius-pill:   999px;
+
+  /* ---- VOICE (Arch) — identity and speaking colour ------- */
+  --sig:           var(--w-sig);           /* identity signature              */
+  --sig-pressed:   var(--w-sig-dk);
+  --sig-tint:      var(--w-sig-d);
+  --voice:         var(--w-voice);         /* the chassis's speaking colour   */
+  --voice-pressed: var(--w-voice-dk);
+  --spark:         var(--w-spark);         /* earned once against deep        */
+
+  /* ---- CONSEQUENCE (Bindu) — one colour across the estate  */
+  --bindu:         #C0392B;                /* the point where something is decided */
+  --bindu-pressed: #9E2D21;
+  --action:        var(--bindu);           /* commerce buy · threshold crossed */
+  --action-fg:     #FFFFFF;
+
+  /* ---- STATUS — the system deliberately has no general alert colour */
+  --ok:            var(--w-voice);
+  --warn:          #B8860B;                /* goldenrod — Low stock only       */
+  --danger:        var(--bindu);
+  --info:          #2575B5;
+
+  /* ---- GRACE (Karishma) — readiness ------------------------ */
+  --ring:          color-mix(in oklch, var(--sig) 70%, white);
+  --ring-w:        2px;
+  --ring-offset:   2px;
+  --shadow-1: 0 1px 3px rgba(40,34,24,.06), 0 1px 2px rgba(40,34,24,.04);
+  --shadow-2: 0 10px 34px rgba(40,34,24,.16), 0 2px 8px rgba(40,34,24,.08);
+  --shadow-3: 0 24px 60px rgba(40,34,24,.20), 0 6px 16px rgba(40,34,24,.10);
+
+  /* ---- FONT FACES — chassis constant, world never changes -- */
+  --font-display:  var(--w-font-display);
+  --font-ui:       var(--w-font-ui);
+  --font-mono:     var(--w-font-mono);
+  --font-ceremony: var(--w-font-ceremony, var(--w-font-display));
+}
+
+/* Focus ring recipe — one rule for the whole estate (keyboard only) */
+:where([data-chassis]) :focus-visible {
+  outline: var(--ring-w) solid var(--ring);
+  outline-offset: var(--ring-offset);
+  border-radius: var(--radius-sm);
+}
+
+/* Foreground-pairing invariant: any surface must be used with its pair */
+[data-chassis] .on-deep  { color: var(--fg-on-deep); }
+[data-chassis] .on-deep .eyebrow { color: var(--sig-tint); }
+[data-chassis] .on-wash .eyebrow { color: var(--sig-pressed); }
+
+/* ---- tokens/scales.css ---- */
+/* ============================================================
+   rupakarshini V3 — tokens/scales.css
+   Fluid type (Utopia math, 360→1440, rem term always present so
+   WCAG 1.4.4 holds: every step max ≤ 2.5× min), measure, space,
+   band rhythm, width scale, motion vocabulary.
+   Both chassis share this file. Worlds may override --pace-*.
+   ============================================================ */
+
+:root, [data-chassis] {
+  /* ---- TYPE LADDER — 8 steps, ratio ~1.2 mobile → 1.25 desktop */
+  --fs-display: clamp(2.5rem,    1.281rem + 5.42vi, 4.75rem);  /* 40 → 76  */
+  --fs-h1:      clamp(2rem,      1.303rem + 3.10vi, 3.28rem);  /* 32 → 52  */
+  --fs-h2:      clamp(1.6rem,    1.211rem + 1.73vi, 2.32rem);  /* 26 → 37  */
+  --fs-h3:      clamp(1.28rem,   1.074rem + 0.91vi, 1.64rem);  /* 20 → 26  */
+  --fs-lg:      clamp(1.125rem,  1.014rem + 0.49vi, 1.33rem);  /* 18 → 21  */
+  --fs-body:    clamp(1rem,      0.958rem + 0.19vi, 1.11rem);  /* 16 → 17.7*/
+  --fs-ui:      clamp(0.875rem,  0.86rem  + 0.07vi, 0.9rem);   /* 14 → 14.4*/
+  --fs-sm:      0.8125rem;                                     /* 13 fixed */
+  --fs-eyebrow: 0.8125rem;                                     /* 13 — RULING (was 12) */
+  --fs-mono-floor: 0.6875rem;                                  /* 11 — never below */
+
+  /* optical size pinned per step (CSS can't read clamp result) */
+  --opsz-display: 72; --opsz-h: 36; --opsz-body: 16; --opsz-label: 10;
+
+  /* ---- LINE HEIGHT — inverse to size */
+  --lh-display: 1.05; --lh-h: 1.15; --lh-lg: 1.35; --lh-body: 1.6; --lh-ui: 1.4;
+  --ls-display: -0.02em; --ls-h: -0.01em; --ls-eyebrow: .18em; --ls-mono: .16em;
+
+  /* ---- WIDTH SCALE — density governs measure (Parrot ruling) */
+  --w-reading:    68ch;                              /* invariant for prose  */
+  --w-reading-b:  60ch;                              /* ASG contemplative    */
+  --w-instrument: 720px;                             /* 640–760 band         */
+  --w-column:     940px;                             /* the editorial column */
+  --w-breakout:   min(1440px, 100vw - 64px);         /* grids, media, tables */
+  --w-shell:      1320px;
+
+  /* ---- SPACE — 8-pt */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px;
+  --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px;
+  --gap-tight: var(--s-2); --gap: var(--s-4); --gap-loose: var(--s-5);
+  --pad-card: var(--s-5);
+
+  /* ---- BAND RHYTHM — RULING 72 / 60; scale, not one value */
+  --band-tight:  clamp(40px, 5vw, 56px);
+  --band:        clamp(60px, 6vw, 72px);
+  --band-deep:   clamp(72px, 8vw, 104px);
+  --silence:     40px;                               /* .silence run-out     */
+  --strata-1: 10px; --strata-2: 14px; --strata-3: 18px; /* the descent seam  */
+
+  /* ---- MOTION VOCABULARY — named, budgeted, reduced-motion gated */
+  --ease-out:  cubic-bezier(.22,.61,.36,1);
+  --ease-soft: cubic-bezier(.4,0,.2,1);
+  --dur-fast: .15s; --dur-base: .25s; --dur-slow: .5s;
+  --dur-breath: 6s;                                  /* ASG breathe loop     */
+  --rise-y: 24px;                                    /* rise/reveal travel   */
+  --veil-y: -8px;                                    /* veil entry travel    */
+  --hold-ms: 700;                                    /* hold-to-continue     */
+
+  /* ---- PACE — world overrides (still / measured / quick) */
+  --pace-dur: var(--dur-base);
+  --pace-y:   var(--rise-y);
+}
+
+/* Reduced motion: keep end states, remove travel */
+@media (prefers-reduced-motion: reduce) {
+  :root, [data-chassis] { --rise-y: 0px; --veil-y: 0px; --dur-breath: 0s; }
+}
+
+/* Named motions (chassis-independent). Used by rk.css. */
+@keyframes rk-rise   { from { opacity:0; transform:translateY(var(--rise-y)); } to { opacity:1; transform:none; } }
+@keyframes rk-seed   { from { opacity:0; letter-spacing:.06em; } to { opacity:1; letter-spacing:0; } }
+@keyframes rk-breathe{ 0%,100% { transform:scale(1); opacity:.85; } 50% { transform:scale(1.04); opacity:1; } }
+@keyframes rk-pulse  { 0%,100% { opacity:.55; } 50% { opacity:1; } }
+@keyframes rk-shimmer{ from { background-position: -200% 0; } to { background-position: 200% 0; } }
+@keyframes rk-descend{ from { transform:translateY(-6px); opacity:0; } to { transform:none; opacity:1; } }
+@keyframes rk-curtain{ from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
+@keyframes rk-mote   { 0% { transform:translate(0,0); opacity:0; } 20% { opacity:.6; } 100% { transform:translate(var(--mx,8px),var(--my,-40px)); opacity:0; } }
+@keyframes rk-blink  { 0%,92%,100% { transform:scaleY(1); } 96% { transform:scaleY(.08); } }
+
+/* ---- tokens/worlds/akas.css ---- */
+/* ============================================================
+   rupakarshini V3 — tokens/worlds/akas.css
+   CHASSIS A — AKAS / Wazoodle. Canon as amended in Parrot
+   (Design System table, Sep 2026), not the June zip.
+   Usage:  <html data-chassis="akas" data-brand="zorb">
+   Type is constant. Colour separates the brands.
+   ============================================================ */
+
+[data-chassis="akas"] {
+  /* ---- chassis constants (Sid) ---- */
+  --w-font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --w-font-ui:      'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --w-font-mono:    'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace; /* RULING: mono eyebrow face added */
+  --w-radius:       12px;
+
+  /* spine surfaces — warm stone (Neev) */
+  --w-ground:    #EFECE6;   /* page ground                       */
+  --w-surface:   #FFFFFF;   /* paper                             */
+  --w-surface-2: #E7E1D5;   /* stone                             */
+  --w-hover:     #F6F2E9;
+  --w-line:      #E3DDD0;
+  --w-divider:   #ECE6DA;
+
+  /* medium (Shweta) */
+  --w-ink:     #1E1E1E;
+  --w-ink-2:   #3A352E;
+  --w-muted:   #6F685C;     /* 5.2:1 on paper · 4.4 on stone — eyebrow lives here (measured; Parrot value #8A8377 was 3.75) */
+  --w-label:   #A8A095;     /* decorative only; NEVER for eyebrow (2.4:1) */
+  --w-on-deep: rgba(255,255,255,.92);
+
+  /* the chassis speaking colour */
+  --w-voice:    #3B8234;
+  --w-voice-dk: #2C6427;
+
+  /* body position default */
+  --body-default: both;
+}
+
+/* Paper-first variant for consumer LPEs and Brand Home (Revity Gen 2 lesson) */
+[data-chassis="akas"][data-ground="paper"] { --w-ground: #FFFFFF; --w-surface: #FBF9F4; }
+
+/* ---- THE EIGHT WORLDS — sig / sig-dk / sig-d / wash / wash-bd / deep / deep-hi / spark ---- */
+[data-chassis="akas"], [data-chassis="akas"][data-brand="house"] {
+  --w-sig:#1E5219; --w-sig-dk:#163D12; --w-sig-d:#6A9E66;
+  --w-wash:#E4EFE2; --w-wash-bd:#C8DEC4; --w-deep:#1A2E15; --w-deep-hi:#213A1B; --w-spark:#D4B800;
+  --pace: measured; --imagery: raw; --motion-budget: rise seed;
+}
+[data-chassis="akas"][data-brand="zorb"] {
+  --w-sig:#0A5A99; --w-sig-dk:#08456F; --w-sig-d:#5FA8DC;
+  --w-wash:#DCEDFB; --w-wash-bd:#BFDDF4; --w-deep:#0A3354; --w-deep-hi:#0E3E66; --w-spark:#CDE970;
+  --pace: quick; --imagery: annotated; --motion-budget: rise seed pulse;   /* clinical precision */
+}
+[data-chassis="akas"][data-brand="prosoft"] {
+  --w-sig:#006B8A; --w-sig-dk:#004E67; --w-sig-d:#5BB8D0;
+  --w-wash:#D4F0F5; --w-wash-bd:#8FD5E0; --w-deep:#003A48; --w-deep-hi:#004D60; --w-spark:#A78CE0;
+  --pace: still; --imagery: raw; --motion-budget: rise;                     /* silent, soft, permanent */
+}
+[data-chassis="akas"][data-brand="proeco"] {
+  --w-sig:#8A6800; --w-sig-dk:#6B5000; --w-sig-d:#C8A840;
+  --w-wash:#F5EDCC; --w-wash-bd:#DEC880; --w-deep:#2E2600; --w-deep-hi:#3A3200; --w-spark:#F0D040;
+  --pace: measured; --imagery: raw; --motion-budget: rise seed breathe;    /* rooted in earth */
+}
+[data-chassis="akas"][data-brand="procool"] {
+  --w-sig:#4A5A9E; --w-sig-dk:#364488; --w-sig-d:#9BA0D4;
+  --w-wash:#E8EAF5; --w-wash-bd:#C0C6E8; --w-deep:#0D1720; --w-deep-hi:#162232; --w-spark:#3FC6F4;
+  --pace: quick; --imagery: annotated; --motion-budget: rise shimmer;      /* cool precision */
+}
+[data-chassis="akas"][data-brand="supabsorb"] {
+  --w-sig:#1A7A3A; --w-sig-dk:#125A2A; --w-sig-d:#60B878;
+  --w-wash:#DDEEE4; --w-wash-bd:#B0D4BC;
+  --w-deep:#0B4A22; --w-deep-hi:#0F5A2A;                                     /* RULING: darkened from #0D672E — APCA Lc≥75 on deep */
+  --w-spark:#FFD200;
+  --pace: quick; --imagery: raw; --motion-budget: rise;                      /* built for the floor */
+}
+[data-chassis="akas"][data-brand="akastex"] {
+  --w-sig:#0E7E92; --w-sig-dk:#0A6072; --w-sig-d:#27C3DA;
+  --w-wash:#E6F6FB; --w-wash-bd:#A9EAF8; --w-deep:#16404F; --w-deep-hi:#1D4E5F; --w-spark:#D85326;
+  --pace: measured; --imagery: annotated; --motion-budget: rise seed descend; /* RULING: canon; get.akastex lineage retired */
+}
+[data-chassis="akas"][data-brand="silverarch"] {
+  --w-sig:#1A6B8E; --w-sig-dk:#134F6A; --w-sig-d:#60A8C8;
+  --w-wash:#D0EBF5; --w-wash-bd:#A0D0E8; --w-deep:#0D2535; --w-deep-hi:#112E41; --w-spark:#44D4B8;
+  --pace: still; --imagery: annotated; --motion-budget: rise pulse;         /* midnight steel */
+}
+/* Worlds-in-waiting inherit House until a character sheet exists */
+[data-chassis="akas"][data-brand="akastiq"],
+[data-chassis="akas"][data-brand="protec"],
+[data-chassis="akas"][data-brand="procare"] { /* inherits house */ }
+
+/* Family palette — crosses both chassis (archetype colours) */
+[data-chassis] {
+  --arch:#7A2F14; --arch-lt:#B8623F; --sid:#1B3A5C; --sid-lt:#4F7BA8;
+  --ash:#26421A; --ash-lt:#5E8A4E;  --shared:#4A4238; --akas:#2A2520; --waz:#8B5E3C;
+}
+
+/* ---- rk.css ---- */
+/* ============================================================
+   rupakarshini V3 — rk.css  ·  THE ELEMENT CORE (chassis-independent)
+   Requires: tokens/spine.css + tokens/scales.css + one world file.
+   Every class here is an element in references/elements.md.
+   No colour literals. No px type. Reduced motion respected.
+   ============================================================ */
+
+/* ---------- PAGE (Sid) ---------- */
+html[data-chassis] { font-size: 100%; -webkit-text-size-adjust: 100%; }   /* rem stays 16 — never scale the root */
+[data-chassis] { background: var(--bg); color: var(--fg); font-family: var(--font-ui); }
+body { margin: 0; font-size: var(--fs-body); line-height: var(--lh-body);
+  font-optical-sizing: auto; text-rendering: optimizeLegibility; }
+.rk-page { min-height: 100svh; }
+*, *::before, *::after { box-sizing: border-box; }
+img, video, canvas { max-width: 100%; height: auto; display: block; }
+
+/* ---------- WIDTH SCALE (Arch) — density governs measure ---------- */
+.rk-in        { width: min(var(--w-column), 100% - 2*var(--s-5)); margin-inline: auto; }
+.rk-reading   { max-width: var(--w-reading); }
+.rk-instrument{ width: min(var(--w-instrument), 100% - 2*var(--s-5)); margin-inline: auto; }
+.rk-breakout  { width: var(--w-breakout); margin-inline: auto; }
+.rk-full      { width: 100%; }
+
+/* ---------- HEAD RHYTHM: eyebrow → title → lede → rule ---------- */
+.eyebrow { font-family: var(--font-mono); font-size: var(--fs-eyebrow); font-weight: 600;
+  letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-eyebrow);
+  display: flex; align-items: center; gap: var(--s-3); margin: 0 0 var(--s-3); }
+.eyebrow::after { content: ""; flex: 0 0 64px; height: 1px; background: currentColor; opacity: .4; }
+.eyebrow.voice { color: var(--voice); }
+.title { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h2);
+  line-height: var(--lh-h); letter-spacing: var(--ls-h); margin: 0 0 var(--s-4);
+  font-variation-settings: 'opsz' var(--opsz-h); text-wrap: balance; }
+.title em { font-style: italic; color: var(--voice); }          /* CAP: 2 per page */
+.display { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-display);
+  line-height: var(--lh-display); letter-spacing: var(--ls-display);
+  font-variation-settings: 'opsz' var(--opsz-display); text-wrap: balance; margin: 0 0 var(--s-5); }
+.h1 { font-family: var(--font-display); font-size: var(--fs-h1); line-height: var(--lh-h); font-weight: 500; margin: 0 0 var(--s-4); text-wrap: balance; }
+.h3 { font-family: var(--font-display); font-size: var(--fs-h3); line-height: var(--lh-h); font-weight: 500; margin: 0 0 var(--s-3); }
+.lede { font-size: var(--fs-lg); line-height: var(--lh-lg); color: var(--fg-2); max-width: var(--w-reading); margin: 0 0 var(--s-5); text-wrap: pretty; }
+.rule { height: 1px; background: var(--line); border: 0; margin: var(--s-6) 0; }
+.seed { font-family: var(--font-display); font-style: italic; font-size: var(--fs-lg); color: var(--t-soft);
+  margin: 0 0 var(--s-5); animation: rk-seed var(--dur-slow) var(--ease-out) both; }   /* Sakshi: one line before a threshold */
+.ceremony { font-family: var(--font-ceremony); letter-spacing: .12em; text-transform: uppercase; font-weight: 400; }
+.prose > * + * { margin-top: var(--s-4); }
+.prose { max-width: var(--w-reading); color: var(--t-body); }
+.prose strong { color: var(--fg); }
+
+/* text ladder utilities */
+.t-high{color:var(--t-high)} .t-mid{color:var(--t-mid)} .t-body{color:var(--t-body)}
+.t-soft{color:var(--t-soft)} .t-whisper{color:var(--t-whisper)} .t-ghost{color:var(--t-ghost)}
+
+/* ---------- BANDS & SURFACE STEPPING (Neev) ---------- */
+.band { padding-block: var(--band); }
+.band.tight { padding-block: var(--band-tight); }
+.band.deep  { padding-block: var(--band-deep); background: var(--surface-deep); color: var(--fg-on-deep); }
+.band.deep .eyebrow { color: var(--sig-tint); }
+.band.deep .title em, .band.deep .voice { color: var(--spark); }
+.s-paper { background: var(--surface); } .s-ground { background: var(--bg); }
+.s-stone { background: var(--surface-2); } .s-wash { background: var(--surface-wash); }
+.s-wash .eyebrow { color: var(--sig-pressed); }
+.s-stone .eyebrow { color: var(--fg-2); }            /* stone measured 4.2:1 with muted — step up */
+.silence { height: var(--silence); }
+
+/* seams — a line, never a label */
+.seam { height: 1px; background: var(--line); }
+.descent { height: calc(var(--strata-1) + var(--strata-2) + var(--strata-3)); background:
+  linear-gradient(to bottom,
+    color-mix(in oklch, var(--surface-deep) 18%, var(--surface-wash)) 0 var(--strata-1),
+    color-mix(in oklch, var(--surface-deep) 45%, var(--surface-wash)) var(--strata-1) calc(var(--strata-1) + var(--strata-2)),
+    color-mix(in oklch, var(--surface-deep) 78%, var(--surface-wash)) calc(var(--strata-1) + var(--strata-2)) 100%); }
+.ascent { transform: scaleY(-1); }
+
+/* ---------- MOTION (Bindu) — floor: rise; ceiling: named budget ---------- */
+.rise { animation: rk-rise var(--pace-dur) var(--ease-out) both; }
+@supports (animation-timeline: view()) {
+  .rise { animation-timeline: view(); animation-range: entry 0% entry 35%; animation-duration: auto; }
+}
+@supports not (animation-timeline: view()) {
+  .rise { opacity: 0; transform: translateY(var(--rise-y)); transition: opacity var(--pace-dur) var(--ease-out), transform var(--pace-dur) var(--ease-out); animation: none; }
+  .rise.is-in, .no-js .rise { opacity: 1; transform: none; }
+}
+.veil { transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); opacity: 1; transform: none; }
+@starting-style { .veil { opacity: 0; transform: translateY(var(--veil-y)); } }
+.breathe { animation: rk-breathe var(--dur-breath) ease-in-out infinite; }
+.pulse   { animation: rk-pulse 2.4s ease-in-out infinite; }
+.curtain { animation: rk-curtain var(--dur-slow) var(--ease-soft) both; }
+@media (prefers-reduced-motion: reduce) {
+  .rise, .breathe, .pulse, .curtain, .seed { animation: none !important; opacity: 1 !important; transform: none !important; clip-path: none !important; }
+  .veil { transition: none; }
+}
+
+/* ---------- THRESHOLD · HOLD · GATE (Sakshi) ---------- */
+.hold { --p: 0; position: relative; display: inline-grid; place-items: center; width: 88px; height: 88px;
+  border-radius: 50%; border: 1px solid var(--line-wash); background: var(--surface); color: var(--fg-2);
+  font-family: var(--font-ui); font-size: var(--fs-sm); cursor: pointer; user-select: none; -webkit-user-select: none; touch-action: manipulation; }
+.hold::before { content: ""; position: absolute; inset: -4px; border-radius: 50%;
+  background: conic-gradient(var(--action) calc(var(--p) * 1turn), transparent 0); mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px)); -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px)); }
+.hold.is-done { border-color: var(--action); color: var(--action); }
+.threshold { position: relative; isolation: isolate; }
+.threshold > .veil-layer { position: absolute; inset: 0; background: var(--bg); z-index: 2; transition: opacity var(--dur-slow) var(--ease-out); }
+.threshold.is-open > .veil-layer { opacity: 0; pointer-events: none; }
+.gate[hidden] { display: none; }
+
+/* ---------- DOORS — "where this leads" (the seam between pages) ---------- */
+.doors { display: grid; gap: var(--s-3); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.door { display: block; padding: var(--s-4) var(--s-5); border-left: 2px solid var(--line-wash); background: var(--surface);
+  color: inherit; text-decoration: none; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; transition: border-color var(--dur-fast), background var(--dur-fast); }
+.door:hover { border-left-color: var(--sig); background: var(--surface-hover); }
+.door .eyebrow { margin-bottom: var(--s-1); } .door .eyebrow::after { display: none; }
+.door strong { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-lg); display: block; margin-bottom: var(--s-1); line-height: var(--lh-h); }
+.door { font-size: var(--fs-sm); color: var(--fg-2); }
+.door.rung { border-left-color: var(--sig); }          /* the Ladder's next rung — visible, never pushed */
+
+/* ---------- PROOF ELEMENTS ---------- */
+.stats { display: grid; gap: var(--s-6); grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); border-top: 1px solid var(--line); padding-top: var(--s-5); }
+.stat .n { font-family: var(--font-display); font-size: var(--fs-h1); line-height: 1; font-variation-settings: 'opsz' var(--opsz-display); }
+.stat .n .sp { color: var(--spark); }
+.stat .l { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); margin-top: var(--s-2); }
+.stat.rule { border-left: 2px solid var(--spark); padding-left: var(--s-4); border-top: 0; }
+.band.deep .stat .l { color: var(--t-soft); }
+.verify { display: grid; gap: var(--s-3); grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+.verify .v { padding: var(--s-4); border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); font-size: var(--fs-sm); }
+.verify .v b { display: block; font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--sig); margin-bottom: var(--s-1); }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--sig); vertical-align: middle; margin-right: var(--s-2); }
+.dot.voice { background: var(--voice); } .dot.warn { background: var(--warn); }
+
+/* ---------- CARDS & ROWS ---------- */
+.tile { display: flex; gap: var(--s-4); align-items: flex-start; }
+.tile .ic { flex: 0 0 36px; height: 36px; display: grid; place-items: center; border-radius: var(--radius-sm); background: var(--sig); color: #fff; }
+.tile h4 { margin: 0 0 var(--s-1); font-family: var(--font-ui); font-weight: 600; }
+.tile p { margin: 0; color: var(--fg-muted); font-size: var(--fs-sm); }
+.grid-2 { display: grid; gap: var(--s-7); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); align-items: center; }
+.grid-3 { display: grid; gap: var(--s-5); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.row { display: grid; gap: var(--s-6); grid-template-columns: minmax(0,1fr); align-items: center; }
+.row + .row { margin-top: var(--s-6); }
+@media (min-width: 720px) { .row { grid-template-columns: 200px minmax(0,1fr); } .row.flip { grid-template-columns: minmax(0,1fr) 200px; } .row.flip > :first-child { order: 2; } }
+.media { border-radius: var(--radius); background: var(--surface-2); overflow: hidden; aspect-ratio: 4/5; }
+.media.sq { aspect-ratio: 1; } .media.wide { aspect-ratio: 16/9; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: var(--pad-card); }
+.panel { border-radius: var(--radius-lg); padding: clamp(var(--s-6), 5vw, var(--s-8));
+  background: linear-gradient(135deg, var(--sig-pressed), var(--surface-deep) 60%, var(--surface-deep)); color: var(--fg-on-deep); }
+.panel .eyebrow { color: var(--spark); }
+
+/* ---------- SPEC TABLE — stops being a table under 700px ---------- */
+.spec { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: var(--fs-sm); }
+.spec th, .spec td { text-align: left; padding: var(--s-3) var(--s-3); border-bottom: 1px solid var(--line); vertical-align: top; }
+.spec th { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); font-weight: 600; }
+@media (max-width: 699px) {
+  .spec, .spec tbody, .spec tr, .spec td { display: block; }
+  .spec thead { display: none; }
+  .spec tr { padding: var(--s-3) 0; border-bottom: 1px solid var(--line); }
+  .spec td { border: 0; padding: var(--s-1) 0; }
+  .spec td::before { content: attr(data-col); display: block; font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); }
+}
+
+/* ---------- BUTTONS — one colour of consequence ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2); min-height: 44px; padding: 0 var(--s-5);
+  border-radius: var(--radius-pill); font-family: var(--font-ui); font-weight: 600; font-size: var(--fs-ui); text-decoration: none; cursor: pointer;
+  border: 1px solid transparent; transition: background var(--dur-fast), border-color var(--dur-fast), color var(--dur-fast); touch-action: manipulation; }
+.btn.act   { background: var(--action); color: var(--action-fg); }       /* Buy · Cross · Begin — LAW: only where consequence */
+.btn.act:hover { background: var(--bindu-pressed); }
+.btn.voice { background: var(--voice); color: #fff; }
+.btn.voice:hover { background: var(--voice-pressed); }
+.btn.sig   { background: var(--sig); color: #fff; }
+.btn.ghost { background: transparent; border-color: var(--line-wash); color: var(--fg); }
+.btn.ghost:hover { border-color: var(--sig); }
+.link { color: var(--sig); text-decoration: underline; text-decoration-color: color-mix(in oklch, var(--sig) 35%, transparent); text-underline-offset: 4px; }
+
+/* ---------- NAVIGATION ---------- */
+.rail { position: sticky; top: 0; z-index: 5; display: flex; gap: var(--s-4); overflow-x: auto; padding: var(--s-3) var(--s-5);
+  background: var(--bg); border-bottom: 1px solid var(--line); font-size: var(--fs-ui); font-weight: 700; scrollbar-width: none; }
+.rail a { color: var(--fg-muted); text-decoration: none; white-space: nowrap; padding: var(--s-1) 0; border-bottom: 2px solid transparent; }
+.rail a.is-active, .rail a:hover { color: var(--fg); border-bottom-color: var(--sig); }
+.family { display: flex; gap: var(--s-4); align-items: center; height: 36px; padding: 0 var(--s-5); font-family: var(--font-mono); font-size: var(--fs-mono-floor);
+  letter-spacing: var(--ls-mono); text-transform: uppercase; background: var(--surface-2); color: var(--fg-muted); overflow-x: auto; scrollbar-width: none; }
+.family a { color: inherit; text-decoration: none; white-space: nowrap; }
+.family a[aria-current="true"] { color: var(--fg); border-bottom: 1px solid var(--sig); }
+.marquee { overflow: hidden; white-space: nowrap; background: var(--surface-wash); padding: var(--s-2) 0; font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--sig-pressed); }
+.marquee > span { display: inline-block; padding-inline: var(--s-6); animation: rk-marquee 28s linear infinite; }
+@keyframes rk-marquee { to { transform: translateX(-50%); } }
+.bottom-nav { position: fixed; inset-inline: 0; bottom: 0; z-index: 6; display: grid; grid-auto-flow: column; gap: var(--s-2);
+  padding: var(--s-3) var(--s-4) calc(var(--s-3) + env(safe-area-inset-bottom)); background: color-mix(in oklch, var(--bg) 92%, transparent);
+  backdrop-filter: blur(12px); border-top: 1px solid var(--line); }
+.sticky-cta { position: sticky; bottom: 0; z-index: 6; padding: var(--s-3) var(--s-4) calc(var(--s-3) + env(safe-area-inset-bottom)); background: var(--surface); border-top: 1px solid var(--line); display: flex; gap: var(--s-3); align-items: center; }
+.sticky-cta .who { flex: 1; font-size: var(--fs-sm); color: var(--fg-muted); }
+@media (max-width: 600px) { .sticky-cta .who { display: none; } .sticky-cta .btn { flex: 1; } }
+
+/* ---------- INSTRUMENT PRIMITIVES ---------- */
+.counter { font-variant-numeric: tabular-nums; }
+details.acc { border-top: 1px solid var(--line); }
+details.acc summary { cursor: pointer; list-style: none; padding: var(--s-4) 0; font-family: var(--font-display); font-size: var(--fs-lg); display: flex; justify-content: space-between; }
+details.acc summary::-webkit-details-marker { display: none; }
+details.acc summary::after { content: "+"; color: var(--fg-muted); } details.acc[open] summary::after { content: "–"; }
+details.acc > :not(summary) { padding-bottom: var(--s-4); color: var(--t-body); }
+dialog.sheet { border: 0; border-radius: var(--radius-lg) var(--radius-lg) 0 0; padding: var(--s-6); width: min(720px, 100%); margin: auto auto 0; background: var(--surface); color: var(--fg); }
+dialog.sheet::backdrop { background: rgba(0,0,0,.45); }
+.field { display: grid; gap: var(--s-1); } .field label { font-size: var(--fs-sm); color: var(--fg-2); }
+.field input, .field select, .field textarea { min-height: 44px; padding: 0 var(--s-3); border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); color: var(--fg); font: inherit; }
+
+/* ---------- PRINT (the Package shape) ---------- */
+@media print {
+  .rise, .veil, .seed, .curtain { animation: none !important; opacity: 1 !important; transform: none !important; }
+  [data-chassis] { background: #fff; color: #000; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .rail, .bottom-nav, .sticky-cta, .marquee, .hold { display: none !important; }
+  .band { break-inside: avoid; } .pagebreak { break-before: page; }
+  h1, h2, .title, .display { break-after: avoid; } p { orphans: 3; widows: 3; }
+  @page { size: A4; margin: 18mm; }
+}
+
+/* ---- page ---- */
+/* ---- page-specific: Journey & Archetypes — silverarch, akas chassis, paper ground ---- */
+.rk-breakout { max-width: 1180px; margin-inline: auto; padding-inline: var(--s-5); }
+.alt { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h1); margin: 0 0 var(--s-4); color: var(--fg); text-wrap: balance; }
+.hd .display { max-width: 24ch; }
+.lede.big { font-size: var(--fs-h3); line-height: 1.4; color: var(--fg); max-width: 60ch; }
+.ft { font-family: var(--font-mono); font-size: var(--fs-sm); letter-spacing: .04em; color: var(--fg-muted); }
+.ft a { color: inherit; }
+.mono { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); }
+@keyframes pop { to { transform: none; opacity: 1; } }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+/* ---- the door: nine arrive ---- */
+.door-grid { display: grid; grid-template-columns: minmax(0, 40ch) 1fr; gap: var(--s-7); align-items: start; margin: var(--s-6) 0 var(--s-5); }
+@media (max-width: 900px) { .door-grid { grid-template-columns: 1fr; gap: var(--s-5); } }
+.arrive { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.arrive li { font-family: var(--font-display); font-size: var(--fs-h3); line-height: 1.25; color: var(--fg); padding: var(--s-2) 0 var(--s-2) var(--s-5); border-left: 2px solid var(--line); opacity: 0; transform: translateY(8px); animation: pop .6s var(--ease-out) forwards; animation-delay: calc(.3s + var(--i) * .3s); }
+.arrive li b { font-weight: 500; }
+.arrive li .who { display: block; font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); margin-top: 2px; }
+.arrive li.foot { font-family: var(--font-mono); font-size: var(--fs-sm); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--sig); border-left: 3px solid var(--sig); margin-top: var(--s-2); }
+.doorfig { margin: 0; position: sticky; top: var(--s-5); }
+.doorfig svg { width: 100%; height: auto; overflow: visible; }
+.doorfig .rail { stroke: var(--fg-2); stroke-width: 3; stroke-linecap: round; opacity: .35; }
+.doorfig .rung { stroke: var(--sig); stroke-width: 3; stroke-linecap: round; transform-box: fill-box; transform-origin: left; transform: scaleX(0); animation: pop .5s var(--ease-out) forwards; animation-delay: calc(.4s + var(--i) * .25s); }
+.doorfig .fig { fill: var(--sig); opacity: 0; transform: translateY(6px); animation: pop .5s var(--ease-out) forwards; animation-delay: calc(2.3s + var(--i) * .3s); }
+.doorfig .fig.stack { fill: var(--spark); }
+.doorfig .fig.zero { fill: none; stroke: var(--fg-muted); stroke-dasharray: 3 3; }
+.doorfig text { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: .08em; text-transform: uppercase; fill: var(--fg-muted); }
+.doorfig .lab { opacity: 0; animation: pop .5s var(--ease-out) forwards; animation-delay: calc(2.3s + var(--i) * .3s); }
+
+/* ---- the eight cards ---- */
+.cards8 { display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); align-items: start; }
+@media (max-width: 560px) { .cards8 { grid-template-columns: 1fr; } }
+.c8 { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 0 var(--s-5); }
+.c8 summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 72px 1fr; column-gap: var(--s-4); row-gap: var(--s-1); padding: var(--s-5) 0; align-items: start; min-height: 44px; }
+.c8 summary::-webkit-details-marker { display: none; }
+.c8 .ic { grid-row: span 2; width: 72px; height: 54px; }
+.c8 .ic svg { width: 100%; height: 100%; overflow: visible; }
+.c8 .ic * { fill: none; stroke: var(--sig); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.c8 .t { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h3); line-height: 1.15; color: var(--fg); }
+.c8 .s { grid-column: 2; font-size: var(--fs-lg); color: var(--fg-2); line-height: 1.4; }
+.c8[open] .t, .c8 summary:hover .t { color: var(--sig); }
+.c8 > p, .c8 > dl { margin: 0 0 var(--s-6) calc(72px + var(--s-4)); font-size: var(--fs-lg); line-height: 1.55; color: var(--fg); border-left: 3px solid var(--sig); padding-left: var(--s-4); }
+.c8 > p + p { margin-top: calc(-1 * var(--s-4)); }
+@media (max-width: 700px) { .c8 > p, .c8 > dl { margin-left: 0; } }
+.c8 .rungs line { stroke-width: 3; transform-box: fill-box; transform-origin: left; transform: scaleX(.3); opacity: .5; } .c8[open] .rungs line { animation: pop .4s var(--ease-out) forwards; animation-delay: calc(var(--i) * .15s); }
+.c8 .you { fill: var(--spark); stroke: none; opacity: 0; } .c8[open] .you { animation: pop .5s var(--ease-out) .9s forwards; }
+.c8 .steps path { stroke-dasharray: 60; stroke-dashoffset: 60; } .c8[open] .steps path { animation: draw .6s var(--ease-out) forwards; animation-delay: calc(var(--i) * .2s); }
+.c8 .doorw rect { fill: var(--sig); stroke: none; opacity: .25; } .c8[open] .doorw rect { animation: glow .5s var(--ease-out) forwards; animation-delay: calc(var(--i) * .2s); } @keyframes glow { to { opacity: 1; } }
+.c8 .plus { stroke: var(--spark); opacity: 0; } .c8[open] .plus { animation: pop .4s var(--ease-out) .8s forwards; }
+.c8 .zero { stroke-dasharray: 3 3; } .c8 .cross { opacity: 0; } .c8[open] .cross { animation: pop .4s var(--ease-out) .6s forwards; }
+.c8 .q { stroke-dasharray: 40; stroke-dashoffset: 40; } .c8[open] .q { animation: draw .6s var(--ease-out) .2s forwards; }
+.c8 .loops path { stroke-dasharray: 1; stroke-dashoffset: 1; } .c8[open] .loops path { animation: draw 1s var(--ease-out) forwards; animation-delay: calc(var(--i) * .5s); }
+.c8 .loops .back { stroke: var(--spark); }
+.c8 .chain circle { fill: var(--fg-muted); stroke: none; opacity: .5; } .c8[open] .chain circle { animation: fade .5s var(--ease-out) forwards; animation-delay: calc(.3s + var(--i) * .15s); } @keyframes fade { to { opacity: 0; transform: translateY(8px); } }
+.c8 .chain .keep { fill: var(--sig); opacity: 1; animation: none; }
+
+/* ---- the ladder (instrument) ---- */
+.chips { display: flex; flex-wrap: wrap; gap: var(--s-2); margin: var(--s-5) 0 var(--s-4); }
+.chip { min-height: 44px; padding: 0 var(--s-4); border: 1px solid var(--line); border-radius: var(--radius-pill); background: var(--surface); font-family: var(--font-ui); font-size: var(--fs-body); color: var(--fg); cursor: pointer; display: inline-flex; align-items: center; gap: var(--s-2); }
+.chip .n { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); color: var(--fg-muted); }
+.chip[aria-pressed="true"] { background: var(--sig); border-color: var(--sig); color: var(--fg-on-action); }
+.chip[aria-pressed="true"] .n { color: inherit; opacity: .8; }
+.chip.shadow { border-style: dashed; }
+.ladder { margin: var(--s-4) 0 var(--s-5); }
+.ladder svg { width: 100%; height: auto; overflow: visible; }
+.ladder .rail { stroke: var(--fg-2); stroke-width: 3; stroke-linecap: round; opacity: .3; }
+.ladder .rung { stroke: var(--fg-2); stroke-width: 3; stroke-linecap: round; opacity: .3; transition: opacity .4s, stroke .4s; }
+.ladder .rung.lit { stroke: var(--sig); opacity: 1; }
+.ladder .rung.hot { stroke: var(--spark); opacity: 1; }
+.ladder .rl { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: .08em; text-transform: uppercase; fill: var(--fg-muted); text-anchor: middle; cursor: pointer; }
+.ladder .rl.lit { fill: var(--sig); font-weight: 600; }
+.ladder .rz { cursor: pointer; fill: transparent; }
+.ladder .span { stroke: var(--sig); stroke-width: 10; stroke-linecap: round; opacity: .18; transition: opacity .4s; }
+.ladder .span.on { opacity: .9; }
+.ladder .span.stack { stroke: var(--spark); }
+.ladder .cnt { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: .06em; fill: var(--fg-2); text-anchor: middle; opacity: .6; transition: opacity .4s; }
+.ladder .cnt.on { opacity: 1; fill: var(--sig); font-weight: 600; }
+.ladder .house { fill: none; stroke: var(--fg-2); stroke-width: 2; opacity: .3; transition: opacity .4s, stroke .4s; } .ladder .house.on { stroke: var(--sig); opacity: 1; }
+.ladder .extract { fill: none; stroke: var(--fg-muted); stroke-width: 2; stroke-dasharray: 4 4; opacity: .5; }
+.ladder .pulse { fill: var(--spark); opacity: .9; animation: pulse 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes pulse { 0%,100% { transform: scale(1); opacity: .9; } 50% { transform: scale(1.6); opacity: .4; } }
+.panel { min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--s-5); margin-top: var(--s-4); display: grid; gap: var(--s-5); grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
+@media (max-width: 860px) { .panel { grid-template-columns: 1fr; } .panel > div { min-width: 0; } }
+@media (max-width: 560px) { .shares { grid-template-columns: 1fr; } .names li { grid-template-columns: 1fr; } .names .meta { text-align: left; } }
+.panel h3 { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h2); line-height: 1.1; margin: 0 0 var(--s-2); color: var(--fg); }
+.panel .line { font-family: var(--font-display); font-style: italic; font-size: var(--fs-h3); color: var(--sig); margin: 0 0 var(--s-4); }
+.panel dl { margin: 0; display: grid; gap: var(--s-2); font-size: var(--fs-body); line-height: var(--lh-body); color: var(--fg); }
+.panel dt { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); margin-top: var(--s-2); }
+.panel dd { margin: 0; }
+.shares { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); margin: var(--s-4) 0; }
+.share { border-top: 1px solid var(--line); padding-top: var(--s-2); }
+.share .big { font-family: var(--font-display); font-size: var(--fs-h1); line-height: 1; color: var(--fg); }
+.share .l { font-size: var(--fs-sm); color: var(--fg-muted); }
+.rhythm { display: flex; align-items: flex-end; gap: 3px; height: 44px; margin-top: var(--s-2); }
+.rhythm i { flex: 1; background: var(--sig); opacity: .75; border-radius: 2px 2px 0 0; min-height: 2px; transform-origin: bottom; animation: grow .6s var(--ease-out) both; }
+.rhythm i.s { background: var(--voice); }
+@keyframes grow { from { transform: scaleY(0); } }
+.rhythm-key { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: .06em; color: var(--fg-muted); text-transform: uppercase; }
+.names { margin: 0; padding: 0; list-style: none; display: grid; gap: 0; }
+.names li { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: var(--s-3); padding: var(--s-2) 0; border-top: 1px solid var(--line); font-size: var(--fs-body); line-height: 1.35; opacity: 0; animation: pop .4s var(--ease-out) forwards; animation-delay: calc(var(--i) * .05s); }
+.names li:first-child { border-top: 0; }
+.names .nm { color: var(--fg); font-weight: 600; }
+.names .as { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: .04em; color: var(--fg-muted); margin-left: var(--s-2); }
+.names .meta { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: .04em; color: var(--fg-2); text-align: right; white-space: normal; line-height: 1.4; }
+.names .tag { display: inline-block; white-space: nowrap; font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: .06em; text-transform: uppercase; color: var(--sig); border: 1px solid var(--line-wash); border-radius: var(--radius-pill); padding: 1px 6px; margin-left: var(--s-2); vertical-align: middle; }
+.names .tag.sp { color: var(--voice); }
+.comm { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: var(--s-3); }
+.comm > div { border: 1px solid var(--line); border-radius: var(--radius); padding: var(--s-3); background: var(--bg); opacity: 0; animation: pop .4s var(--ease-out) forwards; animation-delay: calc(var(--i) * .04s); }
+.comm .ch { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: .08em; text-transform: uppercase; color: var(--fg-muted); }
+.comm .tt { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-lg); line-height: 1.15; color: var(--fg); margin: 2px 0; }
+.comm .cn { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: .04em; color: var(--sig); }
+.comm .nn { font-size: var(--fs-sm); color: var(--fg-2); line-height: 1.3; margin-top: var(--s-1); }
+.walk { margin-top: var(--s-6); border-top: 1px solid var(--line); padding-top: var(--s-4); }
+.walk ol { list-style: none; margin: var(--s-3) 0 0; padding: 0; display: grid; grid-template-columns: repeat(7, 1fr); gap: var(--s-2); }
+@media (max-width: 760px) { .walk ol { grid-template-columns: repeat(4, 1fr); } }
+.walk li { font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-2); border-top: 3px solid var(--line-wash); padding-top: var(--s-2); }
+.walk li b { display: block; font-family: var(--font-display); font-weight: 500; font-size: var(--fs-lg); text-transform: none; letter-spacing: 0; color: var(--fg); }
+.walk li.now { border-top-color: var(--sig); }
+
+/* ---- what the walk found (wash) ---- */
+.finds { display: grid; gap: var(--s-6); margin-top: var(--s-6); }
+@media (min-width: 820px) { .finds { grid-template-columns: repeat(3, 1fr); } }
+.find h4 { margin: 0 0 var(--s-2); font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h3); line-height: 1.2; color: var(--fg); }
+.find p { margin: 0; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--fg-2); max-width: 42ch; }
+.find .n { font-family: var(--font-display); font-size: var(--fs-h1); line-height: 1; color: var(--sig); margin-bottom: var(--s-2); }
+.ledger { margin-top: var(--s-7); padding-top: var(--s-5); border-top: 1px solid var(--line-wash); max-width: var(--w-reading); }
+.ledger h4 { margin: 0 0 var(--s-2); font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h3); color: var(--fg); }
+.ledger p { margin: 0 0 var(--s-3); font-size: var(--fs-body); line-height: var(--lh-body); color: var(--fg-2); }
+
+/* ---- coming home (deep) ---- */
+.home-grid { display: grid; gap: var(--s-7); grid-template-columns: 1fr 1.1fr; align-items: start; margin-top: var(--s-6); }
+@media (max-width: 860px) { .home-grid { grid-template-columns: 1fr; gap: var(--s-5); } .loop { max-width: 420px; } }
+.loop { margin: 0; } .loop svg { width: 100%; height: auto; overflow: visible; }
+.loop text { font-family: var(--font-mono); font-size: var(--fs-sm); letter-spacing: .08em; text-transform: uppercase; fill: var(--fg-on-deep); opacity: .8; text-anchor: middle; }
+.loop .arc { fill: none; stroke: var(--sig-tint); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.loop .arc.back { stroke: var(--spark); }
+.loop .node { fill: none; stroke: var(--sig-tint); stroke-width: 3; opacity: 0; }
+.loop .node.you { stroke: var(--spark); }
+.loop.is-in .node { animation: pop .6s var(--ease-out) forwards; animation-delay: calc(.2s + var(--i) * .3s); }
+.loop.is-in .arc.fwd { animation: draw 1.4s var(--ease-out) 1.2s forwards; }
+.loop.is-in .arc.back { animation: draw 1.4s var(--ease-out) 2.8s forwards; }
+.loop .again { opacity: 0; } .loop.is-in .again { animation: pop .8s var(--ease-out) 4.4s forwards; }
+.home-text { display: grid; gap: var(--s-6); }
+.hm h3 { margin: 0 0 var(--s-2); font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h2); line-height: 1.1; color: var(--fg-on-deep); }
+.hm p { margin: 0; font-size: var(--fs-lg); line-height: 1.55; color: var(--fg-on-deep); opacity: .9; }
+.band.deep .rule { background: color-mix(in oklch, var(--fg-on-deep) 25%, transparent); }
+.ask-line { font-size: var(--fs-h3); font-family: var(--font-display); color: var(--fg-on-deep); margin: 0 0 var(--s-4); max-width: var(--w-reading); }
+.ask-line em { color: var(--spark); font-style: italic; }
+.band.deep .last-line { font-family: var(--font-display); font-style: italic; font-size: var(--fs-h2); color: var(--fg-on-deep); margin: 0; }
+.band.deep .doors { margin-top: var(--s-7); }
+.band.deep .door { background: color-mix(in oklch, var(--fg-on-deep) 8%, transparent); border-color: var(--sig-tint); color: var(--fg-on-deep); }
+.band.deep .door strong { color: var(--fg-on-deep); }
+.band.deep .door:hover { border-left-color: var(--spark); background: color-mix(in oklch, var(--fg-on-deep) 14%, transparent); }
+.band.deep .stats { border-top-color: color-mix(in oklch, var(--fg-on-deep) 25%, transparent); margin-top: var(--s-6); }
+@media (prefers-reduced-motion: reduce) {
+  .arrive li, .doorfig *, .c8 *, .loop *, .names li, .comm div, .rhythm i, .ladder .pulse { animation: none; }
+  .arrive li, .doorfig .rung, .doorfig .fig, .doorfig .lab, .c8 .you, .c8 .plus, .c8 .cross, .loop .node, .loop .again, .names li, .comm div { opacity: 1; transform: none; }
+  .c8 .steps path, .c8 .q, .c8 .loops path, .loop .arc { stroke-dashoffset: 0; } .c8 .rungs line { transform: none; opacity: 1; }
+}
+@media print { .arrive li, .doorfig *, .loop .node, .loop .again, .names li, .comm div { animation: none; opacity: 1; transform: none; } .loop .arc { stroke-dashoffset: 0; } }
+/* ---- v2 additions ---- */
+.doorfig .ret { stroke: var(--sig-tint); stroke-width: 2; stroke-dasharray: 5 5; opacity: 0; animation: pop .8s var(--ease-out) 2.6s forwards; }
+.doorfig .fig.warm { fill: var(--spark); }
+.ladder .retpath { stroke: var(--sig-tint); stroke-width: 2; stroke-dasharray: 5 5; opacity: .6; }
+.ladder .span.warm { stroke: var(--spark); } .ladder .span.mid { stroke: var(--sig); } .ladder .span.gray { stroke: var(--fg-2); } .ladder .span.teal { stroke: var(--sig-tint); }
+.chip.warm[aria-pressed="true"] { background: var(--spark); border-color: var(--spark); color: var(--fg); }
+.chip.gray[aria-pressed="true"] { background: var(--fg-2); border-color: var(--fg-2); }
+.panel h3 .sub { display: block; font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--fg-muted); margin-top: var(--s-1); }
+.moves { display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: var(--s-6); }
+.mv { background: var(--bg); border: 1px solid var(--line-wash); border-radius: var(--radius-lg); padding: var(--s-4); }
+.mv .n { font-family: var(--font-display); font-size: var(--fs-h1); line-height: 1; color: var(--sig); }
+.mv h4 { margin: var(--s-1) 0 var(--s-2); font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h3); color: var(--fg); }
+.mv p { margin: 0 0 var(--s-3); font-size: var(--fs-sm); line-height: 1.45; color: var(--fg-2); }
+.mv ul { list-style: none; margin: 0; padding: 0; font-size: var(--fs-sm); line-height: 1.4; color: var(--fg); }
+.mv li { padding: 3px 0; border-top: 1px solid var(--line-wash); }
+.mv li b { font-weight: 600; }
+.whale { margin: var(--s-7) 0 0; padding-top: var(--s-5); border-top: 1px solid var(--line-wash); }
+.rhythm.big { height: 110px; gap: 6px; max-width: 620px; }
+.rhythm.big i { background: var(--spark); opacity: .9; }
+.whale .rhythm-key { max-width: 620px; }
+.whale .mono { margin-top: var(--s-3); max-width: var(--w-reading); text-transform: none; letter-spacing: .02em; font-size: var(--fs-sm); }
+@media (prefers-reduced-motion: reduce) { .doorfig .ret { animation: none; opacity: 1; } }
+
+.frame { margin: var(--s-5) 0 0; padding: var(--s-4) var(--s-5); border-left: 3px solid var(--sig); background: var(--surface); border-radius: 0 var(--radius) var(--radius) 0; max-width: 62ch; }
+.frame p { margin: 0; font-size: var(--fs-lg); line-height: 1.5; color: var(--fg); } .frame .eyebrow { margin-bottom: var(--s-2); } .frame b { font-weight: 600; color: var(--sig); }
+.readfirst { margin: var(--s-5) 0; max-width: 62ch; } .readfirst p { margin: 0; font-family: var(--font-display); font-size: var(--fs-h3); line-height: 1.35; color: var(--fg); } .readfirst .eyebrow { margin-bottom: var(--s-2); }
+
+.po { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); margin: var(--s-5) 0 0; max-width: 90ch; }
+.po > div { border-left: 3px solid var(--sig); padding: var(--s-2) var(--s-4); background: var(--surface); border-radius: 0 var(--radius) var(--radius) 0; }
+.po p { margin: 0; font-size: var(--fs-lg); line-height: 1.5; color: var(--fg); } .po .eyebrow { margin-bottom: var(--s-2); }
+@media (max-width: 760px) { .po { grid-template-columns: 1fr; } }
+.walks { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6); margin-top: var(--s-6); }
+@media (max-width: 860px) { .walks { grid-template-columns: 1fr; } }
+.walk-col h3 { margin: 0 0 var(--s-3); font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h2); line-height: 1.1; color: var(--fg); }
+.walk-col h3 .mono { display: block; margin-top: var(--s-1); }
+.rungs-list { list-style: none; margin: 0; padding: 0; }
+.rungs-list li { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.4fr) auto; gap: var(--s-3); align-items: baseline; padding: var(--s-2) 0; border-top: 1px solid var(--line); opacity: 0; animation: pop .4s var(--ease-out) forwards; animation-delay: calc(var(--i) * .08s); }
+.rungs-list li b { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h3); color: var(--fg); }
+.rungs-list li span { font-size: var(--fs-body); color: var(--fg-2); }
+.rungs-list li em { font-family: var(--font-mono); font-style: normal; font-size: var(--fs-mono-floor); letter-spacing: var(--ls-mono); text-transform: uppercase; color: var(--sig); white-space: nowrap; }
+@media (max-width: 560px) { .rungs-list li { grid-template-columns: 1fr; gap: 2px; } }
+.walk-col .note { font-size: var(--fs-body); line-height: var(--lh-body); color: var(--fg-2); margin: var(--s-4) 0 0; border-left: 3px solid var(--sig); padding-left: var(--s-4); }
+.matsnames { list-style: none; margin: var(--s-4) 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 2px var(--s-4); }
+.matsnames li { font-size: var(--fs-sm); color: var(--fg); padding: 3px 0; border-top: 1px solid var(--line); } .matsnames li b { font-weight: 600; } .matsnames .mono { display: block; }
+@media (max-width: 560px) { .matsnames { grid-template-columns: 1fr; } }
+.arrive-box { margin-top: var(--s-7); padding: var(--s-5); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); max-width: 78ch; }
+.arrive-box p { margin: 0; font-size: var(--fs-lg); line-height: 1.5; color: var(--fg); } .arrive-box .eyebrow { margin-bottom: var(--s-2); }
+.buys { display: grid; gap: 4px; max-width: 420px; }
+.buys div { display: grid; grid-template-columns: 90px 1fr 36px; align-items: center; gap: var(--s-2); font-family: var(--font-mono); font-size: var(--fs-mono-floor); letter-spacing: .04em; color: var(--fg-2); }
+.buys i { display: block; height: 10px; background: var(--sig); opacity: .75; border-radius: 2px; } .buys b { text-align: right; color: var(--fg); }
+@media (prefers-reduced-motion: reduce) { .rungs-list li { animation: none; opacity: 1; } }
+
+</style>
+</head>
+<body class="rk-page">
+
+<header class="band s-paper hd" id="top">
+  <div class="rk-breakout">
+    <p class="eyebrow voice">The Customer Map · September 2026</p>
+    <h1 class="display">Who buys from us, and how far they walk.</h1>
+    <p class="seed">Fifteen years of customers, read off the record and named. Nine kinds of them, two walks, four ways they move.</p>
+    <div class="po">
+      <div><p class="eyebrow">Why this page exists</p><p>So the people building and filming for us know who our customers actually are — by kind and by name — how they arrive, how far they walk with us, and what makes one of them matter.</p></div>
+      <div><p class="eyebrow">Where you'll be when you've read it</p><p>You can tell the nine kinds apart in a sentence each, read the two walks (cloth by the ladder, mats by the programme), say how customers arrive and move over years, and know what they make and what they buy.</p></div>
+    </div>
+    <div class="frame">
+      <p class="eyebrow">Who we are, in four lines</p>
+      <p>We are one family with two doors.<br><b>Wazoodle</b> sells fabric by the yard to people who make things.<br><b>AKAS Tex</b> makes the fabric and sells it by the roll to businesses.<br>This page is about who walks through those doors, and how far they walk.</p>
+    </div>
+
+    <div class="door-grid">
+      <ol class="arrive" aria-label="The nine, as they arrive">
+        <li style="--i:0"><b>The Explorers</b> ask for what isn't there yet.<span class="who">the needle · the door everyone walks through</span></li>
+        <li style="--i:1"><b>The Healers</b> make things for their own bodies.<span class="who">the lining · the largest group we have</span></li>
+        <li style="--i:2"><b>The Guardians</b> make things for someone they love.<span class="who">the swaddle · the whale lives here</span></li>
+        <li style="--i:3"><b>The Providers</b> make things for people they'll never meet.<span class="who">the weft · uniforms, gowns, kits for strangers</span></li>
+        <li style="--i:4"><b>The Householders</b> make things that replace the disposable.<span class="who">the mend · the kitchen drawer</span></li>
+        <li style="--i:5"><b>The Manufacturer</b> arrives with a drawing and buys by the roll.<span class="who">the roll · never touches the ladder</span></li>
+        <li style="--i:6"><b>The Distributor</b> carries our cloth onward with our name on the edge.<span class="who">the selvedge · markets we can't reach</span></li>
+        <li style="--i:7"><b>The Innovators</b> built something that didn't exist, on our fabric.<span class="who">the warp · came for a swatch, has a brand</span></li>
+        <li style="--i:8"><b>The Extractors</b> took the development and had it made elsewhere.<span class="who">the loose thread · outside the weave</span></li>
+        <li class="foot" style="--i:9">— counted in our customer register and our book of customer stories, then named. Real names, internal page.</li>
+      </ol>
+      <figure class="doorfig" aria-label="A ladder with seven rungs and a return from development back to the shelf; the nine step onto the rungs they stand on">
+        <svg viewBox="0 0 520 420" aria-hidden="true">
+          <line class="rail" x1="60" y1="400" x2="60" y2="30"/><line class="rail" x1="300" y1="400" x2="300" y2="30"/>
+          <g>
+            <line class="rung" style="--i:0" x1="60" y1="380" x2="300" y2="380"/><line class="rung" style="--i:1" x1="60" y1="325" x2="300" y2="325"/><line class="rung" style="--i:2" x1="60" y1="270" x2="300" y2="270"/><line class="rung" style="--i:3" x1="60" y1="215" x2="300" y2="215"/><line class="rung" style="--i:4" x1="60" y1="160" x2="300" y2="160"/><line class="rung" style="--i:5" x1="60" y1="105" x2="300" y2="105"/><line class="rung" style="--i:6" x1="60" y1="50" x2="300" y2="50"/>
+          </g>
+          <path class="ret" d="M310 50 C420 50 460 120 460 215 C460 310 420 380 310 380" fill="none"/>
+          <g>
+            <text class="lab" style="--i:0" x="312" y="384">swatch</text><text class="lab" style="--i:1" x="312" y="329">yards</text><text class="lab" style="--i:2" x="312" y="274">wholesale</text><text class="lab" style="--i:3" x="312" y="219">the crossing</text><text class="lab" style="--i:4" x="312" y="164">roll</text><text class="lab" style="--i:5" x="312" y="109">bulk</text><text class="lab" style="--i:6" x="312" y="54">development</text>
+            <text class="lab" style="--i:7" x="470" y="219">the shelf</text>
+          </g>
+          <g>
+            <circle class="fig warm" style="--i:0" cx="110" cy="372" r="6"/><circle class="fig warm" style="--i:0" cx="130" cy="372" r="6"/><circle class="fig warm" style="--i:0" cx="150" cy="372" r="6"/><circle class="fig warm" style="--i:0" cx="170" cy="372" r="6"/><circle class="fig warm" style="--i:0" cx="190" cy="372" r="6"/><circle class="fig warm" style="--i:0" cx="210" cy="372" r="6"/>
+            <circle class="fig warm" style="--i:1" cx="120" cy="317" r="6"/><circle class="fig warm" style="--i:1" cx="140" cy="317" r="6"/><circle class="fig warm" style="--i:1" cx="160" cy="317" r="6"/><circle class="fig warm" style="--i:1" cx="180" cy="317" r="6"/>
+            <circle class="fig warm" style="--i:2" cx="130" cy="262" r="6"/><circle class="fig" style="--i:2" cx="150" cy="262" r="6"/><circle class="fig" style="--i:2" cx="170" cy="262" r="6"/>
+            <circle class="fig warm" style="--i:3" cx="150" cy="207" r="6"/><circle class="fig" style="--i:3" cx="170" cy="207" r="6"/>
+            <circle class="fig" style="--i:4" cx="160" cy="152" r="6"/><circle class="fig" style="--i:4" cx="180" cy="152" r="6"/>
+            <circle class="fig" style="--i:5" cx="170" cy="97" r="6"/><circle class="fig warm" style="--i:5" cx="190" cy="97" r="6"/>
+            <circle class="fig warm" style="--i:6" cx="180" cy="42" r="6"/>
+            <circle class="fig zero" style="--i:7" cx="180" cy="410" r="6"/><text class="lab" style="--i:7" x="196" y="414">the extractor · $0</text>
+          </g>
+        </svg>
+      </figure>
+    </div>
+
+    <div class="readfirst"><p class="eyebrow">If you read one thing</p><p>Two businesses share one family. Makers of every size buy cloth by the yard and climb a seven-rung ladder toward the roll. Manufacturers and distributors buy mats and rolls to a spec and never touch the ladder at all. The nine kinds of customer are where people stand on those two walks — and the closer a thing is to someone's skin, the more likely the person who makes it is the one buying the cloth.</p></div>
+    <p class="lede big">Two questions sort every customer. What do they do with the cloth — ask for it, make with it, carry it on, cut it up, or buy it to a spec. And how close does what they make get to a body, and whose — their own, someone they love, a stranger's, or none. Under both run the two walks: the cloth ladder, seven rungs from a two-dollar swatch to a new fabric, and the mats programme, four steps from a sample to an annual commitment. Customers walk up, walk down, leave, and come back. Nothing here was invented; it was counted, then named.</p>
+  </div>
+</header>
+
+<div class="seam"></div>
+
+<section class="band s-ground" id="walks">
+  <div class="rk-breakout">
+    <p class="eyebrow">Where they stand</p>
+    <h2 class="title">Two walks. One for cloth, one for mats.</h2>
+    <p class="lede">Every customer stands on one of these. The cloth ladder is walked by makers of every size, from a swatch to a fabric of their own. The mats programme is walked by industrial buyers, and it has no swatch on it.</p>
+    <div class="walks">
+      <div class="walk-col">
+        <h3>The cloth ladder <span class="mono">seven rungs · every number per fabric</span></h3>
+        <ol class="rungs-list" id="ladderlist"></ol>
+        <p class="note">Two standing rules travel with it. Custom print and custom colour are per fabric; no site-wide minimum ever ships. And custom print sits <em>below</em> bulk — it is the cheapest rung on which a fabric becomes the maker's own, and the one that recruits, not the one that rewards.</p>
+      </div>
+      <div class="walk-col">
+        <h3>The mats programme <span class="mono">four steps · no swatch</span></h3>
+        <ol class="rungs-list" id="proglist"></ol>
+        <p class="note">Twenty-two sorbent customers, every one industrial, every one buying to a spec. They arrive through each other — Brady brought the constellation — and they buy on their own rhythm, not ours. In 2026 they are the core of the business.</p>
+        <ul class="matsnames" id="matsnames"></ul>
+      </div>
+    </div>
+    <div class="arrive-box">
+      <p class="eyebrow">How they arrive</p>
+      <p>Two intakes, not one funnel. Makers come through Wazoodle, most of them convinced by other customers before they write a word — <em>"after doing a lot of research… I decided on this ProCool Jersey because of the reviews I read."</em> Manufacturers and distributors arrive at the top, with a part number, and never see the ladder. And the honest position on how the largest accounts arrived: of the thirty-two biggest, one shows a visible swatch-first entry — because a swatch generates no email. Mostly, we don't know. The record only starts when someone writes in.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band s-paper" id="before">
+  <div class="rk-breakout">
+    <h2 class="alt">Before the nine</h2>
+    <div class="cards8">
+      <details class="c8"><summary><span class="ic"><svg viewBox="0 0 80 60"><path class="q" d="M20 44 C20 30 40 30 40 44 M40 24 C40 10 62 10 62 24 C62 34 50 34 50 44 M50 52 L50 54"/></svg></span><span class="t">First question: what do they do with the cloth?</span><span class="s">Ask · make · carry · cut · specify. Every customer sits in exactly one.</span></summary>
+        <p>We asked it of all 1,297 businesses in our customer register. 1,172 make something from it. 85 buy it to a spec into a product line. 21 cut it into someone else's product. 13 carry it onward as fabric. 8 exist only as a request. Four refused to choose between asking and specifying — they arrived with a spec that didn't exist yet — and that is the point: asking isn't a fifth kind of customer. It's the first thing every kind does.</p></details>
+
+      <details class="c8"><summary><span class="ic"><svg viewBox="0 0 80 60"><circle cx="40" cy="30" r="24" class="q"/><circle cx="40" cy="30" r="14" class="q"/><circle class="you" cx="40" cy="30" r="5"/></svg></span><span class="t">Second question: how close does it get, to whose body?</span><span class="s">Their own · someone they love · a stranger · a thing. The reason they came is folded into the answer.</span></summary>
+        <p>Where the money is, things and loved bodies lead. Where the people are — our book of customer stories — the own body leads by a mile: 306 named makers against 170, 179 and 79. Our money comes from things; our people come from skin. And why they came sorts itself onto the same four: it hurt me, it must not hurt her, someone out there has nothing, I'm done throwing things away.</p></details>
+
+      <details class="c8"><summary><span class="ic"><svg viewBox="0 0 80 60"><line x1="22" y1="58" x2="22" y2="4"/><line x1="50" y1="58" x2="50" y2="4"/><g class="rungs"><line x1="22" y1="50" x2="50" y2="50" style="--i:0"/><line x1="22" y1="40" x2="50" y2="40" style="--i:1"/><line x1="22" y1="30" x2="50" y2="30" style="--i:2"/><line x1="22" y1="20" x2="50" y2="20" style="--i:3"/><line x1="22" y1="10" x2="50" y2="10" style="--i:4"/></g><circle class="you" cx="64" cy="30" r="4"/></svg></span><span class="t">The ladder is walked both ways.</span><span class="s">1,047 stand at wholesale. 181 reached a roll. 58 reached bulk. 6 reached development.</span></summary>
+        <p>Forty businesses have bought at both doors. Fifteen went up — Wazoodle first, then AKAS Tex. Twenty-five went down — AKAS Tex first, then Wazoodle for samples, colours, the next idea. The climb we used to think of as the story isn't the common direction. Nobody is pushed. The next rung is visible, and the family stood on every one of them first.</p></details>
+
+      <details class="c8"><summary><span class="ic"><svg viewBox="0 0 80 60"><g class="loops"><path pathLength="1" d="M10 34 Q40 4 70 34" style="--i:0"/><path class="back" pathLength="1" d="M70 34 Q40 60 10 34" style="--i:1"/></g></svg></span><span class="t">The top feeds the bottom.</span><span class="s">Every fabric on the shelf began as somebody's request.</span></summary>
+        <p>Someone asks; the mill makes it; the leftover goes on the shelf; a maker buys a yard of it next week. Fifty-two of our hundred and two fabrics carry the name of the person who asked for them. So the ladder isn't a ladder. It's a loop — and the loop keeps running whether or not the person who asked stays.</p></details>
+
+      <details class="c8"><summary><span class="ic"><svg viewBox="0 0 80 60"><path class="q" d="M8 30 L40 30 M40 30 C40 14 72 14 72 30 C72 46 40 46 40 30"/><circle class="you" cx="40" cy="30" r="4"/></svg></span><span class="t">The distance of love.</span><span class="s">Something made for a child is made safer than for yourself.</span></summary>
+        <p>The people who make for their own body write six words and stop. The people who make for a body they love write pages, rank fabrics, name what failed, try again two weeks later. The closer the body, the shorter the review; the more loved the body, the longer the care. A maker's own skin and her child's stand at the same point, and everything commercial lies between.</p></details>
+
+      <details class="c8"><summary><span class="ic"><svg viewBox="0 0 80 60"><circle class="zero" cx="40" cy="30" r="18"/><path class="cross" d="M30 20 L50 40 M50 20 L30 40"/></svg></span><span class="t">Where we draw the line.</span><span class="s">We don't ship to India, China, Pakistan or Sri Lanka, and we don't assist orders routed there.</span></summary>
+        <p>There is a side of this industry that comes for the development, takes the sample runs and the iterations, and has the result made elsewhere for less. Sometimes the biggest name in the room; sometimes a maker who was ours until the investor cheque arrived. We know it exists. We've fed it more than once. Customers may send our cloth wherever they like — they do it without us.</p></details>
+
+      <details class="c8"><summary><span class="ic"><svg viewBox="0 0 80 60"><rect x="8" y="10" width="28" height="40" rx="3"/><rect x="44" y="10" width="28" height="40" rx="3"/><g class="doorw"><rect x="14" y="20" width="16" height="4" style="--i:0"/><rect x="14" y="30" width="16" height="4" style="--i:1"/><rect x="50" y="20" width="16" height="4" style="--i:2"/><rect x="50" y="30" width="16" height="4" style="--i:3"/></g></svg></span><span class="t">Where the names come from.</span><span class="s">Our customer register knows who bought. Our book of customer stories knows what for.</span></summary>
+        <p>The register holds every business Wazoodle or AKAS Tex knows by name — 1,297, each placed as one of the nine on 8 September 2026, with the evidence written on the record. The book of stories holds the people the register can't see — the guest checkouts, the reviews — 727 of them named across twenty-six communities. Thirty-two people are in both. Real names, on an internal page.</p></details>
+
+      <details class="c8"><summary><span class="ic"><svg viewBox="0 0 80 60"><g class="chain"><circle cx="10" cy="30" r="5" style="--i:0"/><circle cx="24" cy="30" r="5" style="--i:1"/><circle cx="38" cy="30" r="5" style="--i:2"/><circle cx="52" cy="30" r="5" style="--i:3"/><circle class="keep" cx="70" cy="30" r="6"/></g><line x1="10" y1="30" x2="70" y2="30" style="opacity:.3"/></svg></span><span class="t">The closer the body, the shorter the chain.</span><span class="s">Nobody carries, cuts or specifies for their own body.</span></summary>
+        <p>Cross the two questions and twenty combinations are possible. Seven hold real numbers of people. Distributors and manufacturers pile up almost entirely on things; makers spread across all four bodies. As the body gets nearer, it becomes certain that the person who makes the thing is the person buying the cloth — and that the person who knits the cloth is the one who answers her. Every name on this page is a name because of that.</p></details>
+</div>
+  </div>
+</section>
+
+<section class="band s-ground" id="ladder">
+  <div class="rk-breakout">
+    <p class="eyebrow">The nine</p>
+    <h2 class="title">Tap a kind. Read who they are, what brought them, and who they actually are by name.</h2>
+    <p class="lede">Warm where the body is close, gray where it's a thing. Names come from our customer register, and from our book of customer stories where the register can't see. Tap a rung to see who stands on it, and what they buy.</p>
+    <div class="chips" id="chips" role="group" aria-label="The nine archetypes"></div>
+    <figure class="ladder" id="ladderfig"></figure>
+    <div class="panel" id="panel" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="band s-wash" id="moves">
+  <div class="rk-breakout">
+    <p class="eyebrow">The four movements</p>
+    <h2 class="title">The nine are where a customer stands. This is how they move.</h2>
+    <p class="lede">Read off ten years of sales, business by business. The nine are the photograph; this is the film. Real names, internal page.</p>
+    <div class="moves" id="movesgrid"></div>
+    <figure class="whale" id="whale" aria-label="Simply Mommy's ten years: swatch to $4M a year to $54K, a Guardian who became an Innovator and is leaving">
+      <p class="eyebrow">The whale's walk · Simply Mommy</p>
+      <div id="whalebars"></div>
+      <p class="mono">2017 → 2026 · a swatch order that became four million dollars a year · a Guardian who became an Innovator, and is leaving as we watch. Her fabrics are still on the shelf.</p>
+    </figure>
+  </div>
+</section>
+
+<div class="descent"></div>
+
+<section class="band deep" id="home">
+  <div class="rk-breakout">
+    <p class="eyebrow">Coming home</p>
+    <h2 class="title">You've met the nine. <em>Here's what you already knew.</em></h2>
+    <div class="home-grid">
+      <figure class="loop" aria-label="Product runs forward from the ask to the maker; knowledge runs back from the maker to the next one">
+        <svg viewBox="0 0 520 400" aria-hidden="true">
+          <g class="node" style="--i:0"><circle cx="70" cy="200" r="26"/></g><text x="70" y="250">an ask</text>
+          <g class="node" style="--i:1"><circle cx="200" cy="120" r="26"/></g><text x="200" y="80">the mill</text>
+          <g class="node" style="--i:2"><circle cx="330" cy="120" r="26"/></g><text x="330" y="80">the shelf</text>
+          <g class="node you" style="--i:3"><circle cx="450" cy="200" r="26"/></g><text x="450" y="250">the maker</text>
+          <path class="arc fwd" pathLength="1" d="M96 190 Q140 130 174 124 M226 118 L304 118 M356 126 Q400 140 424 186"/>
+          <path class="arc back" pathLength="1" d="M440 226 Q380 330 260 330 Q140 330 84 228"/>
+          <text x="260" y="360" style="opacity:.6">what she said comes back as the page the next one reads</text>
+          <text class="again" x="260" y="30">it was ready before you were</text>
+        </svg>
+      </figure>
+      <div class="home-text">
+        <div class="hm"><h3>Everyone begins as an Explorer.</h3><p>Every email, every call, every knock is the same move: someone asking. That is why we have always given the best of ourselves to whoever writes in — we don't know yet which of the nine they are, and neither do they. The archetype is what the question becomes once it has a body and a rung.</p></div>
+        <div class="hm"><h3>The nine are distances, not types.</h3><p>Nobody is born a Guardian. The same human can be three of these across ten years — a Guardian who becomes an Innovator who becomes a loose thread — and the warp she left is still on the shelf, feeding the next Guardian. The leftover outlives the leaving.</p></div>
+        <div class="hm"><h3>Nobody came because they couldn't find a fabric.</h3><p>They came because what they found hurt, failed, cost too much, or wasn't safe enough for the person it was for. Keep me safe. Help the ones who can't. Stop wasting me. Let me earn. I hurt. This isn't working. Every fabric on the shelf is a reply to one of those — and <em>I couldn't find you</em> barely appears, because someone answered the phone.</p></div>
+        <div class="hm"><h3>Why now.</h3><p>Every account that ever moved — up, down, back — moved for one of two reasons: a new product, or supply trouble. That is the opening line of every conversation worth having. And the fingerprint that says this one matters: a fresh AK style number in the record. A fabric made for them.</p></div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat rule"><div class="n">1,297</div><div class="l">businesses in our register, each placed as one of the nine</div></div>
+      <div class="stat rule"><div class="n">727</div><div class="l">makers named in twenty-six communities</div></div>
+      <div class="stat rule"><div class="n">9</div><div class="l">kinds that held under the count</div></div>
+      <div class="stat rule"><div class="n"><span class="sp">4</span></div><div class="l">movements: up, down, away, back</div></div>
+    </div>
+    <div class="rule"></div>
+    <p class="ask-line">So the first question either website asks is still the only one that places a person on the ladder: <em>What are you making?</em></p>
+    <p class="last-line">Everyone begins by asking. The walk was ready before they were.</p>
+    <div class="doors">
+      <a class="door rung" href="#ladder"><span class="eyebrow">Now</span><strong>Back to the nine</strong>Pick a kind. Read the names. Say who is missing. That's the meeting.</a>
+      <a class="door" href="https://airtable.com/appftauflGQF4lhin/tblV8mC00ztxN1JYR" target="_blank" rel="noopener"><span class="eyebrow">The register</span><strong>Our customer register</strong>Every business, which of the nine she is, and the evidence for it.</a>
+      <a class="door" href="https://airtable.com/app0wlaaxqXGBjWsw/tblB2OtlNzThOFLKA" target="_blank" rel="noopener"><span class="eyebrow">The other book</span><strong>Our book of customer stories</strong>Twenty-six communities, seven hundred names, in their own words.</a>
+      <a class="door" href="design-map.html"><span class="eyebrow">Its sibling</span><strong>The Design Map</strong>The visual system the rooms are built in.</a>
+    </div>
+  </div>
+</section>
+
+<footer class="band tight s-paper">
+  <div class="rk-in ft">The Customer Map · snapshot 8 Sep 2026 · AKAS Tex LLC, Bensalem PA · crafted by Ashrey with Claude · questions: <a href="mailto:ash@wazoodle.com">ash@wazoodle.com</a>
+      <a class="door" href="sitemaps.html"><span class="eyebrow">Its sibling</span><strong>The Sitemaps</strong>Every page on both websites — its door, its reader, its walk, its voice, its shape, its sources — and which are ready to build.</a>
+    </div>
+</footer>
+
+<script>window.DATA={"positions": {"The Explorer": {"humans": 8, "named": 0, "fac": 34247, "fac_pct": 0.1, "shop": 68454, "shop_pct": 1.5, "fac_years": {"2017": 0, "2018": 0, "2019": 23757, "2020": 9929, "2021": 0, "2022": 0, "2023": 0, "2024": 561, "2025": 0, "2026": 0}, "shop_years": {"2021": 19199, "2022": 12092, "2023": 17388, "2024": 9767, "2025": 5800, "2026": 4208}, "top": [{"n": "Brasstache - Robinson Schulze", "as": "AS-1383", "door": "store", "fac": 0, "shop": 32793, "ord": 22, "first": 2021, "pos": "The Explorer"}, {"n": "Jade Yoga", "as": "AS-1214", "door": "factory", "fac": 32107, "shop": 0, "ord": 6, "first": 2019, "pos": "The Explorer"}, {"n": "Siftex Equipment Company - Katty Garcia", "as": "AS-1574", "door": "store", "fac": 0, "shop": 15488, "ord": 29, "first": 2021, "pos": "The Explorer"}, {"n": "Doug Johnson - Lite Run LLC", "as": "AS-1229", "door": "both", "fac": 322, "shop": 12112, "ord": 5, "first": 2020, "pos": "The Explorer"}, {"n": "David Pensak", "as": "AS-1194", "door": "both", "fac": 181, "shop": 4355, "ord": 6, "first": 2019, "pos": "The Explorer"}, {"n": "Mark Johnson", "as": "AS-2171", "door": "store", "fac": 0, "shop": 3706, "ord": 3, "first": 2021, "pos": "The Explorer"}, {"n": "Sprung Structures", "as": "AS-1246", "door": "factory", "fac": 1076, "shop": 0, "ord": 1, "first": 2020, "pos": "The Explorer"}, {"n": "El Sol Custom Lighting", "as": "AS-1310", "door": "factory", "fac": 561, "shop": 0, "ord": 1, "first": 2024, "pos": "The Explorer"}]}, "The Healer": {"humans": 54, "named": 306, "fac": 735599, "fac_pct": 1.9, "shop": 1082906, "shop_pct": 23.2, "fac_years": {"2017": 50, "2018": 9030, "2019": 35986, "2020": 39621, "2021": 151855, "2022": 101768, "2023": 201307, "2024": 64063, "2025": 80879, "2026": 51040}, "shop_years": {"2021": 117894, "2022": 189380, "2023": 347596, "2024": 185735, "2025": 167462, "2026": 74839}, "top": [{"n": "Anastasia Allison", "as": "AS-1178", "door": "both", "fac": 360561, "shop": 7712, "ord": 48, "first": 2018, "pos": "The Healer"}, {"n": "Makayla Kane", "as": "AS-1399", "door": "store", "fac": 0, "shop": 239541, "ord": 121, "first": 2021, "pos": "The Healer"}, {"n": "Squirtopia", "as": "AS-1283", "door": "both", "fac": 71705, "shop": 99517, "ord": 19, "first": 2022, "pos": "The Healer"}, {"n": "The Layer - Claire Alba", "as": "AS-1580", "door": "store", "fac": 0, "shop": 133912, "ord": 37, "first": 2021, "pos": "The Healer"}, {"n": "Circe Care - Rehan Rahim", "as": "AS-1303", "door": "both", "fac": 70364, "shop": 62916, "ord": 20, "first": 2021, "pos": "The Healer"}, {"n": "Mennonite Central Committee - Betsy Kennel", "as": "AS-1361", "door": "store", "fac": 0, "shop": 84464, "ord": 43, "first": 2021, "pos": "The Healer"}, {"n": "Revol Girl Sara Jonsson", "as": "AS-1291", "door": "factory", "fac": 82390, "shop": 0, "ord": 7, "first": 2022, "pos": "The Healer"}, {"n": "Liss & Landi - Melissa Fournier", "as": "AS-1362", "door": "store", "fac": 0, "shop": 81706, "ord": 59, "first": 2023, "pos": "The Healer"}, {"n": "Reid Van Marel - The Collective Thread A/C Dignity Period", "as": "AS-1308", "door": "both", "fac": 17528, "shop": 36281, "ord": 5, "first": 2023, "pos": "The Healer"}, {"n": "Decent Exposures", "as": "AS-1293", "door": "both", "fac": 5305, "shop": 47258, "ord": 26, "first": 2021, "pos": "The Healer"}, {"n": "Wander Wet Bags", "as": "AS-1206", "door": "factory", "fac": 37718, "shop": 0, "ord": 10, "first": 2019, "pos": "The Healer"}, {"n": "Towel Back - Diana DiMaria", "as": "AS-1596", "door": "store", "fac": 0, "shop": 34314, "ord": 34, "first": 2021, "pos": "The Healer"}, {"n": "Blushproof", "as": "AS-1298", "door": "both", "fac": 13814, "shop": 15299, "ord": 20, "first": 2021, "pos": "The Healer"}, {"n": "Papayabragas - Florencia Broussain", "as": "AS-1616", "door": "store", "fac": 0, "shop": 27943, "ord": 9, "first": 2021, "pos": "The Healer"}, {"n": "Covered in Comfort - Christine Barbalic", "as": "AS-1577", "door": "store", "fac": 0, "shop": 27507, "ord": 32, "first": 2021, "pos": "The Healer"}, {"n": "Castorvida - Alison Leighton", "as": "AS-1614", "door": "store", "fac": 0, "shop": 26909, "ord": 12, "first": 2022, "pos": "The Healer"}]}, "The Guardian": {"humans": 78, "named": 170, "fac": 18178562, "fac_pct": 47.5, "shop": 387642, "shop_pct": 8.3, "fac_years": {"2017": 484427, "2018": 1649900, "2019": 2365863, "2020": 2309037, "2021": 4109165, "2022": 2623389, "2023": 1652994, "2024": 2087358, "2025": 817634, "2026": 78795}, "shop_years": {"2021": 49001, "2022": 60907, "2023": 100546, "2024": 84844, "2025": 61238, "2026": 31107}, "top": [{"n": "Simply Mommy", "as": "AS-1111", "door": "factory", "fac": 17199414, "shop": 0, "ord": 631, "first": 2017, "pos": "The Guardian"}, {"n": "Ecopipo / Ecotefila", "as": "AS-1101", "door": "factory", "fac": 261376, "shop": 0, "ord": 14, "first": 2017, "pos": "The Guardian"}, {"n": "Rachels Remedies", "as": "AS-1134", "door": "factory", "fac": 128702, "shop": 0, "ord": 2, "first": 2017, "pos": "The Guardian"}, {"n": "Cristian Padilla", "as": "AS-1108", "door": "factory", "fac": 104051, "shop": 0, "ord": 8, "first": 2017, "pos": "The Guardian"}, {"n": "Glenda Wylie", "as": "AS-1131", "door": "factory", "fac": 85498, "shop": 0, "ord": 13, "first": 2017, "pos": "The Guardian"}, {"n": "Lunapads", "as": "AS-1117", "door": "factory", "fac": 80881, "shop": 0, "ord": 4, "first": 2017, "pos": "The Guardian"}, {"n": "Sarah Egan", "as": "AS-1309", "door": "both", "fac": 42536, "shop": 16830, "ord": 5, "first": 2021, "pos": "The Guardian"}, {"n": "Truly Charis - Destani Rosa", "as": "AS-1587", "door": "store", "fac": 0, "shop": 56326, "ord": 33, "first": 2021, "pos": "The Guardian"}, {"n": "Milk Label - Stephanie McMurdy", "as": "AS-1402", "door": "store", "fac": 0, "shop": 50118, "ord": 13, "first": 2021, "pos": "The Guardian"}, {"n": "Entusia BVBA - Hans", "as": "AS-1138", "door": "factory", "fac": 47679, "shop": 0, "ord": 1, "first": 2017, "pos": "The Guardian"}, {"n": "Hygenics", "as": "AS-1122", "door": "factory", "fac": 39664, "shop": 0, "ord": 7, "first": 2017, "pos": "The Guardian"}, {"n": "Blessed Nest - Heather Anderson", "as": "AS-1387", "door": "store", "fac": 0, "shop": 39052, "ord": 63, "first": 2021, "pos": "The Guardian"}, {"n": "Bumby Wool - Stephanie Gross", "as": "AS-1591", "door": "store", "fac": 0, "shop": 35368, "ord": 10, "first": 2022, "pos": "The Guardian"}, {"n": "Ella' House / Mamaja", "as": "AS-1148", "door": "factory", "fac": 34097, "shop": 0, "ord": 1, "first": 2017, "pos": "The Guardian"}, {"n": "Crystal Burton", "as": "AS-1201", "door": "factory", "fac": 33845, "shop": 0, "ord": 7, "first": 2019, "pos": "The Guardian"}, {"n": "Bibbilyboo - Katie Glickman", "as": "AS-1605", "door": "store", "fac": 0, "shop": 27886, "ord": 34, "first": 2021, "pos": "The Guardian"}]}, "The Provider": {"humans": 63, "named": 79, "fac": 923678, "fac_pct": 2.4, "shop": 304551, "shop_pct": 6.5, "fac_years": {"2017": 14158, "2018": 76229, "2019": 113212, "2020": 361101, "2021": 57667, "2022": 17223, "2023": 33503, "2024": 46159, "2025": 15374, "2026": 189053}, "shop_years": {"2021": 33730, "2022": 60942, "2023": 69776, "2024": 45266, "2025": 47072, "2026": 47765}, "top": [{"n": "Ruby Love", "as": "AS-1156", "door": "factory", "fac": 231085, "shop": 0, "ord": 12, "first": 2017, "pos": "The Provider"}, {"n": "American Roots", "as": "AS-1339", "door": "factory", "fac": 136706, "shop": 0, "ord": 9, "first": 2026, "pos": "The Provider"}, {"n": "Chiki Diki Clothing", "as": "AS-1256", "door": "factory", "fac": 112999, "shop": 0, "ord": 6, "first": 2020, "pos": "The Provider"}, {"n": "Harmonic Threads", "as": "AS-1255", "door": "both", "fac": 16463, "shop": 50116, "ord": 96, "first": 2020, "pos": "The Provider"}, {"n": "Lighthouse Uniforms", "as": "AS-1235", "door": "factory", "fac": 57900, "shop": 0, "ord": 2, "first": 2020, "pos": "The Provider"}, {"n": "Salk Inc", "as": "AS-1177", "door": "factory", "fac": 52424, "shop": 0, "ord": 81, "first": 2018, "pos": "The Provider"}, {"n": "Laws on Motion", "as": "AS-1245", "door": "factory", "fac": 52220, "shop": 0, "ord": 1, "first": 2020, "pos": "The Provider"}, {"n": "Elam Miller", "as": "AS-1259", "door": "both", "fac": 28656, "shop": 15524, "ord": 9, "first": 2020, "pos": "The Provider"}, {"n": "Mystic Cloak & Tailor - Doug Block", "as": "AS-1586", "door": "store", "fac": 0, "shop": 36342, "ord": 21, "first": 2022, "pos": "The Provider"}, {"n": "American Made Atheletics", "as": "AS-1315", "door": "factory", "fac": 31137, "shop": 0, "ord": 5, "first": 2024, "pos": "The Provider"}, {"n": "American Pace - Michael Baker", "as": "AS-1346", "door": "both", "fac": 8173, "shop": 21101, "ord": 14, "first": 2026, "pos": "The Provider"}, {"n": "F. H. Clothing Co. - Joan Ecker", "as": "AS-1349", "door": "factory", "fac": 28695, "shop": 0, "ord": 2, "first": 2026, "pos": "The Provider"}, {"n": "Efirsty (China) - Dawning Wu", "as": "AS-1397", "door": "store", "fac": 0, "shop": 27426, "ord": 6, "first": 2024, "pos": "The Provider"}, {"n": "Sanas Health Practice / High Output Apparel", "as": "AS-1151", "door": "factory", "fac": 24986, "shop": 0, "ord": 0, "first": 2018, "pos": "The Provider"}, {"n": "Dunn Manufacturing - Scott Sain", "as": "AS-1617", "door": "store", "fac": 0, "shop": 24941, "ord": 14, "first": 2021, "pos": "The Provider"}, {"n": "Delbuno Costumes / Regal Costumes", "as": "AS-1217", "door": "factory", "fac": 20483, "shop": 0, "ord": 5, "first": 2019, "pos": "The Provider"}]}, "The Householder": {"humans": 33, "named": 179, "fac": 571288, "fac_pct": 1.5, "shop": 551807, "shop_pct": 11.8, "fac_years": {"2017": 4773, "2018": 85012, "2019": 70566, "2020": 72103, "2021": 69630, "2022": 56949, "2023": 36922, "2024": 81188, "2025": 52862, "2026": 41281}, "shop_years": {"2021": 90645, "2022": 123721, "2023": 85952, "2024": 94168, "2025": 95939, "2026": 61382}, "top": [{"n": "Marley's Monsters - Grace McNabb", "as": "AS-1400", "door": "store", "fac": 0, "shop": 203166, "ord": 64, "first": 2021, "pos": "The Householder"}, {"n": "Piggy Bedspreads", "as": "AS-1162", "door": "both", "fac": 166645, "shop": 28757, "ord": 33, "first": 2018, "pos": "The Householder"}, {"n": "Edg E Concepts, Inc. - Jodi Vivinetti", "as": "AS-1337", "door": "both", "fac": 11050, "shop": 126912, "ord": 39, "first": 2021, "pos": "The Householder"}, {"n": "James McCrimmon", "as": "AS-1187", "door": "factory", "fac": 98475, "shop": 0, "ord": 27, "first": 2018, "pos": "The Householder"}, {"n": "Venus Matters", "as": "AS-1180", "door": "both", "fac": 51526, "shop": 27656, "ord": 29, "first": 2018, "pos": "The Householder"}, {"n": "Tyson Foods", "as": "AS-1262", "door": "factory", "fac": 65217, "shop": 0, "ord": 10, "first": 2020, "pos": "The Householder"}, {"n": "Ever&again (Kristina-Germany)", "as": "AS-1193", "door": "factory", "fac": 59322, "shop": 0, "ord": 4, "first": 2019, "pos": "The Householder"}, {"n": "Core Products", "as": "AS-1287", "door": "factory", "fac": 45935, "shop": 0, "ord": 7, "first": 2022, "pos": "The Householder"}, {"n": "Green City Living - Kathy Rohret", "as": "AS-1593", "door": "store", "fac": 0, "shop": 32077, "ord": 28, "first": 2021, "pos": "The Householder"}, {"n": "Wild Clementine Co. - Alexandra Fitzgerald", "as": "AS-1385", "door": "store", "fac": 0, "shop": 30305, "ord": 59, "first": 2021, "pos": "The Householder"}, {"n": "Eclipse Yacht Furnishings - Joy Hutchinson", "as": "AS-1613", "door": "store", "fac": 0, "shop": 28441, "ord": 51, "first": 2021, "pos": "The Householder"}, {"n": "Keetna Farm Goods - Jesika Stoll", "as": "AS-1359", "door": "store", "fac": 0, "shop": 22293, "ord": 47, "first": 2021, "pos": "The Householder"}, {"n": "Lisa Harrington", "as": "AS-1589", "door": "store", "fac": 0, "shop": 19721, "ord": 27, "first": 2021, "pos": "The Householder"}, {"n": "Thirsties", "as": "AS-1210", "door": "factory", "fac": 19442, "shop": 0, "ord": 7, "first": 2019, "pos": "The Householder"}, {"n": "BGC Sewn Products", "as": "AS-1190", "door": "factory", "fac": 13611, "shop": 0, "ord": 2, "first": 2018, "pos": "The Householder"}, {"n": "Joshua Burger", "as": "AS-1343", "door": "both", "fac": 7991, "shop": 3611, "ord": 5, "first": 2025, "pos": "The Householder"}]}, "The Manufacturer": {"humans": 83, "named": 0, "fac": 11886787, "fac_pct": 31.0, "shop": 175688, "shop_pct": 3.8, "fac_years": {"2017": 866443, "2018": 913765, "2019": 1091562, "2020": 1629843, "2021": 794246, "2022": 1725097, "2023": 1296918, "2024": 1295295, "2025": 1407381, "2026": 866237}, "shop_years": {"2021": 2802, "2022": 11376, "2023": 10801, "2024": 31177, "2025": 90194, "2026": 29338}, "top": [{"n": "Brady Corporation", "as": "AS-1110", "door": "factory", "fac": 3363337, "shop": 0, "ord": 335, "first": 2017, "pos": "The Manufacturer"}, {"n": "Superior Glove", "as": "AS-1123", "door": "factory", "fac": 1638398, "shop": 0, "ord": 35, "first": 2017, "pos": "The Manufacturer"}, {"n": "FyterTech Nonwovens", "as": "AS-1270", "door": "factory", "fac": 1232870, "shop": 0, "ord": 91, "first": 2021, "pos": "The Manufacturer"}, {"n": "Meltblown Technologies", "as": "AS-1215", "door": "factory", "fac": 1020835, "shop": 0, "ord": 87, "first": 2019, "pos": "The Manufacturer"}, {"n": "Britten Inc", "as": "AS-1240", "door": "factory", "fac": 827996, "shop": 0, "ord": 16, "first": 2020, "pos": "The Manufacturer"}, {"n": "Comfort Care Textile", "as": "AS-1139", "door": "factory", "fac": 655697, "shop": 0, "ord": 53, "first": 2017, "pos": "The Manufacturer"}, {"n": "Transformations", "as": "AS-1103", "door": "factory", "fac": 552021, "shop": 0, "ord": 43, "first": 2017, "pos": "The Manufacturer"}, {"n": "Nemschoff - Herman Miller", "as": "AS-1115", "door": "factory", "fac": 537160, "shop": 0, "ord": 79, "first": 2017, "pos": "The Manufacturer"}, {"n": "Knu LLC", "as": "AS-1121", "door": "factory", "fac": 271796, "shop": 0, "ord": 40, "first": 2017, "pos": "The Manufacturer"}, {"n": "Source 1 LLC", "as": "AS-1290", "door": "factory", "fac": 208883, "shop": 0, "ord": 15, "first": 2022, "pos": "The Manufacturer"}, {"n": "Belgium Brady", "as": "AS-1284", "door": "factory", "fac": 178507, "shop": 0, "ord": 43, "first": 2022, "pos": "The Manufacturer"}, {"n": "M2DCON, Inc.", "as": "AS-1319", "door": "factory", "fac": 133009, "shop": 0, "ord": 6, "first": 2024, "pos": "The Manufacturer"}, {"n": "Kon Ky/Czech", "as": "AS-1104", "door": "factory", "fac": 126200, "shop": 0, "ord": 10, "first": 2017, "pos": "The Manufacturer"}, {"n": "Wicked Sheets", "as": "AS-1342", "door": "both", "fac": 6532, "shop": 114812, "ord": 35, "first": 2022, "pos": "The Manufacturer"}, {"n": "Warren Heim", "as": "AS-1135", "door": "factory", "fac": 97167, "shop": 0, "ord": 7, "first": 2017, "pos": "The Manufacturer"}, {"n": "Global Enviromental Products", "as": "AS-1188", "door": "factory", "fac": 95448, "shop": 0, "ord": 19, "first": 2018, "pos": "The Manufacturer"}]}, "The Distributor": {"humans": 33, "named": 0, "fac": 4996776, "fac_pct": 13.1, "shop": 140744, "shop_pct": 3.0, "fac_years": {"2017": 125317, "2018": 252933, "2019": 463582, "2020": 907872, "2021": 1133428, "2022": 503262, "2023": 575661, "2024": 244919, "2025": 566447, "2026": 223356}, "shop_years": {"2021": 32601, "2022": 21471, "2023": 13176, "2024": 26189, "2025": 42097, "2026": 5210}, "top": [{"n": "Milpoint", "as": "AS-1269", "door": "factory", "fac": 701383, "shop": 0, "ord": 10, "first": 2021, "pos": "The Distributor"}, {"n": "Cuddle Plush Fabrics", "as": "AS-1219", "door": "both", "fac": 647463, "shop": 18120, "ord": 34, "first": 2019, "pos": "The Distributor"}, {"n": "Grumax", "as": "AS-1112", "door": "factory", "fac": 488104, "shop": 0, "ord": 21, "first": 2017, "pos": "The Distributor"}, {"n": "SpillTech", "as": "AS-1302", "door": "factory", "fac": 422460, "shop": 0, "ord": 33, "first": 2023, "pos": "The Distributor"}, {"n": "Dal-Bac Manufacturing", "as": "AS-1265", "door": "factory", "fac": 391409, "shop": 0, "ord": 12, "first": 2020, "pos": "The Distributor"}, {"n": "Idaho Sewing for Sports", "as": "AS-1136", "door": "factory", "fac": 345796, "shop": 0, "ord": 25, "first": 2017, "pos": "The Distributor"}, {"n": "WindelManufaktur - Stephanie Oppitz", "as": "AS-1161", "door": "factory", "fac": 273246, "shop": 0, "ord": 10, "first": 2018, "pos": "The Distributor"}, {"n": "A-One Laminating", "as": "AS-1252", "door": "factory", "fac": 238886, "shop": 0, "ord": 13, "first": 2020, "pos": "The Distributor"}, {"n": "Ab Fab Textiles", "as": "AS-1144", "door": "factory", "fac": 171800, "shop": 0, "ord": 25, "first": 2018, "pos": "The Distributor"}, {"n": "Fabric.com", "as": "AS-1113", "door": "factory", "fac": 166652, "shop": 0, "ord": 103, "first": 2017, "pos": "The Distributor"}, {"n": "Found Surface", "as": "AS-1312", "door": "factory", "fac": 143288, "shop": 0, "ord": 12, "first": 2024, "pos": "The Distributor"}, {"n": "The Rainbow Group", "as": "AS-1306", "door": "factory", "fac": 125200, "shop": 0, "ord": 6, "first": 2023, "pos": "The Distributor"}, {"n": "Precision Textiles", "as": "AS-1196", "door": "factory", "fac": 123396, "shop": 0, "ord": 22, "first": 2019, "pos": "The Distributor"}, {"n": "Mondial Tissues", "as": "AS-1231", "door": "factory", "fac": 118359, "shop": 0, "ord": 4, "first": 2020, "pos": "The Distributor"}, {"n": "American Stitchco Inc", "as": "AS-1321", "door": "both", "fac": 104685, "shop": 1336, "ord": 12, "first": 2024, "pos": "The Distributor"}, {"n": "Wieland Designs", "as": "AS-1300", "door": "factory", "fac": 100564, "shop": 0, "ord": 29, "first": 2023, "pos": "The Distributor"}]}, "The Innovator": {"humans": 68, "named": 0, "fac": 18800462, "fac_pct": 49.1, "shop": 2002809, "shop_pct": 42.9, "fac_years": {"2017": 367745, "2018": 1605387, "2019": 2401394, "2020": 2539752, "2021": 4291058, "2022": 2698841, "2023": 1803744, "2024": 2132541, "2025": 864227, "2026": 95770}, "shop_years": {"2021": 253268, "2022": 387498, "2023": 516995, "2024": 353392, "2025": 318594, "2026": 173062}, "top": [{"n": "Simply Mommy", "as": "AS-1111", "door": "factory", "fac": 17199414, "shop": 0, "ord": 631, "first": 2017, "pos": "The Guardian"}, {"n": "Anastasia Allison", "as": "AS-1178", "door": "both", "fac": 360561, "shop": 7712, "ord": 48, "first": 2018, "pos": "The Healer"}, {"n": "Ecopipo / Ecotefila", "as": "AS-1101", "door": "factory", "fac": 261376, "shop": 0, "ord": 14, "first": 2017, "pos": "The Guardian"}, {"n": "Makayla Kane", "as": "AS-1399", "door": "store", "fac": 0, "shop": 239541, "ord": 121, "first": 2021, "pos": "The Healer"}, {"n": "Ruby Love", "as": "AS-1156", "door": "factory", "fac": 231085, "shop": 0, "ord": 12, "first": 2017, "pos": "The Provider"}, {"n": "Marley's Monsters - Grace McNabb", "as": "AS-1400", "door": "store", "fac": 0, "shop": 203166, "ord": 64, "first": 2021, "pos": "The Householder"}, {"n": "Piggy Bedspreads", "as": "AS-1162", "door": "both", "fac": 166645, "shop": 28757, "ord": 33, "first": 2018, "pos": "The Householder"}, {"n": "Squirtopia", "as": "AS-1283", "door": "both", "fac": 71705, "shop": 99517, "ord": 19, "first": 2022, "pos": "The Healer"}, {"n": "Edg E Concepts, Inc. - Jodi Vivinetti", "as": "AS-1337", "door": "both", "fac": 11050, "shop": 126912, "ord": 39, "first": 2021, "pos": "The Householder"}, {"n": "The Layer - Claire Alba", "as": "AS-1580", "door": "store", "fac": 0, "shop": 133912, "ord": 37, "first": 2021, "pos": "The Healer"}, {"n": "Circe Care - Rehan Rahim", "as": "AS-1303", "door": "both", "fac": 70364, "shop": 62916, "ord": 20, "first": 2021, "pos": "The Healer"}, {"n": "Rachels Remedies", "as": "AS-1134", "door": "factory", "fac": 128702, "shop": 0, "ord": 2, "first": 2017, "pos": "The Guardian"}, {"n": "Chiki Diki Clothing", "as": "AS-1256", "door": "factory", "fac": 112999, "shop": 0, "ord": 6, "first": 2020, "pos": "The Provider"}, {"n": "Mennonite Central Committee - Betsy Kennel", "as": "AS-1361", "door": "store", "fac": 0, "shop": 84464, "ord": 43, "first": 2021, "pos": "The Healer"}, {"n": "Liss & Landi - Melissa Fournier", "as": "AS-1362", "door": "store", "fac": 0, "shop": 81706, "ord": 59, "first": 2023, "pos": "The Healer"}, {"n": "Venus Matters", "as": "AS-1180", "door": "both", "fac": 51526, "shop": 27656, "ord": 29, "first": 2018, "pos": "The Householder"}]}, "The Extractor": {"humans": 0, "named": 0, "fac": 0, "fac_pct": 0.0, "shop": 0, "shop_pct": 0.0, "fac_years": {"2017": 0, "2018": 0, "2019": 0, "2020": 0, "2021": 0, "2022": 0, "2023": 0, "2024": 0, "2025": 0, "2026": 0}, "shop_years": {"2021": 0, "2022": 0, "2023": 0, "2024": 0, "2025": 0, "2026": 0}, "top": []}}, "movements": {"climbing": {"count": 15, "names": [{"n": "Edg E Concepts, Inc. - Jodi Vivinetti", "as": "AS-1337", "pos": "The Householder", "tot": 137962, "years": [2021, 2022, 2023, 2024, 2025, 2026]}, {"n": "Circe Care - Rehan Rahim", "as": "AS-1303", "pos": "The Healer", "tot": 133280, "years": [2021, 2022, 2023, 2024, 2025, 2026]}, {"n": "Wicked Sheets", "as": "AS-1342", "pos": "The Manufacturer", "tot": 121344, "years": [2022, 2023, 2024, 2025, 2026]}, {"n": "Sarah Egan", "as": "AS-1309", "pos": "The Guardian", "tot": 59366, "years": [2021, 2022, 2023, 2025, 2026]}, {"n": "Decent Exposures", "as": "AS-1293", "pos": "The Healer", "tot": 52563, "years": [2021, 2022, 2023, 2024, 2025]}, {"n": "hope&plum - Mallory Bransfield", "as": "AS-1345", "pos": "The Distributor", "tot": 51633, "years": [2024, 2025, 2026]}, {"n": "IsoGuardain LLC - Sandra Beck", "as": "AS-1340", "pos": "The Manufacturer", "tot": 39699, "years": [2021, 2022, 2023, 2024, 2025, 2026]}, {"n": "Find a Fabric - Sarah Jarvis", "as": "AS-1294", "pos": "The Distributor", "tot": 35046, "years": [2021, 2022, 2025]}, {"n": "Blushproof", "as": "AS-1298", "pos": "The Healer", "tot": 29113, "years": [2021, 2022, 2023, 2024]}, {"n": "Betsy Hutton", "as": "AS-1347", "pos": "The Manufacturer", "tot": 23190, "years": [2024, 2025, 2026]}, {"n": "Tram Tong", "as": "AS-1295", "pos": "The Provider", "tot": 14361, "years": [2021, 2022, 2023]}, {"n": "Joshua Burger", "as": "AS-1343", "pos": "The Householder", "tot": 11602, "years": [2025, 2026]}, {"n": "Days for Girls", "as": "AS-1336", "pos": "The Guardian", "tot": 10720, "years": [2021, 2022, 2023, 2024, 2025, 2026]}, {"n": "D'Addario & Company Inc.", "as": "AS-1324", "pos": "The Manufacturer", "tot": 8157, "years": [2024, 2025, 2026]}]}, "descending": {"count": 24, "names": [{"n": "Cuddle Plush Fabrics", "as": "AS-1219", "pos": "The Distributor", "tot": 665583, "years": [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026]}, {"n": "Anastasia Allison", "as": "AS-1178", "pos": "The Healer", "tot": 368272, "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]}, {"n": "Piggy Bedspreads", "as": "AS-1162", "pos": "The Householder", "tot": 195402, "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026]}, {"n": "Squirtopia", "as": "AS-1283", "pos": "The Healer", "tot": 171221, "years": [2022, 2023, 2024]}, {"n": "American Stitchco Inc", "as": "AS-1321", "pos": "The Distributor", "tot": 106021, "years": [2024, 2025, 2026]}, {"n": "Venus Matters", "as": "AS-1180", "pos": "The Householder", "tot": 79182, "years": [2018, 2020, 2021, 2022, 2023, 2024, 2025]}, {"n": "Harmonic Threads", "as": "AS-1255", "pos": "The Provider", "tot": 66578, "years": [2020, 2021, 2022, 2023, 2024, 2025, 2026]}, {"n": "Clothier Design Source", "as": "AS-1230", "pos": "The Distributor", "tot": 64145, "years": [2020, 2021, 2022, 2023, 2024, 2025]}, {"n": "Reid Van Marel - The Collective Thread A/C Dignity Period", "as": "AS-1308", "pos": "The Healer", "tot": 53809, "years": [2023, 2024]}, {"n": "Elam Miller", "as": "AS-1259", "pos": "The Provider", "tot": 44180, "years": [2020, 2021, 2022, 2023, 2024, 2025, 2026]}, {"n": "Club Tissus", "as": "AS-1195", "pos": "The Distributor", "tot": 33959, "years": [2019, 2021, 2022, 2023, 2024, 2025]}, {"n": "Buddy Rest - American Pet Works - A Better Way Product", "as": "AS-1222", "pos": "The Manufacturer", "tot": 30587, "years": [2019, 2020, 2021, 2022, 2023]}, {"n": "American Pace - Michael Baker", "as": "AS-1346", "pos": "The Provider", "tot": 29274, "years": [2026]}]}, "leaving": {"count": 40, "names": [{"n": "Britten Inc", "as": "AS-1240", "pos": "The Manufacturer", "tot": 827996, "years": [2020]}, {"n": "USDA", "as": "AS-1257", "pos": "The Manufacturer", "tot": 735480, "years": [2020]}, {"n": "Transformations", "as": "AS-1103", "pos": "The Manufacturer", "tot": 552021, "years": [2017, 2018, 2019, 2020, 2021, 2022]}, {"n": "Nemschoff - Herman Miller", "as": "AS-1115", "pos": "The Manufacturer", "tot": 537160, "years": [2017, 2018, 2019, 2020, 2021, 2022, 2023]}, {"n": "Grumax", "as": "AS-1112", "pos": "The Distributor", "tot": 488104, "years": [2017, 2018, 2019, 2020, 2021, 2022]}, {"n": "Dal-Bac Manufacturing", "as": "AS-1265", "pos": "The Distributor", "tot": 391409, "years": [2020, 2021]}, {"n": "WindelManufaktur - Stephanie Oppitz", "as": "AS-1161", "pos": "The Distributor", "tot": 273246, "years": [2018, 2019, 2020]}, {"n": "Ecopipo / Ecotefila", "as": "AS-1101", "pos": "The Guardian", "tot": 261376, "years": [2017, 2018, 2019, 2020, 2021]}, {"n": "A-One Laminating", "as": "AS-1252", "pos": "The Distributor", "tot": 238886, "years": [2020, 2021]}, {"n": "Ruby Love", "as": "AS-1156", "pos": "The Provider", "tot": 231085, "years": [2017, 2018, 2019, 2020, 2021]}, {"n": "Fabric.com", "as": "AS-1113", "pos": "The Distributor", "tot": 166652, "years": [2017, 2018, 2019, 2020, 2021]}, {"n": "Rachels Remedies", "as": "AS-1134", "pos": "The Guardian", "tot": 128702, "years": [2017, 2018, 2019]}, {"n": "Precision Textiles", "as": "AS-1196", "pos": "The Distributor", "tot": 123396, "years": [2019, 2020, 2021]}, {"n": "Mondial Tissues", "as": "AS-1231", "pos": "The Distributor", "tot": 118359, "years": [2020, 2022]}]}, "returning": {"count": 11, "names": [{"n": "RagaBabe", "as": null, "pos": "The Guardian", "tot": 9630, "years": [2018, 2020, 2022]}, {"n": "Ever&again (Kristina-Germany)", "as": "AS-1193", "pos": "The Householder", "tot": 59322, "years": [2019, 2021, 2024]}, {"n": "Crystal Burton", "as": "AS-1201", "pos": "The Guardian", "tot": 33845, "years": [2019, 2020, 2021, 2024, 2025, 2026]}, {"n": "Delbuno Costumes / Regal Costumes", "as": "AS-1217", "pos": "The Provider", "tot": 20483, "years": [2019, 2023, 2025, 2026]}, {"n": "Liquid Nymph - Kristy Hatton", "as": "AS-1618", "pos": "The Provider", "tot": 20448, "years": [2021, 2022, 2023, 2026]}, {"n": "Jag Mfg", "as": "AS-1152", "pos": "The Provider", "tot": 16925, "years": [2017, 2018, 2021, 2022]}, {"n": "Doug Johnson - Lite Run LLC", "as": "AS-1229", "pos": "The Explorer", "tot": 12434, "years": [2020, 2023, 2024, 2026]}, {"n": "DRYZZZ Inc", "as": "AS-1204", "pos": "The Householder", "tot": 10039, "years": [2019, 2020, 2025]}, {"n": "Tiffany Norton", "as": "AS-1165", "pos": "The Manufacturer", "tot": 7573, "years": [2018, 2023, 2024, 2025]}, {"n": "Althea Lamb", "as": "AS-1808", "pos": "The Manufacturer", "tot": 6384, "years": [2021, 2022, 2025]}, {"n": "Robinsonwindword - John Robinson", "as": "AS-1990", "pos": "The Provider", "tot": 5601, "years": [2021, 2022, 2023, 2026]}]}, "rhythm": {"count": 12, "names": [{"n": "Superior Glove", "as": "AS-1123", "pos": "The Manufacturer", "tot": 1638398, "years": [2017, 2018, 2019, 2022, 2023, 2024, 2025, 2026]}, {"n": "Idaho Sewing for Sports", "as": "AS-1136", "pos": "The Distributor", "tot": 345796, "years": [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2026]}, {"n": "Complete Environmental Product", "as": "AS-1203", "pos": "The Manufacturer", "tot": 61875, "years": [2019, 2020, 2021, 2025, 2026]}, {"n": "Find a Fabric - Sarah Jarvis", "as": "AS-1294", "pos": "The Distributor", "tot": 35046, "years": [2021, 2022, 2025]}, {"n": "Industrial Packaging Products Inc.", "as": "AS-1275", "pos": "The Manufacturer", "tot": 32063, "years": [2021, 2024, 2025, 2026]}, {"n": "Herman Miller", "as": "AS-1236", "pos": "The Manufacturer", "tot": 31191, "years": [2020, 2025, 2026]}, {"n": "Geiger Seating", "as": "AS-1169", "pos": "The Manufacturer", "tot": 26042, "years": [2018, 2023, 2024, 2025, 2026]}, {"n": "Carr Textile", "as": "AS-1146", "pos": "The Distributor", "tot": 14545, "years": [2017, 2018, 2021, 2024]}, {"n": "Fabric Sources", "as": "AS-1278", "pos": "The Manufacturer", "tot": 13000, "years": [2021, 2024]}, {"n": "Jeremy Duncan", "as": "AS-1172", "pos": "The Manufacturer", "tot": 10538, "years": [2018, 2021]}, {"n": "All State Medical", "as": "AS-1118", "pos": "The Manufacturer", "tot": 10509, "years": [2017, 2018, 2020, 2021, 2022, 2025]}, {"n": "Stephensons Warmlite", "as": "AS-1126", "pos": "The Manufacturer", "tot": 7869, "years": [2017, 2018, 2021, 2022, 2026]}]}}, "snapshot": "8 Sep 2026", "whale": {"2017": 237895.13000000003, "2018": 1439584.9299999992, "2019": 2193449.9099999997, "2020": 2166486.85, "2021": 4054068.180000001, "2022": 2595040.85, "2023": 1619181.8899999997, "2024": 2056677.6719999996, "2025": 783267.0499999999, "2026": 53761.5}, "communities": [{"ch": 1, "title": "The Humanitarian Makers", "count": 37}, {"ch": 2, "title": "The Pet Product Makers", "count": 55}, {"ch": 3, "title": "The Sensory Comfort Makers", "count": 2}, {"ch": 4, "title": "The Business Makers", "count": 28}, {"ch": 5, "title": "The Cloth Diaper Makers", "count": 92}, {"ch": 6, "title": "The Personal Pad Makers", "count": 103}, {"ch": 7, "title": "The Incontinence Makers", "count": 63}, {"ch": 8, "title": "The Medical Makers", "count": 40}, {"ch": 9, "title": "The Special Needs Caregiver", "count": 1}, {"ch": 10, "title": "The Household Makers", "count": 84}, {"ch": 11, "title": "The Ones Who Loved the Cloth", "count": 21}, {"ch": 12, "title": "The Underwear / Intimate Makers", "count": 35}, {"ch": 13, "title": "The Activewear Makers", "count": 30}, {"ch": 14, "title": "The Travel Garment Makers", "count": 3}, {"ch": 15, "title": "The Guinea Pig Makers", "count": 16}, {"ch": 16, "title": "The Hydroponic Makers", "count": 4}, {"ch": 17, "title": "The Reusable Food Bag Makers", "count": 45}, {"ch": 18, "title": "The Bowl Cover Makers", "count": 22}, {"ch": 19, "title": "The Accessory Bag Makers", "count": 8}, {"ch": 20, "title": "The Display / Mounting Makers", "count": 8}, {"ch": 21, "title": "The Interactive Craft Makers", "count": 3}, {"ch": 22, "title": "The Adaptive Clothing Makers", "count": 4}, {"ch": 23, "title": "The Costume / Discovery Makers", "count": 11}, {"ch": 24, "title": "The Fiber Artist / Surface Maker", "count": 5}, {"ch": 25, "title": "The Ones Who Knew Before They Spoke", "count": 11}, {"ch": 26, "title": "The Ones Who Found Medicine on a Bolt", "count": 3}], "ledgers": {"FAC": 38287948, "SHOP": 4669313}, "buy": {"The Healer": {"n": 39, "brands": {"Zorb": 23, "ProSoft PUL": 22, "ProCool": 5, "ProECO": 5}}, "The Manufacturer": {"n": 7, "brands": {"Zorb": 2, "ProSoft PUL": 6, "ProCool": 2}}, "The Explorer": {"n": 4, "brands": {"ProCool": 1, "ProSoft PUL": 4, "Zorb": 1}}, "The Guardian": {"n": 61, "brands": {"ProSoft PUL": 30, "Zorb": 25, "ProCool": 5, "ProECO": 13}}, "The Distributor": {"n": 9, "brands": {"ProCool": 3, "Zorb": 7, "ProECO": 2, "ProSoft PUL": 1}}, "The Householder": {"n": 16, "brands": {"ProECO": 6, "ProSoft PUL": 13, "Zorb": 5, "ProCool": 2}}, "The Provider": {"n": 27, "brands": {"ProSoft PUL": 12, "ProECO": 6, "ProCool": 6, "Zorb": 9}}}, "industries": {"The Healer": [["Incontinence", 14], ["Period Care", 7], ["Personal Care", 3]], "The Guardian": [["Diapers", 24], ["Maternity Products", 11], ["Bibs", 2], ["Pets", 1]], "The Manufacturer": [["Industrial", 29], ["Sorbents", 22], ["Furniture Industry", 16], ["Medical Product", 13], ["Military", 2]], "The Explorer": [["Industrial", 3], ["Apparel", 1], ["Food Industry", 1], ["Medical Product", 1]], "The Distributor": [["Industrial", 9], ["Apparel", 6], ["Distributor", 6], ["Reseller", 3], ["Diapers", 2]], "The Provider": [["Apparel", 40]], "The Householder": [["Food Industry", 6], ["Mattress Pads", 5], ["Reusable Household", 4], ["Bags", 2], ["Furniture Industry", 1]]}, "mats": {"humans": 22, "lifetime": 6835162, "names": [{"n": "Brady Corporation", "orders": 335, "years": [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026], "fac": 3363337}, {"n": "FyterTech Nonwovens", "orders": 91, "years": [2021, 2022, 2023, 2024], "fac": 1232870}, {"n": "Meltblown Technologies", "orders": 87, "years": [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026], "fac": 1020835}, {"n": "SpillTech", "orders": 33, "years": [2023, 2024, 2025, 2026], "fac": 422460}, {"n": "Source 1 LLC", "orders": 15, "years": [2022, 2023, 2024, 2025, 2026], "fac": 208883}, {"n": "Belgium Brady", "orders": 43, "years": [2022, 2023, 2024, 2025, 2026], "fac": 178507}, {"n": "Global Enviromental Products", "orders": 19, "years": [2018, 2019, 2020, 2021, 2022, 2023, 2025], "fac": 95448}, {"n": "K&W Environmental", "orders": 7, "years": [2021, 2022, 2024, 2025, 2026], "fac": 68053}, {"n": "Complete Environmental Product", "orders": 13, "years": [2019, 2020, 2021, 2025, 2026], "fac": 61875}, {"n": "Tomar Industries", "orders": 5, "years": [2022, 2023, 2025], "fac": 43835}]}, "ladder": [{"r": "Swatch", "q": "$2", "w": "Wazoodle"}, {"r": "Yards", "q": "any amount", "w": "Wazoodle"}, {"r": "Wholesale roll", "q": "25\u2013100 yards, per fabric", "w": "Wazoodle"}, {"r": "Custom print", "q": "per fabric \u2014 no site-wide number", "w": "AKAS Tex"}, {"r": "Custom colour", "q": "about a 400 lb dye lot", "w": "AKAS Tex"}, {"r": "Bulk", "q": "500 yards \u2014 the threshold", "w": "AKAS Tex"}, {"r": "Development", "q": "2,000 yards \u2014 a new construction", "w": "AKAS Tex"}], "programme": [{"r": "Sample", "q": "a spec, a part number, a sample to evaluate"}, {"r": "Trial order", "q": "one run, tested on their floor"}, {"r": "Standing spec", "q": "the same thing, reordered on their own rhythm"}, {"r": "Volume", "q": "an annual commitment \u2014 where Brady is being walked to now"}]};</script>
+<script>
+const RUNGS=['Swatch','Yards','Wholesale','The crossing','Roll','Bulk','Development'];
+const RUNG_PAGES={0:'Wazoodle · Find (Fabric Finder, swatch kits)',1:'Wazoodle · Shop',2:'Wazoodle · Grow (wholesale)',3:'where a Wazoodle customer becomes an AKAS Tex customer',4:'AKAS Tex · Services (rolls)',5:'AKAS Tex · Industries · Partner Resources',6:'AKAS Tex · Technologies · the origin gallery'};
+const A=[
+ {k:'The Explorer',sub:'the Needle',span:[6,6],warm:'teal',line:'They ask for what isn\u2019t there yet.',wound:'Nothing on any shelf did the thing. They arrive with a drawing, a problem, a hunch \u2014 and nobody has taken it seriously.',know:'They arrive with a request, not a SKU. Every email, every call, every knock is this move; the first message is longer than the first order.',stand:'Development, wherever they were standing before. The top rung is theirs: every fabric on the shelf began as someone\u2019s ask.',needs:'To be taken seriously. A sample. A development cost as a range and a conversation, never a single number.',film:'1.2% of revenue and the reason the catalogue exists.',extra:'Our records also name the ones the register can\u2019t: the robotics team, the hydroponic grower, Johnny in Africa with his soup bags, Coolture, Redshift, Comade, Nappy Heaven. Fairfield Chair asked once and then bought to spec for years \u2014 a Specifier who asked, which every Specifier is.'},
+ {k:'The Healer',sub:'the Lining',span:[0,1],warm:'warm',line:'They make things for their own bodies.',wound:'It hurt. Rash, leak, itch, odour, a condition that does not resolve. What they could buy was expensive, disposable, and made it worse.',know:'A swatch, then yards, then a review of six words. Nancy: no itching and no odor. They name what is no longer present and stop.',stand:'Swatch and yards, mostly. They stay there by design, and they are the largest group in either record. They rarely climb, and don\u2019t need to.',needs:'The right fabric the first time. The construction knowledge that used to live only in reviews. Never to be sold to. To be believed about their own bodies.',film:'The closer the body, the fewer the words. Film the object, not the speech.',book:true},
+ {k:'The Guardian',sub:'the Swaddle',span:[0,6],warm:'warm',line:'They make things for someone they love.',wound:'It must not hurt them. A rash on a baby, a leak at 3 a.m., a chemical they read about, a father\u2019s legs weeping under bandages.',know:'They write pages. Rank fabrics. Name what failed. Iterate twice in sixteen days. Ask about certification before price.',stand:'Every rung. These are the ones who climb without cooling \u2014 swatch to bulk, still warm. The largest customer in our history lives here.',needs:'Safety they can prove to someone else. The yardage maths. The next rung visible and never pushed \u2014 when they climb, they climb fast, and nobody has called them.',film:'The biggest walk in our record is theirs: a swatch to seventeen million dollars to a fabric of their own \u2014 and then away.',book:true},
+ {k:'The Provider',sub:'the Weft',span:[2,4],warm:'mid',line:'They make things for people they\u2019ll never meet.',wound:'Someone out there has nothing, or has the wrong thing. Uniforms, gowns, masks, kits for girls who leave school when their period starts.',know:'They ask about quantity and consistency in the first email. They buy by the roll early. Some arrive with a spec of their own.',stand:'Wholesale to roll, often quickly, often for a season. The pandemic run lived here and left when it ended.',needs:'A supply they can promise onward. Made-in-USA as a fact they can print. Lead time they can plan on.',film:'Where giving and making are the same act.',book:true},
+ {k:'The Householder',sub:'the Mend',span:[1,2],warm:'mid',line:'They make things that replace the disposable.',wound:'Waste. Money thrown away every month; a landfill they can see from the kitchen; plastic against food.',know:'Unpaper towels, bowl covers, snack bags, wetbags. They talk about cost per year, not per yard. Often an Etsy shop and a day job.',stand:'Wholesale, steadily. Some climb \u2014 Marley\u2019s Monsters reached $203K entirely through Wazoodle. Most hold, and flat here is health.',needs:'FoodSAFE they can say out loud. Reliability over growth. Nobody trying to climb them.',film:'The kitchen, the drawer, the thing that gets washed and used again.',book:true},
+ {k:'The Manufacturer',sub:'the Roll',span:[4,5],warm:'gray',line:'They arrive with a drawing and buy by the roll.',wound:'A supply problem, not a fabric problem. A component that needs a certification, a domestic source, a lead time, a laminate nobody else will run.',know:'A PO. A spec sheet. A procurement address. Sometimes one walks in through Wazoodle and pays by the yard \u2014 the State of Michigan did \u2014 and the door has to notice.',stand:'They arrive at the top \u2014 roll and bulk \u2014 and never need the rungs below. The sorbent buyers walk the mats programme instead. Silent for years between requirements; that is rhythm, not leaving.',needs:'The fast path. A spec answered in the language of the spec. No storytelling until they ask.',film:'They are the reason the mill can afford the Healer.',house:true},
+ {k:'The Distributor',sub:'the Selvedge',span:[5,5],warm:'gray',line:'They carry our cloth onward with our name on the edge \u2014 or cut it into someone else\u2019s product.',wound:'A market they serve that we can\u2019t: France, the UK, South Africa, Australia. Or a customer of theirs who needs our fabric inside their product.',know:'Rolls, a price list, freight terms. They ask whether they may use our brand names. Some ask us not to.',stand:'Bulk. Steady while the market holds; gone when the market goes.',needs:'A price list they can carry, brand assets they can print, and the freedom to be our name where we aren\u2019t.',film:'Our fabric with their name on the next label \u2014 and ours on the edge.'},
+ {k:'The Innovator',sub:'the Warp',span:[2,6],warm:'warm',line:'They built something that didn\u2019t exist, on our fabric.',wound:'Whatever they started with \u2014 and then a second one: the shelf ran out of answers and they needed their own, or their idea needed a fabric to stand on.',know:'Not at the door. They show themselves when the question has a yardage attached, or when the swatch buyer of 2019 has a brand in 2023.',stand:'Wholesale to development \u2014 anywhere a business stands on our cloth. Not a kind they start as; a place they arrive at.',needs:'The development conversation as a range and a walk, not a quote. Honesty about after: the fabric is ours to keep on the shelf, the business is theirs to take anywhere.',film:'The ones who came for a swatch and left a fabric behind.'},
+ {k:'The Extractor',sub:'the Loose Thread',span:null,warm:'gray',line:'They took the development and had it made elsewhere.',wound:'None they brought to us. A margin to find.',know:'Often the biggest name in the room \u2014 Ralph Lauren, Adidas, MAS developing for Thinx. Or a maker who was ours until the Shark Tank round or the VC cheque. They come as far as the development conversation and stop.',stand:'Outside the weave, touching only the Explorer\u2019s rung. The ledger cannot see them; the zero is correct.',needs:'Nothing we sell. The line is the answer: we don\u2019t ship to India, China, Pakistan or Sri Lanka, and we don\u2019t assist orders routed there.',film:'Nothing. Named so the room knows the line exists, and where it is.',shadow:true}
+];
+const D=window.DATA; const P=D.positions;
+const chips=document.getElementById('chips'); const fig=document.getElementById('ladderfig'); const panel=document.getElementById('panel');
+const money=v=>v>=1e6?('$'+(v/1e6).toFixed(1)+'M'):v>=1000?('$'+Math.round(v/1000)+'K'):('$'+v);
+function count(a){const p=P[a.k]; if(a.k==='The Extractor') return '0 · correct'; if(!p) return ''; return p.named?`${p.humans} · ${p.named} named`:String(p.humans);}
+A.forEach((a,i)=>{const b=document.createElement('button');b.className='chip '+a.warm+(a.shadow?' shadow':'');b.type='button';b.setAttribute('aria-pressed','false');b.innerHTML=`${a.k} <span class="n">${count(a)}</span>`;b.addEventListener('click',()=>select(i));chips.appendChild(b);});
+(function(){const W=1000,L=70,R=940,top=36,rowH=22;const xs=RUNGS.map((_,i)=>L+(R-L)*i/6);const railY=250;
+ let s=`<svg viewBox="0 0 ${W} 350" role="img" aria-label="The ladder with seven rungs, where each of the nine stands, and the return from development to the shelf">`;
+ s+=`<line class="rail" x1="${L-20}" y1="${railY-16}" x2="${R+20}" y2="${railY-16}"/><line class="rail" x1="${L-20}" y1="${railY+16}" x2="${R+20}" y2="${railY+16}"/>`;
+ s+=`<path class="retpath" d="M${R+24} ${railY+20} C${R+60} ${railY+110} ${L-40} ${railY+110} ${L-24} ${railY+20}" fill="none"/><text class="cnt" x="${(L+R)/2}" y="${railY+88}">the shelf · development feeds the bottom</text>`;
+ xs.forEach((x,i)=>{s+=`<line class="rung" data-r="${i}" x1="${x}" y1="${railY-16}" x2="${x}" y2="${railY+16}"/><rect class="rz" data-r="${i}" x="${x-40}" y="${railY-40}" width="80" height="80"/><text class="rl" data-r="${i}" x="${x}" y="${railY+42}">${RUNGS[i].toLowerCase()}</text>`;});
+ A.forEach((a,i)=>{if(!a.span){s+=`<circle class="extract" cx="${xs[6]+50}" cy="${top+8*rowH}" r="7"/><text class="cnt" style="text-anchor:end" x="${xs[6]+36}" y="${top+8*rowH+4}">the extractor · outside · $0</text>`;return;}
+  const y=top+i*rowH; const x1=xs[a.span[0]],x2=xs[a.span[1]];
+  if(a.house){s+=`<rect class="house" data-i="${i}" x="${x1-34}" y="${y-9}" width="${x2-x1+68}" height="18" rx="4"/><text class="cnt" data-i="${i}" style="text-anchor:start" x="${x2+42}" y="${y+4}">manufacturer · ${P['The Manufacturer'].humans}</text>`;return;}
+  s+=`<line class="span ${a.warm}" data-i="${i}" x1="${x1}" y1="${y}" x2="${x2===x1?x1+1:x2}" y2="${y}" ${x2===x1?'style="stroke-width:18"':''}/><text class="cnt" data-i="${i}" x="${(x1+x2)/2}" y="${y-8}">${a.k.replace('The ','').toLowerCase()} · ${count(a)}</text>`;});
+ s+=`<circle class="pulse" cx="${xs[3]}" cy="${railY}" r="6"/>`; s+='</svg>'; fig.innerHTML=s;
+ fig.querySelectorAll('.rz,.rl').forEach(el=>el.addEventListener('click',()=>rung(+el.dataset.r)));
+ fig.querySelectorAll('.span,.house').forEach(el=>{el.style.cursor='pointer';el.addEventListener('click',()=>select(+el.dataset.i));});
+})();
+function light(a){fig.querySelectorAll('.rung,.rl').forEach(e=>{e.classList.remove('lit','hot');const r=+e.dataset.r;if(a&&a.span&&r>=a.span[0]&&r<=a.span[1]) e.classList.add('lit');});
+ fig.querySelectorAll('.span,.house,.cnt').forEach(e=>e.classList.toggle('on',a?+e.dataset.i===A.indexOf(a):false));}
+function rhythm(p){const bars=(o,cls)=>{const arr=Object.entries(o);const mx=Math.max(...arr.map(x=>x[1]),1);return arr.map(([y,v],i)=>`<i class="${cls}" style="height:${Math.max(2,44*v/mx)}px;animation-delay:${i*.05}s" title="${y}: ${money(v)}"></i>`).join('');};
+ return `<div class="shares"><div class="share"><div class="big">${p.fac_pct}%</div><div class="l">of AKAS Tex sales · ${money(p.fac)}</div><div class="rhythm">${bars(p.fac_years,'')}</div><div class="rhythm-key"><span>2017</span><span>2026</span></div></div><div class="share"><div class="big">${p.shop_pct}%</div><div class="l">of Wazoodle wholesale sales · ${money(p.shop)}</div><div class="rhythm">${bars(p.shop_years,'s')}</div><div class="rhythm-key"><span>2021</span><span>2026</span></div></div></div>`;}
+function names(a){const p=P[a.k];if(!p||!p.top.length) return '';
+ return `<p class="mono">who they are · from our customer register</p><ul class="names">`+p.top.map((h,i)=>{const other=(a.k==='The Innovator'&&h.pos!==a.k)?`<span class="tag">${h.pos.replace('The ','')}</span>`:'';const v=(h.fac?money(h.fac)+' AKAS Tex':'')+(h.fac&&h.shop?' · ':'')+(h.shop?money(h.shop)+' Wazoodle':'');
+  return `<li style="--i:${i}"><span><span class="nm">${h.n}</span>${other}</span><span class="meta">${h.door==='both'?'both doors':h.door==='factory'?'AKAS Tex':'Wazoodle'}${h.first?' · since '+h.first:''}${h.ord?' · '+h.ord+' orders':''}<br>${v}</span></li>`;}).join('')+`</ul>`;}
+const COMM={'The Healer':[6,7,8,11,12,13,25,26],'The Guardian':[2,3,5,9,15,22],'The Provider':[1,4,14,23],'The Householder':[10,16,17,18,19,20,21,24]};
+function communities(a){const chs=COMM[a.k];if(!chs) return '';const cs=D.communities.filter(c=>chs.includes(c.ch));return `<p class="mono" style="margin-top:var(--s-4)">and from our book of customer stories · ${cs.reduce((n,c)=>n+c.count,0)} named</p><div class="comm">`+cs.map((c,i)=>`<div style="--i:${i}"><div class="ch">chapter ${c.ch}</div><div class="tt">${c.title}</div><div class="cn">${c.count} named</div></div>`).join('')+`</div>`;}
+function buys(a){const b=D.buy&&D.buy[a.k];if(!b||!b.n) return '';const o=['Zorb','ProSoft PUL','ProCool','ProECO'];const mx=Math.max(...o.map(k=>b.brands[k]||0),1);return `<p class="mono" style="margin-top:var(--s-4)">what they buy · ${b.n} with wholesale brand tags</p><div class="buys">${o.map(k=>`<div><span>${k}</span><i style="width:${Math.round(100*(b.brands[k]||0)/mx)}%"></i><b>${b.brands[k]||0}</b></div>`).join('')}</div>${D.industries&&D.industries[a.k]?`<p class="mono" style="margin-top:var(--s-3)">what they make · ${D.industries[a.k].map(x=>x[0].toLowerCase()+' '+x[1]).join(' · ')}</p>`:''}`;}
+function select(i){const a=A[i];chips.querySelectorAll('.chip').forEach((c,j)=>c.setAttribute('aria-pressed',j===i?'true':'false'));light(a);
+ const p=P[a.k];const right=(a.shadow?`<p class="mono">who they are</p><p style="font-size:var(--fs-lg);color:var(--fg-2)">MAS Holdings developing for Thinx. The brand that went on Shark Tank and then overseas. The ledger cannot see her, and that is the finding. The line stands: no shipping, no assistance, to India, China, Pakistan or Sri Lanka.</p>`:names(a)+communities(a))+buys(a);
+ panel.innerHTML=`<div><h3>${a.k} <span class="sub">${a.sub}</span></h3><p class="line">${a.line}</p><dl><dt>What brought them</dt><dd>${a.wound}</dd><dt>How to recognise them at the door</dt><dd>${a.know}</dd><dt>Where they stand, and which way</dt><dd>${a.stand}</dd><dt>What they need from us</dt><dd>${a.needs}</dd>${a.extra?`<dt>Also on the record</dt><dd>${a.extra}</dd>`:''}<dt>For the film</dt><dd>${a.film}</dd></dl>${p&&p.humans?rhythm(p):''}</div><div>${right}</div>`;
+ if(window.innerWidth<860) panel.scrollIntoView({behavior:'smooth',block:'start'});}
+function rung(r){chips.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed','false'));light(null);fig.querySelectorAll('.rung,.rl').forEach(e=>e.classList.toggle('hot',+e.dataset.r===r));
+ const who=A.filter(a=>a.span&&r>=a.span[0]&&r<=a.span[1]);
+ panel.innerHTML=`<div><h3>${RUNGS[r]}</h3><p class="line">Rung ${r+1} of seven.</p><dl><dt>Who stands here</dt><dd>${who.map(a=>`<button class="chip ${a.warm}" type="button" data-i="${A.indexOf(a)}" style="margin:2px 4px 2px 0">${a.k}</button>`).join('')}</dd><dt>Where it lives on the sites</dt><dd>${RUNG_PAGES[r]}</dd><dt>The family stood here first</dt><dd>${r===3?'The crossing is the only rung that moves: fifteen went up through it, twenty-five came down. Nobody was pushed.':r===6?'Development feeds the shelf. Fifty-two of a hundred and two fabrics carry the name of the person who asked for them.':'Nobody is pushed up the ladder. This rung was ready before you were.'}</dd></dl></div><div><p class="mono">one visit, seven movements</p><p style="font-size:var(--fs-lg);color:var(--fg-2)">Whatever rung she stands on, a visit is the same walk: search, door, recognition, truth, crossing, inside, outward.</p></div>`;
+ panel.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>select(+b.dataset.i)));}
+select(0);
+/* movements */
+(function(){const M=D.movements;const g=document.getElementById('movesgrid');const T={climbing:['Climbing','Up through the crossing: Wazoodle first, then AKAS Tex.'],descending:['Descending','Down through the crossing: AKAS Tex first, then Wazoodle \u2014 for samples, colours, the next idea. The common direction.'],leaving:['Leaving','Above $20K and nothing since 2023. Some went overseas; some went quiet; some ended with the market that made them.'],returning:['Returning','A maker who went and came back. Nobody called her; she remembered.'],rhythm:['Rhythm, not return','Manufacturers and distributors buying to their own requirement. Silence between orders is the requirement, not a leaving.']};
+ g.innerHTML=Object.keys(T).map((k,i)=>{const m=M[k];return `<div class="mv rise" style="--i:${i}"><div class="n">${m.count}</div><h4>${T[k][0]}</h4><p>${T[k][1]}</p><ul>${m.names.slice(0,8).map(h=>`<li><b>${h.n}</b> <span class="mono">${h.pos.replace('The ','')}${h.years?' · '+h.years[0]+'\u2013'+h.years[h.years.length-1]:''}</span></li>`).join('')}</ul></div>`;}).join('');
+ const w=D.whale;const arr=Object.entries(w);const mx=Math.max(...arr.map(x=>x[1]));document.getElementById('whalebars').innerHTML=`<div class="rhythm big">${arr.map(([y,v],i)=>`<i style="height:${Math.max(3,110*v/mx)}px;animation-delay:${i*.08}s" title="${y}: ${money(v)}"></i>`).join('')}</div><div class="rhythm-key">${arr.map(([y])=>`<span>${y}</span>`).join('')}</div>`;})();
+(function(){const el=document.querySelector('.loop');if(!el)return;const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){el.classList.add('is-in');io.disconnect();}}),{threshold:.35});io.observe(el);})();
+(function(){const all=[...document.querySelectorAll('details.c8')];all.forEach(d=>d.addEventListener('toggle',()=>{if(d.open){all.forEach(o=>{if(o!==d)o.open=false;});}}));})();
+
+(function(){const L=document.getElementById('ladderlist');if(L) L.innerHTML=D.ladder.map((r,i)=>`<li style="--i:${i}"><b>${r.r}</b><span>${r.q}</span><em>${r.w}</em></li>`).join('');
+ const P=document.getElementById('proglist');if(P) P.innerHTML=D.programme.map((r,i)=>`<li style="--i:${i}"><b>${r.r}</b><span>${r.q}</span><em>AKAS Tex</em></li>`).join('');
+ const M=document.getElementById('matsnames');if(M) M.innerHTML=D.mats.names.map(h=>`<li><b>${h.n}</b> <span class="mono">${h.orders} orders · ${h.years[0]}–${h.years[h.years.length-1]}</span></li>`).join('');})();
+
+</script>
+<script>
+/* rupakarshini V3 — rk.js · shared runtime. Optional. Every element degrades without it. */
+(function () {
+  const d = document, root = d.documentElement; root.classList.remove('no-js');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* rise fallback (no animation-timeline support) */
+  if (!CSS.supports('animation-timeline: view()')) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { threshold: .12 });
+    d.querySelectorAll('.rise').forEach(el => io.observe(el));
+  }
+
+  /* hold-to-continue: press held for --hold-ms (default 700) → is-done → emits 'hold:done'; opens [data-threshold] target */
+  d.querySelectorAll('.hold').forEach(h => {
+    const ms = +getComputedStyle(h).getPropertyValue('--hold-ms') || 700; let t0 = 0, raf = 0;
+    const tick = () => { const p = Math.min(1, (performance.now() - t0) / ms); h.style.setProperty('--p', p);
+      if (p >= 1) { done(); } else raf = requestAnimationFrame(tick); };
+    const start = e => { e.preventDefault(); h.classList.remove('is-done'); t0 = performance.now(); raf = requestAnimationFrame(tick); };
+    const stop = () => { cancelAnimationFrame(raf); if (!h.classList.contains('is-done')) h.style.setProperty('--p', 0); };
+    const done = () => { cancelAnimationFrame(raf); h.classList.add('is-done'); h.style.setProperty('--p', 1);
+      if (navigator.vibrate && !reduce) navigator.vibrate(18);                                   /* enhancement only (no iOS) */
+      const target = h.dataset.threshold && d.querySelector(h.dataset.threshold);
+      if (target) { target.classList.add('is-open'); target.querySelectorAll('.gate[hidden]').forEach(g => g.hidden = false); }
+      if (h.dataset.remember) try { localStorage.setItem('rk:' + h.dataset.remember, '1'); } catch (_) {}
+      h.dispatchEvent(new CustomEvent('hold:done', { bubbles: true })); };
+    h.addEventListener('pointerdown', start); ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => h.addEventListener(ev, stop));
+    h.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); done(); } });
+    h.setAttribute('role', 'button'); h.tabIndex = 0;
+    if (h.dataset.remember) try { if (localStorage.getItem('rk:' + h.dataset.remember)) done(); } catch (_) {}
+  });
+
+  /* rail scroll-spy */
+  const rail = d.querySelector('.rail'); if (rail) {
+    const links = [...rail.querySelectorAll('a[href^="#"]')]; const secs = links.map(a => d.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const spy = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-40% 0px -55% 0px' });
+    secs.forEach(s => spy.observe(s));
+  }
+
+  /* counter: <span class="counter" data-to="300" data-suffix="+"> */
+  d.querySelectorAll('.counter[data-to]').forEach(c => {
+    const to = +c.dataset.to, suf = c.dataset.suffix || '', pre = c.dataset.prefix || '';
+    if (reduce) { c.textContent = pre + to.toLocaleString() + suf; return; }
+    const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; io.disconnect(); const t0 = performance.now(), dur = 900;
+      const step = () => { const p = Math.min(1, (performance.now() - t0) / dur), v = Math.round(to * (1 - Math.pow(1 - p, 3))); c.textContent = pre + v.toLocaleString() + suf; if (p < 1) requestAnimationFrame(step); }; step(); }), { threshold: .5 });
+    io.observe(c);
+  });
+
+  /* wake lock for performances: <body data-wake> */
+  if (root.querySelector('[data-wake]') && 'wakeLock' in navigator) {
+    let lock; const get = async () => { try { lock = await navigator.wakeLock.request('screen'); } catch (_) {} };
+    get(); d.addEventListener('visibilitychange', () => { if (d.visibilityState === 'visible') get(); });
+  }
+
+  /* harness hook: body[data-harness] loads harness/dc.js */
+  if (root.querySelector('[data-harness]')) { const s = d.createElement('script'); s.src = root.querySelector('[data-harness]').dataset.harness || 'harness/dc.js'; d.body.appendChild(s); }
+})();
+
+</script>
+</body>
+</html>
