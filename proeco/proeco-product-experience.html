@@ -1,0 +1,3829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProECO Organic Cotton Interlock — Wazoodle Fabrics</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   DESIGN TOKENS — ProECO Organic Cotton Interlock
+   Brown primary + Green emphasis (fourth brand palette — first earth-tone)
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  --waz-green: #3B8234;
+  --waz-deep-green: #0D672E;
+  --waz-brown: #9F693F;
+  --waz-clay: #CCAA87;
+  --waz-olive: #B4CAAF;
+  --waz-stone: #E7E1D5;
+  --waz-slate: #7D8B86;
+  --waz-black: #1E1E1E;
+
+  --brand-primary: #6D3D18;
+  --brand-emphasis: #9DCE1E;
+  --brand-bg: #F5EAD1;
+  --brand-accent: #ECD9B0;
+  --brand-deep: #3A1F0A;
+  --brand-dark: #2A1508;
+  --brand-light: #F8F0E0;
+  --brand-mist: #E0FAEE;
+  --brand-rust: #C76C3C;
+  --brand-eggplant: #7B4A60;
+
+  --white: #FFFFFF;
+  --gray-50: #FAFBFC;
+  --gray-100: #F5F3F0;
+  --gray-200: #E8E5E0;
+  --gray-300: #D1CEC8;
+  --gray-400: #9A9590;
+  --gray-500: #6B6660;
+  --gray-600: #4A4540;
+  --gray-700: #3A3530;
+  --gray-800: #1E1E1E;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+
+  --text-xs: 0.6875rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-md: 1.0625rem;
+  --text-lg: 1.5rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.625rem;
+
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+  --space-4: 1rem; --space-6: 1.5rem; --space-8: 2rem;
+  --space-10: 2.5rem; --space-12: 3rem; --space-16: 4rem;
+  --space-20: 5rem; --space-24: 6rem;
+
+  --container-narrow: 700px;
+  --container-standard: 1100px;
+  --container-wide: 1400px;
+
+  --ease-smooth: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-spring: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --witness-gold: #C8A96E;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  color: var(--gray-800);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   1. THE GATE — Full-screen overlay
+   ═══════════════════════════════════════════════════════════════ */
+
+.gate-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(165deg, #F5EAD1 0%, #F0E4C8 30%, #FAFBFC 65%, #F5F2EC 100%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  overflow: hidden;
+}
+
+.gate-overlay::before {
+  content: '';
+  position: absolute;
+  top: -30%; left: -30%;
+  width: 160%; height: 160%;
+  background: radial-gradient(circle at 35% 30%, rgba(109,61,24,0.06) 0%, transparent 45%),
+              radial-gradient(circle at 70% 65%, rgba(157,206,30,0.03) 0%, transparent 35%);
+  pointer-events: none;
+}
+
+.gate-overlay.dismissed {
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+}
+
+.gate-content {
+  text-align: center;
+  max-width: 960px;
+  padding: var(--space-8);
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.gate-eyebrow {
+  font-size: var(--text-xs);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--brand-primary);
+  font-weight: 600;
+  margin-bottom: var(--space-6);
+  opacity: 0;
+  animation: gateFadeUp 0.6s ease forwards 0.2s;
+}
+
+.gate-question {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 400;
+  color: var(--gray-800);
+  margin-bottom: var(--space-3);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  opacity: 0;
+  animation: gateFadeUp 0.6s ease forwards 0.35s;
+}
+
+.gate-sub {
+  font-size: var(--text-base);
+  color: var(--gray-500);
+  font-weight: 300;
+  margin-bottom: var(--space-12);
+  opacity: 0;
+  animation: gateFadeUp 0.6s ease forwards 0.5s;
+}
+
+.gate-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+}
+
+.gate-tile {
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: 10px;
+  padding: var(--space-6) var(--space-4);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: left;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  opacity: 0;
+  animation: gateTileIn 0.4s ease forwards;
+}
+
+.gate-tile:nth-child(1) { animation-delay: 0.6s; }
+.gate-tile:nth-child(2) { animation-delay: 0.68s; }
+.gate-tile:nth-child(3) { animation-delay: 0.76s; }
+.gate-tile:nth-child(4) { animation-delay: 0.84s; }
+.gate-tile:nth-child(5) { animation-delay: 0.92s; }
+.gate-tile:nth-child(6) { animation-delay: 1.0s; }
+.gate-tile:nth-child(7) { animation-delay: 1.08s; }
+.gate-tile:nth-child(8) { animation-delay: 1.16s; }
+
+.gate-tile:hover {
+  border-color: var(--brand-primary);
+  background: var(--brand-bg);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(109,61,24,0.1);
+}
+
+.gate-tile.selected {
+  border-color: var(--brand-primary);
+  background: var(--brand-bg);
+  box-shadow: 0 0 0 1px var(--brand-primary);
+}
+
+.gate-tile-name {
+  font-weight: 600;
+  font-size: var(--text-sm);
+  color: var(--gray-800);
+  margin-bottom: var(--space-1);
+}
+
+.gate-tile-hook {
+  font-size: var(--text-xs);
+  color: var(--gray-600);
+  font-style: italic;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.gate-tile.fabric-story {
+  background: linear-gradient(135deg, var(--brand-deep) 0%, var(--brand-dark) 100%);
+  border-color: var(--brand-deep);
+  grid-column: span 2;
+}
+.gate-tile.fabric-story .gate-tile-name { color: var(--white); }
+.gate-tile.fabric-story .gate-tile-hook { color: rgba(255,255,255,0.7); }
+.gate-tile.fabric-story:hover {
+  background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand-deep) 100%);
+  border-color: var(--brand-emphasis);
+  box-shadow: 0 8px 24px rgba(157,206,30,0.15);
+}
+.gate-tile.fabric-story.selected {
+  box-shadow: 0 0 0 2px var(--brand-emphasis);
+}
+
+.gate-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  opacity: 0;
+  animation: gateFadeUp 0.5s ease forwards 1.3s;
+}
+
+.gate-enter-btn {
+  display: none;
+  padding: 0.85rem 2.5rem;
+  background: var(--brand-primary);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--ease-smooth);
+}
+.gate-enter-btn.visible { display: inline-block; }
+.gate-enter-btn:hover { background: var(--brand-emphasis); transform: translateY(-1px); }
+
+@keyframes gateFadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes gateTileIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MAIN PAGE
+   ═══════════════════════════════════════════════════════════════ */
+
+.main-page {
+  opacity: 0;
+  transition: opacity 0.8s ease 0.3s;
+}
+.main-page.visible { opacity: 1; }
+
+/* ═══════════════════════════════════════════════════════════════
+   2. THE SEED
+   ═══════════════════════════════════════════════════════════════ */
+
+.seed-section {
+  text-align: center;
+  padding: var(--space-12) var(--space-10) var(--space-8);
+}
+
+.seed-line {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-lg);
+  color: var(--brand-primary);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   3. BUY BOX
+   ═══════════════════════════════════════════════════════════════ */
+
+.buybox-section {
+  max-width: var(--container-standard);
+  margin: 0 auto;
+  padding: 0 var(--space-10) var(--space-16);
+}
+
+.buybox-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  align-items: start;
+}
+
+.product-gallery {
+  background: var(--brand-bg);
+  border-radius: 16px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.8s ease;
+}
+
+.product-gallery::before {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--aura-color, rgba(109,61,24,0.12)) 0%, transparent 65%);
+  transition: all 1s ease;
+  pointer-events: none;
+}
+
+.gallery-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--gray-500);
+  font-size: var(--text-sm);
+  z-index: 1;
+}
+
+.gallery-orb {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand-light), var(--brand-accent));
+  opacity: 0.5;
+  margin-bottom: var(--space-4);
+}
+
+.gallery-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(6,47,68,0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  border-radius: 16px;
+}
+.gallery-video-overlay.visible { display: flex; }
+
+.gallery-video-placeholder {
+  text-align: center;
+  color: var(--white);
+}
+.gallery-video-icon {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin: 0 auto var(--space-4);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.gallery-video-icon:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
+
+.gallery-thumbs {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.gallery-thumb {
+  width: 60px; height: 60px;
+  border-radius: 8px;
+  border: 2px solid var(--gray-200);
+  background: var(--white);
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gallery-thumb.active { border-color: var(--brand-primary); }
+.gallery-thumb:hover { border-color: var(--brand-accent); }
+
+.thumb-placeholder {
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: var(--gray-400);
+}
+.thumb-video {
+  position: relative;
+}
+.thumb-play-icon {
+  color: var(--white);
+  font-size: 14px;
+}
+
+/* Product info */
+.product-name {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  color: var(--gray-800);
+  margin-bottom: var(--space-2);
+}
+
+.product-subtitle {
+  font-size: var(--text-sm);
+  color: var(--gray-500);
+  line-height: 1.6;
+  margin-bottom: var(--space-6);
+}
+
+.spec-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.spec-pill {
+  padding: 4px 10px;
+  border: 1px solid var(--gray-200);
+  border-radius: 20px;
+  font-size: var(--text-xs);
+  color: var(--gray-500);
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.spec-pills:hover .spec-pill {
+  border-color: var(--brand-accent);
+  color: var(--brand-primary);
+}
+
+/* 3-Level Selectors — matching Wazoodle store pattern */
+.selector-level { margin-bottom: var(--space-4); }
+
+.selector-level-label {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--gray-800);
+  margin-bottom: var(--space-2);
+}
+
+/* Level 1: Style dropdown */
+.style-select {
+  width: 100%;
+  padding: 10px 40px 10px 14px;
+  border: 2px solid var(--brand-primary);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--brand-deep);
+  background: var(--white);
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231697D3' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  transition: border-color 0.2s;
+}
+.style-select:hover { border-color: var(--brand-emphasis); }
+.style-select:focus { box-shadow: 0 0 0 3px rgba(109,61,24,0.12); }
+
+/* Level 2: Color dropdown with swatch indicator */
+.color-select-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.color-select {
+  padding: 8px 36px 8px 36px;
+  border: 1.5px solid var(--gray-300);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--gray-700);
+  background: var(--white);
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239A9590' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  min-width: 180px;
+  transition: border-color 0.2s;
+}
+.color-select:hover { border-color: var(--brand-primary); }
+
+.color-swatch-indicator {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid var(--gray-300);
+  pointer-events: none;
+  transition: background 0.2s;
+}
+
+/* Level 3: Length pills */
+.length-pills {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.length-pill {
+  padding: 8px 18px;
+  border: 1.5px solid var(--gray-300);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: var(--white);
+  color: var(--gray-700);
+}
+.length-pill:hover { border-color: var(--brand-primary); color: var(--brand-primary); }
+.length-pill.active {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+  background: var(--brand-bg);
+  font-weight: 600;
+}
+
+/* Variant info switcher */
+.variant-info {
+  padding: var(--space-4) var(--space-4) var(--space-4) var(--space-6);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-6);
+  border-radius: 0 8px 8px 0;
+  line-height: 1.6;
+  background: var(--brand-bg);
+  border-left: 3px solid var(--brand-accent);
+  color: var(--brand-deep);
+  transition: all 0.5s ease;
+}
+
+.variant-info-label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: var(--space-2);
+  display: block;
+  color: var(--brand-primary);
+}
+
+/* Silver variant styling */
+.variant-info[data-variant="silver"] {
+  background: linear-gradient(135deg, #F5F5F8, #EDEDF2);
+  border-left: 3px solid #A8A8B8;
+  color: #3A3A4A;
+}
+.variant-info[data-variant="silver"] .variant-info-label { color: #7A7A8E; }
+
+/* FoodSAFE variant styling */
+.variant-info[data-variant="foodsafe"] {
+  background: linear-gradient(135deg, #F0F8F0, #E8F5E8);
+  border-left: 3px solid var(--waz-green);
+  color: #2A4A2A;
+}
+.variant-info[data-variant="foodsafe"] .variant-info-label { color: var(--waz-green); }
+
+/* REPREVE variant styling */
+.variant-info[data-variant="repreve"] {
+  background: linear-gradient(135deg, #F0F5FA, #E8F0F8);
+  border-left: 3px solid #5B9BD5;
+  color: #2A3A4A;
+}
+.variant-info[data-variant="repreve"] .variant-info-label { color: #5B9BD5; }
+
+/* Quantity row */
+.qty-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.qty-label {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--gray-800);
+}
+
+.qty-stepper {
+  display: flex;
+  border: 1.5px solid var(--gray-300);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.qty-btn {
+  width: 32px; height: 32px;
+  border: none;
+  background: var(--gray-50);
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--gray-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.qty-btn:hover { background: var(--gray-200); }
+
+.qty-value {
+  width: 36px;
+  text-align: center;
+  font-weight: 600;
+  font-size: var(--text-sm);
+  border: none;
+  background: var(--white);
+}
+
+.add-to-cart {
+  width: 100%;
+  padding: 14px;
+  background: var(--brand-primary);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-base);
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: var(--space-6);
+}
+.add-to-cart:hover {
+  background: var(--brand-emphasis);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(157,206,30,0.25);
+}
+
+/* Buybox actions row */
+.buybox-row {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.buybox-row-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.buybox-row-item:hover {
+  border-color: var(--brand-accent);
+  color: var(--brand-primary);
+  background: var(--brand-bg);
+}
+
+.journey-change-hint {
+  margin-left: auto;
+  font-size: var(--text-xs);
+  color: var(--gray-400);
+}
+
+/* Trust icons */
+.trust-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--gray-200);
+}
+
+.trust-icon {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--gray-500);
+}
+
+.trust-badge {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.trust-badge.green { background: var(--waz-green); color: var(--white); }
+.trust-badge.blue { background: var(--brand-primary); color: var(--white); }
+
+/* ═══════════════════════════════════════════════════════════════
+   4. FILMSTRIP
+   ═══════════════════════════════════════════════════════════════ */
+
+.filmstrip-section { overflow: hidden; }
+
+.filmstrip-zone {
+  background: linear-gradient(180deg, var(--brand-deep) 0%, #5A3018 40%, #6D3D18 70%, var(--brand-deep) 100%);
+  padding: var(--space-20) 0 var(--space-16);
+  position: relative;
+}
+
+/* Surface fabric = warm light filmstrip. ProECO lives on the skin — organic warmth. */
+.filmstrip-zone::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 30%, rgba(109,61,24,0.12) 0%, transparent 60%),
+              radial-gradient(ellipse at 30% 70%, rgba(157,206,30,0.04) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.filmstrip-header {
+  max-width: var(--container-wide);
+  margin: 0 auto;
+  padding: 0 var(--space-10);
+  margin-bottom: var(--space-10);
+}
+
+.filmstrip-label {
+  font-size: var(--text-xs);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  font-weight: 600;
+  margin-bottom: var(--space-4);
+}
+
+.filmstrip-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: rgba(255,255,255,0.9);
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.filmstrip-container {
+  max-width: var(--container-wide);
+  margin: 0 auto;
+  padding: 0 var(--space-10);
+  position: relative;
+}
+
+.filmstrip-viewport {
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.filmstrip-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.filmstrip-frame {
+  min-width: 100%;
+  background: rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: var(--space-12) var(--space-10);
+  display: flex;
+  gap: var(--space-10);
+  align-items: center;
+}
+
+.filmstrip-frame-visual {
+  flex: 0 0 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  box-shadow: 0 0 40px rgba(109,61,24,0.08);
+}
+
+.filmstrip-frame-content { flex: 1; }
+
+.filmstrip-frame-number {
+  font-size: var(--text-xs);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--brand-accent);
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+}
+
+.filmstrip-frame-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--white);
+  font-weight: 400;
+  margin-bottom: var(--space-4);
+  line-height: 1.3;
+}
+
+.filmstrip-frame-body {
+  font-size: var(--text-base);
+  color: rgba(255,255,255,0.7);
+  line-height: 1.8;
+  max-width: 540px;
+}
+
+.filmstrip-frame-voice {
+  margin-top: var(--space-4);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-md);
+  color: var(--brand-accent);
+}
+
+/* Before frame — lighter register for surface fabric (quiet dissatisfaction, not suffering) */
+.before-frame { background: rgba(255,255,255,0.04) !important; }
+.before-number { color: rgba(255,255,255,0.4) !important; }
+.before-heading { color: rgba(255,255,255,0.6) !important; font-size: 1.25rem !important; }
+.before-body { color: rgba(255,255,255,0.45) !important; }
+
+/* ═══════════════════════════════════════
+   ANIMATION FACES — play when active
+   ═══════════════════════════════════════ */
+
+.face-animation { width: 160px; height: 160px; overflow: visible; }
+.face-animation * { animation-play-state: paused !important; }
+.filmstrip-frame.face-active .face-animation * { animation-play-state: running !important; }
+
+/* Face 1: Still New — surface stays, counter climbs */
+@keyframes surfaceHold { 0%, 100% { opacity: 0.9; } 50% { opacity: 1; filter: brightness(1.1); } }
+@keyframes counterFade { 0%, 100% { opacity: 0.8; } 50% { opacity: 1; } }
+
+.face-stillnew .surface-line { animation: surfaceHold 3s ease-in-out infinite; }
+.face-stillnew .wash-counter { animation: counterFade 2s ease-in-out infinite; }
+
+/* Face 2: Meets You There — cooperative convergence */
+@keyframes handMeet1 {
+  0% { transform: translate(-50px, 0) rotate(-15deg); opacity: 0; }
+  30% { opacity: 0.8; }
+  60% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+  100% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+}
+@keyframes handMeet2 {
+  0% { transform: translate(50px, 0) rotate(15deg); opacity: 0; }
+  35% { opacity: 0.8; }
+  65% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+  100% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+}
+@keyframes meetGlow {
+  0%, 55% { opacity: 0; }
+  75% { opacity: 0.35; }
+  100% { opacity: 0.2; }
+}
+
+.face-meetsyou .hand-left { animation: handMeet1 3.5s ease-in-out 0.3s infinite; }
+.face-meetsyou .hand-right { animation: handMeet2 3.5s ease-in-out 0.5s infinite; }
+.face-meetsyou .meet-glow { animation: meetGlow 3.5s ease-in-out 0.6s infinite; }
+
+/* Face 3: Ready Again — wicking transit cycle */
+@keyframes wickTransit1 {
+  0% { cy: 30; opacity: 0; }
+  15% { opacity: 0.8; }
+  50% { cy: 80; opacity: 0.5; }
+  75% { cy: 120; opacity: 0.15; }
+  90% { cy: 140; opacity: 0; }
+  100% { cy: 30; opacity: 0; }
+}
+@keyframes wickTransit2 {
+  0% { cy: 25; opacity: 0; }
+  20% { opacity: 0.7; }
+  55% { cy: 85; opacity: 0.4; }
+  80% { cy: 125; opacity: 0.1; }
+  95% { cy: 145; opacity: 0; }
+  100% { cy: 25; opacity: 0; }
+}
+@keyframes channelPulse {
+  0%, 40% { opacity: 0.15; }
+  60% { opacity: 0.3; }
+  80% { opacity: 0.2; }
+  100% { opacity: 0.15; }
+}
+@keyframes resetFlash {
+  0%, 80% { opacity: 0; }
+  90% { opacity: 0.5; }
+  100% { opacity: 0; }
+}
+
+.face-readyagain .drop-1 { animation: wickTransit1 2.5s ease-in infinite; }
+.face-readyagain .drop-2 { animation: wickTransit1 2.5s ease-in 0.4s infinite; }
+.face-readyagain .drop-3 { animation: wickTransit2 2.5s ease-in 0.8s infinite; }
+.face-readyagain .drop-4 { animation: wickTransit1 2.5s ease-in 1.2s infinite; }
+.face-readyagain .channel-glow { animation: channelPulse 2.5s ease-in-out infinite; }
+.face-readyagain .reset-flash { animation: resetFlash 2.5s ease-in-out infinite; }
+
+/* Face 4: Yours Too — applications orbit */
+@keyframes orbitSlow {
+  0% { transform: rotate(0deg) translateX(55px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(55px) rotate(-360deg); }
+}
+.face-yourstoo .orbit-item { animation: orbitSlow 12s linear infinite; }
+.face-yourstoo .orbit-item:nth-child(2) { animation-delay: -2s; }
+.face-yourstoo .orbit-item:nth-child(3) { animation-delay: -4s; }
+.face-yourstoo .orbit-item:nth-child(4) { animation-delay: -6s; }
+.face-yourstoo .orbit-item:nth-child(5) { animation-delay: -8s; }
+.face-yourstoo .orbit-item:nth-child(6) { animation-delay: -10s; }
+
+/* Face 5: Foundation Wicking Highlight — channel flow */
+@keyframes flowThrough {
+  0% { x: -30; opacity: 0; }
+  20% { opacity: 0.8; }
+  80% { opacity: 0.8; }
+  100% { x: 170; opacity: 0; }
+}
+
+.face-highlight .flow-particle { animation: flowThrough 2s ease-in-out infinite; }
+.face-highlight .flow-particle:nth-child(2) { animation-delay: 0.4s; }
+.face-highlight .flow-particle:nth-child(3) { animation-delay: 0.8s; }
+.face-highlight .flow-particle:nth-child(4) { animation-delay: 1.2s; }
+.face-highlight .flow-particle:nth-child(5) { animation-delay: 1.6s; }
+
+/* Filmstrip controls */
+.filmstrip-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+
+.film-btn {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent;
+  color: rgba(255,255,255,0.6);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.film-btn:hover {
+  border-color: rgba(255,255,255,0.5);
+  color: var(--white);
+  background: rgba(255,255,255,0.08);
+}
+
+.film-dots { display: flex; gap: var(--space-2); }
+.film-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.film-dot.active {
+  background: var(--brand-accent);
+  transform: scale(1.25);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   5. MAKER STORIES
+   ═══════════════════════════════════════════════════════════════ */
+
+.maker-section {
+  padding: var(--space-20) var(--space-10);
+  background: var(--white);
+}
+
+.maker-container {
+  max-width: var(--container-standard);
+  margin: 0 auto;
+}
+
+.section-eyebrow {
+  font-size: 0.5625rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  font-weight: 500;
+  margin-bottom: var(--space-4);
+}
+
+.maker-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--gray-800);
+  font-weight: 400;
+  margin-bottom: var(--space-3);
+  line-height: 1.3;
+}
+
+.maker-subtitle {
+  font-size: var(--text-base);
+  color: var(--gray-500);
+  font-weight: 300;
+  margin-bottom: var(--space-12);
+  line-height: 1.6;
+}
+
+/* Domain pills — navigate between all stories */
+.domain-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-10);
+}
+
+.domain-pill {
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  border: 1px solid var(--gray-200);
+  background: var(--white);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 400;
+}
+
+.domain-pill:hover {
+  border-color: var(--brand-accent);
+  color: var(--brand-primary);
+}
+
+.domain-pill.active {
+  background: var(--brand-primary);
+  color: var(--white);
+  border-color: var(--brand-primary);
+  font-weight: 500;
+}
+
+.timeline {
+  max-width: var(--container-narrow);
+  position: relative;
+  padding-left: 40px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 12px; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--gray-300) 0%, var(--brand-primary) 40%, var(--brand-primary) 60%, var(--gray-300) 100%);
+}
+
+.timeline-beat {
+  position: relative;
+  margin-bottom: var(--space-12);
+}
+
+.timeline-beat::before {
+  content: '';
+  position: absolute;
+  left: -33px; top: 6px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--brand-primary);
+  border: 2px solid var(--white);
+  box-shadow: 0 0 0 2px var(--brand-primary);
+}
+
+.beat-label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--brand-primary);
+  margin-bottom: var(--space-2);
+}
+
+.beat-heading {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--gray-800);
+  margin-bottom: var(--space-3);
+  line-height: 1.3;
+}
+
+.beat-body {
+  font-size: var(--text-base);
+  color: var(--gray-600);
+  line-height: 1.8;
+}
+
+.beat-body em { color: var(--gray-800); }
+
+/* Perspective collapse */
+.perspective-collapse {
+  background: var(--brand-bg);
+  border-radius: 12px;
+  padding: var(--space-8) var(--space-6);
+  margin-top: var(--space-12);
+  position: relative;
+}
+
+.perspective-collapse::before {
+  content: '';
+  position: absolute;
+  left: -33px; top: var(--space-8);
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--witness-gold);
+  border: 2px solid var(--white);
+  box-shadow: 0 0 0 2px var(--witness-gold);
+}
+
+.collapse-label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--witness-gold);
+  margin-bottom: var(--space-3);
+}
+
+.collapse-text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-md);
+  color: var(--gray-700);
+  line-height: 1.6;
+}
+
+/* Spoken answer echoes */
+.spoken-echoes {
+  margin-top: var(--space-6);
+  padding: var(--space-4) var(--space-6);
+  background: rgba(255,255,255,0.7);
+  border-radius: 8px;
+  border: 1px solid var(--brand-light);
+}
+
+.echoes-label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--brand-primary);
+  margin-bottom: var(--space-3);
+}
+
+.echo-item {
+  font-size: var(--text-sm);
+  color: var(--gray-600);
+  margin-bottom: var(--space-2);
+  padding-left: var(--space-4);
+  position: relative;
+  line-height: 1.5;
+}
+.echo-item::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--brand-primary);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   6. WITNESSED EXPERIENCES
+   ═══════════════════════════════════════════════════════════════ */
+
+.witnessed-section {
+  padding: var(--space-20) var(--space-10);
+  background: var(--gray-100);
+}
+
+.witnessed-container {
+  max-width: var(--container-wide);
+  margin: 0 auto;
+}
+
+.witnessed-label {
+  font-size: 0.5625rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--witness-gold);
+  font-weight: 500;
+  margin-bottom: var(--space-4);
+}
+
+.witnessed-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--gray-800);
+  font-weight: 400;
+  margin-bottom: var(--space-10);
+  line-height: 1.3;
+}
+
+.mosaic-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(180px, auto);
+  gap: var(--space-3);
+}
+
+.mosaic-tile {
+  background: linear-gradient(145deg, #FFFDF9, #FAF7F2);
+  border-radius: 10px;
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(200,169,110,0.15);
+}
+.mosaic-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(200,169,110,0.12);
+  border-color: rgba(200,169,110,0.35);
+}
+.mosaic-tile.featured {
+  grid-column: span 2;
+  grid-row: span 2;
+  border-color: var(--witness-gold);
+}
+
+.mosaic-tile::before {
+  content: '';
+  position: absolute;
+  top: var(--space-6); left: 0; bottom: var(--space-6);
+  width: 2px;
+  background: var(--witness-gold);
+  opacity: 0.3;
+  transition: opacity 0.3s;
+}
+.mosaic-tile:hover::before { opacity: 0.7; }
+
+.mosaic-tile::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--witness-gold), transparent);
+  opacity: 0.25;
+}
+
+.mosaic-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-md);
+  color: var(--gray-700);
+  line-height: 1.5;
+  flex: 1;
+}
+.mosaic-tile.featured .mosaic-quote { font-size: 1.375rem; line-height: 1.6; }
+
+.mosaic-attribution {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--gray-200);
+}
+
+.mosaic-name {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--gray-600);
+}
+
+.mosaic-witness {
+  font-size: 0.625rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--witness-gold);
+  font-weight: 600;
+}
+
+.mosaic-domain {
+  font-size: var(--text-xs);
+  color: var(--gray-400);
+}
+
+/* Witness lightbox */
+.witness-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 950;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.witness-lightbox.visible { opacity: 1; pointer-events: auto; }
+
+.witness-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(30,30,30,0.5);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+.witness-lightbox-card {
+  position: relative;
+  background: linear-gradient(155deg, #FFFEF9, #FAF6EF);
+  border-radius: 16px;
+  padding: var(--space-10);
+  max-width: 560px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  border: 1px solid rgba(200,169,110,0.25);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.15);
+  transform: translateY(12px);
+  transition: transform 0.3s ease;
+}
+.witness-lightbox.visible .witness-lightbox-card { transform: translateY(0); }
+
+.witness-lightbox-card::before {
+  content: '';
+  position: absolute;
+  top: var(--space-10); left: 0; bottom: var(--space-10);
+  width: 3px;
+  background: var(--witness-gold);
+  border-radius: 0 2px 2px 0;
+  opacity: 0.5;
+}
+
+.witness-lightbox-close {
+  position: absolute;
+  top: var(--space-4); right: var(--space-4);
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--gray-200);
+  background: var(--white);
+  color: var(--gray-500);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.witness-lightbox-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.375rem;
+  color: var(--gray-800);
+  line-height: 1.6;
+  margin-bottom: var(--space-6);
+}
+
+.witness-lightbox-body {
+  font-size: var(--text-base);
+  color: var(--gray-600);
+  line-height: 1.8;
+  margin-bottom: var(--space-6);
+}
+
+.witness-lightbox-attr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-4);
+  border-top: 1px solid rgba(200,169,110,0.2);
+}
+
+.witness-lightbox-name { font-weight: 600; font-size: var(--text-sm); color: var(--gray-700); }
+.witness-lightbox-domain { font-size: var(--text-xs); color: var(--gray-400); margin-top: 2px; }
+.witness-lightbox-badge {
+  font-size: 0.625rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--witness-gold);
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   STICKY BUY BAR
+   ═══════════════════════════════════════════════════════════════ */
+
+.sticky-buy-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 900;
+  background: rgba(255,255,255,0.97);
+  border-top: 1px solid var(--gray-200);
+  padding: var(--space-3) var(--space-10);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+}
+.sticky-buy-bar.visible { transform: translateY(0); }
+
+.sticky-buy-info { display: flex; align-items: center; gap: var(--space-4); }
+.sticky-buy-name { font-weight: 600; font-size: var(--text-sm); color: var(--gray-800); }
+.sticky-buy-price { font-size: var(--text-sm); color: var(--brand-primary); font-weight: 600; }
+
+.sticky-buy-actions { display: flex; align-items: center; gap: var(--space-3); }
+
+.sticky-btn-cart {
+  padding: 8px 24px;
+  background: var(--brand-primary);
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.sticky-btn-cart:hover { background: var(--brand-emphasis); }
+
+/* ═══════════════════════════════════════════════════════════════
+   7. CONSTELLATION + FSA
+   ═══════════════════════════════════════════════════════════════ */
+
+.constellation-section {
+  padding: var(--space-20) var(--space-10);
+  background: linear-gradient(180deg, var(--brand-bg) 0%, var(--white) 100%);
+  position: relative;
+}
+
+.constellation-container {
+  max-width: var(--container-wide);
+  margin: 0 auto;
+}
+
+.constellation-map {
+  position: relative;
+  background: var(--white);
+  border-radius: 16px;
+  border: 1px solid var(--gray-200);
+  padding: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.constellation-svg { width: 100%; height: auto; }
+
+.constellation-node-svg { cursor: pointer; }
+.constellation-node-svg:hover circle { filter: brightness(0.95); }
+
+.constellation-detail {
+  background: var(--white);
+  border: 1px solid var(--brand-accent);
+  border-radius: 12px;
+  padding: var(--space-6);
+  margin-top: var(--space-4);
+  box-shadow: 0 4px 16px rgba(109,61,24,0.08);
+  display: none;
+  position: relative;
+}
+.constellation-detail.visible { display: block; }
+
+.constellation-detail-close {
+  position: absolute;
+  top: 8px; right: 8px;
+  width: 24px; height: 24px;
+  border: none;
+  background: none;
+  color: var(--gray-400);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.constellation-detail-name {
+  font-weight: 600;
+  font-size: var(--text-base);
+  color: var(--gray-800);
+  margin-bottom: var(--space-1);
+}
+
+.constellation-detail-type {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--brand-primary);
+  margin-bottom: var(--space-3);
+  display: inline-block;
+}
+
+.constellation-detail-body {
+  font-size: var(--text-sm);
+  color: var(--gray-600);
+  line-height: 1.6;
+  margin-bottom: var(--space-3);
+}
+
+.constellation-detail-meta {
+  font-size: var(--text-xs);
+  color: var(--gray-400);
+}
+
+/* Place Me */
+.constellation-place-me {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 2px dashed var(--brand-accent);
+  border-radius: 10px;
+  margin-top: var(--space-4);
+  background: rgba(255,255,255,0.7);
+}
+
+.place-me-icon { color: var(--brand-primary); flex-shrink: 0; }
+
+.place-me-input {
+  flex: 1;
+  border: none;
+  background: none;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--gray-600);
+  outline: none;
+}
+.place-me-input::placeholder { color: var(--gray-400); font-style: italic; }
+
+.place-me-btn {
+  padding: 4px 12px;
+  background: var(--brand-primary);
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.constellation-placed-msg {
+  font-size: var(--text-xs);
+  color: var(--brand-primary);
+  font-style: italic;
+  margin-top: var(--space-3);
+  text-align: center;
+}
+
+/* FSA divider — no longer used, sections are separate */
+
+/* ═══════════════════════════════════════════════════════════════
+   7b. FREQUENTLY SPOKEN ANSWERS — Own section
+   ═══════════════════════════════════════════════════════════════ */
+
+.fsa-section {
+  padding: var(--space-20) var(--space-10);
+  background: var(--gray-50);
+  border-top: 1px solid var(--gray-200);
+}
+
+.fsa-container {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+}
+
+.fsa-section-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--gray-800);
+  font-weight: 400;
+  margin-bottom: var(--space-3);
+  line-height: 1.3;
+}
+
+.fsa-section-sub {
+  font-size: var(--text-base);
+  color: var(--gray-500);
+  line-height: 1.6;
+  margin-bottom: var(--space-8);
+}
+
+/* FSA starters and input reuse existing .ai-* styles */
+.ai-deepdive { max-width: var(--container-narrow); margin: 0 auto; }
+
+.ai-deepdive-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.ai-deepdive-icon { color: var(--brand-primary); }
+
+.ai-deepdive-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--gray-800);
+  font-weight: 500;
+}
+
+.ai-deepdive-sub {
+  font-size: var(--text-sm);
+  color: var(--gray-500);
+  margin-bottom: var(--space-6);
+  line-height: 1.6;
+}
+
+.ai-starters { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-6); }
+
+.ai-starter {
+  padding: 8px 14px;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.ai-starter:hover {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+  box-shadow: 0 2px 8px rgba(109,61,24,0.1);
+}
+
+.ai-input-bar {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.ai-input {
+  flex: 1;
+  padding: var(--space-3) var(--space-4);
+  border: 1.5px solid var(--gray-300);
+  border-radius: 10px;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  outline: none;
+}
+.ai-input:focus { border-color: var(--brand-primary); }
+.ai-input::placeholder { color: var(--gray-400); font-style: italic; }
+
+.ai-input-btn {
+  padding: var(--space-3) var(--space-4);
+  background: var(--brand-primary);
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.fsa-response {
+  margin-top: var(--space-6);
+  padding: var(--space-6);
+  background: var(--brand-bg);
+  border-radius: 12px;
+  border-left: 3px solid var(--brand-primary);
+  display: none;
+}
+.fsa-response.visible { display: block; }
+
+.fsa-response-label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--brand-primary);
+  margin-bottom: var(--space-3);
+}
+
+.fsa-response-text {
+  font-size: var(--text-base);
+  color: var(--gray-700);
+  line-height: 1.7;
+  margin-bottom: var(--space-3);
+}
+
+.fsa-response-source {
+  font-size: var(--text-xs);
+  color: var(--gray-400);
+  font-style: italic;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   8. ALONGSIDE & INSTEAD
+   ═══════════════════════════════════════════════════════════════ */
+
+.alongside-section {
+  padding: var(--space-20) var(--space-10);
+  background: var(--waz-stone);
+}
+
+.alongside-container {
+  max-width: var(--container-standard);
+  margin: 0 auto;
+}
+
+.alongside-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+}
+
+.alongside-column-label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gray-500);
+  margin-bottom: var(--space-2);
+}
+
+.alongside-column-hint {
+  font-size: var(--text-sm);
+  color: var(--gray-400);
+  font-style: italic;
+  margin-bottom: var(--space-4);
+}
+
+.fabric-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: var(--white);
+  border-radius: 10px;
+  margin-bottom: var(--space-3);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+.fabric-card:hover {
+  border-color: var(--brand-primary);
+  box-shadow: 0 2px 8px rgba(109,61,24,0.08);
+}
+
+.fabric-card-swatch {
+  width: 40px; height: 40px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.fabric-card-info { flex: 1; }
+.fabric-card-name { font-weight: 600; font-size: var(--text-sm); color: var(--gray-800); }
+.fabric-card-role { font-size: var(--text-xs); color: var(--gray-500); margin-top: 2px; }
+
+.fabric-card-arrow { color: var(--gray-300); font-size: var(--text-sm); }
+
+/* IMPROVEMENT C: Stack position indicator */
+.stack-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: var(--space-6);
+  padding: var(--space-4);
+  background: var(--white);
+  border-radius: 10px;
+}
+
+.stack-layer {
+  padding: 6px 20px;
+  border-radius: 6px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-align: center;
+  width: 180px;
+}
+
+.stack-layer.surface {
+  background: var(--brand-primary);
+  color: var(--white);
+}
+
+.stack-layer.core {
+  background: var(--brand-bg);
+  color: var(--brand-deep);
+}
+
+.stack-layer.barrier {
+  background: var(--gray-200);
+  color: var(--gray-600);
+}
+
+.stack-arrow {
+  font-size: var(--text-xs);
+  color: var(--gray-400);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   9. WHAT'S IN IT
+   ═══════════════════════════════════════════════════════════════ */
+
+.whatsin-section {
+  padding: var(--space-20) var(--space-10);
+  background: var(--white);
+}
+
+.whatsin-container {
+  max-width: var(--container-standard);
+  margin: 0 auto;
+}
+
+.whatsin-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+}
+
+.cert-card {
+  padding: var(--space-6) var(--space-4);
+  border: 1px solid var(--gray-200);
+  border-radius: 10px;
+  text-align: center;
+  transition: all 0.2s;
+}
+.cert-card:hover { border-color: var(--brand-primary); background: var(--brand-mist); }
+.cert-card.domain-priority {
+  border-color: var(--brand-primary);
+  background: var(--brand-bg);
+  box-shadow: 0 2px 12px rgba(109,61,24,0.1);
+}
+
+.cert-icon { font-size: 1.5rem; margin-bottom: var(--space-3); }
+.cert-name { font-weight: 600; font-size: var(--text-sm); color: var(--gray-800); margin-bottom: var(--space-2); }
+.cert-detail { font-size: var(--text-xs); color: var(--gray-500); line-height: 1.5; }
+.cert-domain-note {
+  font-size: var(--text-xs);
+  color: var(--brand-primary);
+  font-weight: 500;
+  margin-top: var(--space-2);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   10. BUILDING WITH IT
+   ═══════════════════════════════════════════════════════════════ */
+
+.building-section {
+  padding: var(--space-20) var(--space-10);
+  background: var(--gray-50);
+}
+
+.building-container {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+}
+
+.building-rule {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 10px;
+  margin-bottom: var(--space-3);
+  overflow: hidden;
+  transition: all 0.2s;
+}
+.building-rule.recommended { border-color: var(--brand-primary); border-width: 2px; }
+
+.building-rule-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-6);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.building-rule-header:hover { background: var(--gray-50); }
+
+.building-rule-number {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--gray-500);
+  flex-shrink: 0;
+}
+.building-rule.recommended .building-rule-number {
+  background: var(--brand-primary);
+  color: var(--white);
+}
+
+.building-rule-title {
+  flex: 1;
+  font-weight: 600;
+  font-size: var(--text-base);
+  color: var(--gray-800);
+}
+
+.building-rule-badge {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--brand-primary);
+  display: none;
+}
+.building-rule.recommended .building-rule-badge { display: inline; }
+
+.building-rule-toggle {
+  color: var(--gray-400);
+  font-size: 12px;
+  transition: transform 0.3s;
+}
+.building-rule.open .building-rule-toggle { transform: rotate(180deg); }
+
+.building-rule-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+.building-rule.open .building-rule-body { max-height: 300px; }
+
+.building-rule-text {
+  padding: 0 var(--space-6) var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--gray-600);
+  line-height: 1.7;
+}
+
+.building-rule-tip {
+  padding: 0 var(--space-6) var(--space-4);
+  font-size: var(--text-xs);
+  color: var(--brand-primary);
+  font-style: italic;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   11. THE NUMBERS
+   ═══════════════════════════════════════════════════════════════ */
+
+.numbers-section {
+  padding: var(--space-20) var(--space-10);
+  background: var(--white);
+}
+
+.numbers-container {
+  max-width: var(--container-standard);
+  margin: 0 auto;
+}
+
+.numbers-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.number-card {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  background: var(--gray-50);
+  border-radius: 10px;
+  border: 1px solid var(--gray-200);
+  align-items: flex-start;
+}
+.number-card.lead {
+  grid-column: span 2;
+  background: var(--brand-bg);
+  border-color: var(--brand-primary);
+}
+
+.number-value {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  min-width: 80px;
+  text-align: right;
+  line-height: 1;
+}
+.number-card.lead .number-value { color: var(--brand-primary); font-size: 2.25rem; min-width: 100px; }
+
+.number-label { font-weight: 600; font-size: var(--text-sm); color: var(--gray-800); margin-bottom: var(--space-1); }
+.number-context { font-size: var(--text-xs); color: var(--gray-500); line-height: 1.5; }
+.number-witness {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-sm);
+  color: var(--witness-gold);
+  margin-top: var(--space-2);
+}
+
+/* Yield math */
+.yield-math {
+  margin-top: var(--space-8);
+  padding: var(--space-6);
+  background: var(--gray-50);
+  border-radius: 12px;
+  border: 1px solid var(--gray-200);
+}
+
+.yield-math-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--gray-800);
+  margin-bottom: var(--space-4);
+}
+
+.yield-row {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  margin-bottom: var(--space-2);
+}
+
+.yield-symbol {
+  font-weight: 600;
+  color: var(--brand-primary);
+  min-width: 24px;
+  text-align: center;
+}
+
+.yield-text {
+  font-size: var(--text-sm);
+  color: var(--gray-600);
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   12. ROUTING ENGINE
+   ═══════════════════════════════════════════════════════════════ */
+
+.routing-section {
+  padding: var(--space-20) var(--space-10);
+  background: linear-gradient(180deg, var(--brand-deep) 0%, var(--brand-dark) 100%);
+  color: var(--white);
+  text-align: center;
+}
+
+.routing-container {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+}
+
+.routing-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: var(--space-10);
+  margin-top: var(--space-8);
+}
+
+.routing-eyebrow {
+  font-size: var(--text-xs);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--brand-emphasis);
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+}
+
+.routing-variant {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--white);
+  font-weight: 500;
+  margin-bottom: var(--space-4);
+}
+
+.routing-reason {
+  font-size: var(--text-base);
+  color: rgba(255,255,255,0.65);
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto var(--space-8);
+}
+
+.routing-cta {
+  display: inline-block;
+  padding: 0.85rem 2.5rem;
+  background: var(--brand-primary);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.routing-cta:hover { background: var(--brand-emphasis); transform: translateY(-1px); }
+
+.routing-alt {
+  margin-top: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--gray-400);
+}
+.routing-alt-link {
+  color: var(--brand-emphasis);
+  cursor: pointer;
+  border-bottom: 1px solid rgba(63,198,244,0.3);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   13. THE PERSPECTIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+.perspective-section {
+  padding: 0 var(--space-10) var(--space-20);
+  background: var(--white);
+  text-align: center;
+  overflow: hidden;
+}
+
+.perspective-bridge {
+  height: 120px;
+  background: linear-gradient(180deg, var(--brand-dark) 0%, #4A2810 20%, #7A5030 40%, #B89070 60%, #E0CDB8 80%, #FAF6F0 100%);
+}
+
+.perspective-inner {
+  padding-top: var(--space-20);
+  background: linear-gradient(180deg, #FAF6F0 0%, #FAFBFC 35%, var(--white) 100%);
+}
+
+.perspective-container {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+}
+
+.perspective-field { margin-bottom: var(--space-16); }
+
+.perspective-field-eyebrow {
+  font-size: var(--text-xs);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  font-weight: 500;
+  margin-bottom: var(--space-6);
+}
+
+.perspective-field-line {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--gray-400);
+  line-height: 2.2;
+  letter-spacing: 0.02em;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.perspective-field-line span { transition: color 0.3s; }
+.perspective-field-line span:hover { color: var(--brand-primary); }
+
+.perspective-divider {
+  width: 40px; height: 1px;
+  background: var(--gray-300);
+  margin: 0 auto var(--space-12);
+}
+
+.perspective-seed-line {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-2xl);
+  color: var(--gray-800);
+  font-weight: 400;
+  line-height: 1.25;
+  margin-bottom: var(--space-10);
+}
+
+.perspective-cascade { margin-bottom: var(--space-12); }
+
+.perspective-cascade-item {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  color: var(--gray-500);
+  font-style: italic;
+  line-height: 1.5;
+  margin-bottom: var(--space-3);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.5s ease;
+}
+.perspective-cascade-item:first-child {
+  color: var(--gray-800);
+  font-size: 1.15rem;
+}
+.perspective-cascade-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.perspective-cascade-item:nth-child(1) { transition-delay: 0.1s; }
+.perspective-cascade-item:nth-child(2) { transition-delay: 0.25s; }
+.perspective-cascade-item:nth-child(3) { transition-delay: 0.4s; }
+.perspective-cascade-item:nth-child(4) { transition-delay: 0.55s; }
+
+.perspective-question {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--brand-primary);
+  font-weight: 400;
+  line-height: 1.35;
+  margin-top: var(--space-12);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.6s ease 0.7s;
+}
+.perspective-question.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.bottom-spacer { height: 80px; }
+
+/* ═══════════════════════════════════════════════════════════════
+   SCROLL REVEAL
+   ═══════════════════════════════════════════════════════════════ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  .gate-tiles { grid-template-columns: repeat(3, 1fr); }
+  .mosaic-grid { grid-template-columns: repeat(3, 1fr); }
+  .filmstrip-frame { flex-direction: column; text-align: center; padding: var(--space-8) var(--space-6); }
+  .filmstrip-frame-visual { flex: 0 0 auto; width: 140px; height: 140px; }
+  .whatsin-grid { grid-template-columns: repeat(2, 1fr); }
+  .numbers-grid { grid-template-columns: 1fr; }
+  .number-card.lead { grid-column: span 1; }
+}
+
+@media (max-width: 768px) {
+  .gate-tiles { grid-template-columns: repeat(2, 1fr); }
+  .gate-tile.fabric-story { grid-column: span 2; }
+  .gate-question { font-size: 2rem; }
+  .buybox-grid { grid-template-columns: 1fr; gap: var(--space-6); }
+  .product-gallery { aspect-ratio: 4/3; }
+  .mosaic-grid { grid-template-columns: repeat(2, 1fr); }
+  .mosaic-tile.featured { grid-column: span 2; grid-row: span 1; }
+  .filmstrip-frame-body { max-width: 100%; }
+  .buybox-row { flex-direction: column; }
+  .alongside-grid { grid-template-columns: 1fr; gap: var(--space-8); }
+  .whatsin-grid { grid-template-columns: 1fr; }
+  .sticky-buy-bar { padding: var(--space-3) var(--space-4); }
+  .seed-line { font-size: 1.25rem; }
+  .perspective-seed-line { font-size: 1.75rem; }
+}
+
+@media (max-width: 480px) {
+  .gate-tiles { grid-template-columns: 1fr; }
+  .gate-tile.fabric-story { grid-column: span 1; }
+  .mosaic-grid { grid-template-columns: 1fr; }
+  .mosaic-tile.featured { grid-column: span 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- 1. THE GATE -->
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-content">
+    <div class="gate-eyebrow">ProECO® Organic Cotton Interlock</div>
+    <h1 class="gate-question">What are you making?</h1>
+    <p class="gate-sub">Choose your project — the page shapes itself around your needs.</p>
+
+    <div class="gate-tiles" id="gateTiles">
+      <div class="gate-tile" data-domain="garment">
+        <div class="gate-tile-name">Garments</div>
+        <div class="gate-tile-hook">The cotton she searched for</div>
+      </div>
+      <div class="gate-tile" data-domain="baby">
+        <div class="gate-tile-name">Baby & Children's</div>
+        <div class="gate-tile-hook">The newest skin deserves nothing less</div>
+      </div>
+      <div class="gate-tile" data-domain="underwear">
+        <div class="gate-tile-name">Underwear & Intimate</div>
+        <div class="gate-tile-hook">She proved the purity with her body</div>
+      </div>
+      <div class="gate-tile" data-domain="period">
+        <div class="gate-tile-name">Period Products</div>
+        <div class="gate-tile-hook">The plastic-free pad</div>
+      </div>
+      <div class="gate-tile" data-domain="incontinence">
+        <div class="gate-tile-name">Incontinence</div>
+        <div class="gate-tile-hook">Cotton from the earth, both sides</div>
+      </div>
+      <div class="gate-tile" data-domain="food">
+        <div class="gate-tile-name">Food & Household</div>
+        <div class="gate-tile-hook">FDA-certified cotton against the food</div>
+      </div>
+      <div class="gate-tile fabric-story" data-domain="fabric-story">
+        <div class="gate-tile-name">The Fabric's Story</div>
+        <div class="gate-tile-hook">How one cotton serves every surface it touches</div>
+      </div>
+    </div>
+
+    <div class="gate-bottom">
+      <button class="gate-enter-btn" id="gateEnter">Enter</button>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN PAGE -->
+<div class="main-page" id="mainPage">
+
+  <!-- 2. THE SEED -->
+  <section class="seed-section reveal">
+    <p class="seed-line" id="seedLine">The feel is pure.</p>
+  </section>
+
+  <!-- 3. BUY BOX -->
+  <section class="buybox-section reveal" id="buyBox">
+    <div class="buybox-grid">
+      <div>
+        <div class="product-gallery" id="productGallery">
+          <div class="gallery-inner" id="galleryMain">
+            <div class="gallery-orb"></div>
+            <span>100% organic cotton — smooth both sides</span>
+          </div>
+          <div class="gallery-video-overlay" id="galleryVideoOverlay">
+            <div class="gallery-video-placeholder">
+              <div class="gallery-video-icon">▶</div>
+              <span>Post-wash compaction — soft to butter</span>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-thumbs" id="galleryThumbs">
+          <button class="gallery-thumb active" data-type="image" onclick="switchGalleryThumb(this)">
+            <div class="thumb-placeholder" style="background:linear-gradient(135deg,var(--brand-bg),var(--brand-light))"><span style="font-size:10px;color:var(--gray-400)">Face</span></div>
+          </button>
+          <button class="gallery-thumb" data-type="image" onclick="switchGalleryThumb(this)">
+            <div class="thumb-placeholder" style="background:linear-gradient(135deg,var(--gray-100),var(--gray-200))"><span style="font-size:10px;color:var(--gray-400)">Back</span></div>
+          </button>
+          <button class="gallery-thumb" data-type="image" onclick="switchGalleryThumb(this)">
+            <div class="thumb-placeholder" style="background:linear-gradient(135deg,#E8EDF0,#F0F4F8)"><span style="font-size:10px;color:var(--gray-400)">Drape</span></div>
+          </button>
+          <button class="gallery-thumb" data-type="image" onclick="switchGalleryThumb(this)">
+            <div class="thumb-placeholder" style="background:linear-gradient(135deg,#F0E8E0,#F8F0E8)"><span style="font-size:10px;color:var(--gray-400)">Stack</span></div>
+          </button>
+          <button class="gallery-thumb" data-type="video" onclick="switchGalleryThumb(this)">
+            <div class="thumb-placeholder thumb-video" style="background:linear-gradient(135deg,var(--brand-deep),var(--brand-primary))"><div class="thumb-play-icon">▶</div></div>
+          </button>
+          <button class="gallery-thumb" data-type="image" onclick="switchGalleryThumb(this)">
+            <div class="thumb-placeholder" style="background:linear-gradient(135deg,#E8F0E8,#F0F8F0)"><span style="font-size:10px;color:var(--gray-400)">Detail</span></div>
+          </button>
+        </div>
+      </div>
+
+      <div class="product-info">
+        <h1 class="product-name">ProECO® Organic Cotton Interlock</h1>
+        <p class="product-subtitle">100% certified organic cotton. Smooth both sides. SustainSafe processing. Made in USA.</p>
+
+        <div class="spec-pills" id="specPills" style="cursor:pointer" onclick="document.getElementById('numbersSection').scrollIntoView({behavior:'smooth'})">
+          <span class="spec-pill">100% Organic Cotton</span>
+          <span class="spec-pill">Interlock Double-Knit</span>
+          <span class="spec-pill">200–215 GSM</span>
+          <span class="spec-pill">30% Stretch</span>
+          <span class="spec-pill">CPSIA</span>
+          <span class="spec-pill">Made in USA</span>
+          <span class="spec-pill">Forever Chemicals-Free</span>
+          <span class="spec-pill" style="border-color:var(--brand-accent); color:var(--brand-primary); font-weight:600">See all specs ↓</span>
+        </div>
+
+        <!-- 3-Level Selectors — simplified for 4 variants -->
+        <!-- Level 1: Style -->
+        <div class="selector-level">
+          <div class="selector-level-label">Style</div>
+          <select class="style-select" id="styleSelect" onchange="onStyleChange(this)">
+            <option value="standard" selected>W-420 - Standard Interlock (215 GSM)</option>
+            <option value="silver">W-559 - Silver Interlock (215 GSM)</option>
+            <option value="print">W-604 - Print Interlock (215 GSM)</option>
+            <option value="foodsafe">W-321 - FoodSAFE Interlock (200 GSM)</option>
+          </select>
+        </div>
+
+        <!-- Level 2: Color -->
+        <div class="selector-level">
+          <div class="selector-level-label">Color</div>
+          <div class="color-select-wrap">
+            <div class="color-swatch-indicator" id="colorIndicator" style="background:#1a1a2e"></div>
+            <select class="color-select" id="colorSelect" onchange="onColorChange(this)">
+              <option value="black" data-color="#1a1a2e" selected>Black</option>
+              <option value="dusty-blue" data-color="#6B8FAD">Dusty Blue</option>
+              <option value="white" data-color="#FAFAFA">White</option>
+              <option value="natural" data-color="#F5E6D0">Natural</option>
+              <option value="taupe" data-color="#C9B8A8">Taupe</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Level 3: Length -->
+        <div class="selector-level">
+          <div class="selector-level-label">Length <span style="font-weight:400; color:var(--gray-400)">- Swatch</span></div>
+          <div class="length-pills">
+            <span class="length-pill active" onclick="setLength(this, 'Swatch')">Swatch</span>
+            <span class="length-pill" onclick="setLength(this, 'Yards')">Yards</span>
+            <span class="length-pill" onclick="setLength(this, '50 Yards Roll')">50 Yards Roll</span>
+          </div>
+        </div>
+
+        <!-- Variant Info -->
+        <div class="variant-info" id="variantInfo" data-variant="standard">
+          <span class="variant-info-label">W-420 · Standard</span>
+          <span class="variant-info-text">The foundation variant. 215 GSM, 100% organic cotton, smooth both sides. For t-shirts, baby clothing, leggings, pajamas, and the skin-contact layer in hygiene builds. Post-wash hand: butter.</span>
+        </div>
+
+        <!-- Quantity -->
+        <div class="qty-row">
+          <div class="selector-level-label" style="margin-bottom:0">Quantity</div>
+          <div class="qty-stepper">
+            <button class="qty-btn" onclick="adjustQty(-1)">−</button>
+            <input class="qty-value" id="qtyValue" value="1" readonly>
+            <button class="qty-btn" onclick="adjustQty(1)">+</button>
+          </div>
+        </div>
+
+        <button class="add-to-cart">Add to Cart — $14.95/yard</button>
+
+        <div class="buybox-row">
+          <div class="buybox-row-item change-journey" id="changeJourney" onclick="document.getElementById('gateOverlay').classList.remove('dismissed'); document.getElementById('mainPage').classList.remove('visible');">
+            <span>👕</span>
+            <span id="journeyLabel">Garments</span>
+            <span class="journey-change-hint">change</span>
+          </div>
+          <div class="buybox-row-item wisdom-scroll">
+            <span>📜</span>
+            <span>Wisdom Scroll</span>
+          </div>
+        </div>
+
+        <div class="trust-icons">
+          <div class="trust-icon"><span class="trust-badge green">✓</span> CPSIA Certified</div>
+          <div class="trust-icon"><span class="trust-badge blue">✓</span> USA Made</div>
+          <div class="trust-icon"><span class="trust-badge green">✓</span> Forever Chemicals-Free</div>
+          <div class="trust-icon"><span class="trust-badge blue">☀</span> UPF 50+</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. FILMSTRIP -->
+  <section class="filmstrip-section" id="filmstripSection">
+    <div class="filmstrip-zone">
+      <div class="filmstrip-header">
+        <div class="filmstrip-label">The Fabric Journey</div>
+        <div class="filmstrip-title">Six frames. One feel.</div>
+      </div>
+
+      <div class="filmstrip-container">
+        <div class="filmstrip-viewport">
+          <div class="filmstrip-track" id="filmstripTrack">
+
+            <!-- Frame 0: Before -->
+            <div class="filmstrip-frame before-frame" id="frame0">
+              <div class="filmstrip-frame-visual" style="background:rgba(255,255,255,0.03)">
+                <span style="font-size:48px;opacity:0.3">◇</span>
+              </div>
+              <div class="filmstrip-frame-content">
+                <div class="filmstrip-frame-number before-number">Before</div>
+                <div class="filmstrip-frame-heading before-heading" id="beforeHeading">The Full Shelf</div>
+                <div class="filmstrip-frame-body before-body" id="beforeBody">Cotton interlock is everywhere — every import catalog, every online supplier. The construction is not rare. What's rare is the verified version: organic, SustainSafe, Made in USA, certified. A full shelf that can't answer: what are you, really?</div>
+              </div>
+            </div>
+
+            <!-- Frame 1: Both Sides -->
+            <div class="filmstrip-frame" id="frame1">
+              <div class="filmstrip-frame-visual">
+                <svg class="face-animation face-bothsides" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+                  <rect class="side-top" x="20" y="60" width="120" height="3" rx="1.5" fill="var(--brand-accent)" opacity="0.8"/>
+                  <rect class="side-bottom" x="20" y="100" width="120" height="3" rx="1.5" fill="var(--brand-accent)" opacity="0.8"/>
+                  <text class="mirror-text-top" x="80" y="50" text-anchor="middle" font-family="var(--font-display)" font-size="11" fill="var(--white)" font-style="italic" opacity="0.7">smooth</text>
+                  <text class="mirror-text-bottom" x="80" y="125" text-anchor="middle" font-family="var(--font-display)" font-size="11" fill="var(--white)" font-style="italic" opacity="0.7">smooth</text>
+                  <text x="80" y="85" text-anchor="middle" font-family="var(--font-display)" font-size="9" fill="var(--brand-accent)" font-style="italic">no wrong side</text>
+                </svg>
+              </div>
+              <div class="filmstrip-frame-content">
+                <div class="filmstrip-frame-number">Face 1</div>
+                <div class="filmstrip-frame-heading">Both Sides</div>
+                <div class="filmstrip-frame-body">Two needle beds built this fabric simultaneously — identical smooth surfaces on face and back. No wrong side. No hidden face. Every certification holds from both directions. Turn the fabric over. Still pure.</div>
+                <div class="filmstrip-frame-voice">"Both sides are smooth and identical — difficult to distinguish right from wrong side."</div>
+              </div>
+            </div>
+
+            <!-- Frame 2: After the Wash -->
+            <div class="filmstrip-frame" id="frame2">
+              <div class="filmstrip-frame-visual">
+                <svg class="face-animation face-afterwash" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+                  <rect class="fiber-wide" x="30" y="70" width="100" height="20" rx="3" fill="none" stroke="var(--brand-accent)" stroke-width="1.5" opacity="0.6"/>
+                  <rect class="fiber-compact" x="40" y="73" width="80" height="14" rx="2" fill="var(--brand-accent)" opacity="0.3"/>
+                  <text x="80" y="45" text-anchor="middle" font-family="var(--font-body)" font-size="8" fill="rgba(255,255,255,0.4)" font-weight="600">PRE-WASH → POST-WASH</text>
+                  <text x="80" y="120" text-anchor="middle" font-family="var(--font-display)" font-size="10" fill="var(--brand-accent)" font-style="italic">fibers compact into butter</text>
+                </svg>
+              </div>
+              <div class="filmstrip-frame-content">
+                <div class="filmstrip-frame-number">Face 2</div>
+                <div class="filmstrip-frame-heading">After the Wash</div>
+                <div class="filmstrip-frame-body">Hot water. Standard detergent. The organic cotton fibers compact — 7–8% length, 3–4% width. The hand shifts from soft to butter. Not a metaphor. A maker's word for what cotton becomes when you give the fibers permission to tighten. Every wash after is the same or better.</div>
+                <div class="filmstrip-frame-voice">"Washed up beautifully. Has great body." — customer review</div>
+              </div>
+            </div>
+
+            <!-- Frame 3: The Ease -->
+            <div class="filmstrip-frame" id="frame3">
+              <div class="filmstrip-frame-visual">
+                <svg class="face-animation face-ease" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+                  <line class="cut-line" x1="30" y1="80" x2="130" y2="80" stroke="var(--brand-accent)" stroke-width="2" stroke-linecap="round" stroke-dasharray="8,4" opacity="0.7"/>
+                  <circle class="ease-dot" cx="80" cy="80" r="5" fill="var(--brand-emphasis)" opacity="0.5"/>
+                  <text x="80" y="45" text-anchor="middle" font-family="var(--font-body)" font-size="8" fill="rgba(255,255,255,0.4)" font-weight="600">FLAT EDGES · STANDARD TENSION</text>
+                  <text x="80" y="125" text-anchor="middle" font-family="var(--font-display)" font-size="9" fill="var(--brand-accent)" font-style="italic">the fabric cooperates</text>
+                </svg>
+              </div>
+              <div class="filmstrip-frame-content">
+                <div class="filmstrip-frame-number">Face 3</div>
+                <div class="filmstrip-frame-heading">The Ease</div>
+                <div class="filmstrip-frame-body">Edges lie flat — no curl. Standard machine tension — no adjustment. Straight stitch works for most construction. A first-time knit sewer felt confident before the needle touched the cloth. The most beginner-friendly knit in the ProECO collection.</div>
+                <div class="filmstrip-frame-voice">"Gorgeous to touch and to sew." — customer review</div>
+              </div>
+            </div>
+
+            <!-- Frame 4: Still Pure -->
+            <div class="filmstrip-frame" id="frame4">
+              <div class="filmstrip-frame-visual">
+                <svg class="face-animation face-stillpure" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="80" cy="75" r="35" fill="none" stroke="var(--brand-accent)" stroke-width="1" opacity="0.4"/>
+                  <text class="pure-center" x="80" y="72" text-anchor="middle" font-family="var(--font-display)" font-size="14" fill="var(--white)" font-weight="400" opacity="0.8">100%</text>
+                  <text class="pure-label" x="80" y="88" text-anchor="middle" font-family="var(--font-body)" font-size="7" fill="var(--brand-accent)" font-weight="600" letter-spacing="2" opacity="0.8">ORGANIC COTTON</text>
+                  <text x="80" y="130" text-anchor="middle" font-family="var(--font-display)" font-size="9" fill="var(--brand-accent)" font-style="italic">nothing else</text>
+                </svg>
+              </div>
+              <div class="filmstrip-frame-content">
+                <div class="filmstrip-frame-number">Face 4</div>
+                <div class="filmstrip-frame-heading">Still Pure</div>
+                <div class="filmstrip-frame-body">100% organic cotton. No synthetic fiber. No Lycra. No chemical finish. No coatings. The purity is not a feature — it's what remains when everything unnecessary has been removed. The feel at wash one hundred is the feel at wash one.</div>
+                <div class="filmstrip-frame-voice">"I love Wazoodle and appreciate their dedication to organic USA products." — customer review</div>
+              </div>
+            </div>
+
+            <!-- Frame 5: SustainSafe Processing Highlight -->
+            <div class="filmstrip-frame" id="frame5">
+              <div class="filmstrip-frame-visual" style="background:rgba(109,61,24,0.15)">
+                <svg class="face-animation face-highlight" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="80" cy="70" r="30" fill="none" stroke="var(--brand-emphasis)" stroke-width="1.5" opacity="0.5"/>
+                  <circle cx="80" cy="70" r="20" fill="none" stroke="var(--brand-emphasis)" stroke-width="1" opacity="0.3"/>
+                  <circle class="sustain-pulse" cx="80" cy="70" r="10" fill="var(--brand-emphasis)" opacity="0.2"/>
+                  <text x="80" y="74" text-anchor="middle" font-family="var(--font-body)" font-size="6" fill="var(--white)" font-weight="700" letter-spacing="1">pH 7.4</text>
+                  <text x="80" y="120" text-anchor="middle" font-family="var(--font-body)" font-size="7" fill="var(--brand-emphasis)" font-weight="600" letter-spacing="2">SUSTAINSAFE</text>
+                  <text x="80" y="135" text-anchor="middle" font-family="var(--font-display)" font-size="8" fill="var(--brand-accent)" font-style="italic">chemical-free processing</text>
+                </svg>
+              </div>
+              <div class="filmstrip-frame-content">
+                <div class="filmstrip-frame-number">Highlight · Sid's Layer</div>
+                <div class="filmstrip-frame-heading">SustainSafe Processing</div>
+                <div class="filmstrip-frame-body">Chemical-free manufacturing removes what the process left behind. pH 7.4 neutral — no acid, no base against the skin. No manufacturing residues. The processing doesn't add a feature. It removes everything that isn't cotton.</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="filmstrip-controls">
+          <button class="film-btn" onclick="filmPrev()">‹</button>
+          <div class="film-dots" id="filmDots">
+            <div class="film-dot active" onclick="filmGo(0)"></div>
+            <div class="film-dot" onclick="filmGo(1)"></div>
+            <div class="film-dot" onclick="filmGo(2)"></div>
+            <div class="film-dot" onclick="filmGo(3)"></div>
+            <div class="film-dot" onclick="filmGo(4)"></div>
+            <div class="film-dot" onclick="filmGo(5)"></div>
+          </div>
+          <button class="film-btn" onclick="filmNext()">›</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. STORIES -->
+  <section class="maker-section reveal" id="makerSection">
+    <div class="maker-container">
+      <div class="section-eyebrow reveal" style="color:var(--brand-primary)">The Story</div>
+      <h2 class="maker-title reveal reveal-delay-1" id="makerTitle">The Garment Maker</h2>
+      <p class="maker-subtitle reveal reveal-delay-2" id="makerSubtitle">The maker who searched the longest.</p>
+
+      <div class="domain-pills reveal reveal-delay-3" id="domainPills">
+        <button class="domain-pill active" data-domain="garment">Garments</button>
+        <button class="domain-pill" data-domain="baby">Baby &amp; Children's</button>
+        <button class="domain-pill" data-domain="underwear">Underwear</button>
+        <button class="domain-pill" data-domain="period">Period Products</button>
+        <button class="domain-pill" data-domain="incontinence">Incontinence</button>
+        <button class="domain-pill" data-domain="food">Food &amp; Household</button>
+        
+        <button class="domain-pill" data-domain="fabric-story">The Fabric's Story</button>
+      </div>
+
+      <div class="timeline reveal reveal-delay-3" id="timeline"></div>
+    </div>
+  </section>
+
+  <!-- 6. WITNESSED EXPERIENCES -->
+  <section class="witnessed-section" id="witnessedSection">
+    <div class="witnessed-container">
+      <div class="witnessed-label reveal">Witnessed</div>
+      <h2 class="witnessed-title reveal reveal-delay-1">Their words. Their fabric.</h2>
+      <div class="mosaic-grid reveal reveal-delay-2" id="mosaicGrid"></div>
+    </div>
+  </section>
+
+  <!-- 7. CONSTELLATION + FSA -->
+  <section class="constellation-section reveal" id="constellationSection">
+    <div class="constellation-container">
+      <div class="section-eyebrow reveal" style="text-align:center">Explore</div>
+      <h2 class="maker-title reveal reveal-delay-1" style="text-align:center; margin-bottom:var(--space-8)">Where this fabric lives</h2>
+
+      <div class="constellation-map">
+        <svg class="constellation-svg" id="constellationSvg" viewBox="0 0 750 530" xmlns="http://www.w3.org/2000/svg">
+          <!-- Orbits -->
+          <circle cx="375" cy="265" r="90" fill="none" stroke="var(--brand-light)" stroke-width="1" stroke-dasharray="4,4"/>
+          <circle cx="375" cy="265" r="170" fill="none" stroke="var(--brand-light)" stroke-width="1" stroke-dasharray="4,4"/>
+          <circle cx="375" cy="265" r="230" fill="none" stroke="var(--brand-bg)" stroke-width="1" stroke-dasharray="4,4"/>
+
+          <!-- Hub -->
+          <circle cx="375" cy="265" r="42" fill="var(--brand-primary)"/>
+          <text x="375" y="260" text-anchor="middle" fill="var(--white)" font-family="var(--font-body)" font-size="8.5" font-weight="600">PROECO</text>
+          <text x="375" y="274" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="var(--font-body)" font-size="7">INTERLOCK</text>
+
+          <!-- Connection lines -->
+          <line x1="375" y1="223" x2="375" y2="115" stroke="var(--brand-accent)" stroke-width="1" opacity="0.15"/>
+          <line x1="410" y1="230" x2="530" y2="140" stroke="var(--brand-accent)" stroke-width="1" opacity="0.15"/>
+          <line x1="417" y1="265" x2="560" y2="265" stroke="var(--brand-accent)" stroke-width="1" opacity="0.15"/>
+          <line x1="410" y1="300" x2="520" y2="400" stroke="var(--brand-accent)" stroke-width="1" opacity="0.15"/>
+          <line x1="340" y1="300" x2="230" y2="400" stroke="var(--brand-accent)" stroke-width="1" opacity="0.15"/>
+          <line x1="333" y1="265" x2="190" y2="255" stroke="var(--brand-accent)" stroke-width="1" opacity="0.15"/>
+          <line x1="340" y1="230" x2="220" y2="130" stroke="var(--brand-accent)" stroke-width="1" opacity="0.15"/>
+
+          <!-- Proven nodes (large) -->
+          <g class="constellation-node-svg" data-id="garment" onclick="showConstellationDetail('garment')" style="cursor:pointer">
+            <circle cx="375" cy="105" r="30" fill="var(--brand-bg)" stroke="var(--brand-primary)" stroke-width="2"/>
+            <text x="375" y="108" text-anchor="middle" font-family="var(--font-body)" font-size="8" fill="var(--brand-primary)" font-weight="600">Garments</text>
+          </g>
+
+          <!-- Vignette nodes (medium) -->
+          <g class="constellation-node-svg" data-id="underwear" onclick="showConstellationDetail('underwear')" style="cursor:pointer">
+            <circle cx="545" cy="150" r="24" fill="var(--brand-bg)" stroke="var(--brand-emphasis)" stroke-width="1.5"/>
+            <text x="545" y="147" text-anchor="middle" font-family="var(--font-body)" font-size="7" fill="var(--brand-emphasis)" font-weight="500">Underwear</text>
+            <text x="545" y="157" text-anchor="middle" font-family="var(--font-body)" font-size="6.5" fill="var(--brand-emphasis)">& Intimate</text>
+          </g>
+          <g class="constellation-node-svg" data-id="baby" onclick="showConstellationDetail('baby')" style="cursor:pointer">
+            <circle cx="205" cy="150" r="24" fill="var(--brand-bg)" stroke="var(--brand-emphasis)" stroke-width="1.5"/>
+            <text x="205" y="147" text-anchor="middle" font-family="var(--font-body)" font-size="7" fill="var(--brand-emphasis)" font-weight="500">Baby &</text>
+            <text x="205" y="157" text-anchor="middle" font-family="var(--font-body)" font-size="6.5" fill="var(--brand-emphasis)">Children's</text>
+          </g>
+          <g class="constellation-node-svg" data-id="period" onclick="showConstellationDetail('period')" style="cursor:pointer">
+            <circle cx="540" cy="310" r="22" fill="var(--brand-bg)" stroke="var(--brand-emphasis)" stroke-width="1.5"/>
+            <text x="540" y="307" text-anchor="middle" font-family="var(--font-body)" font-size="7" fill="var(--brand-emphasis)" font-weight="500">Period</text>
+            <text x="540" y="317" text-anchor="middle" font-family="var(--font-body)" font-size="6.5" fill="var(--brand-emphasis)">Products</text>
+          </g>
+          <g class="constellation-node-svg" data-id="incontinence" onclick="showConstellationDetail('incontinence')" style="cursor:pointer">
+            <circle cx="550" cy="420" r="20" fill="var(--brand-bg)" stroke="var(--brand-emphasis)" stroke-width="1.5"/>
+            <text x="550" y="417" text-anchor="middle" font-family="var(--font-body)" font-size="6.5" fill="var(--brand-emphasis)" font-weight="500">Inconti-</text>
+            <text x="550" y="427" text-anchor="middle" font-family="var(--font-body)" font-size="6.5" fill="var(--brand-emphasis)">nence</text>
+          </g>
+
+          <!-- Silence nodes (dashed) -->
+          <g class="constellation-node-svg" data-id="food" onclick="showConstellationDetail('food')" style="cursor:pointer">
+            <circle cx="200" cy="310" r="20" fill="white" stroke="var(--gray-400)" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <text x="200" y="307" text-anchor="middle" font-family="var(--font-body)" font-size="6.5" fill="var(--gray-500)" font-weight="500">Food &</text>
+            <text x="200" y="317" text-anchor="middle" font-family="var(--font-body)" font-size="6.5" fill="var(--gray-500)">Household</text>
+          </g>
+          <g class="constellation-node-svg" data-id="sun" onclick="showConstellationDetail('sun')" style="cursor:pointer">
+            <circle cx="195" cy="420" r="18" fill="white" stroke="var(--gray-400)" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <text x="195" y="417" text-anchor="middle" font-family="var(--font-body)" font-size="6.5" fill="var(--gray-500)" font-weight="500">Sun &</text>
+            <text x="195" y="427" text-anchor="middle" font-family="var(--font-body)" font-size="6.5" fill="var(--gray-500)">Outdoor</text>
+          </g>
+
+          <!-- Edge nodes (smallest, dashed) -->
+          <g class="constellation-node-svg" data-id="b2b" onclick="showConstellationDetail('b2b')" style="cursor:pointer">
+            <circle cx="620" cy="250" r="16" fill="white" stroke="var(--gray-300)" stroke-width="1" stroke-dasharray="2,3"/>
+            <text x="620" y="247" text-anchor="middle" font-family="var(--font-body)" font-size="6" fill="var(--gray-400)">B2B</text>
+            <text x="620" y="257" text-anchor="middle" font-family="var(--font-body)" font-size="6" fill="var(--gray-400)">Commercial</text>
+          </g>
+          <g class="constellation-node-svg" data-id="mask" onclick="showConstellationDetail('mask')" style="cursor:pointer">
+            <circle cx="375" cy="475" r="14" fill="white" stroke="var(--gray-300)" stroke-width="1" stroke-dasharray="2,3"/>
+            <text x="375" y="478" text-anchor="middle" font-family="var(--font-body)" font-size="6" fill="var(--gray-400)">Masks</text>
+          </g>
+          <g class="constellation-node-svg" data-id="socks" onclick="showConstellationDetail('socks')" style="cursor:pointer">
+            <circle cx="120" cy="250" r="14" fill="white" stroke="var(--gray-300)" stroke-width="1" stroke-dasharray="2,3"/>
+            <text x="120" y="247" text-anchor="middle" font-family="var(--font-body)" font-size="6" fill="var(--gray-400)">Socks &</text>
+            <text x="120" y="257" text-anchor="middle" font-family="var(--font-body)" font-size="6" fill="var(--gray-400)">Accessories</text>
+          </g>
+
+          <!-- Legend -->
+          <g transform="translate(28, 510)">
+            <circle cx="8" cy="0" r="5" fill="var(--brand-bg)" stroke="var(--brand-primary)" stroke-width="1.5"/>
+            <text x="20" y="4" font-family="var(--font-body)" font-size="9" fill="var(--gray-500)">Proven</text>
+            <circle cx="90" cy="0" r="5" fill="var(--brand-bg)" stroke="var(--brand-emphasis)" stroke-width="1.5"/>
+            <text x="102" y="4" font-family="var(--font-body)" font-size="9" fill="var(--gray-500)">Vignette</text>
+            <circle cx="180" cy="0" r="5" fill="white" stroke="var(--gray-400)" stroke-width="1.5" stroke-dasharray="3,2"/>
+            <text x="192" y="4" font-family="var(--font-body)" font-size="9" fill="var(--gray-500)">Silence</text>
+            <circle cx="255" cy="0" r="4" fill="white" stroke="var(--gray-300)" stroke-width="1" stroke-dasharray="2,2"/>
+            <text x="265" y="4" font-family="var(--font-body)" font-size="9" fill="var(--gray-500)">Edge</text>
+          </g>
+
+          <!-- Highlight ring -->
+          <circle id="constellationHighlight" cx="0" cy="0" r="0" fill="none" stroke="var(--brand-primary)" stroke-width="2.5" opacity="0" style="transition:all 0.5s ease">
+            <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+
+        <div class="constellation-detail" id="constellationDetail">
+          <button class="constellation-detail-close" id="constellationClose" onclick="closeConstellationDetail()">✕</button>
+          <div class="constellation-detail-name" id="constellationDetailName"></div>
+          <span class="constellation-detail-type" id="constellationDetailType"></span>
+          <div class="constellation-detail-body" id="constellationDetailBody"></div>
+          <div class="constellation-detail-meta" id="constellationDetailMeta"></div>
+        </div>
+
+        <div class="constellation-place-me">
+          <div class="place-me-icon">📍</div>
+          <input type="text" class="place-me-input" placeholder="I'm making something new..." id="placeInput" onkeydown="if(event.key==='Enter') placeOnConstellation()">
+          <button class="place-me-btn" onclick="placeOnConstellation()">Place me</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7b. FREQUENTLY SPOKEN ANSWERS — Separate section -->
+  <section class="fsa-section reveal" id="fsaSection">
+    <div class="fsa-container">
+      <div class="section-eyebrow reveal" style="color:var(--brand-primary)">Frequently Spoken Answers</div>
+      <h2 class="fsa-section-title reveal reveal-delay-1">These answers were already here.</h2>
+      <p class="fsa-section-sub reveal reveal-delay-2">Makers have already asked what you're about to ask. Their answers are waiting.</p>
+
+      <div class="ai-deepdive reveal reveal-delay-3">
+        <div class="ai-starters" id="aiStarters"></div>
+        <div class="ai-input-bar">
+          <input type="text" class="ai-input" placeholder="What answer are you seeking?" id="aiInput" onkeydown="if(event.key==='Enter') seekAnswer()">
+          <button class="ai-input-btn" onclick="seekAnswer()">→</button>
+        </div>
+        <div class="fsa-response" id="fsaResponse"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. ALONGSIDE & INSTEAD -->
+  <section class="alongside-section">
+    <div class="alongside-container">
+      <div class="section-eyebrow reveal" style="color:var(--waz-brown)">Related Fabrics</div>
+      <h2 class="maker-title reveal reveal-delay-1">What works with it. What works instead.</h2>
+      <div class="alongside-grid reveal reveal-delay-2" id="alongsideGrid"></div>
+    </div>
+  </section>
+
+  <!-- 9. WHAT'S IN IT -->
+  <section class="whatsin-section">
+    <div class="whatsin-container">
+      <div class="section-eyebrow reveal" style="color:var(--waz-green)">What's In It · What Isn't</div>
+      <h2 class="maker-title reveal reveal-delay-1">Trust is materials you can name.</h2>
+      <div class="whatsin-grid reveal reveal-delay-2" id="certGrid">
+        <div class="cert-card" data-cert="organic"><div class="cert-icon">🌱</div><div class="cert-name">100% Organic Cotton</div><div class="cert-detail">US Cotton Trust Protocol verified. No synthetic fiber. No blends.</div><div class="cert-domain-note" id="certOrganicNote"></div></div>
+        <div class="cert-card" data-cert="forever-free"><div class="cert-icon">🧪</div><div class="cert-name">Forever Chemicals-Free</div><div class="cert-detail">No PFAS, PFOS, PFOA, PTFE. BPA-free, phthalate-free, lead-free.</div><div class="cert-domain-note" id="certForeverNote"></div></div>
+        <div class="cert-card" data-cert="cpsia"><div class="cert-icon">👶</div><div class="cert-name">CPSIA Certified</div><div class="cert-detail">Children's product safety. Lead, phthalates, BPA testing.</div><div class="cert-domain-note" id="certCpsiaNote"></div></div>
+        <div class="cert-card" data-cert="fda"><div class="cert-icon">🍽️</div><div class="cert-name">FDA Food Contact</div><div class="cert-detail">FoodSAFE W-321 only. 21 CFR 177.1680 & 175.300. -20°C to 250°F.</div><div class="cert-domain-note" id="certFdaNote"></div></div>
+        <div class="cert-card" data-cert="usa"><div class="cert-icon">🇺🇸</div><div class="cert-name">Made in USA</div><div class="cert-detail">AKAS Tex. EPA/OSHA standards. Every step under one roof.</div><div class="cert-domain-note" id="certUsaNote"></div></div>
+        <div class="cert-card" data-cert="upf"><div class="cert-icon">☀️</div><div class="cert-name">UPF 50+</div><div class="cert-detail">Blocks 98% UV radiation. Sun wraps, outdoor garments.</div><div class="cert-domain-note" id="certUpfNote"></div></div>
+        <div class="cert-card" data-cert="flammability"><div class="cert-icon">🔥</div><div class="cert-name">Flammability Class 1</div><div class="cert-detail">16 CFR Part 1610. General apparel — suitable for children's sleepwear.</div><div class="cert-domain-note" id="certFlammNote"></div></div>
+        <div class="cert-card" data-cert="reach"><div class="cert-icon">🌍</div><div class="cert-name">EU REACH & RoHS</div><div class="cert-detail">SVHC and RoHS 10 compliant. California Prop 65 compliant.</div><div class="cert-domain-note" id="certReachNote"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. BUILDING WITH IT -->
+  <section class="building-section">
+    <div class="building-container">
+      <div class="section-eyebrow reveal" style="color:var(--brand-primary)">Building With It</div>
+      <h2 class="maker-title reveal reveal-delay-1">Construction thresholds.</h2>
+      <p class="maker-subtitle reveal reveal-delay-2">What the fabric asks of you — and what it gives back.</p>
+      <div class="reveal reveal-delay-3" id="buildingRules"></div>
+    </div>
+  </section>
+
+  <!-- 11. THE NUMBERS -->
+  <section class="numbers-section" id="numbersSection">
+    <div class="numbers-container">
+      <div class="section-eyebrow reveal">The Numbers</div>
+      <h2 class="maker-title reveal reveal-delay-1">What the fiber is made of. What the makers confirmed.</h2>
+      <div class="numbers-grid reveal reveal-delay-2" id="numbersGrid">
+        <div class="number-card lead" id="numberLead">
+          <div class="number-value" id="numberLeadValue">100%</div>
+          <div class="number-info">
+            <div class="number-label" id="numberLeadLabel">Organic Cotton</div>
+            <div class="number-context" id="numberLeadContext">No synthetic fiber. No Lycra. No blend. The 30% stretch comes from double-knit interlock construction, not elastane. The purity is the identity — cotton from the earth, nothing else.</div>
+            <div class="number-witness" id="numberLeadWitness">"Very nice quality. Elegant colors. I will be ordering quite a bit."</div>
+          </div>
+        </div>
+        <div class="number-card"><div class="number-value">215</div><div class="number-info"><div class="number-label">GSM (Std/Silver/Print)</div><div class="number-context">6.3 oz/sq yd. 0.028" thick. Post-wash fibers compact into what makers call "butter." FoodSAFE variant: 200 GSM.</div></div></div>
+        <div class="number-card"><div class="number-value">30%</div><div class="number-info"><div class="number-label">Crosswise Stretch</div><div class="number-context">From knit construction alone — no Lycra. 10% lengthwise. Comfortable garment fit without synthetic fiber content.</div></div></div>
+        <div class="number-card"><div class="number-value">7–8%</div><div class="number-info"><div class="number-label">Length Shrinkage</div><div class="number-context">Pre-wash essential. 3–4% width shrinkage. The fibers compact — creating heavier hand and improved body. The shrinkage is the gift.</div><div class="number-witness">"Like butter."</div></div></div>
+        <div class="number-card"><div class="number-value">4.5</div><div class="number-info"><div class="number-label">Color Fastness</div><div class="number-context">Wash stable. Colors hold. Multiple solid colors including dusty blue and black. Print variant adds decorative patterns.</div></div></div>
+        <div class="number-card"><div class="number-value">4</div><div class="number-info"><div class="number-label">Variants</div><div class="number-context">Standard (W-420) · Silver (W-559) · Print (W-604) · FoodSAFE (W-321). Same organic cotton. Different treatments.</div></div></div>
+        <div class="number-card"><div class="number-value">7.4</div><div class="number-info"><div class="number-label">pH (Neutral)</div><div class="number-context">SustainSafe processing. No acidic or basic residues against skin. Safe for baby, intimate, and food-contact applications.</div></div></div>
+        <div class="number-card"><div class="number-value">50+</div><div class="number-info"><div class="number-label">UPF Rating</div><div class="number-context">Blocks 98% UV radiation. Summer garments, sun wraps, outdoor casual wear with genuine sun protection.</div></div></div>
+        <div class="number-card"><div class="number-value">60–64"</div><div class="number-info"><div class="number-label">Width</div><div class="number-context">All variants. Wide enough for efficient garment layout. Print variants may need extra for pattern matching.</div></div></div>
+        <div class="number-card"><div class="number-value">0.028"</div><div class="number-info"><div class="number-label">Thickness</div><div class="number-context">The thinnest ProECO construction. Smooth and discreet as skin-contact layer. Designed for next-to-skin, not absorbent core.</div></div></div>
+        <div class="number-card"><div class="number-value">250°F</div><div class="number-info"><div class="number-label">FoodSAFE Temp Range</div><div class="number-context">W-321 tested from -20°C to 250°F. Stable across acidic, fatty, and all other food types. FDA 21 CFR 177.1680.</div></div></div>
+        <div class="number-card"><div class="number-value">0</div><div class="number-info"><div class="number-label">PFAS Content</div><div class="number-context">Forever Chemicals-Free. No PFAS, BPA, phthalates, lead. CPSIA, Prop 65, REACH, RoHS verified. Class 1 flammability.</div></div></div>
+      </div>
+
+      <div class="yield-math reveal" id="yieldMath">
+        <div class="yield-math-title" id="yieldMathTitle">The Garment Math</div>
+        <div id="yieldMathContent"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. ROUTING ENGINE -->
+  <section class="routing-section">
+    <div class="routing-container">
+      <div class="section-eyebrow reveal" style="color:var(--brand-accent)">Our Recommendation</div>
+      <h2 class="maker-title reveal reveal-delay-1" id="routingTitle" style="color:var(--white)">For your garment project</h2>
+
+      <div class="routing-card reveal reveal-delay-2" id="routingCard">
+        <div class="routing-eyebrow" id="routingEyebrow">Recommended Variant</div>
+        <div class="routing-variant" id="routingVariant">W-420 Standard</div>
+        <div class="routing-reason" id="routingReason">The foundation variant. 215 GSM organic cotton, smooth both sides, SustainSafe processing. For t-shirts, dresses, leggings, pajamas — the verified cotton the commodity market can't provide.</div>
+        <button class="routing-cta" id="routingCta" onclick="document.getElementById('buyBox').scrollIntoView({behavior:'smooth'})">Add W-420 Standard to Cart</button>
+        <div class="routing-alt">
+          <span>Or consider </span>
+          <span class="routing-alt-link" id="routingAlt">W-559 Silver</span>
+          <span id="routingAltReason"> for antimicrobial odor control in underwear and sleepwear</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. THE PERSPECTIVE -->
+  <section class="perspective-section" id="perspectiveSection">
+    <div class="perspective-bridge"></div>
+    <div class="perspective-inner">
+      <div class="perspective-container">
+        <div class="perspective-field reveal">
+          <div class="perspective-field-eyebrow">The Field</div>
+          <div class="perspective-field-line">
+            <span>T-shirt dresses</span> · <span>baby caps</span> · <span>leggings</span> · <span>underwear</span> · <span>menstrual pads</span> · <span>pajamas</span> · <span>incontinence liners</span> · <span>period underwear</span> · <span>bibs</span> · <span>onesies</span> · <span>cloth napkins</span> · <span>socks</span> · <span>sun wraps</span> · <span>reusable food bags</span> · <span>sandwich wraps</span> · <span>bowl covers</span> · <span>breast milk storage</span> · <span>face cloths</span> · <span>burp cloths</span> · <span>backpack linings</span> · <span>and whatever the feel finds next</span>
+          </div>
+        </div>
+
+        <div class="perspective-divider reveal reveal-delay-1"></div>
+
+        <div class="reveal reveal-delay-2">
+          <div class="perspective-seed-line">The feel is pure.</div>
+        </div>
+
+        <div class="perspective-cascade" id="perspectiveCascade">
+          <div class="perspective-cascade-item">The maker who searched through a full shelf found a cotton she could verify — and the verification became the relationship.</div>
+          <div class="perspective-cascade-item">The parent who placed it against the newest skin trusted it because nothing was between the fiber and the baby.</div>
+          <div class="perspective-cascade-item">The maker with bladder problems tested the Silver with her body and found the promise true.</div>
+          <div class="perspective-cascade-item">The B2B buyer confirmed the purity at a hundred bolts and never wrote a word — the reorder was the word.</div>
+        </div>
+
+        <div class="perspective-question" id="perspectiveQuestion">
+          What is the feel pure enough for next?
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="bottom-spacer"></div>
+</div>
+
+<!-- STICKY BUY BAR -->
+<div class="sticky-buy-bar" id="stickyBuyBar">
+  <div class="sticky-buy-info">
+    <span class="sticky-buy-name">ProECO® Organic Cotton Interlock</span>
+    <span class="sticky-buy-price">From $14.95 /yard</span>
+  </div>
+  <div class="sticky-buy-actions">
+    <button class="sticky-btn-cart">Add to Cart</button>
+  </div>
+</div>
+
+<!-- WITNESS LIGHTBOX -->
+<div class="witness-lightbox" id="witnessLightbox">
+  <div class="witness-lightbox-backdrop" onclick="closeWitness()"></div>
+  <div class="witness-lightbox-card">
+    <button class="witness-lightbox-close" onclick="closeWitness()">✕</button>
+    <div class="witness-lightbox-quote" id="lbQuote"></div>
+    <div class="witness-lightbox-body" id="lbBody"></div>
+    <div class="witness-lightbox-attr">
+      <div><div class="witness-lightbox-name" id="lbName"></div><div class="witness-lightbox-domain" id="lbDomain"></div></div>
+      <div class="witness-lightbox-badge">Witnessed</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Due to size constraints, the JavaScript data objects and rendering functions
+// are loaded inline. This matches the established Zorb/ProSoft prototype pattern.
+
+// ═══════════════════════════════════════
+// DOMAIN CONFIGURATION
+// ═══════════════════════════════════════
+
+const domainConfig = {
+  garment: { name: 'Garments', seed: 'The feel is pure — and the maker who searched through a full shelf found a cotton she could verify.', title: 'The Garment Maker', subtitle: 'The maker who searched the longest.' },
+  baby: { name: 'Baby & Children\'s', seed: 'The feel is pure — against the skin that has never felt anything else.', title: 'The Newest Skin', subtitle: 'Organic cotton, smooth both sides, pH neutral. Nothing between the fiber and the baby.' },
+  underwear: { name: 'Underwear & Intimate', seed: 'The feel is pure — and she proved it. Not with a certificate. With her body.', title: 'The Verification', subtitle: 'She tested the Silver with her body and found the promise true.' },
+  period: { name: 'Period Products', seed: 'The feel is pure — and the journey demands purity. No plastic. No synthetic.', title: 'The Plastic-Free Pad', subtitle: 'Cotton against the body during the days the body asks the most.' },
+  incontinence: { name: 'Incontinence', seed: 'The feel is pure — against the body that needs purity most.', title: 'The Naming', subtitle: 'Cotton from the earth, smooth on both sides, touching the skin of a person who named her condition.' },
+  food: { name: 'Food & Household', seed: 'The feel is pure — and the FDA certified what touches your food.', title: 'Food & Household', subtitle: 'FoodSAFE organic cotton. Tested from freezer to oven temperatures.' },
+  'fabric-story': { name: 'The Fabric\'s Story', seed: 'The feel is pure. The purity is the fiber itself.', title: 'The Fabric\'s Story', subtitle: 'Four faces of one grace. Four variants. One cotton.' }
+};
+
+const beforeByDomain = {
+  garment: { heading: 'The Full Shelf', body: 'Cotton interlock is everywhere — every import catalog, every online supplier. The construction is not rare. What\'s rare is the verified version: organic, SustainSafe, Made in USA, certified. A full shelf that can\'t answer: what are you, really?' },
+  baby: { heading: 'What Touches the Newest Skin', body: 'Conventional cotton interlock from import markets. Unknown chemical residues. Unverified processing. The construction is common. The certainty about what\'s against the baby is not.' },
+  underwear: { heading: 'Claims Without Proof', body: 'Antimicrobial promises on products she couldn\'t verify. Fabric treatments she couldn\'t test. Marketing language that sounded right but couldn\'t answer the question: does it actually work against my body?' },
+  period: { heading: 'The Synthetic Pad', body: 'Disposable pads with plastic layers. Reusable alternatives with synthetic surfaces. The plastic-free journey requires materials that can answer one question: what are you? Most fabrics on the shelf can\'t.' },
+  incontinence: { heading: 'The Clinical Surface', body: 'Products designed for the condition but not for the person. Functional surfaces against skin that deserves better than functional. The body\'s condition is private. The surface against it should be pure.' },
+  food: { heading: 'Uncertified Contact', body: 'Fabrics marketed for food wraps without FDA food-contact certification. Reusable food storage that can\'t verify what touches the food. The sustainable choice isn\'t complete until it\'s certified.' },
+  'fabric-story': { heading: 'Before the Makers Arrived', body: 'A double-knit organic cotton interlock. Smooth both sides. SustainSafe processing. Four variants across one platform. What arrived was not just a fabric — it was verification in a market that couldn\'t provide it.' }
+};
+
+// ═══════════════════════════════════════
+// STORY TIMELINE DATA
+// ═══════════════════════════════════════
+
+const domainTimelines = {
+  garment: {
+    beats: [
+      { label: 'Exhausted Belief', heading: 'She loves cotton interlock. And the shelf is full.', body: 'Cotton interlock is everywhere. Every import catalog, every supplier, every store. The construction is not rare. But organic, SustainSafe, Made in USA, certified cotton interlock — <em>that</em> is hard to find. Two makers use those exact words independently.' },
+      { label: 'The Failed Others', heading: 'The full shelf — unnamed.', body: 'No maker names a specific product that failed. The before-state is the commodity market itself — cotton interlock at import prices, at import quality, with import verification. The entire shelf functions as the ambient Failed Other.' },
+      { label: 'The Arrival', heading: 'Finding what was hard to find.', body: 'She ordered. The fabric arrived. She unfolded it and knew: very nice quality, elegant colors, the dusty blue. She already had the pattern — a long-sleeved t-shirt dress with a v-neckline. The commitment was immediate because the search had been long.' },
+      { label: 'The Threshold', heading: 'Hot water. Standard detergent.', body: 'She pre-washed. The organic cotton fibers compacted — 7–8% length, 3–4% width. The hand shifted from soft to <em>butter.</em> Not a finish. Not a softener. The fibers themselves, drawing closer together. The gentlest threshold in the series.' },
+      { label: 'Grace', heading: 'The feel is pure.', body: 'The maker who had been settling for what the commodity market provided found a cotton whose purity she could verify. The organic certification. The SustainSafe processing. The Made in USA origin. Each order confirms. Each wash deepens.' },
+      { label: 'Declaration', heading: 'I will be ordering quite a bit.', body: 'Not expansion language. Commitment language. The relationship deepens, not widens. A definite go-to. Will be purchasing often. What\'s not to love? The settled warmth of a fabric that proves itself through use.' }
+    ],
+    perspective: 'The feel is pure — and the purity was what she searched for. Not a better cotton. A verified cotton. Not softer than the import. More honest. The commodity market provided the construction. This fabric provided the promise that the construction carries what it says it carries.\n\nShe will be ordering quite a bit. The declaration is not about discovering something new. It is about finding what was always needed and settling in.',
+    echoes: ['100% organic cotton — no synthetic fiber of any kind.', 'Pre-wash in hot water before cutting — the shrinkage is the gift.', 'Never use fabric softener — it coats the fibers and undoes everything SustainSafe preserved.']
+  },
+  baby: {
+    beats: [
+      { label: 'The Choice', heading: 'The newest skin deserves nothing less.', body: 'A baby\'s skin has no history with fabric. No accumulated tolerance for chemical finishes. No years of adaptation to synthetic fibers. The first meeting matters more than any parent can measure.' },
+      { label: 'The Arrival', heading: 'USA MADE — with three exclamation marks.', body: 'One maker put three exclamation marks after USA MADE. Not after the softness. After the origin. She was buying the manufacturing promise — organic, American-made, certified — and placing it against a baby\'s head and legs.' },
+      { label: 'The Making', heading: 'A definite go to.', body: 'Another maker chose Silver for baby items and discovered the fabric is a pleasure to work with. She refined her cutting technique — switching from cutting one bib on the fold to cutting two from an entire pattern. Deep enough in production to optimize. Deliberate enough to choose Silver Plus for baby skin.' },
+      { label: 'Grace', heading: 'Nothing between the fiber and the newest skin.', body: 'CPSIA certified. pH 7.4 neutral. Smooth both sides — the baby feels the same cotton the maker\'s hands felt at the cutting table. No face where the promise is different. Organic cotton from the earth against skin that has never felt anything else.' }
+    ],
+    perspective: 'The feel is pure — against the skin that has never felt anything else. The baby\'s first fabric. Organic cotton, smooth both sides, pH neutral. Nothing between the fiber and the newest skin. Nothing added. Nothing to negotiate. Just cotton.',
+    echoes: ['CPSIA certified for children\'s products.', 'Class 1 flammability — suitable for children\'s sleepwear.', 'Silver variant adds antimicrobial for baby items.']
+  },
+  underwear: {
+    beats: [
+      { label: 'The Need', heading: 'She has bladder problems.', body: 'Two words in a product review that most people in her condition never write anywhere. She bought the Silver variant to make her own underwear. She had heard that silver-treated fabric resists bacteria. She did not take it on faith.' },
+      { label: 'The Test', heading: 'She wore it. She washed it. She wore it again.', body: 'She tested the claim the only way that mattered — not with a laboratory protocol, not with a petri dish, but with her own body. The body that makes the claim either true or false every day she wears it.' },
+      { label: 'The Verdict', heading: 'TRUE — in capital letters.', body: 'The fabric does not retain odor or bacteria. She called it TRUE. She addressed the company directly: <em>Good for Wazoodle!</em> She is the only maker in this corpus who verified the purity with her own body and told everyone what she found.' },
+      { label: 'Grace', heading: 'The specification becomes the dignity.', body: 'Silver Plus inhibits 99.9% bacterial growth through 50 wash cycles. That is the specification. What Jeni J confirmed is what the specification <em>feels like</em> when the body testing it has bladder problems and the underwear does not betray her.' }
+    ],
+    perspective: 'The feel is pure — and she proved it. Not with a certificate. With her body. The Silver held. The cotton held. The purity held against the most intimate and demanding test a human being can administer. The feel is pure. She tested it. It\'s true.',
+    echoes: ['Silver Plus inhibits 99.9% bacterial growth through 50+ wash cycles.', 'Never use fabric softener — it permanently destroys antimicrobial effectiveness.', 'Smooth on both sides — no texture against sensitive skin.']
+  },
+  period: {
+    beats: [
+      { label: 'The Journey', heading: 'She described the reason as a journey.', body: 'Was so happy to find organic cotton to sew menstrual pads with as part of her plastic-free journey. One sentence. Every word chosen. The search was not for a fabric — it was for alignment.' },
+      { label: 'The Material', heading: 'Cotton. Just cotton.', body: 'She is removing plastic from her life. She needs a skin-contact surface that is organic, chemical-free, and made of a material she can name without qualification. Cotton. No synthetic. No chemical residue. Nothing she can\'t account for.' },
+      { label: 'The Build', heading: 'The smooth layer against the body.', body: 'Interlock as the skin-contact surface in a reusable pad. Paired with absorbent fleece or French terry core. ProSoft ECO-PUL as barrier. The thin 0.028" interlock keeps the contact layer smooth and discreet during the days that matter most.' },
+      { label: 'Grace', heading: 'The journey continues.', body: 'The pad is one product. The organic cotton is one choice. The journey is larger than any single purchase. But against the body, during menstruation, the surface that touches the skin is the most intimate material decision a pad maker can make. She chose purity.' }
+    ],
+    perspective: 'The feel is pure — and the journey demands purity. No plastic. No synthetic. No chemical residue. Just cotton against the body during the days the body asks the most of whatever touches it. The feel is pure. The journey continues.',
+    echoes: ['Pairs with ProECO Fleece or French Terry as absorbent core.', 'ProSoft ECO-PUL provides the waterproof barrier layer.', '0.028" thin — smooth and discreet as the skin-contact layer.']
+  },
+  incontinence: {
+    beats: [
+      { label: 'The Naming', heading: 'Two makers used the medical words.', body: 'Donna Uetz: <em>Lining incontinence underware.</em> Gramcracker: <em>urinary bladder leak pads/underwear.</em> In a corpus where most makers write one word, these two wrote the clinical vocabulary. They named the condition in the application field.' },
+      { label: 'The Role', heading: 'Lining — not the finished product.', body: 'Donna\'s word tells the fabric\'s role: not the product, but the layer inside it. The smooth organic cotton as the surface touching the skin of a person managing incontinence. The purity of the fiber against a body that has been through enough.' },
+      { label: 'Grace', heading: 'The silence is complete.', body: 'Neither maker wrote another word. The naming was the story. What they make from this interlock, how it serves them, whether the lining holds — that belongs to them. The fabric is in their hands. The purity is against their skin. The rest is silence.' }
+    ],
+    perspective: 'The feel is pure — against the body that needs purity most. No chemical residue. No synthetic surface. Just cotton from the earth, smooth on both sides, touching the skin of a person who named her condition and trusted the fabric with everything she didn\'t say.',
+    echoes: ['Both sides smooth — no wrong side against sensitive skin.', 'pH 7.4 neutral — no acid or base residues.', 'Print variant available for dignified product design.']
+  },
+  food: {
+    beats: [
+      { label: 'The Standard', heading: 'FDA food-contact certified.', body: 'W-321 FoodSAFE Organic Cotton Interlock. 200 GSM. Certified per 21 CFR 177.1680 and 175.300. Tested stable from -20°C to 250°F across acidic and fatty foods. The certification that turns organic cotton into a food-contact material.' },
+      { label: 'The Applications', heading: 'What touches the food.', body: 'Reusable food storage bags. Sandwich wraps. Bowl covers. Baby bibs for food contact. Breast milk storage. Coffee filters. Cloth napkins. Every application where organic cotton meets food — and the FDA says it\'s safe.' },
+      { label: 'The Build', heading: 'FoodSAFE cotton + FoodSAFE PUL.', body: 'FoodSAFE interlock (W-321) as the food-contact lining. ProSoft FoodSAFE PUL as the outer shell. Both layers FDA-certified. The complete food storage system with verified contact safety from the cotton to the barrier.' },
+      { label: 'Grace', heading: 'The silence awaits a community.', body: 'Zero reviews. Not one maker has written about using this for food storage. Listed, purchasable, certified. The community that needs it has not yet found it — or has found it and is using it without speaking. The silence here is potential, not absence.' }
+    ],
+    perspective: 'The feel is pure — and the FDA certified what touches your food. Organic cotton from the earth, processed without chemicals, tested across every food type from freezer to oven. The purity is not just skin-deep. It goes all the way to what you eat.',
+    echoes: ['FDA certified per 21 CFR 177.1680 and 175.300.', 'Tested stable from -20°C to 250°F.', 'Pair with ProSoft FoodSAFE PUL for complete food storage builds.']
+  },
+  'fabric-story': {
+    beats: [
+      { label: 'The Seed', heading: 'The feel is pure.', body: '100% certified organic cotton. SustainSafe chemical-free processing. pH 7.4 neutral. No synthetic content. No chemical finishes. No coatings. What you feel when you touch this fabric is cotton — nothing between your skin and the fiber.' },
+      { label: 'Both Sides', heading: 'No wrong side.', body: 'Two needle beds built this fabric simultaneously — identical smooth surfaces on face and back. Every certification holds from both directions. Turn the fabric over. Still organic. Still SustainSafe. Still pH-neutral. Still pure.' },
+      { label: 'After the Wash', heading: 'The butter threshold.', body: 'Hot water compacts the organic cotton fibers. 7–8% length shrinkage, 3–4% width. The hand shifts from soft to butter. The gentlest threshold in the series — hot water and standard detergent. That is all the fabric asks.' },
+      { label: 'The Ease', heading: 'The fabric cooperates.', body: 'Flat edges, standard tension, straight stitch. The most beginner-friendly knit in the ProECO collection. A first-time sewer felt confident before the needle touched the cloth. A definite go-to.' },
+      { label: 'Still Pure', heading: 'Nothing was added that could wash away.', body: '100% organic cotton — no Lycra, no synthetic blend, no chemical finish. The purity is the fiber itself. After the wash. After a hundred bolts. The feel at wash one is the feel at wash one hundred. Nothing to degrade. Nothing to lose.' },
+      { label: 'The Field', heading: 'Every surface it touches.', body: 'T-shirts and baby caps. Underwear and menstrual pads. Incontinence liners and food storage bags. Socks and sun wraps. The verified cotton that the commodity market cannot provide — organic, SustainSafe, Made in USA — serving every application where purity matters.' }
+    ],
+    perspective: 'The feel is pure. Not purer than something else. Not better than the import. Pure — in the way that cotton from the earth, processed without chemicals, manufactured in a facility she can locate, certified by standards she can read, is purely what it says it is.\n\nThe feel is not a finish applied to a surface. It is the fiber grown in soil. The construction arranged it. The processing cleared away what didn\'t belong. What remains is cotton. Both sides. After the wash. Easy to work with. And still — after all of it — pure.',
+    echoes: ['100% organic cotton — no synthetic fiber of any kind.', 'SustainSafe chemical-free processing — pH 7.4 neutral.', 'Pre-wash in hot water. Never fabric softener. The care is simple.']
+  }
+};
+
+// ═══════════════════════════════════════
+// WITNESS MOSAIC DATA
+// ═══════════════════════════════════════
+
+const witnessData = [
+  { id: 'diana', quote: 'Very nice quality. Elegant colors. I will be ordering quite a bit.', name: 'Diana Falciani', domain: 'Garments · the search ended', body: 'She loves cotton interlock. It\'s hard to find in organic. She found Wazoodle, ordered, and knew immediately — a long-sleeved t-shirt dress with a v-neckline. The commitment was immediate because the search had been long.', featured: true },
+  { id: 'jenij', quote: 'Does not retain odor or bacteria. TRUE!', name: 'Jeni J', domain: 'Underwear · Silver verification', body: 'She has bladder problems. She bought the Silver variant, made underwear, and tested the antimicrobial claim with her own body. The fabric held. She wrote TRUE in capitals. The only maker in this corpus who verified purity with her body and told everyone.', featured: true },
+  { id: 'bridget', quote: 'So much better than I was expecting.', name: 'Bridget', domain: 'Garments · first-time knit sewer', body: 'Her expectation was set by the commodity market. The gap between that floor and where she landed broke through into language. She felt confident her project would succeed specifically because of this fabric\'s quality.' },
+  { id: 'nina', quote: 'So happy to find organic cotton to sew menstrual pads as part of my plastic-free journey.', name: 'Nina', domain: 'Period Products · the journey', body: 'One sentence. Every word chosen. The search was not for a fabric — it was for alignment with a life being deliberately rebuilt without plastic. Organic cotton interlock as the skin-contact surface during menstruation.' },
+  { id: 'donna', quote: 'Lining incontinence underware.', name: 'Donna Uetz', domain: 'Incontinence · the naming', body: 'Three words. The medical vocabulary. The fabric\'s role — not the product, but the layer inside it. Smooth organic cotton as the surface touching the skin of a person managing incontinence. The naming was the story.' },
+  { id: 'sue', quote: 'A definite go to. Great for baby items.', name: 'Sue Kuhn', domain: 'Baby · Silver variant', body: 'She chose Silver for baby items and refined her cutting technique — switching from one bib on the fold to two from an entire pattern. Deep enough in production to optimize. The phrase of a maker who has found what she will keep using.' },
+  { id: 'alexis', quote: 'USA MADE!!! Baby caps and leggings.', name: 'Alexis', domain: 'Baby · the origin matters', body: 'Three exclamation marks after USA MADE. Not after the softness. After the origin. She was buying the manufacturing promise and placing it against a baby\'s head and legs. The purity was the purchase decision.' },
+  { id: 'loyalty', quote: 'Please keep making this in black! My favorite fabric and company!', name: 'Returning Customer', domain: 'Garments · settled loyalty', body: 'The loyalty is not to cotton interlock — cotton interlock is everywhere. The loyalty is to the promise: organic certification, SustainSafe processing, Made in USA. The verification stack that turns cotton into a statement.' }
+];
+
+// ═══════════════════════════════════════
+// FSA STARTERS & RESPONSES
+// ═══════════════════════════════════════
+
+const aiStartersByDomain = {
+  garment: ['100% organic cotton — no synthetic fiber.', 'Pre-wash transforms soft to butter.', 'Smooth both sides — no wrong side.', 'The most beginner-friendly ProECO knit.', 'Never use fabric softener.'],
+  baby: ['CPSIA certified for children\'s products.', 'pH 7.4 neutral against baby skin.', 'Class 1 flammability for sleepwear.', 'Silver variant for antimicrobial baby items.', 'Smooth both sides — same cotton either way.'],
+  underwear: ['Silver Plus inhibits 99.9% bacterial growth.', '50+ wash cycles of antimicrobial protection.', 'Customer verified — tested with her body.', 'Smooth interlock surface for all-day wear.', 'Never use fabric softener or chlorine bleach on Silver.'],
+  period: ['Organic cotton as the skin-contact layer.', 'Pairs with ProECO Fleece absorbent core.', '0.028" thin — smooth and discreet.', 'No plastic. No synthetic. Just cotton.', 'ProSoft ECO-PUL as waterproof barrier.'],
+  incontinence: ['Both sides smooth — no wrong side against skin.', 'pH 7.4 — no chemical residues.', 'Print variant for dignified product design.', 'Pairs with absorbent core and barrier layer.', 'Organic cotton from the earth, both directions.'],
+  food: ['FDA certified per 21 CFR 177.1680.', 'Tested from -20°C to 250°F.', 'Pair with FoodSAFE PUL for complete builds.', '200 GSM — slightly lighter than Standard.', 'Reusable food bags, wraps, covers, filters.'],
+  'fabric-story': ['100% organic cotton — the defining identity.', 'Four variants, one organic cotton platform.', 'Interlock vs Jersey vs Fleece vs French Terry.', 'SustainSafe chemical-free processing.', 'The commodity market gap this fabric fills.'],
+  default: ['100% organic cotton — no synthetic fiber.', 'Smooth both sides — no wrong side.', 'Pre-wash in hot water before cutting.', 'SustainSafe chemical-free processing.', 'Never use fabric softener.']
+};
+
+const fsaResponses = {
+  '100% organic cotton — no synthetic fiber.': { text: 'ProECO Organic Cotton Interlock is 100% certified organic cotton — no Lycra, no polyester, no synthetic fiber of any kind. The 30% crosswise stretch comes from the double-knit interlock construction, not from elastane. US Cotton Trust Protocol verified sourcing. The identity is defined by what it does NOT contain.', source: 'Physical Identity · ProECO Organic Cotton Interlock specs' },
+  'Pre-wash transforms soft to butter.': { text: 'Pre-wash in hot water before cutting. Expect 7–8% length shrinkage and 3–4% width shrinkage. The organic cotton fibers compact during washing, creating a heavier hand and improved body that multiple customers independently describe as "like butter." The first wash produces the most significant change. Every wash after is the same or better.', source: 'Pre-wash protocol · customer-validated transformation' },
+  'Smooth both sides — no wrong side.': { text: 'Double-knit interlock creates identical smooth surfaces on both sides — no pile, no loops, no visible right/wrong distinction in solid colors. Both sides can face outward in the finished product. This eliminates fabric orientation decisions during cutting and makes interlock the easiest ProECO construction for beginners.', source: 'Both Sides · First Face of Grace · interlock construction' },
+  'The most beginner-friendly ProECO knit.': { text: 'Flat, stable edges that don\'t curl during cutting — no weights or pins needed to manage edge roll. Standard machine tension without adjustment. Straight stitch works for most construction. A first-time knit sewer reported feeling confident her project would succeed. Customers consistently call it "easy to sew on" and "stable."', source: 'The Ease · Third Face of Grace · customer testimonials' },
+  'Never use fabric softener.': { text: 'Fabric softeners permanently coat fibers, reducing breathability and absorbency — undoing everything SustainSafe processing preserved. For Silver variants, softeners also permanently destroy antimicrobial effectiveness. Avoid chlorine bleach (degrades cotton). Use standard detergent with an extra rinse cycle. Oxygen bleach is acceptable.', source: 'Care requirement · critical across all ProECO variants' },
+  'CPSIA certified for children\'s products.': { text: 'All ProECO Organic Cotton Interlock variants hold CPSIA certification — lead, phthalates, and BPA testing for children\'s product safety compliance. Note: fabric certification does not automatically certify your finished product. Finished children\'s products may require independent testing depending on product category and sales channels.', source: 'CPSIA certification · all variants' },
+  'pH 7.4 neutral against baby skin.': { text: 'SustainSafe processing delivers pH 7.4 — perfectly neutral. No acidic or basic residues against the skin. For baby products, this means the organic cotton arrives free of manufacturing chemicals that could irritate the newest, most sensitive skin. Combined with organic fiber and chemical-free processing, it\'s the purest surface for first contact.', source: 'SustainSafe specification · pH neutrality' },
+  'Silver Plus inhibits 99.9% bacterial growth.': { text: 'W-559 Silver variant carries Silver Plus antimicrobial treatment inhibiting 99.9% bacterial growth through 50+ wash cycles with proper care. Customer-verified: a maker with bladder problems confirmed effective odor resistance in underwear made from this fabric. The specification becomes the dignity.', source: 'W-559 Silver specification · Jeni J verification' },
+  'Organic cotton as the skin-contact layer.': { text: 'In multi-layer hygiene builds, ProECO Organic Cotton Interlock serves as the smooth skin-contact surface — the layer that touches the body. At 0.028" thick, it\'s discreet and smooth. Pair with ProECO Fleece or French Terry as absorbent core, and ProSoft ECO-PUL as waterproof barrier. The purity starts where the body meets the product.', source: 'Layer role · pairing architecture · KB doc' },
+  'FDA certified per 21 CFR 177.1680.': { text: 'W-321 FoodSAFE variant is FDA food-contact certified per 21 CFR 177.1680 and 175.300 for repeated-use food contact. Tested stable from -20°C to 250°F across all food types including acidic and fatty foods. For commercial food-contact products, FDA certification is required. 200 GSM — slightly lighter than the 215 GSM Standard.', source: 'W-321 FoodSAFE specification · FDA certification' },
+  'Class 1 flammability for sleepwear.': { text: 'Per 16 CFR Part 1610 — general apparel classification suitable for children\'s garments and sleepwear without restriction. The breathable organic cotton construction regulates temperature for comfortable all-night wear. Combined with CPSIA certification, this supports commercial children\'s sleepwear production.', source: 'Flammability certification · children\'s sleepwear application' },
+  'Pairs with ProECO Fleece absorbent core.': { text: 'Proven layer stack: ProECO Organic Cotton Interlock (skin side) → ProECO Heavy Organic Cotton Fleece (absorbent core) → ProSoft ECO-PUL (barrier). All organic layers in the absorbent system. The interlock\'s 0.028" thickness keeps the skin-contact surface smooth while the fleece handles absorption beneath.', source: 'Layer stack configuration · KB doc pairing section' },
+  'Tested from -20°C to 250°F.': { text: 'FoodSAFE variant W-321 is tested stable across the full temperature range of food storage and preparation — from frozen food at -20°C to oven temperatures at 250°F. Stable across acidic foods (tomatoes, citrus), fatty foods (cheese, butter), and all other food types. The organic cotton doesn\'t degrade across this range.', source: 'W-321 FoodSAFE temperature specification' },
+  '100% organic cotton — the defining identity.': { text: 'This is the most exposed fabric in the ProECO collection. Every other construction carries something — fleece carries brushed pile, French terry carries loops, jersey carries Lycra. This fabric carries cotton. That is all. And that is everything. The purity is the identity.', source: 'Still Pure · Fourth Face of Grace · Fabric Story' },
+  'Four variants, one organic cotton platform.': { text: 'Standard (W-420, 215 GSM) — the foundation. Silver (W-559, 215 GSM) — antimicrobial. Print (W-604, 215 GSM) — decorative patterns. FoodSAFE (W-321, 200 GSM) — FDA food-contact. Same organic cotton, same interlock construction, same SustainSafe processing. Your decision is treatment type.', source: 'ProECO Organic Cotton Interlock product lineup' },
+  'SustainSafe chemical-free processing.': { text: 'ProECO SustainSafe technology removes manufacturing residues without adding chemical treatments. The result: pH 7.4 neutral fabric, free from the processing chemicals that conventional cotton carries. The feel is pure because SustainSafe cleared away everything that isn\'t cotton. What remains is the fiber from the earth.', source: 'SustainSafe Technology · ProECO processing standard' },
+  '50+ wash cycles of antimicrobial protection.': { text: 'Silver Plus treatment inhibits 99.9% bacterial growth and maintains effectiveness through 50+ wash cycles — provided you never use fabric softener or chlorine bleach, which permanently destroy the treatment. This care restriction applies to all variants for absorbency, but is especially critical for Silver.', source: 'W-559 Silver durability · care requirements' },
+  'Customer verified — tested with her body.': { text: 'Jeni J has bladder problems. She made underwear from the Silver variant, wore it, washed it, wore it again. She wrote — in capitals with exclamation marks — that the fabric does not retain odor or bacteria. TRUE. The rarest voice in the incontinence community, where the norm is silence. She spoke because the verification was undeniable.', source: 'Jeni J · Vignette 1 · The Verification' },
+  'Pair with FoodSAFE PUL for complete builds.': { text: 'Complete food storage system: FoodSAFE Organic Cotton Interlock (W-321) as food-contact lining + ProSoft FoodSAFE PUL as outer shell. Both layers FDA-certified for food contact. For sandwich wraps, snack bags, bowl covers, breast milk storage, and any application where both surfaces need food-contact verification.', source: 'FoodSAFE layer stack · KB doc pairing section' },
+  'Print variant for dignified product design.': { text: 'W-604 Print variant carries decorative surface-applied patterns on the same 215 GSM organic cotton interlock. For incontinence products, children\'s apparel, and any application where visual design serves dignity and delight. Budget 20–40% additional yardage for pattern matching on directional prints.', source: 'W-604 Print specification' },
+  '0.028" thin — smooth and discreet.': { text: 'At 0.028" thick, this is the thinnest fabric in the ProECO collection — designed for next-to-skin applications where bulk would compromise comfort or discretion. In period pads and incontinence liners, the smooth thinness keeps the skin-contact layer barely perceptible while the absorbent core below handles the work.', source: 'Physical specification · skin-contact layer role' },
+  'The commodity market gap this fabric fills.': { text: 'Cotton interlock is one of the most common knit fabrics globally — abundant from imports at commodity prices. What the commodity market cannot provide is verified cotton interlock: organic, SustainSafe chemical-free, Made in USA, CPSIA, Forever Chemicals-Free, pH 7.4 neutral. The construction is not rare. The verification is.', source: 'Market positioning · Exhausted Belief pattern' },
+  'Interlock vs Jersey vs Fleece vs French Terry.': { text: 'Interlock: smooth both sides, flat edges, no curl, thinnest (0.028"), 30% stretch, beginner-friendly. Jersey: Lycra stretch recovery, edge curl, stretch needle required. Fleece: brushed pile one side, thickest, maximum absorbency. French Terry: loops one side, mid-weight, good absorbency. Same organic cotton. Different constructions for different purposes.', source: 'ProECO construction comparison · KB doc' },
+  default: { text: 'Makers have already explored this territory. In the live experience, the concierge searches 395 knowledge base articles and years of maker wisdom to surface the answer already waiting.', source: 'Wazoodle Knowledge Base · powered by fabric intelligence' }
+};
+
+// ═══════════════════════════════════════
+// ALONGSIDE DATA
+// ═══════════════════════════════════════
+
+const alongsideByDomain = {
+  garment: {
+    partnerHint: 'Standalone garment fabric — no partner layers needed.',
+    partners: [],
+    siblingHint: 'Other ProECO organic cotton constructions.',
+    siblings: [
+      { name: 'ProECO Stretch-FIT Organic Cotton Jersey', role: 'Lycra stretch recovery — fitted garments that snap back', color: 'linear-gradient(135deg, #6D3D18, #ECD9B0)' },
+      { name: 'ProECO Organic Cotton Fleece', role: 'Brushed pile — warm garments, absorbent cores', color: 'linear-gradient(135deg, #6D3D18, #9DCE1E)' },
+      { name: 'ProECO Bamboo Jersey', role: 'Bamboo hand feel — silky drape, moisture management', color: 'linear-gradient(135deg, #6D3D18, #B4CAAF)' }
+    ],
+    showStack: false
+  },
+  baby: {
+    partnerHint: 'Standalone for baby garments. Layer partner for cloth diapers.',
+    partners: [
+      { name: 'ProECO Heavy Organic Cotton Fleece', role: 'Absorbent core for fitted cloth diapers', color: 'linear-gradient(135deg, #6D3D18, #9DCE1E)' },
+      { name: 'ProSoft® 1 mil ECO-PUL', role: 'Waterproof barrier — the outer cover layer', color: 'linear-gradient(135deg, #01ACEE, #8EC640)' }
+    ],
+    siblingHint: 'Other ProECO fabrics for baby products.',
+    siblings: [
+      { name: 'ProECO Stretch-FIT Organic Cotton Jersey', role: 'Fitted baby garments with stretch recovery', color: 'linear-gradient(135deg, #6D3D18, #ECD9B0)' }
+    ],
+    showStack: true
+  },
+  underwear: {
+    partnerHint: 'Standalone fabric for underwear and intimate apparel.',
+    partners: [],
+    siblingHint: 'Silver variant recommended for antimicrobial underwear.',
+    siblings: [
+      { name: 'ProECO Stretch-FIT Organic Cotton Jersey', role: 'Lycra recovery for fitted underwear', color: 'linear-gradient(135deg, #6D3D18, #ECD9B0)' }
+    ],
+    showStack: false
+  },
+  period: {
+    partnerHint: 'What goes below the interlock in a period product stack.',
+    partners: [
+      { name: 'ProECO Organic Cotton French Terry', role: 'Absorbent core for menstrual pads', color: 'linear-gradient(135deg, #6D3D18, #9DCE1E)' },
+      { name: 'ProSoft® 1 mil ECO-PUL', role: 'Waterproof barrier — the bottom layer', color: 'linear-gradient(135deg, #01ACEE, #8EC640)' },
+      { name: 'Zorb® Original', role: 'Concentrated absorption booster between layers', color: 'linear-gradient(135deg, #003B73, #0066CC)' }
+    ],
+    siblingHint: 'Other skin-contact surfaces for period products.',
+    siblings: [
+      { name: 'ProCool Performance Interlock', role: 'Wicking surface — transits moisture, doesn\'t hold it', color: 'linear-gradient(135deg, #1697D3, #91C8EB)' }
+    ],
+    showStack: true
+  },
+  incontinence: {
+    partnerHint: 'What goes below the interlock in an incontinence build.',
+    partners: [
+      { name: 'ProECO Heavy Organic Cotton Fleece', role: 'Absorbent core layer', color: 'linear-gradient(135deg, #6D3D18, #9DCE1E)' },
+      { name: 'ProSoft® 1 mil ECO-PUL', role: 'Waterproof barrier layer', color: 'linear-gradient(135deg, #01ACEE, #8EC640)' },
+      { name: 'Zorb® Original', role: 'Absorption booster for heavy needs', color: 'linear-gradient(135deg, #003B73, #0066CC)' }
+    ],
+    siblingHint: 'Other options for incontinence products.',
+    siblings: [
+      { name: 'ProCool Performance Interlock', role: 'Stay-dry wicking alternative surface', color: 'linear-gradient(135deg, #1697D3, #91C8EB)' }
+    ],
+    showStack: true
+  },
+  food: {
+    partnerHint: 'What pairs with FoodSAFE interlock for food storage.',
+    partners: [
+      { name: 'ProSoft® FoodSAFE PUL', role: 'FDA-certified waterproof outer shell', color: 'linear-gradient(135deg, #01ACEE, #8EC640)' }
+    ],
+    siblingHint: 'Other FoodSAFE-certified options.',
+    siblings: [
+      { name: 'ProSoft® FoodSAFE PUL', role: 'Waterproof barrier with FDA food-contact certification', color: 'linear-gradient(135deg, #01ACEE, #8EC640)' }
+    ],
+    showStack: true
+  },
+  default: {
+    partnerHint: 'What goes with ProECO Interlock in layered systems.',
+    partners: [
+      { name: 'ProECO Organic Cotton Fleece', role: 'Absorbent core for layered products', color: 'linear-gradient(135deg, #6D3D18, #9DCE1E)' },
+      { name: 'ProSoft® 1 mil ECO-PUL', role: 'Waterproof barrier layer', color: 'linear-gradient(135deg, #01ACEE, #8EC640)' }
+    ],
+    siblingHint: 'Other ProECO organic cotton constructions.',
+    siblings: [
+      { name: 'ProECO Stretch-FIT Organic Cotton Jersey', role: 'Lycra stretch recovery — fitted garments', color: 'linear-gradient(135deg, #6D3D18, #ECD9B0)' },
+      { name: 'ProECO Organic Cotton Fleece', role: 'Brushed pile — warm garments, absorbent cores', color: 'linear-gradient(135deg, #6D3D18, #9DCE1E)' },
+      { name: 'ProECO Organic Cotton French Terry', role: 'Loop back — mid-weight, absorbent', color: 'linear-gradient(135deg, #6D3D18, #B4CAAF)' }
+    ],
+    showStack: false
+  }
+};
+
+// ═══════════════════════════════════════
+// BUILDING RULES
+// ═══════════════════════════════════════
+
+const buildingRulesAll = [
+  { id: 'prewash', title: 'Pre-Wash (Essential)', text: 'Pre-wash in hot water before cutting — expect 7–8% length shrinkage and 3–4% width shrinkage. Fibers compact during washing, creating a heavier hand and the "butter" texture. Always pre-wash at the temperature you\'ll use for the finished product.', tip: 'The first wash produces the most significant change. Test a sample piece first.' },
+  { id: 'needle', title: 'Needle & Machine', text: 'Ballpoint or universal needles — 80/12 for general construction, 90/14 for multiple layers. Polyester thread for durability. Standard machine tension works without adjustment. Straight stitch for most construction; narrow zigzag (2mm) or stretch stitch for seam flexibility.', tip: 'Serged edges prevent raveling. The stable construction doesn\'t fight the feed dogs.' },
+  { id: 'stretch', title: 'Stretch & Layout', text: '30% crosswise, 10% lengthwise stretch. Orient greater stretch around the body. Both sides are identical — mark your chosen "right side" before cutting. Flat, stable edges don\'t curl during cutting — no weights needed to manage edge roll.', tip: 'Rotary cutter or sharp scissors both work cleanly on this construction.' },
+  { id: 'care', title: 'The Care Rule', text: 'Wash hot water with standard detergent. Extra rinse cycle to prevent detergent buildup. Tumble dry medium heat. Never fabric softener or dryer sheets — they permanently coat fibers, reducing breathability. Never chlorine bleach on Silver variants. Oxygen bleach acceptable.', tip: 'Fabric softener on Silver variants permanently destroys antimicrobial effectiveness.' },
+  { id: 'layering', title: 'Layering Logic', text: 'Standalone for garments — the fabric IS the product. As skin-contact layer in builds: Interlock (skin side) → Fleece or French Terry (absorbent core) → ECO-PUL (barrier). The 0.028" thickness keeps the contact surface smooth and discreet inside a multi-layer stack.', tip: 'Print variants: budget 20–40% additional yardage for pattern matching.' }
+];
+
+const buildingRuleOrder = {
+  garment: ['prewash', 'needle', 'stretch', 'care', 'layering'],
+  baby: ['prewash', 'needle', 'care', 'stretch', 'layering'],
+  underwear: ['care', 'needle', 'prewash', 'stretch', 'layering'],
+  period: ['layering', 'prewash', 'needle', 'care', 'stretch'],
+  incontinence: ['layering', 'prewash', 'care', 'needle', 'stretch'],
+  food: ['layering', 'care', 'prewash', 'needle', 'stretch'],
+  default: ['prewash', 'needle', 'stretch', 'care', 'layering']
+};
+
+const buildingRuleBadge = {
+  garment: 'prewash', baby: 'prewash', underwear: 'care', period: 'layering',
+  incontinence: 'layering', food: 'layering', default: 'prewash'
+};
+
+// ═══════════════════════════════════════
+// YIELD MATH & NUMBER CONFIG
+// ═══════════════════════════════════════
+
+const yieldByDomain = {
+  garment: { title: 'The Garment Math', rows: [{ sym: '→', text: '<strong>2–3 yards</strong> of ProECO Interlock at 60–64" wide' }, { sym: '×', text: '<strong>1 garment</strong> — t-shirt dress, top, or leggings' }, { sym: '○', text: 'Pre-wash first: 7–8% length shrinkage' }, { sym: '$', text: 'Organic cotton garments at <strong>fabric cost</strong>' }, { sym: '→', text: 'Verified organic. Made in USA. <strong>The cotton she searched for.</strong>' }] },
+  baby: { title: 'The Baby Math', rows: [{ sym: '→', text: '<strong>1 yard</strong> of ProECO Interlock = ~6–8 baby bibs' }, { sym: '×', text: 'Or <strong>2–3 baby caps</strong> + <strong>1 pair leggings</strong>' }, { sym: '○', text: 'CPSIA certified for children\'s products' }, { sym: '$', text: 'Organic baby clothing at <strong>maker prices</strong>' }, { sym: '→', text: 'Silver variant adds antimicrobial for <strong>extended wear</strong>' }] },
+  underwear: { title: 'The Underwear Math', rows: [{ sym: '→', text: '<strong>1 yard</strong> at 60–64" wide' }, { sym: '×', text: '<strong>2–3 pairs</strong> of underwear per yard' }, { sym: '○', text: 'Silver variant for <strong>antimicrobial odor control</strong>' }, { sym: '$', text: 'Verified organic underwear at <strong>fabric cost</strong>' }, { sym: '→', text: 'She tested it with her body. <strong>It\'s true.</strong>' }] },
+  period: { title: 'The Period Pad Math', rows: [{ sym: '→', text: '<strong>1 yard</strong> of Interlock (skin-contact layer)' }, { sym: '+', text: '1 yard Fleece or French Terry (absorbent core)' }, { sym: '+', text: '1 yard ECO-PUL (waterproof barrier)' }, { sym: '×', text: '<strong>~8–10 menstrual pads</strong> from the three-layer stack' }, { sym: '→', text: 'All organic. Plastic-free. <strong>The journey continues.</strong>' }] },
+  incontinence: { title: 'The Incontinence Build Math', rows: [{ sym: '→', text: '<strong>1 yard</strong> Interlock (smooth skin-contact)' }, { sym: '+', text: 'Absorbent core + barrier layer below' }, { sym: '×', text: '<strong>Multiple liners or pads</strong> per yard' }, { sym: '○', text: 'Both sides smooth — no wrong side against skin' }, { sym: '→', text: 'pH 7.4 neutral. <strong>Cotton from the earth.</strong>' }] },
+  food: { title: 'The FoodSAFE Math', rows: [{ sym: '→', text: '<strong>1 yard</strong> FoodSAFE Interlock (W-321)' }, { sym: '+', text: '1 yard FoodSAFE PUL (outer shell)' }, { sym: '×', text: '<strong>~6–8 sandwich wraps</strong> or <strong>4–6 snack bags</strong>' }, { sym: '○', text: 'FDA certified from -20°C to 250°F' }, { sym: '→', text: 'Both layers certified. <strong>Complete food safety.</strong>' }] },
+  default: { title: 'The Yield Math', rows: [{ sym: '→', text: '<strong>1 yard</strong> of ProECO Interlock = 60–64" × 36"' }, { sym: '=', text: '<strong>~2,200 sq inches</strong> of organic cotton' }, { sym: '×', text: '<strong>4 variants</strong> — same interlock, different treatments' }, { sym: '$', text: 'From $14.95/yard — volume discounts on rolls' }, { sym: '→', text: 'Choose your domain above for specific project math' }] }
+};
+
+// ═══════════════════════════════════════
+// CERT PRIORITIES
+// ═══════════════════════════════════════
+
+const certPriorities = {
+  garment: { priority: ['organic', 'forever-free'], notes: { organic: '100% certified organic cotton — the defining identity', 'forever-free': 'No PFAS, no chemical residues against skin' } },
+  baby: { priority: ['cpsia', 'organic'], notes: { cpsia: 'Children\'s product safety compliance', organic: 'Certified organic cotton against the newest skin' } },
+  underwear: { priority: ['forever-free', 'organic'], notes: { 'forever-free': 'No chemicals during prolonged intimate contact', organic: 'Purity verified by her body — not just a certificate' } },
+  period: { priority: ['forever-free', 'organic'], notes: { 'forever-free': 'No chemicals during the most sensitive days', organic: 'Plastic-free journey demands certified organic' } },
+  incontinence: { priority: ['forever-free', 'organic'], notes: { 'forever-free': 'No chemical residues against vulnerable skin', organic: 'Cotton from the earth, pH 7.4 neutral' } },
+  food: { priority: ['fda', 'organic'], notes: { fda: 'FDA food-contact certified — required for commercial products', organic: 'Organic cotton touching your food' } },
+  'fabric-story': { priority: ['usa', 'organic'], notes: { usa: 'Manufactured by AKAS Tex — every step under one roof', organic: 'The promise that distinguishes this from the commodity market' } },
+};
+
+// ═══════════════════════════════════════
+// NUMBER LEAD CONFIG
+// ═══════════════════════════════════════
+
+const numberLeadConfig = {
+  garment: { value: '100%', label: 'Organic Cotton', context: 'No synthetic fiber. No Lycra. No blend. The 30% stretch comes from double-knit interlock construction, not elastane. The purity is the identity — cotton from the earth, nothing else.', witness: '"Very nice quality. Elegant colors. I will be ordering quite a bit."' },
+  baby: { value: '7.4', label: 'pH (Neutral)', context: 'SustainSafe processing delivers perfect pH neutrality — no acid, no base against the newest skin. Combined with CPSIA, organic cotton, and chemical-free processing, the purest surface for baby\'s first contact.', witness: '"USA MADE!!! Baby caps and leggings."' },
+  underwear: { value: '99.9%', label: 'Bacterial Inhibition (Silver)', context: 'Silver Plus antimicrobial inhibits 99.9% bacterial growth through 50+ wash cycles. Customer-verified: Jeni J tested it with her own body and confirmed it\'s TRUE.', witness: '"Does not retain odor or bacteria. TRUE!"' },
+  period: { value: '0.028"', label: 'Thickness', context: 'The thinnest ProECO construction — smooth and discreet as the skin-contact layer in a menstrual pad. Thin enough to be barely perceptible while the absorbent core below does the work.', witness: '"So happy to find organic cotton for my plastic-free journey."' },
+  incontinence: { value: '2', label: 'Smooth Sides', context: 'Both sides identical — no wrong surface against sensitive skin. The same organic cotton from either direction. The same pH neutrality. The same purity. No face where the promise breaks down.', witness: '' },
+  food: { value: '250°F', label: 'Temperature Stability', context: 'FoodSAFE W-321 tested stable from -20°C to 250°F across all food types. FDA certified per 21 CFR 177.1680 and 175.300. The organic cotton that\'s safe against your food from freezer to oven.', witness: '' },
+  'fabric-story': { value: '4', label: 'Variants · One Platform', context: 'Standard, Silver, Print, FoodSAFE. Same organic cotton, same interlock construction, same SustainSafe processing. Your decision is treatment type — the purity is consistent across the family.', witness: '' },
+};
+
+// ═══════════════════════════════════════
+// CONSTELLATION NODES
+// ═══════════════════════════════════════
+
+const constellationNodes = [
+  { id: 'garment', label: 'Garments', type: 'proven', desc: 'T-shirts, dresses, leggings, pajamas, casual wear. The primary application — customer-validated across multiple projects and colors. Post-wash butter texture.' },
+  { id: 'underwear', label: 'Underwear & Intimate', type: 'vignette', desc: 'Silver variant verified by Jeni J for bladder condition — antimicrobial confirmed through body testing. The most intimate purity test in the series.' },
+  { id: 'baby', label: 'Baby & Children\'s', type: 'vignette', desc: 'Bibs, onesies, caps, leggings. CPSIA certified. Multiple customers specifically choose organic for baby. Silver variant for antimicrobial baby items.' },
+  { id: 'period', label: 'Period Products', type: 'vignette', desc: 'Skin-contact layer in reusable menstrual pads. Part of plastic-free journeys. Smooth organic surface during the most sensitive days.' },
+  { id: 'incontinence', label: 'Incontinence', type: 'vignette', desc: 'Lining for bladder leak pads and underwear. Two makers named the condition. The silence after is complete. Print variant for dignified design.' },
+  { id: 'food', label: 'Food & Household', type: 'silence', desc: 'FoodSAFE W-321 — FDA certified. Snack bags, wraps, bowl covers, coffee filters. Zero customer reviews. The community hasn\'t found it yet, or uses it without speaking.' },
+  { id: 'sun', label: 'Sun & Outdoor', type: 'silence', desc: 'UPF 50+ blocks 98% UV. Sun wraps, casual outdoor garments. Architecturally supported but emotionally unvoiced.' },
+  { id: 'mask', label: 'Masks', type: 'edge', desc: 'Pandemic-era application. Organic cotton mask construction. Technical precision, no ongoing emotional arc.' },
+  { id: 'b2b', label: 'B2B Commercial', type: 'edge', desc: 'The deepest silence. Commercial buyers who test one yard and come back for hundreds. Their testimony is the reorder. Their review is the growing volume.' },
+  { id: 'socks', label: 'Socks & Accessories', type: 'edge', desc: 'A maker knits organic cotton socks from this interlock and sells them online. The fabric disappears into a product line.' }
+];
+
+const constellationPositions = {
+  garment: { cx: 375, cy: 105, r: 35 },
+  underwear: { cx: 545, cy: 150, r: 29 },
+  baby: { cx: 205, cy: 150, r: 29 },
+  period: { cx: 540, cy: 310, r: 27 },
+  incontinence: { cx: 550, cy: 420, r: 25 },
+  food: { cx: 200, cy: 310, r: 23 },
+  sun: { cx: 195, cy: 420, r: 21 },
+  b2b: { cx: 620, cy: 250, r: 21 }
+};
+
+// ═══════════════════════════════════════
+// ROUTING RECOMMENDATIONS
+// ═══════════════════════════════════════
+
+const routingByDomain = {
+  garment: { title: 'For your garment project', variant: 'W-420 Standard', reason: 'The foundation variant. 215 GSM organic cotton, smooth both sides, SustainSafe processing. For t-shirts, dresses, leggings, pajamas — the verified cotton the commodity market can\'t provide.', cta: 'Add W-420 Standard to Cart', alt: 'W-559 Silver', altReason: ' for antimicrobial odor control in sleepwear and underwear' },
+  baby: { title: 'For your baby project', variant: 'W-420 Standard', reason: 'CPSIA certified, pH 7.4 neutral, organic cotton smooth both sides. The purest surface for the newest skin. Silver variant available for antimicrobial baby items.', cta: 'Add W-420 Standard to Cart', alt: 'W-559 Silver', altReason: ' for antimicrobial protection in baby clothing' },
+  underwear: { title: 'For your underwear project', variant: 'W-559 Silver', reason: 'Silver Plus antimicrobial inhibits 99.9% bacterial growth through 50+ wash cycles. Customer-verified for bladder conditions. The purity tested with her body.', cta: 'Add W-559 Silver to Cart', alt: 'W-420 Standard', altReason: ' if antimicrobial is not needed' },
+  period: { title: 'For your period product', variant: 'W-420 Standard', reason: 'Organic cotton skin-contact layer at 0.028" — smooth and discreet. Pair with ProECO Fleece core and ProSoft ECO-PUL barrier for a complete organic pad.', cta: 'Add W-420 Standard to Cart', alt: 'W-559 Silver', altReason: ' for antimicrobial in period underwear gussets' },
+  incontinence: { title: 'For your incontinence product', variant: 'W-420 Standard', reason: 'Smooth both sides, pH 7.4 neutral, organic cotton against skin that needs purity most. Pair with absorbent core and barrier layer.', cta: 'Add W-420 Standard to Cart', alt: 'W-604 Print', altReason: ' for dignified product design with decorative patterns' },
+  food: { title: 'For your food product', variant: 'W-321 FoodSAFE', reason: 'FDA food-contact certified per 21 CFR 177.1680. Tested from -20°C to 250°F. The only organic cotton interlock certified for food contact. Pair with FoodSAFE PUL.', cta: 'Add W-321 FoodSAFE to Cart', alt: 'W-420 Standard', altReason: ' for cloth napkins and non-food-contact household items' },
+  'fabric-story': { title: 'For your project', variant: 'W-420 Standard', reason: 'The foundation variant. 215 GSM, 100% organic cotton, smooth both sides, SustainSafe processing. Start here — the most versatile entry into the ProECO Interlock family.', cta: 'Add W-420 Standard to Cart', alt: 'W-559 Silver', altReason: ' for antimicrobial odor control' },
+  default: { title: 'For your project', variant: 'W-420 Standard', reason: 'The foundation variant. 215 GSM, 100% organic cotton, smooth both sides. The verified cotton the commodity market can\'t provide. Start here.', cta: 'Add W-420 Standard to Cart', alt: 'W-559 Silver', altReason: ' for antimicrobial odor control' }
+};
+
+// ═══════════════════════════════════════
+// PERSPECTIVE CASCADE DATA
+// ═══════════════════════════════════════
+
+const perspectiveByDomain = {
+  garment: ['The maker who searched through a full shelf found a cotton she could verify.', 'The parent who placed it against the newest skin trusted it because nothing was between the fiber and the baby.', 'The maker with bladder problems tested the Silver with her body and found the promise true.', 'The B2B buyer confirmed the purity at a hundred bolts and never wrote a word.'],
+  baby: ['The newest skin meets organic cotton — pH neutral, chemical-free, smooth both sides.', 'The maker who searched the longest found this and committed immediately.', 'The Silver holds through fifty washes because the treatment is inside the fiber, not on it.', 'Cotton from the earth. Against the skin that has never felt anything else.'],
+  underwear: ['She proved the purity with her body — the most intimate test a human being can administer.', 'The Silver held. The cotton held. The promise held.', 'The maker who searched for organic found commitment language, not expansion language.', 'The reorder is the word. The silence scales with the relationship.'],
+  period: ['The plastic-free journey requires cotton that can answer the question: what are you?', 'This fabric answers: cotton. Nothing else.', 'The baby\'s first fabric. The maker\'s verified cotton. The body\'s most intimate surface.', 'The feel is pure. The journey continues.'],
+  incontinence: ['She named her condition in three words and trusted the fabric with everything she didn\'t say.', 'Both sides smooth. No wrong side against the body that needs purity most.', 'The parent chose organic for the newest skin. The maker chose it for dignity.', 'Cotton from the earth. pH 7.4. The silence is complete.'],
+  food: ['FDA certified what touches your food — from freezer to oven temperatures.', 'Organic cotton from the earth, processed without chemicals, safe against what you eat.', 'The community hasn\'t spoken yet. The certification speaks for them.', 'The feel is pure. The food knows.'],
+  'fabric-story': ['The feel is pure. Not purer than something else. Purely what it says it is.', 'Cotton from the earth. Construction from the loom. Nothing else.', 'The maker searched through a full shelf. The parent chose for the newest skin. The Silver held against the body.', 'Both sides. After the wash. Easy to work with. And still — after all of it — pure.'],
+  default: ['The maker who searched found verification. The parent found safety. The body found purity.', 'The baby\'s first fabric. The maker\'s verified cotton. The body\'s most intimate surface.', 'The B2B buyer confirmed at a hundred bolts and never wrote a word.', 'Cotton from the earth. Both sides. After the wash. Still pure.']
+};
+
+// ═══════════════════════════════════════
+// GATE LOGIC
+// ═══════════════════════════════════════
+
+let currentDomain = '';
+let listenersInitialized = false;
+
+document.querySelectorAll('.gate-tile').forEach(tile => {
+  tile.addEventListener('click', () => {
+    document.querySelectorAll('.gate-tile').forEach(t => t.classList.remove('selected'));
+    tile.classList.add('selected');
+    document.getElementById('gateEnter').classList.add('visible');
+  });
+});
+
+document.getElementById('gateEnter').addEventListener('click', dismissGate);
+
+function dismissGate() {
+  const selected = document.querySelector('.gate-tile.selected');
+  const domain = selected ? selected.dataset.domain : '';
+  currentDomain = domain;
+
+  document.getElementById('gateOverlay').classList.add('dismissed');
+  document.getElementById('mainPage').classList.add('visible');
+
+  applyDomain(domain);
+
+  if (!listenersInitialized) {
+    initStickyBuyBar();
+    initScrollReveal();
+    listenersInitialized = true;
+  }
+}
+
+// ═══════════════════════════════════════
+// APPLY DOMAIN
+// ═══════════════════════════════════════
+
+function applyDomain(domain) {
+  const config = domainConfig[domain] || domainConfig['fabric-story'];
+  document.getElementById('seedLine').textContent = config.seed;
+  document.getElementById('journeyLabel').textContent = config.name;
+
+  // Before frame
+  const before = beforeByDomain[domain] || beforeByDomain['fabric-story'];
+  document.getElementById('beforeHeading').textContent = before.heading;
+  document.getElementById('beforeBody').textContent = before.body;
+
+  // Story title + subtitle + active pill
+  document.getElementById('makerTitle').textContent = config.title;
+  document.getElementById('makerSubtitle').textContent = config.subtitle;
+  document.querySelectorAll('#domainPills .domain-pill').forEach(p => {
+    p.classList.toggle('active', p.dataset.domain === domain);
+  });
+  renderTimeline(domain);
+  renderMosaic(domain);
+  applyDomainToSections(domain);
+}
+
+// ═══════════════════════════════════════
+// RENDER FUNCTIONS
+// ═══════════════════════════════════════
+
+function renderTimeline(domain) {
+  const data = domainTimelines[domain] || domainTimelines['fabric-story'];
+  const container = document.getElementById('timeline');
+  container.innerHTML = data.beats.map(b => `
+    <div class="timeline-beat">
+      <div class="beat-label">${b.label}</div>
+      <div class="beat-heading">${b.heading}</div>
+      <div class="beat-body">${b.body}</div>
+    </div>
+  `).join('') + `
+    <div class="perspective-collapse">
+      <div class="collapse-label">The Perspective</div>
+      <div class="collapse-text">${data.perspective.replace(/\n/g, '<br>')}</div>
+      <div class="spoken-echoes">
+        <div class="echoes-label">What the makers confirmed</div>
+        ${data.echoes.map(e => `<div class="echo-item">${e}</div>`).join('')}
+      </div>
+    </div>
+  `;
+}
+
+// Domain pills — switch between stories without leaving the section
+document.querySelectorAll('#domainPills .domain-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.querySelectorAll('#domainPills .domain-pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    const domain = pill.dataset.domain;
+    const config = domainConfig[domain] || domainConfig['fabric-story'];
+    document.getElementById('makerTitle').textContent = config.title;
+    document.getElementById('makerSubtitle').textContent = config.subtitle;
+    renderTimeline(domain);
+  });
+});
+
+function renderMosaic(domain) {
+  const grid = document.getElementById('mosaicGrid');
+  grid.innerHTML = witnessData.map(w => `
+    <div class="mosaic-tile ${w.featured ? 'featured' : ''}" onclick="expandWitness('${w.id}')">
+      <div class="mosaic-quote">"${w.quote}"</div>
+      <div class="mosaic-attribution">
+        <div><div class="mosaic-name">${w.name}</div><div class="mosaic-domain">${w.domain}</div></div>
+        <div class="mosaic-witness">Witnessed</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function expandWitness(id) {
+  const w = witnessData.find(d => d.id === id);
+  if (!w) return;
+  document.getElementById('lbQuote').textContent = '"' + w.quote + '"';
+  document.getElementById('lbBody').textContent = w.body;
+  document.getElementById('lbName').textContent = w.name;
+  document.getElementById('lbDomain').textContent = w.domain;
+  document.getElementById('witnessLightbox').classList.add('visible');
+}
+
+function closeWitness() {
+  document.getElementById('witnessLightbox').classList.remove('visible');
+}
+
+function renderAlongside(domain) {
+  const data = alongsideByDomain[domain] || alongsideByDomain['default'];
+  const grid = document.getElementById('alongsideGrid');
+
+  const stackHtml = data.showStack ? `
+    <div class="stack-indicator">
+      <div class="stack-layer surface">ProECO Interlock — smooth skin contact</div>
+      <div class="stack-arrow">↓ moisture transits down</div>
+      <div class="stack-layer core">Zorb — absorbent core</div>
+      <div class="stack-arrow">↓ liquid held</div>
+      <div class="stack-layer barrier">ProSoft ECO-PUL — waterproof barrier</div>
+    </div>
+  ` : '';
+
+  grid.innerHTML = `
+    <div class="alongside-column">
+      <div class="alongside-column-label">${data.showStack ? 'What Goes Below' : 'Alongside — Layer Partners'}</div>
+      <div class="alongside-column-hint">${data.partnerHint}</div>
+      ${stackHtml}
+      ${data.partners.map(f => `
+        <div class="fabric-card">
+          <div class="fabric-card-swatch" style="background:${f.color}"></div>
+          <div class="fabric-card-info"><div class="fabric-card-name">${f.name}</div><div class="fabric-card-role">${f.role}</div></div>
+          <div class="fabric-card-arrow">→</div>
+        </div>
+      `).join('') || '<div style="font-size:var(--text-sm);color:var(--gray-400);font-style:italic;padding:var(--space-4)">Standalone fabric — airflow enables evaporation.</div>'}
+    </div>
+    <div class="alongside-column">
+      <div class="alongside-column-label">Instead — Family Siblings</div>
+      <div class="alongside-column-hint">${data.siblingHint}</div>
+      ${data.siblings.map(f => `
+        <div class="fabric-card">
+          <div class="fabric-card-swatch" style="background:${f.color}"></div>
+          <div class="fabric-card-info"><div class="fabric-card-name">${f.name}</div><div class="fabric-card-role">${f.role}</div></div>
+          <div class="fabric-card-arrow">→</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function renderBuildingRules(domain) {
+  const order = buildingRuleOrder[domain] || buildingRuleOrder['default'];
+  const badge = buildingRuleBadge[domain] || buildingRuleBadge['default'];
+  const container = document.getElementById('buildingRules');
+  container.innerHTML = order.map((id, i) => {
+    const rule = buildingRulesAll.find(r => r.id === id);
+    return `
+      <div class="building-rule ${i === 0 ? 'open' : ''} ${id === badge ? 'recommended' : ''}">
+        <div class="building-rule-header" onclick="toggleBuildingRule(this)">
+          <div class="building-rule-number">${i + 1}</div>
+          <div class="building-rule-title">${rule.title}</div>
+          <span class="building-rule-badge">Start here</span>
+          <div class="building-rule-toggle">▼</div>
+        </div>
+        <div class="building-rule-body">
+          <div class="building-rule-text">${rule.text}</div>
+          <div class="building-rule-tip">${rule.tip}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function toggleBuildingRule(header) {
+  const rule = header.parentElement;
+  const wasOpen = rule.classList.contains('open');
+  document.querySelectorAll('.building-rule').forEach(r => r.classList.remove('open'));
+  if (!wasOpen) rule.classList.add('open');
+}
+
+function renderAIStarters(domain) {
+  const starters = aiStartersByDomain[domain] || aiStartersByDomain['default'];
+  document.getElementById('aiStarters').innerHTML = starters.map(s =>
+    `<button class="ai-starter" onclick="showFSA(this.textContent)">${s}</button>`
+  ).join('');
+}
+
+function showFSA(text) {
+  const resp = fsaResponses[text] || fsaResponses['default'];
+  const container = document.getElementById('fsaResponse');
+  container.innerHTML = `
+    <div class="fsa-response-label">An answer already spoken</div>
+    <div class="fsa-response-text">${resp.text}</div>
+    <div class="fsa-response-source">${resp.source}</div>
+  `;
+  container.classList.add('visible');
+  container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function seekAnswer() {
+  const input = document.getElementById('aiInput');
+  const text = input.value.trim();
+  if (!text) return;
+  const container = document.getElementById('fsaResponse');
+  container.innerHTML = `
+    <div class="fsa-response-label">An answer already spoken</div>
+    <div class="fsa-response-text">Makers have explored "${text}" before. In the live experience, the concierge searches 395 knowledge base articles to surface the answer already waiting.</div>
+    <div class="fsa-response-source">Wazoodle Knowledge Base · powered by fabric intelligence</div>
+  `;
+  container.classList.add('visible');
+  input.value = '';
+}
+
+function applyDomainToSections(domain) {
+  highlightConstellationNode(domain);
+  renderAIStarters(domain || 'default');
+  renderAlongside(domain || 'default');
+  renderBuildingRules(domain || 'default');
+
+  // Routing
+  const routing = routingByDomain[domain] || routingByDomain['default'];
+  document.getElementById('routingTitle').textContent = routing.title;
+  document.getElementById('routingVariant').textContent = routing.variant;
+  document.getElementById('routingReason').textContent = routing.reason;
+  document.getElementById('routingCta').textContent = routing.cta;
+  document.getElementById('routingAlt').textContent = routing.alt;
+  document.getElementById('routingAltReason').textContent = routing.altReason;
+
+  // Yield
+  const yieldData = yieldByDomain[domain] || yieldByDomain['default'];
+  document.getElementById('yieldMathTitle').textContent = yieldData.title;
+  document.getElementById('yieldMathContent').innerHTML = yieldData.rows.map(r =>
+    `<div class="yield-row"><div class="yield-symbol">${r.sym}</div><div class="yield-text">${r.text}</div></div>`
+  ).join('');
+
+  // Certs
+  document.querySelectorAll('.cert-card').forEach(c => { c.classList.remove('domain-priority'); const n = c.querySelector('.cert-domain-note'); if(n) n.textContent = ''; });
+  const certs = certPriorities[domain];
+  if (certs) {
+    certs.priority.forEach(id => {
+      const card = document.querySelector(`[data-cert="${id}"]`);
+      if (card) { card.classList.add('domain-priority'); const note = card.querySelector('.cert-domain-note'); if(note && certs.notes[id]) note.textContent = certs.notes[id]; }
+    });
+  }
+
+  // Number lead
+  const numConfig = numberLeadConfig[domain];
+  if (numConfig) {
+    document.getElementById('numberLeadValue').textContent = numConfig.value;
+    document.getElementById('numberLeadLabel').textContent = numConfig.label;
+    document.getElementById('numberLeadContext').textContent = numConfig.context;
+    document.getElementById('numberLeadWitness').textContent = numConfig.witness;
+  }
+
+  // Perspective cascade
+  const cascadeItems = perspectiveByDomain[domain] || perspectiveByDomain['default'];
+  const cascade = document.getElementById('perspectiveCascade');
+  cascade.innerHTML = cascadeItems.map(text => `<div class="perspective-cascade-item">${text}</div>`).join('');
+}
+
+// ═══════════════════════════════════════
+// CONSTELLATION
+// ═══════════════════════════════════════
+
+function highlightConstellationNode(domain) {
+  const ring = document.getElementById('constellationHighlight');
+  const pos = constellationPositions[domain];
+  if (pos && ring) {
+    ring.setAttribute('cx', pos.cx);
+    ring.setAttribute('cy', pos.cy);
+    ring.setAttribute('r', pos.r);
+    ring.style.opacity = '1';
+  } else if (ring) { ring.style.opacity = '0'; }
+}
+
+function showConstellationDetail(id) {
+  const node = constellationNodes.find(n => n.id === id);
+  if (!node) return;
+  document.getElementById('constellationDetailName').textContent = node.label;
+  document.getElementById('constellationDetailType').textContent = node.type === 'proven' ? 'Proven' : node.type === 'vignette' ? 'Vignette' : node.type === 'silence' ? 'Discovery' : 'Edge';
+  document.getElementById('constellationDetailBody').textContent = node.desc;
+  document.getElementById('constellationDetail').classList.add('visible');
+}
+
+function closeConstellationDetail() {
+  document.getElementById('constellationDetail').classList.remove('visible');
+}
+
+let placedCount = 0;
+function placeOnConstellation() {
+  const input = document.getElementById('placeInput');
+  const text = input.value.trim();
+  if (!text) return;
+
+  const svg = document.getElementById('constellationSvg');
+  if (!svg) return;
+
+  placedCount++;
+  const nodeId = 'user-' + placedCount;
+
+  // Add to data
+  constellationNodes.push({ id: nodeId, label: text, type: 'silence', desc: `"${text}" — you're the first to place this on the map. The purity of ProECO Organic Cotton Interlock supports any application where organic cotton meets skin. This is the frontier.` });
+
+  // Pick position on outer orbit (avoid existing nodes)
+  const gapAngles = [-40, 15, 70, 160, 200, 310];
+  const angle = gapAngles[(placedCount - 1) % gapAngles.length] * (Math.PI / 180);
+  const radius = 215 + Math.random() * 25;
+  const cx = 375 + Math.cos(angle) * radius;
+  const cy = 265 + Math.sin(angle) * radius;
+
+  // Truncate label
+  const label = text.length > 18 ? text.substring(0, 16) + '…' : text;
+  const lines = label.length > 10 ? [label.substring(0, Math.ceil(label.length / 2)), label.substring(Math.ceil(label.length / 2))] : [label];
+
+  // Create connection line
+  const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+  line.setAttribute('x1', cx); line.setAttribute('y1', cy);
+  line.setAttribute('x2', 375); line.setAttribute('y2', 265);
+  line.setAttribute('stroke', '#9CA3AF'); line.setAttribute('stroke-width', '1');
+  line.setAttribute('opacity', '0.25'); line.setAttribute('stroke-dasharray', '3,3');
+
+  // Create glow ring
+  const glow = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  glow.setAttribute('cx', cx); glow.setAttribute('cy', cy); glow.setAttribute('r', '28');
+  glow.setAttribute('fill', 'none'); glow.setAttribute('stroke', '#4C9ED9');
+  glow.setAttribute('stroke-width', '1'); glow.setAttribute('opacity', '0.15');
+
+  // Create node group
+  const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  g.classList.add('constellation-node-svg');
+  g.setAttribute('data-id', nodeId);
+  g.style.cursor = 'pointer';
+  g.onclick = () => showConstellationDetail(nodeId);
+
+  const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  circle.setAttribute('cx', cx); circle.setAttribute('cy', cy); circle.setAttribute('r', '20');
+  circle.setAttribute('fill', 'rgba(163,219,239,0.15)');
+  circle.setAttribute('stroke', '#4C9ED9'); circle.setAttribute('stroke-width', '1.5');
+  circle.setAttribute('stroke-dasharray', '4,3');
+  g.appendChild(circle);
+
+  lines.forEach((l, i) => {
+    const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    txt.setAttribute('x', cx);
+    txt.setAttribute('y', cy + (lines.length === 1 ? 3 : (i === 0 ? -2 : 8)));
+    txt.setAttribute('text-anchor', 'middle');
+    txt.setAttribute('font-family', 'var(--font-body)');
+    txt.setAttribute('font-size', '7'); txt.setAttribute('fill', '#4C9ED9');
+    txt.setAttribute('font-weight', '500');
+    txt.textContent = l;
+    g.appendChild(txt);
+  });
+
+  // Insert before legend group
+  const legend = svg.querySelector('g[transform]');
+  svg.insertBefore(line, legend);
+  svg.insertBefore(glow, legend);
+  svg.insertBefore(g, legend);
+
+  // Show placed message
+  const map = document.querySelector('.constellation-map');
+  let msg = map.querySelector('.constellation-placed-msg');
+  if (!msg) { msg = document.createElement('div'); msg.className = 'constellation-placed-msg'; map.appendChild(msg); }
+  msg.textContent = `"${text}" placed on the constellation. You're exploring new territory.`;
+
+  input.value = '';
+  setTimeout(() => showConstellationDetail(nodeId), 400);
+}
+
+// ═══════════════════════════════════════
+// FILMSTRIP
+// ═══════════════════════════════════════
+
+let filmIndex = 0;
+
+function filmGo(idx) {
+  filmIndex = idx;
+  document.getElementById('filmstripTrack').style.transform = `translateX(-${idx * 100}%)`;
+  document.querySelectorAll('.film-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  document.querySelectorAll('.filmstrip-frame').forEach((f, i) => f.classList.toggle('face-active', i === idx));
+  if (idx === 1) startEnduranceCounter();
+}
+
+function filmPrev() { if (filmIndex > 0) filmGo(filmIndex - 1); }
+function filmNext() { if (filmIndex < 5) filmGo(filmIndex + 1); }
+
+let washInterval;
+function startEnduranceCounter() {
+  clearInterval(washInterval);
+  const el = document.getElementById('washCounterText');
+  let count = 1;
+  el.textContent = '1';
+  washInterval = setInterval(() => {
+    count++;
+    el.textContent = count >= 300 ? '300+' : count;
+    if (count >= 300) clearInterval(washInterval);
+  }, 12);
+}
+
+// Touch/swipe
+let touchX = 0;
+const track = document.getElementById('filmstripTrack');
+track.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+track.addEventListener('touchend', e => {
+  const d = touchX - e.changedTouches[0].clientX;
+  if (Math.abs(d) > 50) { d > 0 ? filmNext() : filmPrev(); }
+});
+
+// Keyboard
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') filmNext();
+  if (e.key === 'ArrowLeft') filmPrev();
+});
+
+// ═══════════════════════════════════════
+// BUY BOX
+// ═══════════════════════════════════════
+
+const variantData = {
+  standard: { label: 'W-420 · Standard', text: 'The foundation variant. 215 GSM, 100% organic cotton, smooth both sides. For t-shirts, baby clothing, leggings, pajamas, and skin-contact layers. Post-wash: butter.', style: 'standard' },
+  silver: { label: 'W-559 · Silver', text: 'Silver Plus antimicrobial — 99.9% bacterial inhibition through 50+ washes. For underwear, intimate apparel, baby items, sleepwear. Customer verified: TRUE.', style: 'silver' },
+  print: { label: 'W-604 · Print', text: 'Decorative surface patterns on 215 GSM organic cotton. For children\'s apparel, cloth diaper outer shells, baby accessories. Budget 20–40% extra for pattern matching.', style: 'standard' },
+  foodsafe: { label: 'W-321 · FoodSAFE', text: 'FDA food-contact certified per 21 CFR 177.1680. 200 GSM. Tested -20°C to 250°F across all food types. For reusable food bags, sandwich wraps, bowl covers, coffee filters.', style: 'foodsafe' }
+};
+
+function onStyleChange(select) {
+  const v = select.value;
+  const data = variantData[v];
+  if (data) {
+    const info = document.getElementById('variantInfo');
+    info.dataset.variant = data.style;
+    info.innerHTML = `<span class="variant-info-label">${data.label}</span><span class="variant-info-text">${data.text}</span>`;
+  }
+}
+
+function onColorChange(select) {
+  const opt = select.options[select.selectedIndex];
+  const color = opt.dataset.color || '#FAFAFA';
+  document.getElementById('colorIndicator').style.background = color;
+}
+
+function setLength(el, label) {
+  document.querySelectorAll('.length-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  // Update the label text next to "Length"
+  const levelLabel = el.closest('.selector-level').querySelector('.selector-level-label');
+  levelLabel.innerHTML = `Length <span style="font-weight:400; color:var(--gray-400)">- ${label}</span>`;
+}
+
+function switchGalleryThumb(el) {
+  document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  const isVideo = el.dataset.type === 'video';
+  document.getElementById('galleryVideoOverlay').classList.toggle('visible', isVideo);
+}
+
+function adjustQty(delta) {
+  const input = document.getElementById('qtyValue');
+  let val = parseInt(input.value) + delta;
+  input.value = Math.max(1, Math.min(99, val));
+}
+
+// ═══════════════════════════════════════
+// STICKY BUY BAR
+// ═══════════════════════════════════════
+
+function initStickyBuyBar() {
+  const buybox = document.getElementById('buyBox');
+  const bar = document.getElementById('stickyBuyBar');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => bar.classList.toggle('visible', !entry.isIntersecting));
+  }, { threshold: 0 });
+  observer.observe(buybox);
+}
+
+// ═══════════════════════════════════════
+// SCROLL REVEAL
+// ═══════════════════════════════════════
+
+function initScrollReveal() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Perspective cascade
+  const perspObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.perspective-cascade-item').forEach(item => item.classList.add('visible'));
+        document.getElementById('perspectiveQuestion').classList.add('visible');
+      }
+    });
+  }, { threshold: 0.3 });
+  perspObs.observe(document.getElementById('perspectiveCascade'));
+}
+
+// Initialize first frame as active
+filmGo(0);
+</script>
+
+</body>
+</html>

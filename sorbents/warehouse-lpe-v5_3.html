@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Warehouse Floor Safety | SupAbsorb Tech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--green:#3B8234;--dg:#0D672E;--olive:#B4CAAF;--clay:#CCAA87;--stone:#E7E1D5;--blk:#1E1E1E;--yel:#FFD200;--red:#C0392B;--ink:#1E1E1E;--ink2:#5A5A5A;--inkd:#E8E4DE;--inkm:#9A9590;--pad:clamp(60px,10vw,120px)}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;font-weight:400;line-height:1.7;color:var(--ink);background:var(--blk);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.sn{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.04em;line-height:1.1}
+
+/* Concrete grain on dark sections */
+.grain::after{content:'';position:absolute;inset:0;opacity:.04;pointer-events:none;
+background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:200px 200px}
+
+/* Oil canvas */
+.oil{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:2}
+
+/* Entry */
+.entry{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px 24px;background:var(--blk);position:relative;z-index:3}
+.drop{width:6px;height:6px;background:var(--red);border-radius:50%;margin-bottom:48px;opacity:0;position:relative;animation:dF 1.8s ease-in forwards .3s}
+@keyframes dF{0%{opacity:0;transform:translateY(-80px) scale(.4)}35%{opacity:1;transform:translateY(0) scale(1)}42%{transform:scaleX(2.2) scaleY(.35)}55%{transform:scale(1)}100%{opacity:1;box-shadow:0 0 80px rgba(192,57,43,.2),0 0 160px rgba(192,57,43,.06)}}
+.entry h1{font-size:clamp(2rem,6vw,4rem);color:var(--inkd);max-width:700px;opacity:0;animation:rU 1s ease forwards 1.8s}
+.entry .sub{font-size:clamp(.95rem,2vw,1.2rem);color:var(--inkm);margin-top:24px;font-weight:300;max-width:500px;opacity:0;animation:rU 1s ease forwards 2.5s;line-height:1.8}
+.entry .whisper{font-size:.82rem;color:rgba(125,139,134,.6);margin-top:44px;font-style:italic;letter-spacing:.02em;opacity:0;animation:rU 1.2s ease forwards 3.2s}
+.scr{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);opacity:0;animation:rU .6s ease forwards 3.8s,sB 2.5s ease-in-out infinite 4.2s}
+.scr svg{width:22px;height:22px;stroke:var(--inkm);stroke-width:2;fill:none}
+@keyframes rU{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes sB{0%,100%{transform:translateX(-50%)}50%{transform:translateX(-50%) translateY(7px)}}
+
+/* Acts */
+.act{padding:var(--pad) 24px;position:relative;z-index:3}
+.si{max-width:660px;margin:0 auto}.si.w{max-width:940px}
+.lb{font-family:'Outfit',sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px;display:inline-block}
+.st{font-size:clamp(1.02rem,1.8vw,1.12rem);line-height:1.9;margin-bottom:28px}
+.st:last-child{margin-bottom:0}
+.sh{font-size:clamp(1.5rem,4vw,2.6rem);margin-bottom:32px}
+.br{width:36px;height:2px;margin:48px auto;border-radius:1px}
+.hl{color:var(--inkd);font-weight:500}
+
+
+/* Gradient evidence links */
+.glow{background:linear-gradient(90deg,#3B8234,#FFD200,#C0392B,#B4CAAF,#3B8234);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700;text-decoration:none;background-size:200% auto;animation:shimmer 3s linear infinite}
+.glow:hover{opacity:.85}
+@keyframes shimmer{to{background-position:200% center}}
+
+/* Act 1 */
+.a1{background:var(--blk)}.a1 .lb{color:var(--red)}.a1 .sh{color:var(--inkd)}.a1 .st{color:var(--inkm)}.a1 .br{background:rgba(192,57,43,.25)}
+/* Penalty counter */
+.pen{margin:36px 0;padding:28px 0;text-align:center}
+.pen p{color:var(--inkm);font-size:.95rem;margin-bottom:20px;line-height:1.7}
+.pen-btns{display:flex;gap:10px;justify-content:center;margin-bottom:20px}
+.pen-btn{font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;padding:12px 24px;min-width:80px;min-height:44px;background:rgba(255,210,0,.06);border:1px solid rgba(255,210,0,.2);border-radius:6px;color:var(--yel);cursor:pointer;transition:all .3s}
+.pen-btn:hover{background:rgba(255,210,0,.12);border-color:var(--yel)}
+.pen-btn.sel{background:var(--yel);color:var(--blk);border-color:var(--yel)}
+.pen-result{min-height:60px}
+.pen-result .sn{font-size:clamp(2rem,5vw,3.2rem);color:var(--yel);display:block;opacity:0;transform:translateY(6px);transition:opacity .6s,transform .6s}
+.pen-result .sn.show{opacity:1;transform:translateY(0)}
+.pen-result .pen-note{font-size:.78rem;color:var(--inkm);margin-top:4px;opacity:0;transition:opacity .6s .2s}
+.pen-result .pen-note.show{opacity:1}
+
+/* $10.5B + 25-year marks */
+.big-stat{text-align:center;padding:56px 0 32px}
+.big-stat .sn{font-size:clamp(2.8rem,8vw,5.5rem);color:var(--yel);display:block}
+.big-stat .ctx{font-size:.82rem;color:var(--inkm);max-width:440px;margin:8px auto 0;line-height:1.65}
+.marks{display:flex;justify-content:center;gap:4px;margin-top:24px;height:20px}
+.mark{width:2px;height:0;background:var(--yel);border-radius:1px;opacity:0;transition:height .4s ease,opacity .3s ease}
+.mark.lit{height:16px;opacity:.5}
+
+/* Callout */
+.co{margin:40px 0;padding:28px 24px;border-left:3px solid var(--yel);border-radius:0 8px 8px 0;background:rgba(255,210,0,.035)}
+.co p{font-size:.93rem;line-height:1.75;margin-bottom:12px;color:var(--inkd)}.co p:last-child{margin-bottom:0}
+.co strong{color:var(--yel);font-weight:600}
+.co .rc{font-size:.68rem;font-weight:600;letter-spacing:.08em;opacity:.45;margin-bottom:8px;display:block;color:var(--inkm)}
+
+/* Solution thread */
+.thread{position:absolute;left:24px;top:0;width:2px;background:var(--green);opacity:0;height:0;border-radius:1px;transition:opacity 1.2s,height 2s ease}
+@media(min-width:680px){.thread{left:calc(50% - 330px)}}
+
+/* Act 2 */
+.a2{background:var(--blk)}.a2 .lb{color:var(--green)}.a2 .sh{color:var(--inkd)}.a2 .st{color:var(--inkm)}
+.zmc{display:grid;grid-template-columns:1fr;gap:0;max-width:940px;margin:36px auto 0}
+@media(min-width:680px){.zmc{grid-template-columns:200px 1fr;gap:20px}}
+.zl{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px}
+@media(min-width:680px){.zl{flex-direction:column;margin-bottom:0}}
+.zb{font-family:'Outfit',sans-serif;font-size:.76rem;font-weight:500;padding:9px 13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-left:3px solid transparent;border-radius:6px;color:var(--inkm);cursor:pointer;transition:all .3s;text-align:left;flex:1;min-width:105px;min-height:44px}
+@media(min-width:680px){.zb{flex:none}}
+.zb:hover{background:rgba(59,130,52,.08);border-color:rgba(255,255,255,.1);border-left-color:var(--green);color:var(--inkd)}
+.zb.on{background:var(--green);border-color:var(--green);border-left-color:var(--green);color:#fff;font-weight:600}
+.zb.done{border-left-color:var(--olive);background:rgba(180,202,175,.06);color:var(--olive)}
+.zb.done.on{background:var(--green);color:#fff}
+.zd{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.05);border-radius:10px;padding:26px;min-height:220px}
+.zdi{opacity:0;transform:translateY(5px);animation:rU .3s ease forwards}
+.zd h3{font-size:1.25rem;color:var(--inkd);margin-bottom:5px}.zd .fl{font-size:.68rem;color:var(--olive);font-weight:500;letter-spacing:.05em;text-transform:uppercase;margin-bottom:16px}
+.pr{padding:11px 0;border-top:1px solid rgba(255,255,255,.04)}.pr:first-of-type{border-top:none}
+.prh{display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:10px;min-height:44px}
+.prn{font-weight:600;color:var(--inkd);font-size:.86rem}
+.prb{font-size:.56rem;font-weight:600;padding:2px 6px;border-radius:3px;text-transform:uppercase;letter-spacing:.07em;white-space:nowrap}
+.bh{background:var(--green);color:#fff}.bc{background:rgba(59,130,52,.12);color:var(--olive)}.bb{background:rgba(255,210,0,.12);color:var(--yel)}
+.prd{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1),opacity .4s,padding .4s;opacity:0;padding:0}
+.prd.open{max-height:500px;opacity:1;padding:10px 0 0}
+.prd p{font-size:.78rem;color:var(--inkm);margin-bottom:4px;line-height:1.6}
+.prd .to{color:var(--clay);font-style:italic;font-size:.76rem}
+.prd .to::before{content:'\25C7 ';opacity:.5}
+.sak{margin-top:48px;padding:24px 0;text-align:center;opacity:0;transition:opacity 1.5s}
+.sak.vis{opacity:1}
+.sak p{font-size:.98rem;color:var(--olive);font-style:italic;max-width:500px;margin:0 auto;line-height:1.85}
+
+/* Act 3 */
+.a3{background:var(--stone)}.a3 .lb{color:var(--dg)}.a3 .sh{color:var(--ink)}.a3 .st{color:var(--ink2)}.a3 .br{background:rgba(0,0,0,.08)}
+.cs{margin:40px 0;padding:30px;background:#fff;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.035)}
+.cs h3{font-size:1.1rem;color:var(--ink);margin-bottom:18px}
+.cs .st{font-size:.9rem;color:var(--ink2);margin-bottom:14px}
+/* Area coverage visual */
+.area-vis{display:flex;align-items:center;gap:24px;margin:28px 0;padding:20px;background:rgba(0,0,0,.02);border-radius:8px;flex-wrap:wrap;justify-content:center}
+.area-roll{width:120px;height:80px;background:var(--green);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.7rem;font-weight:600;text-align:center;line-height:1.3;padding:8px}
+.area-vs{font-size:.75rem;color:var(--inkm);font-weight:500}
+.area-mats{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
+.area-mat{width:18px;height:14px;background:#ccc;border-radius:2px}
+/* Bars */
+.bc2{margin-bottom:12px}
+.bl{font-size:.68rem;color:var(--ink2);margin-bottom:3px;display:flex;justify-content:space-between}
+.bt{height:22px;background:rgba(0,0,0,.04);border-radius:5px;overflow:hidden}
+.bf{height:100%;border-radius:5px;display:flex;align-items:center;padding-left:10px;font-size:.66rem;font-weight:600;color:#fff;transition:width 1.8s cubic-bezier(.25,.46,.45,.94);width:0}
+.bf.t{background:var(--red)}.bf.u2{background:var(--green)}.bf.u7{background:var(--dg)}
+.pl{text-align:center;margin-top:18px;padding:14px;background:rgba(59,130,52,.05);border-radius:6px}
+.pl .sn{font-size:1.9rem;color:var(--green)}.pl p{font-size:.75rem;color:var(--ink2);margin-top:2px}
+.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:8px;margin-top:32px}
+.cb{background:#fff;border:1px solid rgba(0,0,0,.04);border-radius:6px;padding:12px 10px;text-align:center;transition:transform .3s}
+.cb:hover{transform:translateY(-2px)}
+.ci{font-size:1rem;margin-bottom:4px}.ct{font-size:.68rem;font-weight:600;color:var(--ink);line-height:1.3}.cu{font-size:.58rem;color:var(--ink2);margin-top:2px}
+
+/* Act 4 */
+.a4{background:linear-gradient(180deg,var(--stone) 0%,#E8F0E4 40%,#D6EBCE 100%);text-align:center}
+.a4 .sh{color:var(--dg)}.a4 .st{color:var(--ink2);text-align:center}
+.ctg{display:grid;grid-template-columns:1fr;gap:14px;max-width:760px;margin:36px auto 0}
+@media(min-width:680px){.ctg{grid-template-columns:repeat(3,1fr)}}
+.cc{background:#fff;border-radius:10px;padding:26px 18px;box-shadow:0 2px 12px rgba(0,0,0,.035);transition:transform .3s,box-shadow .3s;cursor:pointer;text-decoration:none;display:block;text-align:left}
+.cc:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.07)}
+.cc.ft{border:2px solid var(--green)}
+.ctr{font-family:'Outfit',sans-serif;font-size:.62rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--green);margin-bottom:8px}
+.cc h3{font-size:1.1rem;color:var(--ink);margin-bottom:8px}.cc p{font-size:.8rem;color:var(--ink2);line-height:1.55}
+.btn{display:inline-block;margin-top:14px;padding:8px 18px;background:var(--green);color:#fff;font-family:'Outfit',sans-serif;font-size:.76rem;font-weight:600;border-radius:5px;text-decoration:none;transition:background .3s}
+.btn:hover{background:var(--dg)}
+.closing{margin-top:56px}
+.seed{font-size:clamp(.9rem,2vw,1.05rem);color:var(--dg);font-style:italic;font-weight:300;max-width:420px;margin:0 auto 20px;line-height:1.85}
+.fd{width:5px;height:5px;background:var(--green);border-radius:50%;margin:0 auto;opacity:0}
+.fd.abs{animation:fA 2s ease forwards}
+@keyframes fA{0%{opacity:0;transform:translateY(-20px)}30%{opacity:1;transform:translateY(0)}50%{transform:scale(1.6);opacity:.7}100%{opacity:0;transform:scale(0)}}
+.foot{background:var(--blk);padding:24px;text-align:center;z-index:3;position:relative}
+.foot p{color:var(--inkm);font-size:.65rem}.foot a{color:var(--green);text-decoration:none}
+.rv{opacity:0;transform:translateY(14px);transition:opacity .7s,transform .7s}.rv.v{opacity:1;transform:translateY(0)}
+.rd1{transition-delay:.12s}.rd2{transition-delay:.24s}
+
+/* Departure toast */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#2a2a2a;color:var(--inkd);font-family:'Outfit',sans-serif;font-size:.78rem;padding:14px 24px;border-radius:8px;z-index:100;opacity:0;pointer-events:none;transition:opacity .4s,transform .4s;box-shadow:0 4px 20px rgba(0,0,0,.3);text-align:center;max-width:90vw}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast .dest{color:var(--green);font-weight:600}
+.toast .leaving{color:var(--inkm);font-size:.68rem;display:block;margin-bottom:4px}
+</style>
+</head>
+<body>
+<canvas class="oil" id="oC"></canvas>
+
+<section class="entry" id="entry">
+  <div class="drop"></div>
+  <h1>SOMEBODY SLIPPED ON YOUR WAREHOUSE FLOOR LAST WEEK</h1>
+  <p class="sub">The report's been filed. The insurance company's been notified. And now you're wondering — what should I actually do about the floor?</p>
+  <p class="whisper">You already know which zone keeps you up at night.</p>
+  <div class="scr"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+</section>
+
+<section class="act a1 grain" id="act1">
+  <div class="si">
+    <p class="lb rv">Here's what you're facing</p>
+    <p class="st rv">Here's what happens after a slip-and-fall in a warehouse. <span class="hl">An OSHA recordable incident goes on your record.</span> Your experience modification rate — the number your insurance company uses to calculate your premiums — goes up. And it stays up for <strong>three years</strong>.</p>
+    <p class="st rv">That's not a typo. <span class="hl">One incident on a Tuesday afternoon affects what you pay every month for the next 36 months.</span> Slip-and-fall claims cost employers <a class="glow" href="https://www.osha.gov/safetypays/estimator" target="_blank" rel="noopener">$40,000 to $48,000</a> on average. But the real cost is the mod rate — the compounding premium increase that keeps going long after the floor's been mopped.</p>
+    <div class="br rv"></div>
+    <p class="st rv">And right now, there's something most warehouse managers don't know about.</p>
+    <p class="st rv">In 2024, OSHA launched a <span class="hl">National Emphasis Program</span> targeting warehouses and distribution centers specifically. A directive telling compliance officers: go inspect these facilities. The program runs through at least 2027 and focuses on walking-working surfaces, powered vehicles, and material handling. OSHA isn't waiting for complaints. <span class="hl">They're showing up.</span></p>
+    <div class="pen rv">
+      <p>OSHA cites each violation separately. At over <a class="glow" href="https://www.osha.gov/penalties" target="_blank" rel="noopener">$16,000 per serious violation</a>, the math adds up fast.</p>
+      <p><strong style="color:var(--inkd)">How many zones in your warehouse have wet floors right now?</strong></p>
+      <div class="pen-btns">
+        <button class="pen-btn" onclick="penCalc(3)">3 zones</button>
+        <button class="pen-btn" onclick="penCalc(5)">5 zones</button>
+        <button class="pen-btn" onclick="penCalc(7)">7 zones</button>
+      </div>
+      <div class="pen-result" id="penR">
+        <span class="sn" id="penNum"></span>
+        <p class="pen-note" id="penNote">That's from a single walk-through.</p>
+      </div>
+    </div>
+    <div class="big-stat rv" id="bigStat">
+      <span class="sn" id="bigNum">$0</span>
+      <p class="ctx"><a class="glow" href="https://www.libertymutualgroup.com/about-lm/news/articles/us-companies-spend-50.87b-year-top-ten-causes-serious-workplace-injuries-according-2025-liberty-mutual-workplace-safety-index" target="_blank" rel="noopener">Liberty Mutual 2025 Workplace Safety Index</a>. Same-level falls have been the #1 or #2 most expensive workplace injury for <strong>25 consecutive years.</strong> The cost has nearly doubled.</p>
+      <div class="marks" id="marks"></div>
+    </div>
+    <div class="br rv"></div>
+    <p class="st rv">Here's the part that surprises most people.</p>
+    <div class="co rv">
+      <span class="rc"><a href='https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.22' target='_blank' class='glow' style='-webkit-text-fill-color:transparent'>29 CFR 1910.22(a)(2)</a></span>
+      <p>There's a federal regulation that says warehouse floors must be kept dry. And where wet conditions exist, the regulation says you have to provide <strong>"dry standing places, such as false floors, platforms, and mats."</strong></p>
+      <p>Not signs. Not cones. The regulation specifically names <strong>mats</strong> as one of the compliance mechanisms. If your floor is wet and you don't have absorbent mats down, you're not just at risk — you're already out of compliance.</p>
+    </div>
+    <p class="st rv">So now the question isn't <em>should I do something about the floor.</em> The question is <em>what, exactly, goes where.</em></p>
+  </div>
+</section>
+
+<section class="act a2 grain" id="act2">
+  <div class="thread" id="thread"></div>
+  <div class="si w">
+    <p class="lb rv">Your warehouse has seven zones</p>
+    <h2 class="sh rv" style="max-width:580px">DIFFERENT FLUIDS. DIFFERENT TRAFFIC. DIFFERENT ANSWERS.</h2>
+    <p class="st rv" style="max-width:580px">This is the part nobody else shows you. Most absorbent mat companies want to sell you one product for everything. But a forklift lane has different fluids and different traffic than a battery charging station. Putting the wrong mat in the wrong zone doesn't just waste money — it can create a new hazard.</p>
+    <p class="st rv" style="max-width:580px">Click any zone. You'll see every product that works there, why it works, when it's the best choice, and — honestly — where it falls short.</p>
+    <div class="zmc rv">
+      <div class="zl" id="zL">
+        <button class="zb on" data-zone="forklift">Forklift Lanes</button>
+        <button class="zb" data-zone="dock">Loading Dock</button>
+        <button class="zb" data-zone="machine">Machine Areas</button>
+        <button class="zb" data-zone="battery">Battery Charging</button>
+        <button class="zb" data-zone="walkway">Walkways</button>
+        <button class="zb" data-zone="picking">Picking / Packing</button>
+        <button class="zb" data-zone="spill">Spill Kits</button>
+      </div>
+      <div class="zd" id="zD"></div>
+    </div>
+    <div class="sak" id="sakR">
+      <p>Every zone in your facility has an answer. Not one product forced everywhere — the right product, in the right place, for the right fluid. That's not a catalog. That's how a facility actually gets safe.</p>
+    </div>
+  </div>
+</section>
+
+<section class="act a3" id="act3">
+  <div class="si">
+    <p class="lb rv">The cost question</p>
+    <h2 class="sh rv">LET'S TALK ABOUT WHAT YOU'RE PROBABLY SPENDING NOW</h2>
+    <p class="st rv">If you already have mats, there's a good chance they're rental mats — the kind Cintas or UniFirst drops off weekly. You're paying typically around $5 per mat per week. That adds up.</p>
+    <div class="cs rv">
+      <h3>RENTAL MATS VS. OWNING YOUR OWN</h3>
+      <p class="st">A single roll of W-280 StickyBack covers roughly 300 square feet — the same area that would require 15 to 20 rental mats.</p>
+      <div class="area-vis">
+        <div class="area-roll">1 roll<br>W-280<br>~300 sq ft<br><strong>$164</strong></div>
+        <div class="area-vs">replaces</div>
+        <div>
+          <div class="area-mats" id="areaMats"></div>
+          <p style="font-size:.65rem;color:var(--ink2);margin-top:6px;text-align:center">~15-20 rental mats &middot; ~$260/yr each</p>
+        </div>
+      </div>
+      <p class="st">And here's the part the rental company won't tell you: <strong>rental mats don't absorb oil.</strong> They're designed for dirt and water at entrances. If your warehouse has hydraulic fluid, coolant, or any petroleum-based drip — rental mats aren't just expensive. They're not doing the job.</p>
+    </div>
+    <div class="br rv"></div>
+    <p class="st rv">Comparing to other absorbent mat companies — New Pig, Brady, FyterTech — the metric that matters isn't price per roll. It's <strong>price per gallon absorbed.</strong></p>
+    <div class="cs rv">
+      <h3>COST PER GALLON ABSORBED</h3>
+      <p class="st">How much are you paying for each gallon of fluid your mat can hold?</p>
+      <div style="margin:24px 0 14px">
+        <div class="bc2"><div class="bl"><span>New Pig Grippy (36"x100')</span><span style="color:var(--red);font-weight:600"><a class="glow" href="https://www.newpig.com/pig-ultra-duty-adhesive-backed-grippy-floor-mat/p/GRP36200" target="_blank" rel="noopener">$20.72-$24.48/gal</a></span></div><div class="bt"><div class="bf t" data-width="100">$24.48</div></div></div>
+        <div class="bc2"><div class="bl"><span>SupAbsorb W-280 (36"x100')</span><span style="color:var(--green);font-weight:600"><a class="glow" href="https://superabsorbentmats.com/products/sticky-back" target="_blank" rel="noopener">$7.81/gal</a></span></div><div class="bt"><div class="bf u2" data-width="32">$7.81</div></div></div>
+        <div class="bc2"><div class="bl"><span>SupAbsorb W-278 (36"x150')</span><span style="color:var(--dg);font-weight:600"><a class="glow" href="https://superabsorbentmats.com/products/ragrug" target="_blank" rel="noopener">$1.20/gal</a></span></div><div class="bt"><div class="bf u7" data-width="5">$1.20</div></div></div>
+      </div>
+      <div class="pl"><span class="sn">62-68%</span><p>less per gallon — W-280 StickyBack vs New Pig Grippy</p></div>
+    </div>
+    <div class="br rv"></div>
+    <p class="st rv">Every product you've seen on this page is made in America. Most from recycled textile waste — up to 90% recycled content.</p>
+    <p class="st rv">If you're wondering about slip resistance — there's an independent organization called the <strong>National Floor Safety Institute (NFSI)</strong> that certifies floor products for traction. Our StickyBack mat scored a <a class="glow" href="https://nfloorsi.org" target="_blank" rel="noopener">TCOF of 0.80</a> — rated "High Traction" — the same certification New Pig's Grippy carries. At 62-68% less cost per gallon.</p>
+    <div class="cg rv">
+      <div class="cb"><div class="ci">🛡️</div><div class="ct">NFSI 101-C</div><div class="cu">"High Traction" TCOF 0.80</div></div>
+      <div class="cb"><div class="ci">♿</div><div class="ct">ADA Compliant</div><div class="cu">Ultra-thin floor mat</div></div>
+      <div class="cb"><div class="ci">🏗️</div><div class="ct">Forklift Rated</div><div class="cu">28 lbs+ durability</div></div>
+      <div class="cb"><div class="ci">♻️</div><div class="ct">Up to 90% Recycled</div><div class="cu">Varies by product line</div></div>
+      <div class="cb"><div class="ci">🇺🇸</div><div class="ct">Berry Compliant</div><div class="cu">5 of 6 product lines</div></div>
+      <div class="cb"><div class="ci">📍</div><div class="ct">Made in America</div><div class="cu">U.S. manufactured</div></div>
+      <div class="cb"><div class="ci">🚫</div><div class="ct">No Heavy Metals</div><div class="cu">Verified on catalog sheets</div></div>
+      <div class="cb"><div class="ci">📋</div><div class="ct">1910.22 Ready</div><div class="cu">Meets the standard mats serve</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="act a4" id="act4">
+  <div class="si">
+    <h2 class="sh rv">START WITH YOUR WORST ZONE</h2>
+    <p class="st rv" style="max-width:460px;margin:0 auto 12px">You don't need to solve the whole facility today. Pick the zone that keeps you up at night.</p>
+    <div class="ctg">
+      <a class="cc rv" href="https://superabsorbentmats.com" target="_blank" rel="noopener"><p class="ctr">Try it</p><h3>GET A SAMPLE</h3><p>$5 sample of any product. See how it performs in your facility. Then decide.</p><span class="btn">Order Sample</span></a>
+      <a class="cc ft rv rd1" href="https://superabsorbentmats.com" target="_blank" rel="noopener"><p class="ctr">Start small</p><h3>ONE ROLL, ONE ZONE</h3><p>Pick your worst zone. One roll. Let the floor speak for itself for a month.</p><span class="btn">Shop Now</span></a>
+      <a class="cc rv rd2" href="https://superabsorbentmats.com/pages/contact" target="_blank" rel="noopener"><p class="ctr">Go all in</p><h3>FACILITY ASSESSMENT</h3><p>We'll map your zones with you. Bulk pricing. No contract. No pressure.</p><span class="btn">Request Assessment</span></a>
+    </div>
+    <div class="closing rv">
+      <p class="seed">You already know which zone keeps you up at night.<br>Now you know what it needs.</p>
+      <div class="fd" id="fD"></div>
+    </div>
+  </div>
+</section>
+
+<div class="toast" id="toast"><span class="leaving">Leaving SupAbsorb Tech</span>Entering <span class="dest" id="toastDest"></span></div>
+
+<footer class="foot"><p>SupAbsorb Tech — a division of <a href="https://akastex.com" target="_blank" rel="noopener">AKAS Tex Inc.</a> — Made in America</p></footer>
+<script>
+/* === OIL CANVAS (Bindu — section-driven) === */
+var cv=document.getElementById('oC'),cx=cv.getContext('2d'),ds=[],phase='none';
+function rz(){cv.width=innerWidth;cv.height=innerHeight}
+rz();addEventListener('resize',rz);
+for(var i=0;i<8;i++)ds.push({x:Math.random()*cv.width,y:Math.random()*cv.height,r:25+Math.random()*55,tr:0,to:0,cr:0,co:0,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25});
+var pm={entry:'none',act1:'spread',act2:'hold',act3:'absorb',act4:'clean'};
+var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&e.intersectionRatio>.25){var p=pm[e.target.id];if(p)phase=p}})},{threshold:[.25]});
+['entry','act1','act2','act3','act4'].forEach(function(id){var el=document.getElementById(id);if(el)so.observe(el)});
+function draw(){cx.clearRect(0,0,cv.width,cv.height);
+ds.forEach(function(d,i){
+if(phase==='none'){d.tr=0;d.to=0}
+else if(phase==='spread'){var s=Math.min(1,1-i*.1);d.tr=d.r*s;d.to=.15*s}
+else if(phase==='hold'){d.tr=d.r;d.to=.1}
+else if(phase==='absorb'){var a=Math.max(0,1-i*.18);d.tr=d.r*a*.3;d.to=.08*a}
+else{d.tr=0;d.to=0}
+d.cr+=(d.tr-d.cr)*.025;d.co+=(d.to-d.co)*.025;
+d.x+=d.vx;d.y+=d.vy;
+if(d.x<-80)d.x=cv.width+80;if(d.x>cv.width+80)d.x=-80;
+if(d.y<-80)d.y=cv.height+80;if(d.y>cv.height+80)d.y=-80;
+if(d.cr>.3&&d.co>.0005){
+var g=cx.createRadialGradient(d.x,d.y,0,d.x,d.y,d.cr);
+g.addColorStop(0,'rgba(25,22,18,'+d.co+')');
+g.addColorStop(.4,'rgba(20,18,14,'+(d.co*.7)+')');
+g.addColorStop(.7,'rgba(18,15,12,'+(d.co*.3)+')');
+g.addColorStop(1,'rgba(15,12,10,0)');
+cx.fillStyle=g;cx.beginPath();cx.ellipse(d.x,d.y,d.cr,d.cr*.65,i*.3,0,Math.PI*2);cx.fill()}});
+requestAnimationFrame(draw)}
+draw();
+
+/* === PENALTY COUNTER === */
+function penCalc(n){
+var btns=document.querySelectorAll('.pen-btn');
+for(var i=0;i<btns.length;i++)btns[i].classList.remove('sel');
+event.target.classList.add('sel');
+var amt='$'+(n*16000).toLocaleString()+'+';
+var el=document.getElementById('penNum');
+el.textContent=amt;el.classList.add('show');
+document.getElementById('penNote').classList.add('show');
+}
+
+/* === $10.5B COUNTER + 25 YEAR MARKS === */
+var marksEl=document.getElementById('marks');
+for(var m=0;m<25;m++){var mk=document.createElement('div');mk.className='mark';marksEl.appendChild(mk)}
+var bigCounted=false;
+var bigObs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!bigCounted){bigCounted=true;
+var el=document.getElementById('bigNum'),target=10.5,start=performance.now(),dur=2200;
+(function tick(now){var p=Math.min((now-start)/dur,1);var eased=1-Math.pow(1-p,3);
+var v=eased*target;el.textContent='$'+v.toFixed(1)+' BILLION';
+if(p<1)requestAnimationFrame(tick);
+else{el.textContent='$10.5 BILLION';
+var mks=marksEl.querySelectorAll('.mark');
+for(var i=0;i<mks.length;i++){(function(mk,delay){setTimeout(function(){mk.classList.add('lit')},delay)})(mks[i],i*60)}
+}})(performance.now())}})},{threshold:.3});
+bigObs.observe(document.getElementById('bigStat'));
+
+/* === SOLUTION THREAD === */
+var threadEl=document.getElementById('thread');
+var threadObs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){threadEl.style.opacity='.4';threadEl.style.height='100%'}})},{threshold:.1});
+threadObs.observe(document.getElementById('act2'));
+
+/* === AREA MATS VISUAL === */
+var amEl=document.getElementById('areaMats');
+for(var a=0;a<18;a++){var mt=document.createElement('div');mt.className='area-mat';amEl.appendChild(mt)}
+
+/* === ZONE DATA === */
+var Z={
+forklift:{n:"Forklift Lanes",f:"Oil \xb7 Hydraulic Fluid \xb7 Battery Acid \xb7 Coolant",p:[
+{n:"W-280 StickyBack",b:"bh",bt:"Best Fit",w:"Adhesive keeps mat flat under forklift wheels. NFSI certified (TCOF 0.80). Forklift-rated 28 lbs+. ADA compliant.",bw:"Walkway safety is primary. OSHA compliance. Constant forklift traffic.",t:"Lower capacity (21 gal) \u2014 absorbs tracking, not heavy drip. 80% recycled. $7.81/gal."},
+{n:"W-282 BSM Barrier",b:"bc",bt:"Floor Protection",w:"Barrier backing \u2014 zero fluid penetration to concrete. Forklift-rated. 55% recycled. Berry Compliant.",bw:"Floor protection is critical \u2014 concrete remediation cost, EPA concern.",t:"Lower capacity ($3.98/gal). Doesn\u2019t anchor to floor like StickyBack."},
+{n:"W-278 Rag Rug",b:"bb",bt:"Best Value",w:"Highest capacity (55 gal) at lowest cost ($1.20/gal). 90% recycled. Universal. Lint-free.",bw:"Budget is primary. Forklift traffic is occasional.",t:"NOT forklift-rated \u2014 compresses under repeated passes. No barrier. Not adhesive."},
+{n:"W-393 Pads",b:"bc",bt:"Targeted",w:"Precision pads at specific drip points \u2014 under parked forklifts, turn points. Berry Compliant.",bw:"Drip source is localized. Spill kit restocking.",t:"NOT for floor coverage. Complement lane mats, don\u2019t replace them."}]},
+dock:{n:"Loading Dock",f:"Rain \xb7 Snow \xb7 Mud \xb7 Oil Tracking \xb7 Condensation",p:[
+{n:"W-280 StickyBack",b:"bh",bt:"Best Fit",w:"Adhesive stays flat in high-traffic entrance. NFSI anti-slip. ADA compliant. Forklift-rated.",bw:"Entrance safety. Replaces rental mats that bunch and slide.",t:"Lower capacity. Best as first 3-10 feet from door."},
+{n:"W-278 Rag Rug",b:"bb",bt:"Best Value",w:"High capacity (55 gal) beyond entrance where tracked fluids accumulate. 90% recycled.",bw:"Budget-driven transition zone coverage.",t:"Not adhesive. Not forklift-rated."},
+{n:"W-282 BSM Barrier",b:"bc",bt:"Floor Protection",w:"Barrier prevents tracked fluid from reaching floor. Forklift-rated. Berry Compliant.",bw:"Dock has drainage or EPA containment concerns.",t:"Lower capacity. Higher cost per area."}]},
+machine:{n:"Machine Areas",f:"Coolant \xb7 Hydraulic Oil \xb7 Cutting Fluid \xb7 Lubricant",p:[
+{n:"W-393 Pads",b:"bh",bt:"Precision",w:"Directly under drip points \u2014 conveyors, presses, packaging machines. Quick swap.",bw:"Drip is localized and consistent.",t:"Not for floor coverage. Replace more frequently."},
+{n:"W-278 Rag Rug",b:"bb",bt:"Best Value",w:"Full floor coverage around machines. 55 gal, $1.20/gal. Lint-free PP top.",bw:"Wide drip zone or multiple machines close together.",t:"Not forklift-rated. No barrier. Not adhesive."},
+{n:"W-282 BSM Barrier",b:"bc",bt:"Floor Protection",w:"Barrier under machines where fluid cannot reach floor \u2014 near drains, expansion joints.",bw:"Floor protection non-negotiable \u2014 regulatory or remediation.",t:"Lower capacity ($3.98/gal). More expensive per sqft."},
+{n:"W-280 StickyBack",b:"bc",bt:"Walkway Safety",w:"Anti-slip between machine areas where oil tracks via foot traffic. NFSI certified.",bw:"Hazard is tracking into walking paths, not the drip itself.",t:"Not for heavy drip. Transition zones."}]},
+battery:{n:"Battery Charging",f:"Battery Acid (Sulfuric) \xb7 Water \xb7 Electrolyte",p:[
+{n:"W-282 BSM Barrier",b:"bh",bt:"Critical",w:"Barrier is CRITICAL \u2014 battery acid cannot reach concrete. Permanent damage + EPA liability.",bw:"Always. Acid + concrete = irreversible. Non-negotiable.",t:"Lower capacity (25 gal). Containment is the driver, not capacity."},
+{n:"W-280 StickyBack",b:"bc",bt:"Approach Safety",w:"Anti-slip walkway approaching station. Adhesive stays flat. NFSI certified.",bw:"Personnel safety where acid and water track on tires.",t:"Not containment \u2014 use alongside W-282."},
+{n:"W-393 Pads",b:"bc",bt:"Targeted",w:"Under battery cells during charging or maintenance.",bw:"Targeted acid capture at exact drip point.",t:"Not floor coverage. Pads under charger, W-282 under forklift."}]},
+walkway:{n:"Walkways",f:"Oil Tracking \xb7 Water \xb7 Cleaning Solutions",p:[
+{n:"W-280 StickyBack",b:"bh",bt:"Purpose-Built",w:"Designed for this. Adhesive = zero trip hazard. NFSI certified. ADA compliant.",bw:"Any walkway where slip prevention is primary mission.",t:"Absorbs tracking, not heavy drip. Pair with W-278 for heavy fluid zones."},
+{n:"W-278 Rag Rug",b:"bb",bt:"Best Value",w:"Cost-effective for lower-traffic walkways. 55 gal. 90% recycled.",bw:"Secondary walkways. Budget-driven. Light tracking.",t:"Not adhesive. May shift. Not NFSI certified."}]},
+picking:{n:"Picking / Packing",f:"Product Leaks \xb7 Condensation \xb7 Cleaning Solution",p:[
+{n:"W-280 StickyBack",b:"bh",bt:"Best Fit",w:"Adhesive flat in narrow aisles. Won\u2019t interfere with pallet jacks. NFSI certified.",bw:"High-traffic narrow aisles. Workers + equipment sharing space.",t:"Lower capacity \u2014 tracking and small leaks, not heavy spills."},
+{n:"W-278 Rag Rug",b:"bb",bt:"Best Value",w:"Wider aisles. Product leaks and condensation. Lint-free.",bw:"Moderate traffic. Budget-driven.",t:"Not adhesive. May need securing in narrow aisles."},
+{n:"W-393 Pads",b:"bc",bt:"Targeted",w:"Under refrigeration units, water fountains, condensation points.",bw:"Known drip points. Quick between-shift cleanup.",t:"Not aisle-length coverage."}]},
+spill:{n:"Spill Kits",f:"All \u2014 Emergency Response",p:[
+{n:"W-393 Pads",b:"bh",bt:"Essential",w:"The spill response tool. Universal absorbency. Quick deployment.",bw:"Every spill kit. OSHA requires response capability.",t:"Compliance requirement, not optional."},
+{n:"W-278 Rag Rug (Cut)",b:"bc",bt:"Bulk Response",w:"Pre-cut pieces for larger containment. 55 gal. Lowest cost/gal.",bw:"Larger spills. 18x18 or 36x36 pieces.",t:"Heavier/bulkier than pads."},
+{n:"W-282 BSM Barrier (Cut)",b:"bc",bt:"Floor Protect",w:"Barrier pieces for spills near drains. Zero penetration.",bw:"Spill heading toward a floor drain.",t:"More expensive. Barrier-critical only."}]}
+};
+
+/* === ZONE RENDERING + EARNED WARMTH === */
+var exp={};
+function rZone(k){var z=Z[k];if(!z)return;exp[k]=1;
+var h='<div class="zdi"><h3>'+z.n+'</h3><p class="fl">'+z.f+'</p>';
+for(var i=0;i<z.p.length;i++){var p=z.p[i];
+h+='<div class="pr"><div class="prh" onclick="tog(this)"><span class="prn">'+p.n+'</span><span class="prb '+p.b+'">'+p.bt+'</span></div><div class="prd'+(i===0?' open':'')+'"><p><strong>Why:</strong> '+p.w+'</p><p><strong>Best when:</strong> '+p.bw+'</p><p class="to">'+p.t+'</p></div></div>'}
+h+='</div>';document.getElementById('zD').innerHTML=h;
+/* Mark explored zones */
+var btns=document.querySelectorAll('.zb');
+for(var j=0;j<btns.length;j++){if(exp[btns[j].getAttribute('data-zone')]&&!btns[j].classList.contains('on'))btns[j].classList.add('done')}
+if(Object.keys(exp).length>=2)document.getElementById('sakR').classList.add('vis')}
+function tog(el){el.nextElementSibling.classList.toggle('open')}
+var zBtns=document.querySelectorAll('.zb');
+for(var b=0;b<zBtns.length;b++)zBtns[b].addEventListener('click',function(){
+for(var j=0;j<zBtns.length;j++){zBtns[j].classList.remove('on');if(exp[zBtns[j].getAttribute('data-zone')])zBtns[j].classList.add('done')}
+this.classList.add('on');this.classList.remove('done');rZone(this.getAttribute('data-zone'))});
+rZone('forklift');
+
+/* === SCROLL REVEAL + BARS === */
+var rvs=document.querySelectorAll('.rv');
+var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('v');
+var bars=e.target.querySelectorAll('.bf');
+for(var i=0;i<bars.length;i++){(function(b){if(b.getAttribute('data-d'))return;b.setAttribute('data-d','1');
+setTimeout(function(){b.style.width=b.getAttribute('data-width')+'%'},400)})(bars[i])}}})},{threshold:.1});
+for(var r=0;r<rvs.length;r++)ro.observe(rvs[r]);
+
+/* === FINAL DROP === */
+var fd=document.getElementById('fD');
+new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)setTimeout(function(){fd.classList.add('abs')},700)})},{threshold:.5}).observe(fd);
+/* === DEPARTURE TOAST === */
+var toast=document.getElementById('toast'),toastDest=document.getElementById('toastDest'),toastTimer=null;
+var siteNames={'osha.gov':'OSHA.gov','libertymutualgroup.com':'Liberty Mutual','superabsorbentmats.com':'SuperAbsorbentMats.com','nfloorsi.org':'National Floor Safety Institute','akastex.com':'AKAS Tex'};
+
+/* Intercept ALL external links for departure toast */
+document.addEventListener('click',function(e){
+var link=e.target.closest('a[target="_blank"]');
+if(!link)return;
+var url=link.getAttribute('href');if(!url||url.indexOf('http')<0)return;
+e.preventDefault();
+try{var hostname=new URL(url).hostname.replace('www.','');
+var name=siteNames[hostname]||hostname;
+toastDest.textContent=name;
+toast.classList.add('show');
+if(toastTimer)clearTimeout(toastTimer);
+toastTimer=setTimeout(function(){toast.classList.remove('show')},2800);
+setTimeout(function(){window.open(url,'_blank','noopener')},600);
+}catch(err){window.open(url,'_blank','noopener')}
+});
+</script>
+</body>
+</html>

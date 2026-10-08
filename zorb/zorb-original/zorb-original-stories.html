@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zorb Original — The Witnesses · AKAS Wisdom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;1,9..144,200;1,9..144,300;1,9..144,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper:      #F7F4ED;
+  --paper-edge: #EFEBE0;
+  --page:       #FCFAF4;
+  --ink:        #0C0C0A;
+  --body:       #1F1F1C;
+  --warm:       #4D4D47;
+  --dim:        #8B8A82;
+  --rule:       #D6D2C5;
+  --rule-soft:  #E5E1D4;
+}
+
+* , *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; font-size: 17px; }
+body {
+  background: var(--paper);
+  color: var(--body);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-weight: 400;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--ink); color: var(--paper); }
+
+/* ── OPENING ────────────────────────────
+   No title, no chrome, no nav.
+   One verbatim fragment. Held alone.
+   The reader doesn't know where they are yet.
+   ─────────────────────────────────────── */
+.opening {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  position: relative;
+}
+.opening-fragment {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 200;
+  font-style: italic;
+  font-size: clamp(2.4rem, 6.4vw, 4.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  max-width: 22ch;
+  margin-bottom: 3.5rem;
+}
+.opening-attr {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.opening-cue {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--dim);
+  animation: drift 3.2s ease-in-out infinite;
+}
+@keyframes drift {
+  0%, 100% { opacity: 0.35; transform: translate(-50%, 0); }
+  50%      { opacity: 0.85; transform: translate(-50%, 6px); }
+}
+
+/* ── INSCRIPTION ───────────────────────
+   The page admits itself, quietly.
+   No banner. No header. Just three lines.
+   ────────────────────────────────────── */
+.inscription {
+  padding: 14vh 2rem 16vh;
+  background: var(--page);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.inscription-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+.inscription-line {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 200;
+  font-style: italic;
+  font-size: clamp(1.45rem, 2.6vw, 1.85rem);
+  line-height: 1.42;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+}
+.inscription-line + .inscription-line {
+  margin-top: 0.9rem;
+}
+.inscription-line em {
+  font-style: normal;
+  font-weight: 300;
+}
+
+/* ── JOURNEY ──────────────────────────
+   The repeating unit.
+   Number + community / context / moment / resolution / attribution.
+   No labels. The architecture is shape, not vocabulary.
+   ────────────────────────────────────── */
+.journey {
+  padding: 9rem 2rem 8rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.journey-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.journey-mark {
+  display: flex;
+  align-items: baseline;
+  gap: 1.4rem;
+  margin-bottom: 3.2rem;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 1.1rem;
+}
+.journey-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  color: var(--ink);
+}
+.journey-name {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  letter-spacing: -0.01em;
+  color: var(--warm);
+}
+
+.journey-prose {
+  font-size: 1.06rem;
+  line-height: 1.72;
+  color: var(--body);
+}
+.journey-prose + .journey-prose {
+  margin-top: 1.1rem;
+}
+
+/* The moment — large breath, thin rules above and below.
+   No quote marks. Some moments are verbatim, some are
+   what was distilled from what was lived. The page
+   does not separate them. */
+.moment {
+  margin: 3.4rem 0 3.4rem;
+  text-align: center;
+  position: relative;
+}
+.moment::before, .moment::after {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: var(--rule);
+  margin: 0 auto;
+}
+.moment::before { margin-bottom: 2rem; }
+.moment::after  { margin-top: 2rem; }
+.moment-text {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 200;
+  font-style: italic;
+  font-size: clamp(1.55rem, 3vw, 2.1rem);
+  line-height: 1.22;
+  letter-spacing: -0.022em;
+  color: var(--ink);
+  max-width: 22ch;
+  margin: 0 auto;
+}
+
+.attribution {
+  margin-top: 3rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dim);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.7rem;
+}
+.attribution-name { color: var(--warm); }
+.attribution-sep { opacity: 0.5; }
+.attribution-note {
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0.06em;
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 300;
+  font-size: 0.92rem;
+  color: var(--warm);
+}
+
+/* Vignettes — slightly more compressed.
+   Same rhythm, fewer lines. */
+.journey.vignette { padding: 7rem 2rem 6.5rem; }
+.journey.vignette .journey-mark { margin-bottom: 2.6rem; }
+.journey.vignette .moment { margin: 2.6rem 0 2.6rem; }
+
+/* ── SILENCE ──────────────────────────
+   The unwritten domains.
+   Named. Not narrated. The Sakshi frame
+   doing its work without saying its name.
+   ────────────────────────────────────── */
+.silence {
+  padding: 16vh 2rem 16vh;
+  background: var(--ink);
+  color: var(--paper-edge);
+  text-align: center;
+}
+.silence-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+.silence-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 2.4rem;
+}
+.silence-line {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 200;
+  font-style: italic;
+  font-size: clamp(1.4rem, 2.6vw, 1.8rem);
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+}
+.silence-list {
+  list-style: none;
+  margin: 3rem auto;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.silence-list li {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 1.1rem;
+  letter-spacing: 0.01em;
+  color: var(--paper-edge);
+  opacity: 0.78;
+}
+.silence-coda {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--dim);
+  margin-top: 2rem;
+}
+
+/* ── CLOSE ────────────────────────────
+   The Sakshi Seed, overheard.
+   Not declared.
+   ────────────────────────────────────── */
+.close {
+  padding: 18vh 2rem 14vh;
+  text-align: center;
+  background: var(--paper);
+}
+.close-line {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 200;
+  font-style: italic;
+  font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+  line-height: 1.22;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  max-width: 18ch;
+  margin: 0 auto 4rem;
+}
+
+/* ── COLOPHON ─────────────────────────
+   The volume identifier — only at the foot.
+   AKAS Wisdom marker. Sister-page link.
+   ────────────────────────────────────── */
+.colophon {
+  padding: 4rem 2rem 5rem;
+  border-top: 1px solid var(--rule);
+  background: var(--page);
+}
+.colophon-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 2.4rem;
+}
+.colophon-mark {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--warm);
+  line-height: 1.7;
+}
+.colophon-mark span { color: var(--dim); }
+.colophon-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--ink);
+  padding: 1rem 1.6rem;
+  text-decoration: none;
+  font-weight: 500;
+  border: 1px solid var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+.colophon-link:hover { background: var(--warm); border-color: var(--warm); }
+
+@media (max-width: 720px) {
+  html { font-size: 16px; }
+  .opening { padding: 3rem 1.4rem; }
+  .opening-fragment { max-width: 14ch; }
+  .inscription { padding: 10vh 1.4rem 11vh; }
+  .journey { padding: 6.5rem 1.4rem 6rem; }
+  .journey.vignette { padding: 5rem 1.4rem 4.5rem; }
+  .moment-text { max-width: 16ch; }
+  .silence { padding: 11vh 1.4rem 11vh; }
+  .silence-list li { font-size: 1.02rem; }
+  .close { padding: 12vh 1.4rem 10vh; }
+  .colophon-inner { grid-template-columns: 1fr; gap: 1.6rem; }
+  .colophon-link { justify-self: start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.silence :focus-visible { outline-color: var(--paper); }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     OPENING — no title. no chrome. just a fragment.
+     ════════════════════════════════════════ -->
+<section class="opening" aria-label="Opening">
+  <p class="opening-fragment">
+    Mud, straw, rags &mdash;<br>
+    anything they find.
+  </p>
+  <p class="opening-attr">— A maker, before</p>
+  <span class="opening-cue">↓ keep reading</span>
+</section>
+
+<!-- ════════════════════════════════════════
+     INSCRIPTION — the page admits itself
+     ════════════════════════════════════════ -->
+<section class="inscription" aria-label="Inscription">
+  <div class="inscription-inner">
+    <p class="inscription-line">Eleven journeys.</p>
+    <p class="inscription-line">What they had tried.<br>What arrived. What they made of it.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     01 — THE HUMANITARIAN MAKER
+     Maximum swing. Absence → presence.
+     ════════════════════════════════════════ -->
+<article class="journey">
+  <div class="journey-inner">
+    <header class="journey-mark">
+      <span class="journey-num">01</span>
+      <span class="journey-name">The maker who sews for someone she will never meet</span>
+    </header>
+
+    <p class="journey-prose">
+      In Kenya, Ethiopia, Sierra Leone, Ghana, Ecuador — one week out of every month, the classroom loses her. Not for grades. For periods. The alternatives are mud, straw, rags, whatever can be found.
+    </p>
+    <p class="journey-prose">
+      The maker is in a church basement on the other side of an ocean. She has a sewing machine and a bolt of fabric. She does not know who will receive what she sews.
+    </p>
+
+    <div class="moment">
+      <p class="moment-text">Careful cutting and sewing with love in your heart.</p>
+    </div>
+
+    <p class="journey-prose">
+      Fifty yards becomes a thousand pads. A thousand pads reaches three hundred and thirty-three girls. The fabric arrives ready — because where it lands, conditioning washes are not possible. The maker, asleep in her own bed, will never know which morning held which body safe.
+    </p>
+
+    <p class="attribution">
+      <span class="attribution-name">Dianne Leach</span>
+      <span class="attribution-sep">·</span>
+      <span>since 2016</span>
+      <span class="attribution-sep">·</span>
+      <span>with Pamela Killion, six years sewing</span>
+    </p>
+  </div>
+</article>
+
+<!-- ════════════════════════════════════════
+     02 — THE PERSONAL PAD MAKER
+     High swing. Dependence → autonomy.
+     ════════════════════════════════════════ -->
+<article class="journey">
+  <div class="journey-inner">
+    <header class="journey-mark">
+      <span class="journey-num">02</span>
+      <span class="journey-name">The maker who sews her own solution for her own body</span>
+    </header>
+
+    <p class="journey-prose">
+      She was a skeptic. She had tried other reusables. She tried making her own — and even that came stiff off the bolt, unyielding against her body the first time she wore it. She had every reason to stop there.
+    </p>
+
+    <div class="moment">
+      <p class="moment-text">I washed one. The Heavens descended to earth.</p>
+    </div>
+
+    <p class="journey-prose">
+      The stiffness dissolved into something pillow-like. The softness was already inside the fabric, waiting for the wash that would release it. Four years later, the pads are still going strong.
+    </p>
+
+    <p class="attribution">
+      <span class="attribution-name">Linda F.</span>
+      <span class="attribution-sep">·</span>
+      <span>and Ashley P., who said:</span>
+      <span class="attribution-note">Ever. Ever ever. Positively NEVER.</span>
+    </p>
+  </div>
+</article>
+
+<!-- ════════════════════════════════════════
+     03 — THE CLOTH DIAPER MAKER
+     High swing. Iterative deepening.
+     ════════════════════════════════════════ -->
+<article class="journey">
+  <div class="journey-inner">
+    <header class="journey-mark">
+      <span class="journey-num">03</span>
+      <span class="journey-name">The maker whose baby won't stop wetting through everything</span>
+    </header>
+
+    <p class="journey-prose">
+      The heavy wetter. Microfiber leaked. Hemp left gaps. Flour sack towels weren't enough. Three a.m. wake-ups, sheets to change, clothes to change, a sleeplessness compounding into fog.
+    </p>
+
+    <div class="moment">
+      <p class="moment-text">Three yards. Forty-two inserts.</p>
+    </div>
+
+    <p class="journey-prose">
+      The night the diaper held was the night the parent slept. The community started layering — the sandwich technique, targeted zones, each layer slightly smaller than the one below it. The fabric became a standard practice it was never marketed for.
+    </p>
+
+    <p class="attribution">
+      <span class="attribution-name">Michelle Harkins</span>
+      <span class="attribution-sep">·</span>
+      <span class="attribution-name">Katherine</span>
+      <span class="attribution-sep">·</span>
+      <span class="attribution-name">Tatiana H.</span>
+    </p>
+  </div>
+</article>
+
+<!-- ════════════════════════════════════════
+     04 — THE GUINEA PIG OWNER
+     Med-high swing. Measurable comparison.
+     ════════════════════════════════════════ -->
+<article class="journey">
+  <div class="journey-inner">
+    <header class="journey-mark">
+      <span class="journey-num">04</span>
+      <span class="journey-name">The maker whose pets deserve better than what was available</span>
+    </header>
+
+    <p class="journey-prose">
+      U-Haul furniture pads inside cage liners — the community standard because it was cheap and accessible. Heavy when wet. Slow to dry. Dye bleeding into the fleece. Six animals, a C&amp;C cage, three to five days between cleanings.
+    </p>
+    <p class="journey-prose">
+      Then an earthquake in November. The owner can't get home for four days.
+    </p>
+
+    <div class="moment">
+      <p class="moment-text">No smell. The cage was dry.</p>
+    </div>
+
+    <p class="journey-prose">
+      What held during the emergency had been holding every ordinary Tuesday. The crisis only made visible what was invisible every other day.
+    </p>
+
+    <p class="attribution">
+      <span class="attribution-name">ShelleyRay</span>
+      <span class="attribution-sep">·</span>
+      <span>with Wheek Dreams Designs, who made the comparison video</span>
+    </p>
+  </div>
+</article>
+
+<!-- ════════════════════════════════════════
+     05 — THE INCONTINENCE MAKER
+     Med-high swing. Vigilance → forgetting.
+     ════════════════════════════════════════ -->
+<article class="journey">
+  <div class="journey-inner">
+    <header class="journey-mark">
+      <span class="journey-num">05</span>
+      <span class="journey-name">The maker who sews dignity</span>
+    </header>
+
+    <p class="journey-prose">
+      The condition itself was the burden. The leaks were the second. The self-consciousness was the third. Each new product carried the fear of public failure — and the courage required for the first wear would not extend to a second attempt.
+    </p>
+
+    <div class="moment">
+      <p class="moment-text">I have been telling others they need to buy this fabric.</p>
+    </div>
+
+    <p class="journey-prose">
+      The fabric held through the workday. Through the social event. Through the moment protection was forgotten — which is the highest form of holding. The forgetting was the grace.
+    </p>
+
+    <p class="attribution">
+      <span class="attribution-name">Anne</span>
+      <span class="attribution-sep">·</span>
+      <span>and others writing under their initials only</span>
+    </p>
+  </div>
+</article>
+
+<!-- ════════════════════════════════════════
+     06 — THE MEDICAL MAKER
+     Medium swing. Bolt-to-body.
+     ════════════════════════════════════════ -->
+<article class="journey">
+  <div class="journey-inner">
+    <header class="journey-mark">
+      <span class="journey-num">06</span>
+      <span class="journey-name">The maker whose body needs something no store sells</span>
+    </header>
+
+    <p class="journey-prose">
+      Skin folds — itchy, burning, no commercial product addressing the moisture without chemicals she couldn't tolerate. So she cut three-inch strips. Placed them under the folds. Daily.
+    </p>
+
+    <div class="moment">
+      <p class="moment-text">No itching and no odor.</p>
+    </div>
+
+    <p class="journey-prose">
+      No construction. No conditioning. Bolt to body in one cut. Six words carry the entire threshold — relief from the moment of placement.
+    </p>
+
+    <p class="attribution">
+      <span class="attribution-name">Nancy</span>
+      <span class="attribution-sep">·</span>
+      <span>the quietest anchor in the corpus</span>
+    </p>
+  </div>
+</article>
+
+<!-- ════════════════════════════════════════
+     07 — THE DOG OWNER
+     Medium swing. Domestic territory recovery.
+     ════════════════════════════════════════ -->
+<article class="journey">
+  <div class="journey-inner">
+    <header class="journey-mark">
+      <span class="journey-num">07</span>
+      <span class="journey-name">The maker whose house was being lost</span>
+    </header>
+
+    <p class="journey-prose">
+      Large breed. Ten-gallon bladder. Incontinence. Floors being lost. The house no longer functioning as a home — every door a threshold, every rug a casualty, every welcome guarded.
+    </p>
+
+    <div class="moment">
+      <p class="moment-text">I MAY GET MY HOUSE BACK THANKS TO ZORB.</p>
+    </div>
+
+    <p class="journey-prose">
+      The first void test had held. Not one drop reached the floor. The belly band came off, washed, went back on — and her language, all caps, dramatic, marked the moment she first dared to believe the territory might be returning.
+    </p>
+
+    <p class="attribution">
+      <span class="attribution-name">Vanessa C.</span>
+      <span class="attribution-sep">·</span>
+      <span>and the maker who bought scrap from a baby diaper project to fix a different problem entirely</span>
+    </p>
+  </div>
+</article>
+
+<!-- ════════════════════════════════════════
+     08 — THE BUSINESS PAD MAKER
+     Medium swing. Livelihood dependency.
+     ════════════════════════════════════════ -->
+<article class="journey">
+  <div class="journey-inner">
+    <header class="journey-mark">
+      <span class="journey-num">08</span>
+      <span class="journey-name">The maker whose livelihood depends on this fabric</span>
+    </header>
+
+    <p class="journey-prose">
+      A small business. A reputation that depends on every order arriving and performing. The supply chain is the maker. The customer trusts at two removes — through the maker, through the kit, through the first wear in a body she will never see.
+    </p>
+
+    <div class="moment">
+      <p class="moment-text">I owe my business success to this.</p>
+    </div>
+
+    <p class="journey-prose">
+      The bolt arrives ready. The kit ships ready. The customer's first wear works. The business holds because the fabric does. There is no buffer. There is no second chance to convert someone who has already been disappointed once.
+    </p>
+
+    <p class="attribution">
+      <span class="attribution-name">Laura Guevara</span>
+      <span class="attribution-sep">·</span>
+      <span class="attribution-name">Megan</span>
+      <span class="attribution-sep">·</span>
+      <span class="attribution-name">Kelli Harvey</span>
+    </p>
+  </div>
+</article>
+
+<!-- ════════════════════════════════════════
+     09 — THE HYDROPONIC GROWER (vignette)
+     ════════════════════════════════════════ -->
+<article class="journey vignette">
+  <div class="journey-inner">
+    <header class="journey-mark">
+      <span class="journey-num">09</span>
+      <span class="journey-name">The maker who discovered grace in a greenhouse</span>
+    </header>
+
+    <p class="journey-prose">
+      A high school greenhouse. A nutrient bath. A plant base sitting too far above the water to drink it. A piece of fabric scrap left over from another project entirely.
+    </p>
+
+    <div class="moment">
+      <p class="moment-text">Seven inches, knotted at one end. Basil eight inches tall.</p>
+    </div>
+
+    <p class="journey-prose">
+      Nobody designed Zorb for hydroponics. The strip wicked the nutrients up. The plants grew. Discovery far from the original intent.
+    </p>
+
+    <p class="attribution">
+      <span class="attribution-name">John Robert Hall</span>
+    </p>
+  </div>
+</article>
+
+<!-- ════════════════════════════════════════
+     10 — THE SPECIAL NEEDS CAREGIVER (vignette)
+     Closest human mirror of the fabric itself.
+     ════════════════════════════════════════ -->
+<article class="journey vignette">
+  <div class="journey-inner">
+    <header class="journey-mark">
+      <span class="journey-num">10</span>
+      <span class="journey-name">The maker who loves the person whose body has the need</span>
+    </header>
+
+    <p class="journey-prose">
+      The body that has the need cannot make for itself. The caregiver makes for it — and the work is discretion. Invisible support, so the person being cared for is never reduced to their need.
+    </p>
+
+    <div class="moment">
+      <p class="moment-text">It absorbs without showing.</p>
+    </div>
+
+    <p class="journey-prose">
+      The bib holds during the school day. The strip holds under the fold. The dignity stays where it belongs — with the person, not the product.
+    </p>
+
+    <p class="attribution">
+      <span>The caregiver corpus</span>
+      <span class="attribution-sep">·</span>
+      <span>parents, siblings, professionals — most writing only their first name</span>
+    </p>
+  </div>
+</article>
+
+<!-- ════════════════════════════════════════
+     11 — THE HOUSEHOLD MAKER (vignette)
+     The Scraps as a domain unto itself.
+     ════════════════════════════════════════ -->
+<article class="journey vignette">
+  <div class="journey-inner">
+    <header class="journey-mark">
+      <span class="journey-num">11</span>
+      <span class="journey-name">The maker who discovered that scraps become solutions</span>
+    </header>
+
+    <p class="journey-prose">
+      She bought it for one purpose. Cut her pieces. Had scraps left over. The scraps were too valuable to throw away because she now knew what they could do.
+    </p>
+
+    <div class="moment">
+      <p class="moment-text">Mop pads. Dish sponges. Window strips. Mug rugs. Drain mats.</p>
+    </div>
+
+    <p class="journey-prose">
+      One bolt. A dozen uses nobody planned for. Discovery overflowing past the original intent — and then the overflow overflowing again, into communities organizing around what the fabric had quietly made possible.
+    </p>
+
+    <p class="attribution">
+      <span class="attribution-name">Karina C.</span>
+      <span class="attribution-sep">·</span>
+      <span class="attribution-name">Kathrine</span>
+      <span class="attribution-sep">·</span>
+      <span>and a long thread of household makers, mostly unnamed</span>
+    </p>
+  </div>
+</article>
+
+<!-- ════════════════════════════════════════
+     SILENCE — the unwritten domains
+     Named. Not narrated. The Sakshi frame
+     doing its work without saying its name.
+     ════════════════════════════════════════ -->
+<section class="silence" aria-label="The Silence">
+  <div class="silence-inner">
+    <p class="silence-eyebrow">And then —</p>
+    <p class="silence-line">There are journeys that did not make it into language.</p>
+    <ul class="silence-list" role="list">
+      <li>The nursing pad</li>
+      <li>The burp cloth</li>
+      <li>The training pants</li>
+      <li>The small-animal rescue</li>
+      <li>The mug rug</li>
+      <li>The humidifier filter</li>
+    </ul>
+    <p class="silence-coda">
+      They happened. Nobody wrote them down. The fabric still held.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     CLOSE — the Sakshi Seed, overheard
+     ════════════════════════════════════════ -->
+<section class="close" aria-label="Close">
+  <p class="close-line">It was ready before you were.</p>
+</section>
+
+<!-- ════════════════════════════════════════
+     COLOPHON — the volume identifier, finally
+     ════════════════════════════════════════ -->
+<footer class="colophon">
+  <div class="colophon-inner">
+    <div class="colophon-mark">
+      Zorb Original — The Witnesses<br>
+      <span>AKAS Wisdom · Made in USA · A companion to the engineering edition</span>
+    </div>
+    <a class="colophon-link" href="zorb-s01-hero-EDITORIAL.html">
+      Read the engineering →
+    </a>
+  </div>
+</footer>
+
+</body>
+</html>

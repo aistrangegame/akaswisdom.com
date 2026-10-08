@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oil & Gas Spill Prevention | SupAbsorb Tech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--green:#3B8234;--dg:#0D672E;--olive:#B4CAAF;--clay:#CCAA87;--stone:#E7E1D5;--blk:#1E1E1E;--yel:#FFD200;--red:#C0392B;--ink:#1E1E1E;--ink2:#5A5A5A;--inkd:#E8E4DE;--inkm:#9A9590;--crude:#0A0806;--pad:clamp(60px,10vw,120px)}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;font-weight:400;line-height:1.7;color:var(--ink);background:var(--blk);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.sn{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.04em;line-height:1.1}
+
+.grain::after{content:'';position:absolute;inset:0;opacity:.04;pointer-events:none;
+background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:200px 200px}
+
+.oil{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:2}
+
+/* Entry */
+.entry{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px 24px;background:var(--blk);position:relative;z-index:3}
+.drop{width:7px;height:7px;background:var(--crude);border-radius:50%;margin-bottom:48px;opacity:0;position:relative;animation:dF 2s ease-in forwards .3s}
+@keyframes dF{0%{opacity:0;transform:translateY(-80px) scale(.4)}30%{opacity:1;transform:translateY(0) scale(1)}38%{transform:scaleX(2.5) scaleY(.3)}50%{transform:scale(1)}70%{box-shadow:0 0 40px rgba(10,8,6,.4),0 0 120px rgba(10,8,6,.15)}100%{opacity:1;box-shadow:0 0 60px rgba(10,8,6,.3),0 0 160px rgba(10,8,6,.08)}}
+.entry h1{font-size:clamp(1.8rem,5.5vw,3.6rem);color:var(--inkd);max-width:740px;opacity:0;animation:rU 1s ease forwards 1.8s}
+.entry .sub{font-size:clamp(.92rem,1.8vw,1.12rem);color:var(--inkm);margin-top:24px;font-weight:300;max-width:520px;opacity:0;animation:rU 1s ease forwards 2.5s;line-height:1.85}
+.entry .whisper{font-size:.82rem;color:rgba(125,139,134,.5);margin-top:48px;font-style:italic;letter-spacing:.02em;opacity:0;animation:rU 1.2s ease forwards 3.2s}
+.scr{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);opacity:0;animation:rU .6s ease forwards 3.8s,sB 2.5s ease-in-out infinite 4.2s}
+.scr svg{width:22px;height:22px;stroke:var(--inkm);stroke-width:2;fill:none}
+@keyframes rU{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes sB{0%,100%{transform:translateX(-50%)}50%{transform:translateX(-50%) translateY(7px)}}
+
+/* Acts */
+.act{padding:var(--pad) 24px;position:relative;z-index:3}
+.si{max-width:660px;margin:0 auto}.si.w{max-width:940px}
+.lb{font-family:'Outfit',sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px;display:inline-block}
+.st{font-size:clamp(1.02rem,1.8vw,1.12rem);line-height:1.9;margin-bottom:28px}
+.st:last-child{margin-bottom:0}
+.sh{font-size:clamp(1.5rem,4vw,2.6rem);margin-bottom:32px}
+.br{width:36px;height:2px;margin:48px auto;border-radius:1px}
+.hl{color:var(--inkd);font-weight:500}
+
+.glow{background:linear-gradient(90deg,#3B8234,#FFD200,#C0392B,#B4CAAF,#3B8234);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700;text-decoration:none;background-size:200% auto;animation:shimmer 3s linear infinite}
+.glow:hover{opacity:.85}
+@keyframes shimmer{to{background-position:200% center}}
+
+/* Act 1 */
+.a1{background:var(--blk)}.a1 .lb{color:var(--red)}.a1 .sh{color:var(--inkd)}.a1 .st{color:var(--inkm)}.a1 .br{background:rgba(192,57,43,.25)}
+
+/* Penalty counter */
+.pen{margin:36px 0;padding:28px 0;text-align:center}
+.pen p{color:var(--inkm);font-size:.95rem;margin-bottom:20px;line-height:1.7}
+.pen-btns{display:flex;gap:10px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}
+.pen-btn{font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;padding:12px 24px;min-width:80px;min-height:44px;background:rgba(255,210,0,.06);border:1px solid rgba(255,210,0,.2);border-radius:6px;color:var(--yel);cursor:pointer;transition:all .3s}
+.pen-btn:hover{background:rgba(255,210,0,.12);border-color:var(--yel)}
+.pen-btn.sel{background:var(--yel);color:var(--blk);border-color:var(--yel)}
+.pen-result{min-height:60px}
+.pen-result .sn{font-size:clamp(2rem,5vw,3.2rem);color:var(--yel);display:block;opacity:0;transform:translateY(6px);transition:opacity .6s,transform .6s}
+.pen-result .sn.show{opacity:1;transform:translateY(0)}
+.pen-result .pen-note{font-size:.78rem;color:var(--inkm);margin-top:4px;opacity:0;transition:opacity .6s .2s}
+.pen-result .pen-note.show{opacity:1}
+
+/* Outdoor triple problem */
+.triple{display:grid;grid-template-columns:1fr;gap:16px;margin:36px 0}
+@media(min-width:680px){.triple{grid-template-columns:repeat(3,1fr)}}
+.triple-card{padding:20px;background:rgba(192,57,43,.04);border:1px solid rgba(192,57,43,.1);border-radius:8px}
+.triple-card h4{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--inkd);margin-bottom:8px;letter-spacing:.03em}
+.triple-card p{font-size:.82rem;color:var(--inkm);line-height:1.7}
+
+/* State table */
+.state-tbl{margin:32px 0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.state-tbl table{width:100%;border-collapse:collapse;min-width:480px}
+.state-tbl th{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--inkm);padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.06);text-align:left}
+.state-tbl td{font-size:.78rem;color:var(--inkd);padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.03)}
+
+/* Callout */
+.co{margin:40px 0;padding:28px 24px;border-left:3px solid var(--yel);border-radius:0 8px 8px 0;background:rgba(255,210,0,.035)}
+.co p{font-size:.93rem;line-height:1.75;margin-bottom:12px;color:var(--inkd)}.co p:last-child{margin-bottom:0}
+.co strong{color:var(--yel);font-weight:600}
+.co .rc{font-size:.68rem;font-weight:600;letter-spacing:.08em;opacity:.45;margin-bottom:8px;display:block;color:var(--inkm)}
+
+/* Go deeper panels */
+.deeper{margin:40px 0;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.04)}
+.deeper-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;cursor:pointer;background:rgba(255,255,255,.02);transition:background .3s;min-height:44px;gap:12px}
+.deeper-head:hover{background:rgba(255,255,255,.04)}
+.deeper-label{font-size:.78rem;font-weight:500;color:var(--inkm);letter-spacing:.02em}
+.deeper-arrow{font-size:.7rem;color:var(--inkm);transition:transform .3s;flex-shrink:0}
+.deeper.open .deeper-arrow{transform:rotate(90deg)}
+.deeper-body{max-height:0;overflow:hidden;transition:max-height .6s cubic-bezier(.4,0,.2,1),opacity .4s;opacity:0;padding:0 20px}
+.deeper.open .deeper-body{max-height:8000px;opacity:1;padding:0 20px 24px}
+.deeper-body p{font-size:.82rem;color:var(--inkm);line-height:1.8;margin-bottom:16px}
+.deeper-body p:last-child{margin-bottom:0}
+.deeper-body strong{color:var(--inkd);font-weight:600}
+.deeper-body h4{font-family:'Outfit',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--olive);margin:20px 0 10px}
+
+/* Solution thread */
+.thread{position:absolute;left:24px;top:0;width:2px;background:var(--green);opacity:0;height:0;border-radius:1px;transition:opacity 1.2s,height 2s ease}
+@media(min-width:680px){.thread{left:calc(50% - 330px)}}
+
+/* Act 2 */
+.a2{background:var(--blk)}.a2 .lb{color:var(--green)}.a2 .sh{color:var(--inkd)}.a2 .st{color:var(--inkm)}
+.zmc{display:grid;grid-template-columns:1fr;gap:0;max-width:940px;margin:36px auto 0}
+@media(min-width:680px){.zmc{grid-template-columns:200px 1fr;gap:20px}}
+.zl{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px}
+@media(min-width:680px){.zl{flex-direction:column;margin-bottom:0}}
+.zb{font-family:'Outfit',sans-serif;font-size:.74rem;font-weight:500;padding:9px 13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-left:3px solid transparent;border-radius:6px;color:var(--inkm);cursor:pointer;transition:all .3s;text-align:left;flex:1;min-width:110px;min-height:44px}
+@media(min-width:680px){.zb{flex:none}}
+.zb:hover{background:rgba(59,130,52,.08);border-color:rgba(255,255,255,.1);border-left-color:var(--green);color:var(--inkd)}
+.zb.on{background:var(--green);border-color:var(--green);border-left-color:var(--green);color:#fff;font-weight:600}
+.zb.done{border-left-color:var(--olive);background:rgba(180,202,175,.06);color:var(--olive)}
+.zb.done.on{background:var(--green);color:#fff}
+.zd{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.05);border-radius:10px;padding:26px;min-height:220px}
+.zdi{opacity:0;transform:translateY(5px);animation:rU .3s ease forwards}
+.zd h3{font-size:1.25rem;color:var(--inkd);margin-bottom:5px}.zd .fl{font-size:.68rem;color:var(--olive);font-weight:500;letter-spacing:.05em;text-transform:uppercase;margin-bottom:16px}
+.pr{padding:11px 0;border-top:1px solid rgba(255,255,255,.04)}.pr:first-of-type{border-top:none}
+.prh{display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:10px;min-height:44px}
+.prn{font-weight:600;color:var(--inkd);font-size:.86rem}
+.prb{font-size:.56rem;font-weight:600;padding:2px 6px;border-radius:3px;text-transform:uppercase;letter-spacing:.07em;white-space:nowrap}
+.bh{background:var(--green);color:#fff}.bc{background:rgba(59,130,52,.12);color:var(--olive)}.bb{background:rgba(255,210,0,.12);color:var(--yel)}.bbl{background:rgba(74,102,112,.15);color:#7BA3B0}
+.prd{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1),opacity .4s,padding .4s;opacity:0;padding:0}
+.prd.open{max-height:500px;opacity:1;padding:10px 0 0}
+.prd p{font-size:.78rem;color:var(--inkm);margin-bottom:4px;line-height:1.6}
+.prd .to{color:var(--clay);font-style:italic;font-size:.76rem}
+.prd .to::before{content:'\25C7 ';opacity:.5}
+
+/* Zone deeper (inline with zone) */
+.zone-deeper{margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.04)}
+.zone-deeper summary{font-size:.72rem;color:var(--inkm);cursor:pointer;font-weight:500;list-style:none;display:flex;align-items:center;gap:6px}
+.zone-deeper summary::before{content:'→';font-size:.65rem;transition:transform .3s}
+.zone-deeper[open] summary::before{transform:rotate(90deg)}
+.zone-deeper .zd-body{padding:12px 0 0;font-size:.78rem;color:var(--inkm);line-height:1.75}
+
+.sak{margin-top:48px;padding:24px 0;text-align:center;opacity:0;transition:opacity 1.5s}
+.sak.vis{opacity:1}
+.sak p{font-size:.98rem;color:var(--olive);font-style:italic;max-width:520px;margin:0 auto;line-height:1.85}
+
+/* Act 3 */
+.a3{background:var(--stone)}.a3 .lb{color:var(--dg)}.a3 .sh{color:var(--ink)}.a3 .st{color:var(--ink2)}.a3 .br{background:rgba(0,0,0,.08)}
+.cs{margin:40px 0;padding:30px;background:#fff;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.035)}
+.cs h3{font-size:1.1rem;color:var(--ink);margin-bottom:18px}
+.cs .st{font-size:.9rem;color:var(--ink2);margin-bottom:14px}
+.honest{margin:40px 0;padding:28px 24px;border-left:3px solid var(--clay);border-radius:0 8px 8px 0;background:rgba(204,170,135,.06)}
+.honest p{font-size:.93rem;line-height:1.75;margin-bottom:12px;color:var(--ink2)}.honest p:last-child{margin-bottom:0}
+.honest strong{color:var(--ink);font-weight:600}
+.honest .big{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,3vw,2rem);color:var(--ink);display:block;margin:12px 0}
+
+/* Portfolio grid */
+.port{display:grid;grid-template-columns:1fr;gap:10px;margin:28px 0}
+@media(min-width:680px){.port{grid-template-columns:repeat(2,1fr)}}
+.port-item{padding:14px 16px;background:#fff;border-radius:8px;box-shadow:0 1px 6px rgba(0,0,0,.03);border-left:3px solid var(--green)}
+.port-item.miss{border-left-color:#ccc;opacity:.55}
+.port-name{font-weight:600;font-size:.82rem;color:var(--ink)}.port-desc{font-size:.72rem;color:var(--ink2);margin-top:2px;line-height:1.5}
+.port-tag{font-size:.56rem;font-weight:600;display:inline-block;padding:2px 6px;border-radius:3px;margin-top:4px}
+.pt-s{background:var(--green);color:#fff}.pt-m{background:#ccc;color:#666}
+
+/* Bars */
+.bc2{margin-bottom:12px}
+.bl{font-size:.68rem;color:var(--ink2);margin-bottom:3px;display:flex;justify-content:space-between}
+.bt{height:22px;background:rgba(0,0,0,.04);border-radius:5px;overflow:hidden}
+.bf{height:100%;border-radius:5px;display:flex;align-items:center;padding-left:10px;font-size:.66rem;font-weight:600;color:#fff;transition:width 1.8s cubic-bezier(.25,.46,.45,.94);width:0}
+.bf.t{background:var(--red)}.bf.u2{background:var(--green)}.bf.u7{background:var(--dg)}
+.pl{text-align:center;margin-top:18px;padding:14px;background:rgba(59,130,52,.05);border-radius:6px}
+.pl .sn{font-size:1.9rem;color:var(--green)}.pl p{font-size:.75rem;color:var(--ink2);margin-top:2px}
+.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-top:32px}
+.cb{background:#fff;border:1px solid rgba(0,0,0,.04);border-radius:6px;padding:12px 10px;text-align:center;transition:transform .3s}
+.cb:hover{transform:translateY(-2px)}
+.ci{font-size:1rem;margin-bottom:4px}.ct{font-size:.68rem;font-weight:600;color:var(--ink);line-height:1.3}.cu{font-size:.58rem;color:var(--ink2);margin-top:2px}
+
+/* Arena tabs */
+.arena{margin:48px 0}
+.arena h3{font-size:1.2rem;color:var(--ink);margin-bottom:6px}
+.arena .arena-sub{font-size:.82rem;color:var(--ink2);margin-bottom:20px}
+.arena-tabs{display:flex;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;border-bottom:2px solid rgba(0,0,0,.06);margin-bottom:0}
+.arena-tab{font-family:'Outfit',sans-serif;font-size:.72rem;font-weight:600;padding:12px 16px;min-height:44px;background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--ink2);cursor:pointer;white-space:nowrap;transition:all .3s;letter-spacing:.02em}
+.arena-tab:hover{color:var(--ink);background:rgba(0,0,0,.02)}
+.arena-tab.on{color:var(--green);border-bottom-color:var(--green)}
+.arena-panel{display:none;animation:rU .3s ease forwards}
+.arena-panel.show{display:block}
+.arena-tbl{width:100%;border-collapse:collapse;margin:20px 0;font-size:.72rem;overflow-x:auto;display:block}
+.arena-tbl thead{position:sticky;top:0}
+.arena-tbl th{font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);padding:10px 10px;border-bottom:2px solid rgba(0,0,0,.08);text-align:left;font-size:.62rem;white-space:nowrap;background:var(--stone)}
+.arena-tbl td{padding:8px 10px;border-bottom:1px solid rgba(0,0,0,.04);color:var(--ink2);vertical-align:top;min-width:80px}
+.arena-tbl tr:hover td{background:rgba(59,130,52,.03)}
+.arena-tbl .win{color:var(--green);font-weight:600}
+.arena-tbl .lose{color:var(--red);opacity:.7}
+.arena-tbl .prod-col{font-weight:600;color:var(--ink);white-space:nowrap}
+.arena-tbl .sup{background:rgba(59,130,52,.04)}
+.arena-tbl .sup td{color:var(--ink)}
+.arena-read{margin:16px 0 0;padding:16px;background:rgba(0,0,0,.02);border-radius:6px;border-left:3px solid var(--clay)}
+.arena-read p{font-size:.8rem;color:var(--ink2);line-height:1.7;margin:0}
+.arena-read strong{color:var(--ink)}
+.arena-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -10px;padding:0 10px}
+
+/* Deeper on light bg */
+.a3 .deeper{border-color:rgba(0,0,0,.06)}
+.a3 .deeper-head{background:rgba(0,0,0,.02)}
+.a3 .deeper-head:hover{background:rgba(0,0,0,.04)}
+.a3 .deeper-label{color:var(--ink2)}
+.a3 .deeper-arrow{color:var(--ink2)}
+.a3 .deeper-body p{color:var(--ink2)}
+.a3 .deeper-body strong{color:var(--ink)}
+.a3 .deeper-body h4{color:var(--dg)}
+
+/* Act 4 */
+.a4{background:linear-gradient(180deg,var(--stone) 0%,#E8F0E4 40%,#D6EBCE 100%);text-align:center}
+.a4 .sh{color:var(--dg)}.a4 .st{color:var(--ink2);text-align:center}
+.ctg{display:grid;grid-template-columns:1fr;gap:14px;max-width:760px;margin:36px auto 0}
+@media(min-width:680px){.ctg{grid-template-columns:repeat(3,1fr)}}
+.cc{background:#fff;border-radius:10px;padding:26px 18px;box-shadow:0 2px 12px rgba(0,0,0,.035);transition:transform .3s,box-shadow .3s;cursor:pointer;text-decoration:none;display:block;text-align:left}
+.cc:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.07)}
+.cc.ft{border:2px solid var(--green)}
+.ctr{font-family:'Outfit',sans-serif;font-size:.62rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--green);margin-bottom:8px}
+.cc h3{font-size:1.1rem;color:var(--ink);margin-bottom:8px}.cc p{font-size:.8rem;color:var(--ink2);line-height:1.55}
+.btn{display:inline-block;margin-top:14px;padding:8px 18px;background:var(--green);color:#fff;font-family:'Outfit',sans-serif;font-size:.76rem;font-weight:600;border-radius:5px;text-decoration:none;transition:background .3s}
+.btn:hover{background:var(--dg)}
+.closing{margin-top:56px}
+.seed{font-size:clamp(.9rem,2vw,1.05rem);color:var(--dg);font-style:italic;font-weight:300;max-width:460px;margin:0 auto 20px;line-height:1.85}
+.fd{width:5px;height:5px;background:var(--green);border-radius:50%;margin:0 auto;opacity:0}
+.fd.abs{animation:fA 2s ease forwards}
+@keyframes fA{0%{opacity:0;transform:translateY(-20px)}30%{opacity:1;transform:translateY(0)}50%{transform:scale(1.6);opacity:.7}100%{opacity:0;transform:scale(0)}}
+.foot{background:var(--blk);padding:24px;text-align:center;z-index:3;position:relative}
+.foot p{color:var(--inkm);font-size:.65rem}.foot a{color:var(--green);text-decoration:none}
+.rv{opacity:0;transform:translateY(14px);transition:opacity .7s,transform .7s}.rv.v{opacity:1;transform:translateY(0)}
+.rd1{transition-delay:.12s}.rd2{transition-delay:.24s}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#2a2a2a;color:var(--inkd);font-family:'Outfit',sans-serif;font-size:.78rem;padding:14px 24px;border-radius:8px;z-index:100;opacity:0;pointer-events:none;transition:opacity .4s,transform .4s;box-shadow:0 4px 20px rgba(0,0,0,.3);text-align:center;max-width:90vw}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast .dest{color:var(--green);font-weight:600}
+.toast .leaving{color:var(--inkm);font-size:.68rem;display:block;margin-bottom:4px}
+</style>
+</head>
+<body>
+<canvas class="oil" id="oC"></canvas>
+
+<section class="entry" id="entry">
+  <div class="drop"></div>
+  <h1>AN ENGINEER SAW OIL DRAINING INTO THE GROUND. HE DIDN'T FILE A REPORT. HE BUILT AN INSTRUMENT TO STOP IT.</h1>
+  <p class="sub">That was decades ago. The instrument became a company. The company built a product for every place oil meets earth — from West Texas wellheads to Gulf Coast refineries. The ground is still waiting for the same answer.</p>
+  <p class="whisper">The ground remembers what you spill on it.</p>
+  <div class="scr"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+</section>
+
+<section class="act a1 grain" id="act1">
+  <div class="si">
+    <p class="lb rv">Here's what you're facing</p>
+    <p class="st rv">Every oil and gas facility in America that stores more than 1,320 gallons aboveground — and virtually all of them do — must maintain an SPCC plan under federal law. That plan must include provisions for spill prevention, containment, and cleanup. <span class="hl">Absorbent mats are explicitly listed as spill response materials in EPA guidance.</span></p>
+    <p class="st rv">The penalty for non-compliance: up to <a class="glow" href="https://www.epa.gov/oil-spills-prevention-and-preparedness-regulations/spill-prevention-control-and-countermeasure-spcc" target="_blank" rel="noopener">$27,500 per day</a>. Per violation. And SPCC inspectors cite each deficiency separately.</p>
+
+    <div class="pen rv">
+      <p><strong style="color:var(--inkd)">How many zones at your facility have chronic drip points right now?</strong></p>
+      <div class="pen-btns">
+        <button class="pen-btn" onclick="penCalc(3)">3 zones</button>
+        <button class="pen-btn" onclick="penCalc(5)">5 zones</button>
+        <button class="pen-btn" onclick="penCalc(7)">7 zones</button>
+      </div>
+      <div class="pen-result" id="penR">
+        <span class="sn" id="penNum"></span>
+        <p class="pen-note" id="penNote">That's potential daily exposure from a single inspection.</p>
+      </div>
+    </div>
+
+    <div class="br rv"></div>
+
+    <p class="st rv">But regulation isn't the only problem. <span class="hl">Oil and gas is an outdoor industry.</span> And outdoor conditions destroy standard absorbent products.</p>
+
+    <div class="triple rv">
+      <div class="triple-card">
+        <h4>UV DEGRADATION</h4>
+        <p>Standard polypropylene mats shred in direct sunlight within days. The fiber structure breaks down. The mat falls apart on the pad.</p>
+      </div>
+      <div class="triple-card">
+        <h4>RAIN WASHOUT</h4>
+        <p>Captured oil releases back into the environment during rain. The mat absorbed crude on Tuesday. Thursday's storm put it back on the ground.</p>
+      </div>
+      <div class="triple-card">
+        <h4>WIND DISPLACEMENT</h4>
+        <p>Lightweight pads blow off the site. The mat under the wellhead is now 200 yards downwind in the brush.</p>
+      </div>
+    </div>
+
+    <p class="st rv">The white pads that work inside a warehouse don't survive a week on a well pad in the Permian Basin.</p>
+
+    <div class="br rv"></div>
+
+    <p class="st rv">And every producing state has its own rules. State enforcement is often <em>more</em> aggressive than federal.</p>
+
+    <div class="state-tbl rv">
+      <table>
+        <thead><tr><th>State</th><th>Agency</th><th>Reporting Threshold</th></tr></thead>
+        <tbody>
+          <tr><td>Texas</td><td>Railroad Commission</td><td>>5 barrels or any reaching water</td></tr>
+          <tr><td>Oklahoma</td><td>Corporation Commission</td><td>Any spill or discharge</td></tr>
+          <tr><td>Pennsylvania</td><td>DEP</td><td>Any release to water, land, or air</td></tr>
+          <tr><td>North Dakota</td><td>Industrial Commission</td><td>Any discharge >1 barrel</td></tr>
+          <tr><td>Colorado</td><td>ECMC</td><td>Spill/release reporting required</td></tr>
+          <tr><td>California</td><td>CalGEM + RWQCB</td><td>Zero-discharge expectation</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="deeper rv" id="d1">
+      <div class="deeper-head" onclick="togDeep('d1')">
+        <span class="deeper-label">Go deeper → Why these regulations exist and how enforcement actually works</span>
+        <span class="deeper-arrow">▸</span>
+      </div>
+      <div class="deeper-body">
+        <h4>Three disasters shaped every rule</h4>
+        <p>The <strong>Exxon Valdez</strong> grounding in 1989 — 11 million gallons in Prince William Sound — revealed that neither industry nor government was prepared. Congress responded with the Oil Pollution Act of 1990, establishing strict liability and the Oil Spill Liability Trust Fund. The <strong>SPCC rule</strong> (40 CFR Part 112), originally from 1973, requires any facility storing more than 1,320 gallons aboveground to maintain a spill prevention plan certified by a Professional Engineer for larger facilities.</p>
+        <p>The <strong>Deepwater Horizon</strong> blowout in 2010 — 4.9 million barrels over 87 days, costing BP roughly $65 billion — triggered the breakup of the Minerals Management Service and doubled the offshore inspector workforce. Every significant tightening of oil spill regulation traces back to a disaster that proved the previous rules weren't enough.</p>
+        <h4>How enforcement actually works</h4>
+        <p>Inspection rates are low — roughly 90% of sites in New Mexico's Permian Basin go uninspected in any given year. Violations are discovered through direct inspections, citizen complaints, aerial FLIR surveillance, satellite methane monitoring, and discrepancies in self-reported data. The enforcement progression: Notice of Violation → compliance order → consent decree (court-filed, 5-10 year duration).</p>
+        <p>Penalties have escalated dramatically. In FY 2024, EPA concluded 19 oil and gas enforcement cases imposing nearly <strong>$72 million in civil penalties</strong>. The landmark: <strong>Marathon Oil's $64.5 million penalty</strong> — the largest Clean Air Act stationary source penalty ever — for violations at nearly 90 facilities on the Fort Berthold Indian Reservation, plus $177 million in mandated compliance investments.</p>
+        <h4>State enforcement varies enormously</h4>
+        <p>The <strong>Texas Railroad Commission</strong> — three elected commissioners accepting unlimited campaign contributions from the industry they regulate — is widely criticized for inadequate enforcement. At the opposite end, <strong>California's CalGEM</strong> enforces 3,200-foot setbacks from homes and a fracking phase-out. <strong>Colorado's ECMC</strong> changed its mission in 2019 from "fostering" oil and gas development to "protecting public health, safety, welfare, the environment, and wildlife." <strong>New Mexico</strong> requires operators to capture 98% of natural gas by 2026.</p>
+      </div>
+    </div>
+
+    <p class="st rv">So the question isn't <em>should I do something about spill prevention.</em> The question is <em>what, exactly, goes where — in a facility that has seven different environments.</em></p>
+  </div>
+</section>
+
+<section class="act a2 grain" id="act2">
+  <div class="thread" id="thread"></div>
+  <div class="si w">
+    <p class="lb rv">Your facility has seven zones</p>
+    <h2 class="sh rv" style="max-width:600px">DIFFERENT ENVIRONMENTS. DIFFERENT FLUIDS. DIFFERENT ANSWERS.</h2>
+    <p class="st rv" style="max-width:600px">This is the part nobody else shows you. HalenHardy makes one product for outdoors. New Pig makes one product for indoors. But an oil and gas facility isn't one environment — it's seven. And putting the wrong product in the wrong zone doesn't just waste money. It creates a new liability.</p>
+    <p class="st rv" style="max-width:600px">Click any zone. You'll see what works, why, and where it falls short.</p>
+    <div class="zmc rv">
+      <div class="zl" id="zL">
+        <button class="zb on" data-zone="wellhead">Wellhead / Pump Jack</button>
+        <button class="zb" data-zone="tank">Tank Battery</button>
+        <button class="zb" data-zone="pipeline">Pipeline / Valve Station</button>
+        <button class="zb" data-zone="compressor">Compressor Station</button>
+        <button class="zb" data-zone="loading">Loading Rack</button>
+        <button class="zb" data-zone="refinery">Refinery Indoor</button>
+        <button class="zb" data-zone="terminal">Fuel Terminal</button>
+      </div>
+      <div class="zd" id="zD"></div>
+    </div>
+    <div class="sak" id="sakR">
+      <p>Every zone in your operation has an answer. Not one product forced everywhere — the right product, in the right place, for the right fluid. That's not a product catalog. That's one engineer's answer to every place oil meets earth.</p>
+    </div>
+  </div>
+</section>
+
+<section class="act a3" id="act3">
+  <div class="si w">
+    <p class="lb rv">The full picture</p>
+    <h2 class="sh rv">EVERY PRODUCT. EVERY COMPETITOR. HONESTLY.</h2>
+
+    <div class="si">
+    <div class="honest rv">
+      <p>Before we show you comparison tables, here's something most companies wouldn't tell you.</p>
+      <p>Our W-281 Railroad/Track Mat — the primary outdoor product for oil and gas — holds <strong>39 gallons</strong>. HalenHardy's SPL122 Spilltration holds <strong>134.9 gallons</strong> at a lower cost per gallon.</p>
+      <p class="big">HalenHardy wins the outdoor comparison on capacity and per-gallon cost.</p>
+      <p>So why are we showing you this? Because an oil and gas facility isn't one zone. It's seven. And HalenHardy makes one product. We'll show you who wins where — including where we don't.</p>
+    </div>
+    </div>
+
+    <div class="arena rv">
+      <h3>COMPARE PRODUCTS FOR YOUR ZONE</h3>
+      <p class="arena-sub">Five competitive arenas. Full specs. Honest reads. Click any category.</p>
+      <div class="arena-tabs" id="arenaTabs">
+        <button class="arena-tab on" data-arena="outdoor">Outdoor Track Mats</button>
+        <button class="arena-tab" data-arena="walkway">Indoor Walkway</button>
+        <button class="arena-tab" data-arena="bulk">Indoor Bulk</button>
+        <button class="arena-tab" data-arena="barrier">Barrier Containment</button>
+        <button class="arena-tab" data-arena="pads">Pads / Spill Kits</button>
+      </div>
+
+      <!-- ARENA 1: OUTDOOR -->
+      <div class="arena-panel show" id="arena-outdoor">
+        <p style="font-size:.72rem;color:var(--ink2);padding:14px 0 4px;font-style:italic">Wellheads · Tank Batteries · Loading Racks · Pipeline Stations · Fuel Terminals</p>
+        <div class="arena-scroll">
+        <table class="arena-tbl">
+          <thead><tr><th>Product</th><th>Size</th><th>Capacity</th><th>Price</th><th>$/Gallon</th><th>UV Rating</th><th>Oil-Selective</th><th>Recycled</th><th>Berry</th></tr></thead>
+          <tbody>
+            <tr class="sup"><td class="prod-col"><a class="glow" href="https://superabsorbentmats.com/products/railroad-mat-track-rug" target="_blank" rel="noopener">SupAbsorb W-281</a></td><td>58"×80'</td><td class="lose">39 gal</td><td>$329</td><td>$8.44</td><td>Black PP geotextile</td><td class="win">Yes (evaporation)</td><td>Partial</td><td class="win">Yes ✓</td></tr>
+            <tr><td class="prod-col"><a class="glow" href="https://www.halenhardy.com/shop/product/spilltration-railroad-oil-leak-spill-inner-track-mat/" target="_blank" rel="noopener">HalenHardy SPL122</a></td><td>52"×100'</td><td class="win">134.9 gal ✓</td><td>$576</td><td class="win">$4.27 ✓</td><td class="win">2-yr guarantee ✓</td><td class="win">Yes (rain-filtration)</td><td class="win">>95%</td><td>No</td></tr>
+            <tr><td class="prod-col"><a class="glow" href="https://www.spilltech.com/webapp/wcs/stores/servlet/ProductDisplay?productId=16285&storeId=10052" target="_blank" rel="noopener">SpillTech TMAT57</a></td><td>57"×80'</td><td>63 gal</td><td class="win">$262 ✓</td><td class="win">$4.16 ✓</td><td>Not published</td><td>Standard PP</td><td>Not stated</td><td>No</td></tr>
+            <tr><td class="prod-col"><a class="glow" href="https://fytertech.com/eu/products/M-151" target="_blank" rel="noopener">Spilfyter M-151</a></td><td>58"×80'</td><td>96 gal</td><td>$326–435</td><td>$3.40–4.53</td><td>Not published</td><td>Standard PP</td><td>Not stated</td><td>No</td></tr>
+            <tr><td class="prod-col">New Pig MAT465</td><td>59"×100'</td><td>60 gal</td><td>~$400–600</td><td>$6.67–10.00</td><td>12 mo (MAT4105)</td><td>Standard PP</td><td>Not stated</td><td>No</td></tr>
+            <tr><td class="prod-col"><a class="glow" href="https://www.bradyid.com/absorbents/mats-rugs/trackmat-matting-roll-cps-brus-10850" target="_blank" rel="noopener">Brady SPC TM58</a></td><td>58" wide</td><td>—</td><td>~$200–400</td><td>—</td><td>Not published</td><td>Standard PP</td><td>Not stated</td><td>No</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="arena-read">
+          <p><strong>Honest read:</strong> HalenHardy SPL122 wins capacity (3.5×), $/gallon, UV guarantee, and recycled content for the outdoor application. SpillTech wins on lowest price. SupAbsorb W-281 is the only Berry Compliant outdoor track mat — critical for federal facilities. The real question: does your facility need only an outdoor mat, or a full solution across seven zones?</p>
+        </div>
+      </div>
+
+      <!-- ARENA 2: WALKWAY -->
+      <div class="arena-panel" id="arena-walkway">
+        <p style="font-size:.72rem;color:var(--ink2);padding:14px 0 4px;font-style:italic">Refinery corridors · Compressor building entries · Terminal office transitions · Contractor staging areas</p>
+        <div class="arena-scroll">
+        <table class="arena-tbl">
+          <thead><tr><th>Product</th><th>Capacity</th><th>Price (~36"×100')</th><th>$/Gallon</th><th>NFSI</th><th>ADA</th><th>Forklift</th><th>Recycled</th><th>Berry</th></tr></thead>
+          <tbody>
+            <tr class="sup"><td class="prod-col"><a class="glow" href="https://superabsorbentmats.com/products/sticky-back" target="_blank" rel="noopener">SupAbsorb W-280</a></td><td class="win">21 gal ✓</td><td class="win">$164 ✓</td><td class="win">$7.81 ✓</td><td class="win">Yes</td><td class="win">Yes</td><td class="win">Yes (28 lb+)</td><td class="win">85% ✓</td><td class="win">Yes ✓</td></tr>
+            <tr><td class="prod-col"><a class="glow" href="https://www.newpig.com/pig-ultra-duty-adhesive-backed-grippy-floor-mat/p/GRP36200" target="_blank" rel="noopener">New Pig GRP36200</a></td><td>12.5 gal</td><td>$259–306</td><td>$20.72–24.48</td><td>Yes</td><td>Yes</td><td>Yes</td><td>0% stated</td><td>Unknown</td></tr>
+            <tr><td class="prod-col"><a class="glow" href="https://www.bradyid.com/absorbents/mats-rugs/toughsorb-adhesive-mat-roll-cps-brus-10847" target="_blank" rel="noopener">Brady ToughSorb</a></td><td>21 gal</td><td>$300</td><td>$14.29</td><td>No</td><td>Not stated</td><td>Yes</td><td>0% stated</td><td>No</td></tr>
+            <tr><td class="prod-col"><a class="glow" href="https://www.uline.com/Product/Detail/H-7947/Carpet-Mats/Grip-Tight-Carpet-Mat-3-x-30" target="_blank" rel="noopener">Uline Grip-Tight</a></td><td>21 gal</td><td>$295–315</td><td>$14.05–15.00</td><td>No</td><td>Not stated</td><td>Not stated</td><td>0% stated</td><td>No</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="arena-read">
+          <p><strong>Honest read:</strong> W-280 wins capacity, $/gallon (62–68% less than New Pig), recycled content, and Berry Compliance. It's the only product combining NFSI + ADA + forklift-rated + 85% recycled. New Pig wins on brand recognition and distribution reach. <strong>HalenHardy has no product in this category.</strong></p>
+        </div>
+      </div>
+
+      <!-- ARENA 3: BULK -->
+      <div class="arena-panel" id="arena-bulk">
+        <p style="font-size:.72rem;color:var(--ink2);padding:14px 0 4px;font-style:italic">Compressor building floors · Pump houses · Generator rooms · Maintenance shops</p>
+        <div class="arena-scroll">
+        <table class="arena-tbl">
+          <thead><tr><th>Product</th><th>Size</th><th>Capacity</th><th>Price</th><th>$/Gallon</th><th>Recycled</th><th>Lint-Free</th><th>Berry</th></tr></thead>
+          <tbody>
+            <tr class="sup"><td class="prod-col"><a class="glow" href="https://superabsorbentmats.com/products/ragrug" target="_blank" rel="noopener">SupAbsorb W-278</a></td><td>36"×150'</td><td class="win">55 gal ✓</td><td class="win">$66 ✓</td><td class="win">$1.20 ✓</td><td class="win">90% ✓</td><td class="win">Yes (PP top)</td><td>No</td></tr>
+            <tr><td class="prod-col">Generic industrial mats</td><td>Varies</td><td>10–30 gal typical</td><td>$80–200+</td><td>$3–10+</td><td>Varies</td><td>Varies</td><td>Rarely</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="arena-read">
+          <p><strong>Honest read:</strong> At $1.20 per gallon absorbed, W-278 is the most cost-effective industrial absorbent mat available. 90% recycled content. The limitation: not forklift-rated, not adhesive-backed, not outdoor-rated. For indoor bulk floor coverage where budget drives the decision, nothing else is close. <strong>HalenHardy, New Pig, and Brady have no direct competitor at this price point.</strong></p>
+        </div>
+      </div>
+
+      <!-- ARENA 4: BARRIER -->
+      <div class="arena-panel" id="arena-barrier">
+        <p style="font-size:.72rem;color:var(--ink2);padding:14px 0 4px;font-style:italic">Battery charging areas · Near floor drains · Environmentally sensitive zones · Under lube oil systems</p>
+        <div class="arena-scroll">
+        <table class="arena-tbl">
+          <thead><tr><th>Product</th><th>Size</th><th>Capacity</th><th>Price</th><th>$/Linear Ft</th><th>Recycled</th><th>Forklift</th><th>Berry</th></tr></thead>
+          <tbody>
+            <tr class="sup"><td class="prod-col"><a class="glow" href="https://superabsorbentmats.com/products/spill-matting-w-barrier" target="_blank" rel="noopener">SupAbsorb W-282</a></td><td>36"×100'</td><td>25 gal</td><td class="win">$94–99 ✓</td><td class="win">$0.94–1.00 ✓</td><td class="win">55% ✓</td><td class="win">Yes (28 lb+)</td><td class="win">Yes ✓</td></tr>
+            <tr><td class="prod-col"><a class="glow" href="https://www.uline.com/Product/Detail/H-7947/Carpet-Mats/Grip-Tight-Carpet-Mat-3-x-30" target="_blank" rel="noopener">Uline S-20085</a></td><td>36"×100'</td><td>25 gal</td><td>$203–222</td><td>$2.03–2.22</td><td>0% stated</td><td>Not stated</td><td>No</td></tr>
+            <tr><td class="prod-col"><a class="glow" href="https://www.bradyid.com/absorbents/mats-rugs/barrier-spill-absorbent-mat-cps-2378298?part-number=bsm100" target="_blank" rel="noopener">Brady BSM100</a></td><td>36"×100'</td><td>25 gal</td><td>$260</td><td>$2.60</td><td>0% stated</td><td>Yes</td><td>No</td></tr>
+            <tr><td class="prod-col"><a class="glow" href="https://www.newpig.com/pig-ultra-duty-adhesive-backed-grippy-floor-mat/p/GRP36200" target="_blank" rel="noopener">New Pig Grippy</a></td><td>32"×100'</td><td>~9 gal</td><td>~$282</td><td>~$2.82</td><td>0% stated</td><td>Not stated</td><td>No</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="arena-read">
+          <p><strong>Honest read:</strong> W-282 is <strong>55–62% cheaper</strong> than Brady and Uline at identical capacity. Clear price leader with Berry Compliance, recycled content, and forklift rating. This is SupAbsorb's most decisive competitive advantage in any product category. <strong>HalenHardy has no barrier product.</strong></p>
+        </div>
+      </div>
+
+      <!-- ARENA 5: PADS -->
+      <div class="arena-panel" id="arena-pads">
+        <p style="font-size:.72rem;color:var(--ink2);padding:14px 0 4px;font-style:italic">Spill kits · Targeted drip points · Well service operations · Turnaround maintenance</p>
+        <div class="arena-scroll">
+        <table class="arena-tbl">
+          <thead><tr><th>Product</th><th>Type</th><th>Berry</th><th>Key Advantage</th></tr></thead>
+          <tbody>
+            <tr class="sup"><td class="prod-col"><a class="glow" href="https://superabsorbentmats.com/products/universal-fine-fiber-pads" target="_blank" rel="noopener">SupAbsorb W-393</a></td><td>Universal meltblown PP</td><td class="win">Yes ✓</td><td>Berry Compliant + part of full portfolio</td></tr>
+            <tr><td class="prod-col"><a class="glow" href="https://www.newpig.com/pig-oil-only-absorbent-mat-pad/p/MAT403" target="_blank" rel="noopener">New Pig MAT403</a></td><td>Oil-only PP</td><td>Unknown</td><td>Broadest SKU range, strongest brand</td></tr>
+            <tr><td class="prod-col"><a class="glow" href="https://www.bradyid.com/absorbents/oil-pads/oil-absorbent-pad-cps-brus-10831?part-number=spc100" target="_blank" rel="noopener">Brady SPC SPC100</a></td><td>Oil-only PP</td><td>No</td><td>BradyPLUS distribution</td></tr>
+            <tr><td class="prod-col">SpillTech</td><td>Universal / Oil-only PP</td><td>No</td><td>Competitive pricing</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="arena-read">
+          <p><strong>Honest read:</strong> Universal pads are a commodity category. Differentiation comes from Berry Compliance (federal facility access), pricing, and being part of a portfolio that covers the full facility. W-393's Berry Compliance is meaningful for government O&G operations — military fuel farms, DOE sites, Corps of Engineers facilities. <strong>HalenHardy has no pads product.</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="br rv"></div>
+
+    <div class="si">
+    <p class="st rv">The pattern across all five arenas: <strong>HalenHardy wins the outdoor comparison. SupAbsorb wins everything else.</strong> And "everything else" is five of seven zones in an oil and gas facility.</p>
+
+    <p class="st rv">Every product on this page is made in America. Five of six lines are Berry Compliant. Up to 90% recycled content.</p>
+
+    <div class="cg rv">
+      <div class="cb"><div class="ci">☀️</div><div class="ct">UV Resistant</div><div class="cu">W-281 outdoor-rated</div></div>
+      <div class="cb"><div class="ci">🛡️</div><div class="ct">NFSI 101-C</div><div class="cu">TCOF 0.80 "High Traction"</div></div>
+      <div class="cb"><div class="ci">♻️</div><div class="ct">Up to 90% Recycled</div><div class="cu">Varies by product</div></div>
+      <div class="cb"><div class="ci">🇺🇸</div><div class="ct">Berry Compliant</div><div class="cu">5 of 6 product lines</div></div>
+      <div class="cb"><div class="ci">🏗️</div><div class="ct">Forklift Rated</div><div class="cu">28 lbs+ durability</div></div>
+      <div class="cb"><div class="ci">📍</div><div class="ct">Made in America</div><div class="cu">U.S. manufactured</div></div>
+      <div class="cb"><div class="ci">🌧️</div><div class="ct">Oil-Selective</div><div class="cu">Rain evaporates, oil stays</div></div>
+      <div class="cb"><div class="ci">🚫</div><div class="ct">No Heavy Metals</div><div class="cu">Cal Prop 65 verified</div></div>
+    </div>
+
+    <div class="deeper rv" id="d3">
+      <div class="deeper-head" onclick="togDeep('d3')">
+        <span class="deeper-label">Go deeper → Who's buying in this industry, how purchasing works, and where it's all going</span>
+        <span class="deeper-arrow">▸</span>
+      </div>
+      <div class="deeper-body">
+        <h4>The operator landscape</h4>
+        <p>Two supermajors dominate: <strong>ExxonMobil</strong> (1.7M BOE/d in Permian alone after $64.5B Pioneer acquisition) and <strong>Chevron</strong> (1.06M BOE/d Permian). Below them, large independents: ConocoPhillips, EOG, Diamondback, Devon. Below those, roughly <strong>9,000 independent producers</strong> — most small, often family-owned. And 760,000 stripper wells (averaging 2.15 barrels/day) collectively producing 7-10% of US oil.</p>
+        <h4>How majors buy vs how independents buy</h4>
+        <p>At ExxonMobil, selling absorbent products requires ISNetworld certification ($875+/yr), registration through Supplier One, and navigating MSA negotiations. Purchases under $5,000 go on a field supervisor's P-card. At a 50-well independent in Odessa? The foreman drives to the oilfield supply store, loads up, and gets a Net 30 invoice. No ISNetworld. No MSA. Relationships and convenience drive the decision.</p>
+        <h4>Where absorbents sit in budgets</h4>
+        <p>They straddle environmental compliance, safety, and MRO categories — making them easy to purchase but hard to track. A small operator spends $5,000-$15,000/year. A mid-size operator: $50,000-$200,000. Majors: millions, but it registers as a rounding error in total procurement.</p>
+        <h4>Key distributors</h4>
+        <p><strong>DNOW</strong> (acquiring MRC Global for $1.5B, creating 350+ location network) is the dominant oilfield-specific distributor. <strong>Grainger</strong> ($17.2B revenue) captures ~7% of MRO market. Local oilfield supply houses remain essential for remote upstream.</p>
+        <h4>Where this industry is going</h4>
+        <p><strong>$250 billion in mergers</strong> (2024-2025) means fewer, larger buyers with more centralized procurement. <strong>Half of US pipelines are 50+ years old</strong> — aging infrastructure means more chronic leaks. <strong>EPA methane rules</strong> and the Inflation Reduction Act methane fee are tightening compliance requirements. The workforce has shrunk from 600,000 to 380,000 while producing 45% more oil — fewer experienced workers need simpler, more reliable solutions.</p>
+        <p>Every one of these trends — consolidation, aging infrastructure, tighter regulation, smaller workforce — is a tailwind for products that prevent oil from reaching the ground.</p>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="act a4" id="act4">
+  <div class="si">
+    <h2 class="sh rv">START WITH YOUR WORST ZONE</h2>
+    <p class="st rv" style="max-width:460px;margin:0 auto 12px">You don't need to solve every wellhead, every compressor building, and every loading rack today. Pick the zone that keeps you up at night.</p>
+    <div class="ctg">
+      <a class="cc rv" href="https://superabsorbentmats.com" target="_blank" rel="noopener"><p class="ctr">Try it</p><h3>GET A SAMPLE</h3><p>$5 sample of any product. See how it performs in your field conditions — UV, rain, wind. Then decide.</p><span class="btn">Order Sample</span></a>
+      <a class="cc ft rv rd1" href="https://superabsorbentmats.com" target="_blank" rel="noopener"><p class="ctr">Start small</p><h3>ONE ZONE, ONE PRODUCT</h3><p>Pick your worst zone. One roll of the right product. Let it sit for a month in your conditions. The mat speaks for itself.</p><span class="btn">Shop Now</span></a>
+      <a class="cc rv rd2" href="https://superabsorbentmats.com/pages/contact-us" target="_blank" rel="noopener"><p class="ctr">Talk to us</p><h3>SCHEDULE A CALL</h3><p>Have questions about which products fit your facility? Schedule a call to discuss your needs. No pressure. No obligation.</p><span class="btn">Schedule a Call</span></a>
+    </div>
+    <div class="closing rv">
+      <p class="seed">The ground remembers what you spill on it.<br>And what you prevent.</p>
+      <div class="fd" id="fD"></div>
+    </div>
+  </div>
+</section>
+
+<div class="toast" id="toast"><span class="leaving">Leaving SupAbsorb Tech</span>Entering <span class="dest" id="toastDest"></span></div>
+
+<footer class="foot"><p>SupAbsorb Tech — a division of <a href="https://akastex.com" target="_blank" rel="noopener">AKAS Tex Inc.</a> — Made in America</p></footer>
+
+<script>
+/* === OIL CANVAS (Bindu — oil meeting earth) === */
+var cv=document.getElementById('oC'),cx=cv.getContext('2d'),ds=[],phase='none';
+function rz(){cv.width=innerWidth;cv.height=innerHeight}
+rz();addEventListener('resize',rz);
+for(var i=0;i<10;i++)ds.push({x:Math.random()*cv.width,y:Math.random()*cv.height,r:30+Math.random()*60,tr:0,to:0,cr:0,co:0,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18});
+var pm={entry:'none',act1:'spread',act2:'hold',act3:'absorb',act4:'clean'};
+var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&e.intersectionRatio>.25){var p=pm[e.target.id];if(p)phase=p}})},{threshold:[.25]});
+['entry','act1','act2','act3','act4'].forEach(function(id){var el=document.getElementById(id);if(el)so.observe(el)});
+function draw(){cx.clearRect(0,0,cv.width,cv.height);
+ds.forEach(function(d,i){
+if(phase==='none'){d.tr=0;d.to=0}
+else if(phase==='spread'){var s=Math.min(1,1-i*.08);d.tr=d.r*s;d.to=.12*s}
+else if(phase==='hold'){d.tr=d.r*.7;d.to=.08}
+else if(phase==='absorb'){var a=Math.max(0,1-i*.15);d.tr=d.r*a*.25;d.to=.06*a}
+else{d.tr=0;d.to=0}
+d.cr+=(d.tr-d.cr)*.02;d.co+=(d.to-d.co)*.02;
+d.x+=d.vx;d.y+=d.vy;
+if(d.x<-80)d.x=cv.width+80;if(d.x>cv.width+80)d.x=-80;
+if(d.y<-80)d.y=cv.height+80;if(d.y>cv.height+80)d.y=-80;
+if(d.cr>.3&&d.co>.0005){
+var g=cx.createRadialGradient(d.x,d.y,0,d.x,d.y,d.cr);
+g.addColorStop(0,'rgba(10,8,6,'+d.co+')');
+g.addColorStop(.4,'rgba(8,6,4,'+(d.co*.7)+')');
+g.addColorStop(.7,'rgba(6,4,2,'+(d.co*.3)+')');
+g.addColorStop(1,'rgba(4,2,0,0)');
+cx.fillStyle=g;cx.fillRect(d.x-d.cr,d.y-d.cr,d.cr*2,d.cr*2)}});
+requestAnimationFrame(draw)}
+draw();
+
+/* === PENALTY COUNTER === */
+function penCalc(n){
+document.querySelectorAll('.pen-btn').forEach(function(b){b.classList.remove('sel')});
+event.target.classList.add('sel');
+var total=n*27500;
+var el=document.getElementById('penNum'),note=document.getElementById('penNote');
+el.textContent='$'+total.toLocaleString();
+el.classList.add('show');note.classList.add('show')}
+
+/* === GO DEEPER PANELS === */
+function togDeep(id){document.getElementById(id).classList.toggle('open')}
+
+/* === ZONE DATA === */
+var Z={
+wellhead:{n:"Wellhead / Pump Jack",f:"Crude Oil · Produced Water · Hydraulic Fluid · Seal Leaks",env:"Outdoor · Full UV · Rain · Wind · Remote — mats may sit weeks between visits",p:[
+{n:"W-281 Railroad/Track Mat",b:"bh",bt:"Hero",w:"The primary product for wellheads. UV-resistant. Oil-selective — absorbs petroleum, lets rainwater evaporate. Impermeable bottom prevents oil from reaching soil. Berry Compliant.",bw:"Always for wellhead pads and pump jack bases. The defining application.",t:"39-gallon capacity vs. HalenHardy's 135 gal. Capacity gap matters when mats sit for weeks between service visits."},
+{n:"W-393 Universal Pads",b:"bc",bt:"Targeted",w:"Precision pads at specific drip points — packing glands, valve stems, gauge connections. Quick deployment during well service. Berry Compliant.",bw:"Targeted drip management at specific connection points. During workover or completion operations. In wellsite spill kits.",t:"NOT outdoor-rated for extended exposure. No UV protection. For short-term service operations, not long-term placement."},
+{n:"W-282 BSM Barrier",b:"bbl",bt:"Floor Protection",w:"Barrier backing for areas where oil absolutely cannot reach soil — near monitoring wells, in environmentally sensitive areas. Berry Compliant.",bw:"Sites with heightened sensitivity — near waterways, wetlands, wellhead protection zones.",t:"NOT UV-rated for full outdoor exposure. Not oil-selective — absorbs water too, will saturate from rain."}]},
+
+tank:{n:"Tank Battery / Production Facility",f:"Crude Oil · Produced Water · Diesel · Lubricating Oil",env:"Outdoor tanks + indoor pump houses · Mixed UV exposure · Transfer connections are high-risk spill points",p:[
+{n:"W-281 Railroad/Track Mat",b:"bh",bt:"Hero",w:"UV-resistant mat around tank connections, valve manifolds, and transfer lines. Oil-selective — catches drips between inspections. Berry Compliant.",bw:"Under tank valve manifolds, around transfer pumps, at loading connections. Extended outdoor placement.",t:"39-gallon capacity. For high-volume tank overflows, containment berms are primary — W-281 handles chronic drips."},
+{n:"W-278 Rag Rug",b:"bb",bt:"Best Value",w:"High capacity (55 gal) at lowest cost ($1.20/gal). Use INSIDE pump houses, generator sheds, enclosed buildings. 90% recycled. Lint-free.",bw:"Indoor areas within the tank battery — pump houses, control rooms, generator rooms.",t:"NOT outdoor-rated. No UV protection. INDOOR USE ONLY within oil & gas facilities."},
+{n:"W-393 Universal Pads",b:"bc",bt:"Targeted",w:"Precision placement under gauge hatches, at sample points, around level indicators. Berry Compliant.",bw:"Short-term targeted use during tank gauging and sampling. In tank battery spill kits.",t:"Not for extended outdoor placement. Supplemental to full-coverage mats."}]},
+
+pipeline:{n:"Pipeline / Valve Station",f:"Pipeline Oil/Product · Hydraulic Fluid · Lubricating Oil",env:"Outdoor · Unmanned — mats must perform without supervision for days/weeks",p:[
+{n:"W-281 Railroad/Track Mat",b:"bh",bt:"Hero",w:"UV-resistant mat under valve manifolds. Oil-selective. Impermeable bottom. Can be left in place for extended periods. Berry Compliant.",bw:"Always under valve manifolds and pipeline connections. Unmanned stations where mats perform without supervision.",t:"39-gallon capacity. For large-volume valve station spills, containment berms are primary; W-281 is for chronic drip management."},
+{n:"W-282 BSM Barrier",b:"bbl",bt:"Floor Protection",w:"Barrier backing inside enclosed valve station buildings or meter houses. Berry Compliant.",bw:"Indoor/enclosed stations where barrier containment matters and UV exposure isn't a factor.",t:"Not outdoor-rated. Absorbs water — will saturate from rain if placed outside."}]},
+
+compressor:{n:"Compressor Station",f:"Compressor Lube Oil · Coolant · Hydraulic Fluid · Condensate · Diesel",env:"Indoor buildings + outdoor skids · Mix of conditions · Multiple fluid types",p:[
+{n:"W-278 Rag Rug",b:"bb",bt:"Best Value",w:"High capacity (55 gal) at lowest cost for INDOOR compressor buildings. 90% recycled. Lint-free PP top won't contaminate equipment.",bw:"Inside compressor buildings — around skids, under lube oil systems, around cooling systems.",t:"NOT outdoor-rated. Indoor compressor buildings only."},
+{n:"W-281 Railroad/Track Mat",b:"bh",bt:"Outdoor Hero",w:"UV-resistant for OUTDOOR compressor skids (field gas compression). Oil-selective. Berry Compliant.",bw:"Outdoor compressor installations — field compression units, booster stations.",t:"39-gallon capacity. For outdoor use only — indoor buildings use W-278 or W-282."},
+{n:"W-282 BSM Barrier",b:"bbl",bt:"Floor Protection",w:"Barrier backing under lube oil systems where oil cannot reach concrete floor. Berry Compliant.",bw:"Where SPCC plan or environmental permit mandates barrier containment.",t:"Lower capacity ($3.98/gal). More expensive. Use where containment, not volume, is the requirement."},
+{n:"W-393 Universal Pads",b:"bc",bt:"Targeted",w:"Precision pads at specific drip points — fittings, sight glasses, sample ports. Berry Compliant.",bw:"Targeted drip management during maintenance. In compressor station spill kits.",t:"Not for floor coverage. Supplement to full-coverage mats."}]},
+
+loading:{n:"Loading / Unloading Rack (Truck & Rail)",f:"Crude Oil · Refined Products · Diesel · Gasoline — HIGH VOLUME transfer",env:"Outdoor or covered · Heavy equipment traffic · Rail and truck connections · The origin application for 'Railroad Mat'",p:[
+{n:"W-281 Railroad/Track Mat",b:"bh",bt:"Hero",w:"UV-resistant. Oil-selective. Impermeable bottom. The 58\" width fits between rails — this is the origin application for the Railroad Mat name. Berry Compliant.",bw:"ALWAYS at rail loading/unloading. Under truck loading arms. At fuel transfer connections.",t:"39-gallon capacity. Catches chronic drips and minor hose disconnects — not catastrophic releases (those need containment berms)."},
+{n:"W-282 BSM Barrier",b:"bbl",bt:"Floor Protection",w:"Barrier backing at covered truck loading positions. Forklift-rated for drum/tote loading areas. Berry Compliant.",bw:"Covered loading racks. Where forklift traffic crosses the loading area. Where barrier containment is specified in SPCC plan.",t:"Not UV-rated for outdoor exposure. Not oil-selective."}]},
+
+refinery:{n:"Refinery Indoor Process Areas",f:"Petroleum Process Fluids · Lube Oil · Hydraulic Fluid",env:"Indoor maintenance areas and walkways · High foot traffic · Contractor staging · NOT chemical processing units",p:[
+{n:"W-280 StickyBack",b:"bh",bt:"Walkway Safety",w:"Adhesive stays flat on petroleum-contaminated floors. NFSI anti-slip certified (TCOF 0.80). ADA compliant. Berry Compliant. For INDOOR walkways.",bw:"Refinery maintenance corridors. Around pump seals where foot traffic crosses oily areas. Control room entrances.",t:"Lower capacity (21 gal). Not for heavy drip areas — for walkway safety where tracked petroleum creates slip hazards."},
+{n:"W-278 Rag Rug",b:"bb",bt:"Best Value",w:"High capacity (55 gal) at lowest cost. INDOOR use in pump houses, maintenance shops, lube oil storage rooms. 90% recycled.",bw:"Budget-driven floor coverage in enclosed refinery maintenance areas.",t:"Not outdoor-rated. Not forklift-rated. Indoor maintenance only."},
+{n:"W-282 BSM Barrier",b:"bbl",bt:"Floor Protection",w:"Barrier backing under lube oil systems, around in-plant transformers. Berry Compliant. Forklift-rated.",bw:"Where SPCC plan or refinery environmental requirements mandate barrier containment.",t:"Lower capacity. Higher cost. Use where containment, not volume, is the requirement."},
+{n:"W-393 Universal Pads",b:"bc",bt:"Targeted",w:"Precision pads at pump seals, flange connections, instrument connections. Berry Compliant.",bw:"During turnaround maintenance. Under specific drip points. In unit spill kits.",t:"Not for floor coverage. Short-term maintenance use."}]},
+
+terminal:{n:"Fuel Terminal / Distribution Depot",f:"Gasoline · Diesel · Jet Fuel · Heating Oil — finished products",env:"Outdoor loading lanes + indoor offices/control rooms · Lower drip volume than upstream · Personnel transition zones",p:[
+{n:"W-281 Railroad/Track Mat",b:"bh",bt:"Outdoor Hero",w:"UV-resistant for outdoor loading areas. Oil-selective. Berry Compliant.",bw:"Outdoor truck loading lanes. Under fuel transfer connections. At outdoor tank valve manifolds.",t:"39-gallon capacity. Capacity gap is less critical here — terminal drips are lower volume than upstream."},
+{n:"W-280 StickyBack",b:"bc",bt:"Walkway Safety",w:"Anti-slip at indoor office/control room entrances where fuel gets tracked. NFSI certified. Berry Compliant.",bw:"Personnel transition zones between terminal operations and office/control areas.",t:"Lower capacity. Indoor use only. Personnel safety application."},
+{n:"W-393 Universal Pads",b:"bc",bt:"Targeted",w:"Fuel transfer connection drip points. In terminal spill kits. Berry Compliant.",bw:"Under hose connections during fuel loading. Quick response to minor hose drips.",t:"Not for floor coverage. Supplemental."}]}
+};
+
+/* === ZONE RENDERING + EARNED WARMTH === */
+var exp={};
+function rZone(k){var z=Z[k];if(!z)return;exp[k]=1;
+var h='<div class="zdi"><h3>'+z.n+'</h3><p class="fl">'+z.f+'</p>';
+for(var i=0;i<z.p.length;i++){var p=z.p[i];
+h+='<div class="pr"><div class="prh" onclick="tog(this)"><span class="prn">'+p.n+'</span><span class="prb '+p.b+'">'+p.bt+'</span></div><div class="prd'+(i===0?' open':'')+'"><p><strong>Why:</strong> '+p.w+'</p><p><strong>Best when:</strong> '+p.bw+'</p><p class="to">'+p.t+'</p></div></div>'}
+h+='<details class="zone-deeper"><summary>Go deeper → What this zone actually looks like</summary><div class="zd-body">'+z.env+'</div></details>';
+h+='</div>';document.getElementById('zD').innerHTML=h;
+var btns=document.querySelectorAll('.zb');
+for(var j=0;j<btns.length;j++){if(exp[btns[j].getAttribute('data-zone')]&&!btns[j].classList.contains('on'))btns[j].classList.add('done')}
+if(Object.keys(exp).length>=2)document.getElementById('sakR').classList.add('vis')}
+function tog(el){el.nextElementSibling.classList.toggle('open')}
+var zBtns=document.querySelectorAll('.zb');
+for(var b=0;b<zBtns.length;b++)zBtns[b].addEventListener('click',function(){
+for(var j=0;j<zBtns.length;j++){zBtns[j].classList.remove('on');if(exp[zBtns[j].getAttribute('data-zone')])zBtns[j].classList.add('done')}
+this.classList.add('on');this.classList.remove('done');rZone(this.getAttribute('data-zone'))});
+rZone('wellhead');
+
+/* === THREAD VISIBILITY === */
+var thEl=document.getElementById('thread');
+new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){thEl.style.opacity='1';thEl.style.height='100%'}})},{threshold:.1}).observe(document.getElementById('act2'));
+
+/* === SCROLL REVEAL + BARS === */
+var rvs=document.querySelectorAll('.rv');
+var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('v');
+var bars=e.target.querySelectorAll('.bf');
+for(var i=0;i<bars.length;i++){(function(b){if(b.getAttribute('data-d'))return;b.setAttribute('data-d','1');
+setTimeout(function(){b.style.width=b.getAttribute('data-width')+'%'},400)})(bars[i])}}})},{threshold:.1});
+for(var r=0;r<rvs.length;r++)ro.observe(rvs[r]);
+
+/* === FINAL DROP === */
+var fd=document.getElementById('fD');
+new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)setTimeout(function(){fd.classList.add('abs')},700)})},{threshold:.5}).observe(fd);
+
+/* === ARENA TABS === */
+var aTabs=document.querySelectorAll('.arena-tab');
+for(var a=0;a<aTabs.length;a++)aTabs[a].addEventListener('click',function(){
+for(var j=0;j<aTabs.length;j++)aTabs[j].classList.remove('on');
+this.classList.add('on');
+var panels=document.querySelectorAll('.arena-panel');
+for(var k=0;k<panels.length;k++)panels[k].classList.remove('show');
+document.getElementById('arena-'+this.getAttribute('data-arena')).classList.add('show')});
+
+/* === DEPARTURE TOAST === */
+var toast=document.getElementById('toast'),toastDest=document.getElementById('toastDest'),toastTimer=null;
+var siteNames={'epa.gov':'EPA.gov','superabsorbentmats.com':'SuperAbsorbentMats.com','akastex.com':'AKAS Tex','osha.gov':'OSHA.gov','halenhardy.com':'HalenHardy','spilltech.com':'SpillTech','fytertech.com':'FyterTech / Spilfyter','newpig.com':'New Pig','bradyid.com':'Brady SPC','uline.com':'Uline'};
+document.addEventListener('click',function(e){
+var link=e.target.closest('a[target="_blank"]');
+if(!link)return;
+var url=link.getAttribute('href');if(!url||url.indexOf('http')<0)return;
+e.preventDefault();
+try{var hostname=new URL(url).hostname.replace('www.','');
+var name=siteNames[hostname]||hostname;
+toastDest.textContent=name;
+toast.classList.add('show');
+if(toastTimer)clearTimeout(toastTimer);
+toastTimer=setTimeout(function(){toast.classList.remove('show')},2800);
+setTimeout(function(){window.open(url,'_blank','noopener')},600);
+}catch(err){window.open(url,'_blank','noopener')}});
+</script>
+</body>
+</html>

@@ -1,0 +1,3456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zorb Original — The Moments-Line · AKAS Wisdom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;1,9..144,200;1,9..144,300;1,9..144,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper:      #F7F4ED;
+  --paper-edge: #EFEBE0;
+  --page:       #FCFAF4;
+  --ink:        #0C0C0A;
+  --body:       #1F1F1C;
+  --warm:       #4D4D47;
+  --dim:        #8B8A82;
+  --rule:       #D6D2C5;
+  --rule-soft:  #E5E1D4;
+  --highlight:  #F2EAD8;
+  --filled:     #1F1F1C;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 17px; }
+body {
+  background: var(--paper);
+  color: var(--body);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-weight: 400;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection { background: var(--ink); color: var(--paper); }
+
+/* OPENING */
+.opening {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 2rem;
+  max-width: 720px;
+  margin: 0 auto;
+  position: relative;
+}
+.opening-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 4rem;
+}
+.opening-h {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 200;
+  font-style: italic;
+  font-size: clamp(2.4rem, 5.4vw, 3.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.026em;
+  color: var(--ink);
+  margin-bottom: 2.4rem;
+}
+.opening-h em { font-style: normal; font-weight: 300; }
+.opening-line {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.1rem, 1.6vw, 1.28rem);
+  color: var(--warm);
+  line-height: 1.55;
+  max-width: 56ch;
+  margin-bottom: 0.8rem;
+}
+.opening-meta {
+  margin-top: 4rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.opening-meta span { color: var(--warm); }
+.opening-cue {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--dim);
+  animation: drift 3.4s ease-in-out infinite;
+}
+@keyframes drift {
+  0%, 100% { opacity: 0.35; transform: translate(-50%, 0); }
+  50%      { opacity: 0.8; transform: translate(-50%, 6px); }
+}
+
+/* DOMAIN-EMERGENCE PANEL — now collapsible */
+.emergence {
+  background: var(--page);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.emergence + .emergence { border-top: none; }
+.emergence-panel { display: block; }
+.emergence-summary {
+  cursor: pointer;
+  list-style: none;
+  display: block;
+  padding: 2.4rem 2rem;
+  transition: background 0.18s;
+}
+.emergence-summary::-webkit-details-marker { display: none; }
+.emergence-summary:hover { background: var(--highlight); }
+.emergence-panel[open] .emergence-summary {
+  border-bottom: 1px solid var(--rule);
+}
+.emergence-summary-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 1rem 2rem;
+  align-items: baseline;
+}
+.emergence-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.6rem, 2.8vw, 2.1rem);
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.emergence-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dim);
+  white-space: nowrap;
+}
+.emergence-chevron {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1;
+  user-select: none;
+  transition: transform 0.2s;
+  display: inline-block;
+}
+.emergence-panel[open] .emergence-chevron {
+  transform: rotate(45deg);
+}
+.emergence-content {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 2.4rem 2rem 3.5rem;
+}
+.emergence-sub {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-size: 1.02rem;
+  color: var(--warm);
+  max-width: 60ch;
+  line-height: 1.55;
+  margin-bottom: 2.4rem;
+}
+.emergence-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 0.7rem 1.6rem;
+}
+.emergence-row {
+  display: grid;
+  grid-template-columns: 140px 16px 90px 1fr;
+  gap: 0.8rem;
+  align-items: baseline;
+  padding: 0.55rem 0.6rem;
+  font-size: 0.98rem;
+  cursor: pointer;
+  transition: background 0.15s;
+  border-radius: 2px;
+}
+.emergence-row:hover { background: var(--highlight); }
+.emergence-domain {
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  font-size: 1.02rem;
+}
+.emergence-arrow { color: var(--dim); font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; }
+.emergence-when {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--warm);
+}
+.emergence-who {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  color: var(--dim);
+  font-size: 0.96rem;
+}
+@media (max-width: 720px) {
+  .emergence-summary { padding: 1.8rem 1.4rem; }
+  .emergence-summary-inner { grid-template-columns: 1fr auto; gap: 0.6rem; }
+  .emergence-count { grid-row: 2; grid-column: 1; }
+  .emergence-chevron { grid-row: 1; grid-column: 2; align-self: center; }
+  .emergence-content { padding: 1.8rem 1.4rem 2.5rem; }
+  .emergence-grid { grid-template-columns: 1fr; gap: 0.4rem; }
+  .emergence-row {
+    grid-template-columns: 1fr auto;
+    gap: 0.3rem 0.8rem;
+    padding: 0.95rem 0.5rem;
+    font-size: 0.94rem;
+    min-height: 44px;
+  }
+  .emergence-row .emergence-domain { grid-row: 1; grid-column: 1; }
+  .emergence-row .emergence-arrow { display: none; }
+  .emergence-row .emergence-when { grid-row: 1; grid-column: 2; text-align: right; }
+  .emergence-row .emergence-who { grid-row: 2; grid-column: 1 / -1; padding-top: 0.1rem; }
+}
+
+/* APPLICATION-EMERGENCE PANEL */
+.emergence.applications {
+  background: var(--paper);
+}
+.application-grid {
+  columns: 2;
+  column-gap: 3.2rem;
+  column-fill: balance;
+}
+@media (max-width: 720px) {
+  .application-grid { columns: 1; column-gap: 0; }
+}
+.application-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.7rem 1.5rem;
+  align-items: baseline;
+  padding: 0.85rem 0;
+  border-bottom: 1px dashed var(--rule-soft);
+  break-inside: avoid;
+  page-break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+}
+.application-row:first-of-type { padding-top: 0; }
+.app-left { line-height: 1.35; }
+.app-name {
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink);
+  font-size: 1.05rem;
+  letter-spacing: -0.005em;
+  line-height: 1.3;
+}
+.app-context {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--warm);
+  margin-top: 0.3rem;
+  line-height: 1.5;
+}
+.app-right {
+  text-align: right;
+  align-self: start;
+  padding-top: 0.18rem;
+  white-space: nowrap;
+}
+.app-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--warm);
+}
+.app-maker {
+  display: block;
+  margin-top: 0.3rem;
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s, color 0.15s;
+}
+.app-maker:hover { border-bottom-color: var(--ink); }
+
+@media (max-width: 720px) {
+  .app-name { font-size: 1.05rem; }
+  .app-context { font-size: 0.94rem; }
+  .app-maker { font-size: 0.98rem; }
+  .app-date { font-size: 0.76rem; }
+}
+
+/* ── SECTION BREAK — between emergence panels and the years ── */
+.section-break {
+  background: var(--paper);
+  padding: 5rem 2rem 4rem;
+  text-align: center;
+  border-top: 1px solid var(--ink);
+}
+.section-break-rule {
+  width: 60px;
+  height: 1px;
+  background: var(--ink);
+  margin: 0 auto 2rem;
+  opacity: 0.5;
+}
+.section-break-label {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 200;
+  font-style: italic;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  letter-spacing: -0.028em;
+  color: var(--ink);
+  line-height: 1.05;
+  margin-bottom: 1rem;
+}
+.section-break-sub {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1rem, 1.6vw, 1.18rem);
+  color: var(--warm);
+  letter-spacing: -0.005em;
+}
+@media (max-width: 720px) {
+  .section-break { padding: 3.5rem 1.4rem 2.8rem; }
+  .section-break-rule { margin-bottom: 1.4rem; }
+}
+
+/* CONTROLS BAR */
+.controls {
+  position: sticky;
+  top: 0;
+  background: rgba(247, 244, 237, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+  padding: 0.8rem 2rem;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  flex-wrap: wrap;
+}
+.controls-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.controls-toggle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--rule);
+  padding: 0.5rem 0.95rem;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.15s;
+}
+.controls-toggle:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.domain-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+}
+.filter-chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--warm);
+  background: var(--paper-edge);
+  border: 1px solid transparent;
+  padding: 0.34rem 0.7rem;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.15s;
+}
+.filter-chip:hover { background: var(--rule); }
+.filter-chip.active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+@media (max-width: 720px) {
+  .controls {
+    padding: 0.55rem 0;
+    gap: 0;
+    font-size: 0.85rem;
+    flex-wrap: nowrap;
+    align-items: stretch;
+  }
+  .controls-label { display: none; }
+  /* Open all / Close all are vestigial on mobile — fingerprint cards are the
+     right navigation here. Hiding them gives the chip strip the breathing
+     room it needs. */
+  .controls-toggle { display: none; }
+  /* The chip strip — single horizontal scrolling row, full width on mobile */
+  .domain-filter {
+    flex: 1;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 0.4rem;
+    padding: 0 1rem;
+    margin: 0;
+    align-items: center;
+    /* Soft fade on the right edge to hint at scrollability */
+    mask-image: linear-gradient(to right, black 0%, black calc(100% - 28px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 0%, black calc(100% - 28px), transparent 100%);
+  }
+  .domain-filter::-webkit-scrollbar { display: none; }
+  .filter-chip {
+    min-height: 44px;
+    padding: 0.65rem 0.95rem;
+    font-size: 0.74rem;
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  /* Match count: hidden in chip-row on mobile, shown as its own thin strip below */
+  .controls .match-count { display: none; }
+  body.filtering .controls {
+    padding-bottom: 0;
+  }
+  .mobile-clear-strip {
+    display: none;
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border-top: 1px solid var(--rule);
+    background: var(--paper);
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    order: 99;
+    flex-basis: 100%;
+    min-height: 44px;
+  }
+  body.filtering .mobile-clear-strip { display: flex; }
+  .mobile-clear-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-style: italic;
+  }
+  .mobile-clear-button {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 0.4rem 0.85rem;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Smallest screens — slightly tighter chip padding so more chips visible at once */
+  .filter-chip { padding: 0.65rem 0.8rem; }
+  .domain-filter { padding: 0 0.8rem; }
+}
+
+/* ── FILTER MODE ──
+   When body.filtering is active:
+   - Hide voices that don't match
+   - Hide year fingerprint cards
+   - Show thin year-dividers above each year's remaining voices
+   - Hide bands and band-labels that lose their meaning
+*/
+.filter-year-label { display: none; }
+
+body.filtering .year-summary { display: none; }
+body.filtering .year-section {
+  background: transparent;
+  border-top: none;
+}
+body.filtering .year-section[open] { background: transparent; }
+body.filtering .year-body {
+  padding-top: 0;
+  padding-bottom: 2.5rem;
+}
+body.filtering .year-body > .filter-year-label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.84rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding: 1.6rem 0 1rem;
+  border-top: 1px solid var(--rule);
+  margin-bottom: 1.4rem;
+}
+body.filtering .voice {
+  display: none;
+}
+body.filtering .voice.match {
+  display: block;
+}
+body.filtering .voice.witness.match {
+  display: grid;
+}
+body.filtering .voice.brief.match {
+  display: inline-flex;
+}
+body.filtering .witness-band {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+body.filtering .brief-band {
+  margin-top: 1rem;
+  padding-top: 0;
+  border-top: none;
+}
+body.filtering .brief-band::before {
+  display: none;
+}
+/* When filtering and a year-section has no matches, JS will also display:none it */
+body.filtering .year-section[data-no-match="true"] {
+  display: none;
+}
+
+/* Match count in controls */
+.match-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  font-style: italic;
+  margin-left: auto;
+  display: none;
+}
+body.filtering .match-count {
+  display: inline;
+}
+.mobile-clear-strip { display: none; }
+
+/* YEAR-NAV */
+.year-nav {
+  position: fixed;
+  right: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  z-index: 30;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+  background: rgba(247, 244, 237, 0.85);
+  backdrop-filter: blur(6px);
+  padding: 0.7rem 0.55rem;
+  border-radius: 2px;
+}
+.nav-year {
+  color: var(--dim);
+  text-decoration: none;
+  padding: 0.1rem 0.35rem;
+  transition: color 0.18s;
+}
+.nav-year:hover { color: var(--ink); }
+.nav-year.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 920px) { .year-nav { display: none; } }
+
+/* YEAR-SECTION (now <details>) */
+.year-section {
+  border-top: 1px solid var(--rule);
+}
+.year-section:first-of-type { border-top: 1px solid var(--ink); }
+.year-section[open] { background: var(--page); }
+
+.year-summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 2.2rem 2rem 2rem;
+  display: block;
+  position: relative;
+  transition: background 0.18s;
+}
+.year-summary::-webkit-details-marker { display: none; }
+.year-summary:hover { background: rgba(247, 234, 216, 0.4); }
+.year-section[open] .year-summary {
+  background: var(--page);
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.year-summary-head {
+  max-width: 1180px;
+  margin: 0 auto 1.6rem;
+  display: grid;
+  grid-template-columns: minmax(140px, 200px) 1fr 36px;
+  gap: 1.6rem;
+  align-items: center;
+}
+.year-num {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 200;
+  font-size: clamp(2.6rem, 5.2vw, 4rem);
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.04em;
+}
+.year-summary-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  align-items: flex-start;
+}
+.year-density {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.year-note {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.5vw, 1.22rem);
+  line-height: 1.4;
+  color: var(--warm);
+  letter-spacing: -0.005em;
+}
+.accordion-chevron {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: var(--ink);
+  text-align: center;
+  transition: transform 0.2s;
+  user-select: none;
+  line-height: 1;
+}
+.year-section[open] .accordion-chevron {
+  transform: rotate(45deg);
+}
+
+/* YEAR-FINGERPRINT */
+.year-fingerprint {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+.fp-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 1rem;
+  align-items: baseline;
+  font-size: 0.95rem;
+}
+.fp-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dim);
+  white-space: nowrap;
+}
+.fp-value {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.5rem;
+  align-items: baseline;
+  color: var(--body);
+}
+.fp-names {
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.02rem;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  display: block;
+  line-height: 1.45;
+}
+.fp-density {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 1rem;
+  align-items: center;
+  font-size: 0.95rem;
+}
+.density-strip {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 4px;
+  height: 22px;
+  align-items: end;
+  max-width: 360px;
+}
+.density-cell {
+  display: block;
+  width: 100%;
+  background: var(--rule-soft);
+  height: 2px;
+  border-radius: 1px;
+  cursor: default;
+  transition: background 0.15s;
+}
+.density-cell.empty { background: var(--rule-soft); height: 2px; }
+.density-cell.filled {
+  background: var(--filled);
+  height: var(--h, 6px);
+}
+.density-cell:hover { background: var(--ink); }
+
+.domain-chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--warm);
+  background: var(--paper-edge);
+  padding: 0.24rem 0.65rem;
+  border-radius: 2px;
+}
+.domain-chip.new {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.fp-signature {
+  margin-top: 0.5rem;
+  padding: 1.1rem 1.3rem;
+  background: var(--paper);
+  border-left: 2px solid var(--ink);
+  border-radius: 0 2px 2px 0;
+}
+.sig-text {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.1rem, 1.7vw, 1.32rem);
+  line-height: 1.4;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+}
+.sig-attr {
+  margin-top: 0.7rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+@media (max-width: 720px) {
+  .year-summary { padding: 1.6rem 1.4rem; }
+  .year-summary-head { grid-template-columns: 1fr 36px; gap: 0.8rem; }
+  .year-num { grid-row: 1; }
+  .year-summary-meta { grid-row: 2; grid-column: 1; }
+  .accordion-chevron { grid-row: 1; grid-column: 2; align-self: center; }
+  .fp-row, .fp-density { grid-template-columns: 1fr; gap: 0.4rem; }
+  .density-strip { max-width: 100%; }
+}
+
+/* YEAR-BODY */
+.year-body {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+}
+@media (min-width: 920px) {
+  .year-body {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.4rem 2.8rem;
+  }
+  .year-body .witness-band,
+  .year-body .brief-band {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ANCHOR */
+.voice.anchor {
+  background: var(--paper);
+  border-left: 1px solid var(--rule);
+  padding: 1.4rem 1.6rem 1.6rem;
+  position: relative;
+  break-inside: avoid;
+  transition: background 0.2s, opacity 0.2s;
+}
+.voice.anchor:hover { background: var(--highlight); }
+.voice.anchor[data-highlighted="true"] {
+  background: var(--highlight);
+  border-left-color: var(--ink);
+}
+
+.anchor-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.9rem;
+  margin-bottom: 0.6rem;
+}
+.anchor-name {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 400;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.anchor-name.anonymous {
+  font-style: italic;
+  color: var(--warm);
+  font-weight: 300;
+}
+.anchor-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-left: auto;
+}
+.anchor-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--warm);
+  letter-spacing: -0.005em;
+  margin-bottom: 0.7rem;
+  line-height: 1.35;
+}
+.anchor-body {
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--body);
+}
+
+/* PLUMB MARKER */
+.plumb-marker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--paper-edge);
+  padding: 0.22rem 0.55rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.plumb-marker:hover { background: var(--ink); color: var(--paper); }
+.plumb-marker.mini { font-size: 0.6rem; padding: 0.15rem 0.42rem; }
+
+@media (max-width: 720px) {
+  .plumb-marker {
+    min-height: 36px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.7rem;
+    display: inline-flex;
+    align-items: center;
+  }
+  .plumb-marker.mini {
+    min-height: 32px;
+    padding: 0.42rem 0.6rem;
+    font-size: 0.66rem;
+  }
+}
+
+/* DEPTH-ARC */
+.depth-arc {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px dashed var(--rule);
+}
+.depth-line {
+  display: inline-block;
+  width: 36px;
+  height: 1px;
+  background: var(--ink);
+  opacity: 0.5;
+  position: relative;
+}
+.depth-line::before {
+  content: '←';
+  position: absolute;
+  left: -10px;
+  top: -9px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  color: var(--ink);
+  opacity: 0.7;
+}
+.depth-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--warm);
+  font-style: italic;
+}
+
+/* WITNESS */
+.witness-band {
+  margin-top: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--rule-soft);
+}
+.voice.witness {
+  display: grid;
+  grid-template-columns: minmax(150px, 230px) 1fr;
+  gap: 1rem 1.6rem;
+  align-items: baseline;
+  padding: 0.55rem 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  transition: background 0.15s, opacity 0.2s;
+  cursor: default;
+}
+.voice.witness:hover { background: var(--highlight); }
+.voice.witness[data-highlighted="true"] { background: var(--highlight); }
+.witness-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.8rem;
+  align-items: baseline;
+}
+.witness-name {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 400;
+  color: var(--ink);
+  font-size: 1.04rem;
+}
+.witness-name.anonymous {
+  font-style: italic;
+  color: var(--warm);
+  font-weight: 300;
+}
+.witness-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.witness-excerpt { color: var(--body); font-size: 1rem; }
+.witness-excerpt.has-body {
+  font-style: italic;
+  color: var(--warm);
+  margin-bottom: 0.4rem;
+}
+.witness-body {
+  color: var(--body);
+  font-size: 1rem;
+  line-height: 1.6;
+  grid-column: 2;
+  margin-top: 0.2rem;
+}
+@media (max-width: 720px) {
+  .voice.witness { grid-template-columns: 1fr; gap: 0.3rem; }
+  .witness-body { grid-column: 1; }
+}
+
+/* BRIEF */
+.brief-band {
+  margin-top: 2rem;
+  padding-top: 1.4rem;
+  border-top: 1px dashed var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.6rem;
+  align-items: center;
+}
+.brief-band::before {
+  content: 'and these voices —';
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-right: 0.6rem;
+  font-style: italic;
+}
+.voice.brief {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  padding: 0.28rem 0.65rem;
+  font-size: 0.85rem;
+  background: var(--paper-edge);
+  border-radius: 2px;
+  cursor: default;
+  font-family: 'Source Serif 4', serif;
+  transition: background 0.15s, opacity 0.2s;
+}
+.voice.brief:hover { background: var(--rule); }
+.brief-name { font-weight: 400; color: var(--ink); font-style: italic; }
+.brief-name.anonymous { color: var(--warm); }
+.brief-text { color: var(--warm); font-size: 0.82rem; }
+.brief-text::before { content: '· '; opacity: 0.5; }
+
+@media (max-width: 720px) {
+  .voice.brief {
+    min-height: 36px;
+    padding: 0.55rem 0.75rem;
+    font-size: 0.92rem;
+    display: inline-flex;
+    align-items: center;
+  }
+  .brief-text { font-size: 0.88rem; }
+  .brief-band { gap: 0.5rem 0.65rem; }
+}
+
+/* ── CROSS-WEAVE — sister relationships in the volume ── */
+.cross-weave {
+  background: var(--paper);
+  padding: 4rem 2rem 3rem;
+  border-top: 1px solid var(--rule);
+}
+.cross-weave-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.cross-weave-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dim);
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+.cross-weave-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.cross-weave-row {
+  border-bottom: 1px dashed var(--rule-soft);
+}
+.cross-weave-row:last-child { border-bottom: none; }
+.cross-weave-link {
+  display: grid;
+  grid-template-columns: minmax(140px, 200px) 1fr;
+  gap: 1rem 2rem;
+  align-items: baseline;
+  padding: 1.1rem 0;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s;
+}
+.cross-weave-link:not(.cross-weave-pending):hover {
+  background: var(--highlight);
+  margin-left: -0.6rem;
+  padding-left: 0.6rem;
+  margin-right: -0.6rem;
+  padding-right: 0.6rem;
+}
+.cw-name {
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.cw-context {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--warm);
+  line-height: 1.5;
+}
+.cross-weave-pending .cw-name { color: var(--warm); }
+.cross-weave-pending .cw-context { color: var(--dim); }
+.cross-weave-pending::after {
+  content: 'awaiting build';
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dim);
+  font-style: italic;
+  align-self: center;
+  padding-left: 0.8rem;
+}
+@media (max-width: 720px) {
+  .cross-weave { padding: 3rem 1.4rem 2.5rem; }
+  .cross-weave-link {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+    padding: 1rem 0;
+  }
+  .cross-weave-pending::after {
+    grid-row: 3;
+    padding-left: 0;
+    padding-top: 0.3rem;
+  }
+}
+
+/* ── BOOKENDING CLOSE — pianissimo register ── */
+.closing {
+  background: var(--paper);
+  padding: 6rem 2rem 5rem;
+  text-align: center;
+}
+.closing-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.closing-mark {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--dim);
+  font-style: italic;
+  margin-bottom: 3.5rem;
+}
+.closing-h {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 200;
+  font-style: italic;
+  font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+  line-height: 1.4;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  margin: 0 auto 4.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.closing-h span {
+  display: block;
+}
+.closing-h em {
+  font-style: italic;
+  font-weight: 300;
+  display: block;
+  margin-top: 0.5rem;
+  font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+  letter-spacing: -0.024em;
+}
+.closing-hairline {
+  width: 240px;
+  height: 1px;
+  margin: 0 auto;
+  background: linear-gradient(to right, transparent 0%, var(--ink) 30%, var(--ink) 70%, transparent 100%);
+  opacity: 0.45;
+}
+@media (max-width: 720px) {
+  .closing { padding: 4.5rem 1.4rem 3.5rem; }
+  .closing-mark { margin-bottom: 2.5rem; }
+  .closing-h { margin-bottom: 3rem; gap: 0.3rem; }
+  .closing-hairline { width: 180px; }
+}
+
+/* COLOPHON */
+.colophon {
+  border-top: 1px solid var(--ink);
+  padding: 4rem 2rem 5rem;
+  background: var(--page);
+}
+.colophon-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2.4rem;
+  align-items: end;
+}
+.colophon-mark {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--warm);
+  line-height: 1.7;
+}
+.colophon-mark span { color: var(--dim); display: block; margin-top: 0.4rem; }
+.colophon-note {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: var(--dim);
+  max-width: 60ch;
+  margin-top: 1rem;
+  line-height: 1.6;
+}
+.colophon-links { display: flex; flex-direction: column; gap: 0.7rem; }
+.colophon-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--ink);
+  padding: 0.95rem 1.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.18s;
+  white-space: nowrap;
+}
+.colophon-link.ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+}
+.colophon-link:hover { background: var(--warm); border-color: var(--warm); }
+.colophon-link.ghost:hover { background: var(--ink); color: var(--paper); }
+
+@media (max-width: 720px) {
+  .colophon-inner { grid-template-columns: 1fr; }
+  .opening { padding: 3rem 1.4rem; }
+  .voice.anchor { padding: 1.1rem 1.2rem 1.3rem; }
+  .year-body { padding: 2rem 1.4rem 3rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; }
+}
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+</style>
+</head>
+<body>
+
+<!-- ════════════ OPENING ════════════ -->
+<section class="opening">
+  <p class="opening-tag">Zorb Original · The Moments-Line · AKAS Wisdom</p>
+  <h1 class="opening-h">Eleven years.<br>One <em>fabric</em>.<br>Every voice <em>kept</em>.</h1>
+  <p class="opening-line">
+    What follows is the record of who met this fabric, and when, and what they said about the meeting.
+  </p>
+  <p class="opening-line">
+    The fabric was already holding. The voices arrived at their own pace.
+  </p>
+  <div class="opening-meta">
+    From <span>July 2015</span> to today · <span>167 voices</span> across <span>12 years</span>
+  </div>
+  <span class="opening-cue">↓ walk the years</span>
+</section>
+
+<!-- ════════════ DOMAIN-EMERGENCE ════════════ -->
+<section class="emergence">
+  <details class="emergence-panel">
+    <summary class="emergence-summary">
+      <div class="emergence-summary-inner">
+        <h2 class="emergence-title">When each domain found its first sentence</h2>
+        <span class="emergence-count">10 domains</span>
+        <span class="emergence-chevron" aria-hidden="true">+</span>
+      </div>
+    </summary>
+    <div class="emergence-content">
+      <p class="emergence-sub">Not when reviews arrived — when each kind of need first became language in the corpus. The fabric was already meeting the body before the body found words for it. Click a row to filter.</p>
+      <div class="emergence-grid">
+        <div class="emergence-row" data-domain="diaper"><span class="emergence-domain">cloth diaper</span><span class="emergence-arrow">→</span><span class="emergence-when">Jul 2015</span><span class="emergence-who">Linda F.</span></div>
+<div class="emergence-row" data-domain="pad"><span class="emergence-domain">mama cloth</span><span class="emergence-arrow">→</span><span class="emergence-when">Jul 2015</span><span class="emergence-who">Maggie C.</span></div>
+<div class="emergence-row" data-domain="pet-cage"><span class="emergence-domain">pet-cage</span><span class="emergence-arrow">→</span><span class="emergence-when">Nov 2015</span><span class="emergence-who">Yolanda J.</span></div>
+<div class="emergence-row" data-domain="dog"><span class="emergence-domain">dog</span><span class="emergence-arrow">→</span><span class="emergence-when">Jul 2015</span><span class="emergence-who">Vanessa C.</span></div>
+<div class="emergence-row" data-domain="incontinence"><span class="emergence-domain">incontinence</span><span class="emergence-arrow">→</span><span class="emergence-when">Jul 2015</span><span class="emergence-who">Vanessa C.</span></div>
+<div class="emergence-row" data-domain="humanitarian"><span class="emergence-domain">humanitarian</span><span class="emergence-arrow">→</span><span class="emergence-when">May 2020</span><span class="emergence-who">ckau54</span></div>
+<div class="emergence-row" data-domain="infant"><span class="emergence-domain">infant care</span><span class="emergence-arrow">→</span><span class="emergence-when">Jul 2015</span><span class="emergence-who">Lena H.</span></div>
+<div class="emergence-row" data-domain="household"><span class="emergence-domain">household</span><span class="emergence-arrow">→</span><span class="emergence-when">Feb 2016</span><span class="emergence-who">Harry R.</span></div>
+<div class="emergence-row" data-domain="special-needs"><span class="emergence-domain">special needs</span><span class="emergence-arrow">→</span><span class="emergence-when">Jul 2015</span><span class="emergence-who">Bubba Bear</span></div>
+<div class="emergence-row" data-domain="hydroponic"><span class="emergence-domain">hydroponic</span><span class="emergence-arrow">→</span><span class="emergence-when">Apr 2022</span><span class="emergence-who">John Robert Hall</span></div>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ════════════ APPLICATION-EMERGENCE ════════════ -->
+<section class="emergence applications">
+  <details class="emergence-panel">
+    <summary class="emergence-summary">
+      <div class="emergence-summary-inner">
+        <h2 class="emergence-title">Every application named in eleven years</h2>
+        <span class="emergence-count">63 applications</span>
+        <span class="emergence-chevron" aria-hidden="true">+</span>
+      </div>
+    </summary>
+    <div class="emergence-content">
+      <p class="emergence-sub">63 specific things makers said they made with this fabric — each at the moment its name first entered the corpus, attributed to the maker who first said it. Not categories — the actual artifacts the fabric became in their hands. Click a maker to find their year.</p>
+      <div class="application-grid">
+        <div class="application-row"><div class="app-left"><div class="app-name">cloth menstrual pad</div></div><div class="app-right"><div class="app-date">Jul 8, 2015</div><a class="app-maker" href="#voice-maggie-c-2015-07-08" data-maker="Maggie C.">Maggie C.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">belly bands</div><div class="app-context">for incontinent male senior dogs</div></div><div class="app-right"><div class="app-date">Jul 8, 2015</div><a class="app-maker" href="#voice-vanessa-c-2015-07-08" data-maker="Vanessa C.">Vanessa C.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">cloth diapers</div></div><div class="app-right"><div class="app-date">Jul 8, 2015</div><a class="app-maker" href="#voice-linda-f-2015-07-08" data-maker="Linda F.">Linda F.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">potty training cover</div><div class="app-context">for toddler&#x27;s bed</div></div><div class="app-right"><div class="app-date">Jul 8, 2015</div><a class="app-maker" href="#voice-linda-f-2015-07-08" data-maker="Linda F.">Linda F.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">panty-liners</div></div><div class="app-right"><div class="app-date">Jul 8, 2015</div><a class="app-maker" href="#voice-lena-h-2015-07-08" data-maker="Lena H.">Lena H.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">nursing pads</div></div><div class="app-right"><div class="app-date">Jul 8, 2015</div><a class="app-maker" href="#voice-lena-h-2015-07-08" data-maker="Lena H.">Lena H.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">incontinence pads</div></div><div class="app-right"><div class="app-date">Jul 8, 2015</div><a class="app-maker" href="#voice-lena-h-2015-07-08" data-maker="Lena H.">Lena H.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">mama cloths</div></div><div class="app-right"><div class="app-date">Jul 9, 2015</div><a class="app-maker" href="#voice-ashley-p-2015-07-09" data-maker="Ashley P.">Ashley P.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">diaper inserts</div></div><div class="app-right"><div class="app-date">Jul 9, 2015</div><a class="app-maker" href="#voice-lily-s-2015-07-09" data-maker="Lily S.">Lily S.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">bandanna bibs</div><div class="app-context">for special needs children who drool</div></div><div class="app-right"><div class="app-date">Jul 21, 2015</div><a class="app-maker" href="#voice-bubba-bear-2015-07-21" data-maker="Bubba Bear">Bubba Bear</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">cloth feminine pads</div></div><div class="app-right"><div class="app-date">Oct 5, 2015</div><a class="app-maker" href="#voice-jade-2015-10-05" data-maker="Jade">Jade</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">contoured diaper inserts</div><div class="app-context">2- and 3-layer for overnight 7+ hours</div></div><div class="app-right"><div class="app-date">Nov 10, 2015</div><a class="app-maker" href="#voice-nia-bellomee-2015-11-10" data-maker="Nia Bellomee">Nia Bellomee</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">guinea pig cage liners</div><div class="app-context">small-animal-cage liner — Zorb between two anti-pill fleece</div></div><div class="app-right"><div class="app-date">Nov 24, 2015</div><a class="app-maker" href="#voice-yolanda-j-2015-11-24" data-maker="Yolanda J.">Yolanda J.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">diaper liners</div><div class="app-context">middle absorbent layer</div></div><div class="app-right"><div class="app-date">Dec 3, 2015</div><a class="app-maker" href="#voice-patrick-v-2015-12-03" data-maker="Patrick V.">Patrick V.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">mama pad</div></div><div class="app-right"><div class="app-date">Dec 28, 2015</div><a class="app-maker" href="#voice-theresa-v-2015-12-28" data-maker="Theresa V.">Theresa V.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">skin fold strips</div><div class="app-context">under the tummy fold of large women — antimicrobial silver</div></div><div class="app-right"><div class="app-date">Feb 4, 2016</div><a class="app-maker" href="#voice-harry-r-2016-02-04" data-maker="Harry R.">Harry R.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">Swiffer mop pads</div><div class="app-context">Zorb between two microfiber cloths</div></div><div class="app-right"><div class="app-date">Feb 19, 2016</div><a class="app-maker" href="#voice-mary-g-2016-02-19" data-maker="Mary G.">Mary G.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">Oreck Orbiter mop pads</div></div><div class="app-right"><div class="app-date">Feb 19, 2016</div><a class="app-maker" href="#voice-mary-g-2016-02-19" data-maker="Mary G.">Mary G.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">suck pads</div></div><div class="app-right"><div class="app-date">Apr 15, 2016</div><a class="app-maker" href="#voice-estrellad-a-2016-04-15" data-maker="Estrellad A.">Estrellad A.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">drool bibs</div></div><div class="app-right"><div class="app-date">Apr 15, 2016</div><a class="app-maker" href="#voice-estrellad-a-2016-04-15" data-maker="Estrellad A.">Estrellad A.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">breast pads</div></div><div class="app-right"><div class="app-date">Apr 15, 2016</div><a class="app-maker" href="#voice-estrellad-a-2016-04-15" data-maker="Estrellad A.">Estrellad A.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">bedwetting bedding pads</div></div><div class="app-right"><div class="app-date">Apr 17, 2016</div><a class="app-maker" href="#voice-new-kiddo-2016-04-17" data-maker="New Kiddo">New Kiddo</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">toilet training pants</div></div><div class="app-right"><div class="app-date">May 9, 2016</div><a class="app-maker" href="#voice-olivia-g-2016-05-09" data-maker="Olivia G.">Olivia G.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">adult incontinence underwear</div><div class="app-context">new line for older bedwetting</div></div><div class="app-right"><div class="app-date">Jun 29, 2016</div><a class="app-maker" href="#voice-jeanette-schmidt-2016-06-29" data-maker="Jeanette Schmidt">Jeanette Schmidt</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">period underwear</div></div><div class="app-right"><div class="app-date">Jul 27, 2016</div><a class="app-maker" href="#voice-john-p-2016-07-27" data-maker="John P.">John P.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">tampons</div></div><div class="app-right"><div class="app-date">Jul 27, 2016</div><a class="app-maker" href="#voice-john-p-2016-07-27" data-maker="John P.">John P.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">puppy pads</div></div><div class="app-right"><div class="app-date">Aug 25, 2016</div><a class="app-maker" href="#voice-becky-2016-08-25" data-maker="Becky">Becky</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">bed pads</div></div><div class="app-right"><div class="app-date">Sep 20, 2017</div><a class="app-maker" href="#voice-2513indy-2017-09-20" data-maker="2513indy">2513indy</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">Cuddle Huts</div><div class="app-context">small-pet accessory</div></div><div class="app-right"><div class="app-date">Aug 2018</div><a class="app-maker" href="#voice-ravchel-t-2018-08" data-maker="Ravchel T.">Ravchel T.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">Cuddle Cups</div><div class="app-context">small-pet accessory</div></div><div class="app-right"><div class="app-date">Aug 2018</div><a class="app-maker" href="#voice-ravchel-t-2018-08" data-maker="Ravchel T.">Ravchel T.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">water bottle pads</div><div class="app-context">small-pet accessory</div></div><div class="app-right"><div class="app-date">Aug 2018</div><a class="app-maker" href="#voice-ravchel-t-2018-08" data-maker="Ravchel T.">Ravchel T.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">dish sponges</div><div class="app-context">made from leftover scraps — soap-holding, no smell</div></div><div class="app-right"><div class="app-date">Aug 2018</div><a class="app-maker" href="#voice-kathrine-2018-08" data-maker="Kathrine">Kathrine</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">snap-in soaker</div><div class="app-context">for cloth diapers</div></div><div class="app-right"><div class="app-date">Aug 2018</div><a class="app-maker" href="#voice-cynthia-d-2018-08" data-maker="Cynthia D.">Cynthia D.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">hedgehog playmats and liners</div></div><div class="app-right"><div class="app-date">Mar 17, 2019</div><a class="app-maker" href="#voice-m-j-2019-03-17" data-maker="M.J.">M.J.</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">guinea pig bed pads</div></div><div class="app-right"><div class="app-date">May 1, 2019</div><a class="app-maker" href="#voice-valerie-2019-05-01" data-maker="Valerie">Valerie</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">reusable menstrual pad cores</div><div class="app-context">the absorbent core only</div></div><div class="app-right"><div class="app-date">Sep 9, 2019</div><a class="app-maker" href="#voice-yaderin-2019-09-09" data-maker="Yaderin">Yaderin</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">reusable towels</div></div><div class="app-right"><div class="app-date">Feb 5, 2020</div><a class="app-maker" href="#voice-tim-2020-02-05" data-maker="Tim">Tim</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">menstrual pads for Operation Christmas Child shoeboxes</div><div class="app-context">humanitarian — first OCC mention</div></div><div class="app-right"><div class="app-date">May 4, 2020</div><a class="app-maker" href="#voice-ckau54-2020-05-04" data-maker="ckau54">ckau54</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">fitted cloth diapers</div><div class="app-context">Zorb sandwiched in 3D Stay Dry Dimple</div></div><div class="app-right"><div class="app-date">May 26, 2021</div><a class="app-maker" href="#voice-katherine-2021-05-26" data-maker="Katherine">Katherine</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">maxipads</div><div class="app-context">commercial — Designer Pads by LXG</div></div><div class="app-right"><div class="app-date">Jul 20, 2021</div><a class="app-maker" href="#voice-laura-guevara-2021-07-20" data-maker="Laura Guevara">Laura Guevara</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">belly pouch skin fold strips</div><div class="app-context">3-inch strips, for itch + odor under fold</div></div><div class="app-right"><div class="app-date">Aug 6, 2021</div><a class="app-maker" href="#voice-nancy-2021-08-06" data-maker="Nancy">Nancy</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">reusable sanitary pads for teenagers in third world countries</div><div class="app-context">humanitarian — Samaritan&#x27;s Purse</div></div><div class="app-right"><div class="app-date">Dec 16, 2021</div><a class="app-maker" href="#voice-june-goshi-2021-12-16" data-maker="June Goshi">June Goshi</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">fleece cage liners</div><div class="app-context">for small pets, mostly guinea pigs</div></div><div class="app-right"><div class="app-date">Mar 9, 2022</div><a class="app-maker" href="#voice-john-mathews-2022-03-09" data-maker="John Mathews">John Mathews</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">pet pads for crates</div></div><div class="app-right"><div class="app-date">Mar 9, 2022</div><a class="app-maker" href="#voice-john-mathews-2022-03-09" data-maker="John Mathews">John Mathews</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">hydroponic cup wicks</div><div class="app-context">soaks water up to plant from below</div></div><div class="app-right"><div class="app-date">Apr 19, 2022</div><a class="app-maker" href="#voice-john-robert-hall-2022-04-19" data-maker="John Robert Hall">John Robert Hall</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">burp diapers</div><div class="app-context">for newborn gifts</div></div><div class="app-right"><div class="app-date">Apr 29, 2022</div><a class="app-maker" href="#voice-laura-prince-2022-04-29" data-maker="Laura Prince">Laura Prince</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">dog boots</div></div><div class="app-right"><div class="app-date">May 5, 2022</div><a class="app-maker" href="#voice-sandy-2022-05-05" data-maker="Sandy">Sandy</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">greenhouse hydroponic system</div><div class="app-context">high-school basil, 960-spot, 7-inch strips with knot</div></div><div class="app-right"><div class="app-date">May 8, 2022</div><a class="app-maker" href="#voice-john-robert-hall-2022-05-08" data-maker="John Robert Hall">John Robert Hall</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">dog diapers</div></div><div class="app-right"><div class="app-date">May 23, 2022</div><a class="app-maker" href="#voice-patricia-council-2022-05-23" data-maker="Patricia Council">Patricia Council</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">incontinence underwear</div><div class="app-context">single layer for light needs</div></div><div class="app-right"><div class="app-date">Aug 25, 2022</div><a class="app-maker" href="#voice-michele-eskew-2022-08-25" data-maker="Michele Eskew">Michele Eskew</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">washable menstrual pads for rural African girls</div><div class="app-context">humanitarian — Pamela&#x27;s six-year practice</div></div><div class="app-right"><div class="app-date">Oct 25, 2022</div><a class="app-maker" href="#voice-pamela-killion-2022-10-25" data-maker="Pamela Killion">Pamela Killion</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">stress incontinence liners</div><div class="app-context">DIY — to undercut $2 underwear with $1 fabric</div></div><div class="app-right"><div class="app-date">Nov 6, 2022</div><a class="app-maker" href="#voice-anne-2022-11-06" data-maker="Anne">Anne</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">window condensation pads</div><div class="app-context">for daughter&#x27;s unsealed apartment windows</div></div><div class="app-right"><div class="app-date">Jan 20, 2023</div><a class="app-maker" href="#voice-rita-t-2023-01-20" data-maker="Rita T">Rita T</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">hammocks for wild small animal rescue</div><div class="app-context">with cage pads — animal babies approved</div></div><div class="app-right"><div class="app-date">Apr 7, 2023</div><a class="app-maker" href="#voice-anonymous-2023-04-07" data-maker="Anonymous">Anonymous</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">panty pack</div><div class="app-context">sewist DIY kit — Discovery Fabrics</div></div><div class="app-right"><div class="app-date">May 18, 2023</div><a class="app-maker" href="#voice-discovery-fabrics-2023-05-18" data-maker="Discovery Fabrics">Discovery Fabrics</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">women&#x27;s days pads</div></div><div class="app-right"><div class="app-date">May 29, 2023</div><a class="app-maker" href="#voice-eunice-2023-05-29" data-maker="Eunice">Eunice</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">fleece liner bedding for small pet cages</div><div class="app-context">drier than U-haul layers</div></div><div class="app-right"><div class="app-date">Jun 21, 2023</div><a class="app-maker" href="#voice-wheek-dreams-designs-2023-06-21" data-maker="Wheek Dreams Designs">Wheek Dreams Designs</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">burp cloths for baby shower gifts</div></div><div class="app-right"><div class="app-date">Apr 1, 2024</div><a class="app-maker" href="#voice-laura-p-2024-04-01" data-maker="Laura P">Laura P</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">charity period pads</div><div class="app-context">against mud, straw, rags — 50 yards = 1000 pads</div></div><div class="app-right"><div class="app-date">Oct 10, 2024</div><a class="app-maker" href="#voice-dianne-leach-2024-10-10" data-maker="Dianne Leach">Dianne Leach</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">playpen liners</div><div class="app-context">for guinea pigs in playpen — no more wet pigs</div></div><div class="app-right"><div class="app-date">Jan 23, 2025</div><a class="app-maker" href="#voice-kari-2025-01-23" data-maker="Kari">Kari</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">personal incontinence pads</div></div><div class="app-right"><div class="app-date">Feb 23, 2025</div><a class="app-maker" href="#voice-piney-2025-02-23" data-maker="Piney">Piney</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">spit up cloths</div><div class="app-context">for grandson expected in August</div></div><div class="app-right"><div class="app-date">Jun 18, 2025</div><a class="app-maker" href="#voice-carrie-valentin-2025-06-18" data-maker="Carrie Valentin">Carrie Valentin</a></div></div>
+<div class="application-row"><div class="app-left"><div class="app-name">cloth pads for school girls in Ethiopia</div><div class="app-context">humanitarian — Phyllis sends</div></div><div class="app-right"><div class="app-date">Aug 28, 2025</div><a class="app-maker" href="#voice-phyllis-2025-08-28" data-maker="Phyllis">Phyllis</a></div></div>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ════════════ SECTION BREAK ════════════ -->
+<div class="section-break">
+  <div class="section-break-rule"></div>
+  <h3 class="section-break-label">Walk the years</h3>
+  <p class="section-break-sub">One hundred and sixty-seven voices, kept in time.</p>
+</div>
+
+<!-- ════════════ CONTROLS ════════════ -->
+<div class="controls" id="controls">
+  <span class="controls-label">filter</span>
+  <div class="domain-filter" id="filter">
+    <button class="filter-chip" data-filter="diaper">cloth diaper</button>
+    <button class="filter-chip" data-filter="pad">mama cloth</button>
+    <button class="filter-chip" data-filter="pet-cage">pet-cage</button>
+    <button class="filter-chip" data-filter="dog">dog</button>
+    <button class="filter-chip" data-filter="incontinence">incontinence</button>
+    <button class="filter-chip" data-filter="humanitarian">humanitarian</button>
+    <button class="filter-chip" data-filter="household">household</button>
+    <button class="filter-chip" data-filter="hydroponic">hydroponic</button>
+    <button class="filter-chip" data-filter="special-needs">special needs</button>
+    <button class="filter-chip" data-filter="infant">infant</button>
+  </div>
+  <span class="match-count" id="match-count"></span>
+  <div class="mobile-clear-strip" id="mobile-clear-strip">
+    <span class="mobile-clear-text" id="mobile-clear-text"></span>
+    <button class="mobile-clear-button" id="mobile-clear-button" aria-label="Clear filter">✕ Clear</button>
+  </div>
+</div>
+
+<!-- ════════════ YEAR-NAV ════════════ -->
+<nav class="year-nav"><a href="#year-2015" class="nav-year" data-year="2015">2015</a><a href="#year-2016" class="nav-year" data-year="2016">2016</a><a href="#year-2017" class="nav-year" data-year="2017">2017</a><a href="#year-2018" class="nav-year" data-year="2018">2018</a><a href="#year-2019" class="nav-year" data-year="2019">2019</a><a href="#year-2020" class="nav-year" data-year="2020">2020</a><a href="#year-2021" class="nav-year" data-year="2021">2021</a><a href="#year-2022" class="nav-year" data-year="2022">2022</a><a href="#year-2023" class="nav-year" data-year="2023">2023</a><a href="#year-2024" class="nav-year" data-year="2024">2024</a><a href="#year-2025" class="nav-year" data-year="2025">2025</a><a href="#year-2026" class="nav-year" data-year="2026">2026</a></nav>
+
+<!-- ════════════ THE YEARS ════════════ -->
+<main class="years-main">
+
+  <details class="year-section" id="year-2015" data-year="2015">
+    
+    <summary class="year-summary">
+      <div class="year-summary-head">
+        <span class="year-num">2015</span>
+        <div class="year-summary-meta">
+          <span class="year-density">28 voices</span>
+          <span class="year-note">the first year</span>
+        </div>
+        <span class="accordion-chevron" aria-hidden="true">+</span>
+      </div>
+      <div class="year-fingerprint">
+        <div class="fp-density">
+          <span class="fp-label">Months</span>
+          <div class="density-strip"><span class="density-cell empty" title="Jan 2015 · no voices"></span><span class="density-cell empty" title="Feb 2015 · no voices"></span><span class="density-cell empty" title="Mar 2015 · no voices"></span><span class="density-cell empty" title="Apr 2015 · no voices"></span><span class="density-cell empty" title="May 2015 · no voices"></span><span class="density-cell empty" title="Jun 2015 · no voices"></span><span class="density-cell filled" style="--h:18px" title="Jul 2015 · 10 voices"></span><span class="density-cell filled" style="--h:6px" title="Aug 2015 · 3 voices"></span><span class="density-cell filled" style="--h:3px" title="Sep 2015 · 1 voice"></span><span class="density-cell filled" style="--h:5px" title="Oct 2015 · 2 voices"></span><span class="density-cell filled" style="--h:14px" title="Nov 2015 · 8 voices"></span><span class="density-cell filled" style="--h:8px" title="Dec 2015 · 4 voices"></span></div>
+        </div>
+        <div class="fp-row"><span class="fp-label">Anchors</span><span class="fp-value fp-names">Maggie C. · Vanessa C. · Linda F. · Lena H. · Ashley P. · Lily S. · Tatiana H. · Clarence A.</span></div>
+        <div class="fp-row"><span class="fp-label">New here</span><span class="fp-value"><span class="domain-chip new">cloth diaper</span> <span class="domain-chip new">mama cloth</span> <span class="domain-chip new">pet-cage</span> <span class="domain-chip new">dog</span> <span class="domain-chip new">incontinence</span> <span class="domain-chip new">infant care</span> <span class="domain-chip new">special needs</span></span></div>
+        
+        
+      <div class="fp-signature">
+        <p class="sig-text">I MAY GET MY HOUSE BACK THANKS TO ZORB.</p>
+        <p class="sig-attr">— Vanessa C., July 8</p>
+      </div>
+      </div>
+    </summary>
+    <div class="year-body">
+      <div class="filter-year-label" data-year="2015">2015</div>
+      
+    <article class="voice anchor" id="voice-maggie-c-2015-07-08" data-name="Maggie C." data-domains="pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Maggie C.</span>
+        
+        <span class="anchor-date">Jul 8, 2015</span>
+      </header>
+      <div class="anchor-title">Super Pleased</div>
+      <div class="anchor-body">First I want to say that my product was shipped extremely fast which is a wonderful thing. Second the Zorb was very easy to cut &amp; sew with. I paired it with wicking fabric &amp; pul to make an awesome absorbent cloth menstrual pad that washes well &amp; dries quickly. I will definitely be purchasing more.</div>
+    </article>
+    <article class="voice anchor" id="voice-vanessa-c-2015-07-08" data-name="Vanessa C." data-domains="pad dog incontinence">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Vanessa C.</span>
+        
+        <span class="anchor-date">Jul 8, 2015</span>
+      </header>
+      <div class="anchor-title">Excellent</div>
+      <div class="anchor-body">I just received my ZORB today and promptly set out to test it. I am using it for my male senior dogs. I have 2 with incontinence issues and both are large dogs with 10 gallon bladders. i cut 3 layers of ZORB and sewed them together at the edges. I then placed them into my custom belly bands over the top of disposable male incontinence pads. Right on que, my boys let loose and not one drop of urine came out of their belly bands. I removed them immediately to inspect and was quite impressed!!! While the outer covers were moist to the touch, they were not spilling urine everywhere. What I found was that the ZORB acted as a funnel and collected all of the urine in a small area, leading it into the disposable pad underneath. I MAY GET MY HOUSE BACK THANKS TO ZORB!!</div>
+    </article>
+    <article class="voice anchor" id="voice-linda-f-2015-07-08" data-name="Linda F." data-domains="diaper pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Linda F.</span>
+        
+        <span class="anchor-date">Jul 8, 2015</span>
+      </header>
+      <div class="anchor-title">Great Stuff!!</div>
+      <div class="anchor-body">I was given a yard of this by my mom to make cloth menstrual pads with. I was skeptical because it felt kind of scratchy. Boy, am I glad she gave it to me! It was pretty easy to sew with one I got used to the bulk. I had to go slow the first pad or two. I wore them right away, and didn&#x27;t like it. Then washed one, and the Heavens descended to earth in the form of that pillow like cloth for my least favorite time of the month! It fluffed a bit upon washing, which sounds like it would probably make you angry, but it doesn&#x27;t warp the other fabrics. It just enhances the zorb! I have purchased a couple more yards and am making more things with it. Diapers, more pads for myself and for potty training, as well as a potty training cover for my toddler&#x27;s bed! This is wonderful stuff! I am excited to finally try Zorb II as well!</div>
+    </article>
+    <article class="voice anchor" id="voice-lena-h-2015-07-08" data-name="Lena H." data-domains="diaper pad incontinence infant">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Lena H.</span>
+        
+        <span class="anchor-date">Jul 8, 2015</span>
+      </header>
+      <div class="anchor-title">Nothing absorbs like Zorb</div>
+      <div class="anchor-body">Thick and super absorbent. It absorbs like nothing I&#x27;ve ever seen, its amazing. It would make an excellent absorbent layer for reusable/washable panty-liners, nursing pads, incontinence pads, diapers, etc.</div>
+    </article>
+    <article class="voice anchor" id="voice-ashley-p-2015-07-09" data-name="Ashley P." data-domains="pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Ashley P.</span>
+        
+        <span class="anchor-date">Jul 9, 2015</span>
+      </header>
+      <div class="anchor-title">Can&#x27;t live without this stuff...</div>
+      <div class="anchor-body">Thankfully, I&#x27;ve never even tried to go the route of only using traditional clothes in my pads, I went straight to the good stuff. A lot of reading was involved in this decision and it&#x27;s paid off. I am so glad that I&#x27;ve found this product. This product is virtually stupid proof to sew with, too. Very forgiving of novices. Just make sure you layer it between two layers of cloth!! And if you&#x27;re using two layers of ZORB then sew a layer of cotton between them. I made my own template for mama cloths using my own panties. Trial and error but SOooo worth it!! I get them exactly like I like them as a result. I&#x27;ll never ever go back to store-bought products. Ever. Ever ever. Positively NEVER. I hope every woman who learns about ZORB gives this a try. Amazing material. Very forgiving while sewing. Deceptively absorbent. When I made my first pads I didn&#x27;t believe how absorbent it was. To confirm it, I held the pad under running water. When it couldn&#x27;t hold any more water I held the pad in my hands and felt the heft of it. Unreal!!! For the star rating system here on the site I&#x27;d give it a 100 stars, not just 5.</div>
+    </article>
+    <article class="voice anchor" id="voice-lily-s-2015-07-09" data-name="Lily S." data-domains="diaper">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Lily S.</span>
+        
+        <span class="anchor-date">Jul 9, 2015</span>
+      </header>
+      <div class="anchor-title">So Far, So Good</div>
+      <div class="anchor-body">I bought a 10 yard bolt and have made mommacloth and diaper inserts out of it, and so far I love both. It feels like a rather rigid material when you first start working with it, but once you get it sandwiched with some flannel, or PUL &amp; Jersey, or w/e you end up putting it inside and give it a wash or two it loosens up and actually very natural feeling when used as mommacloth.</div>
+    </article>
+    <article class="voice anchor" id="voice-tatiana-h-2015-07-09" data-name="Tatiana H." data-domains="diaper">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Tatiana H.</span>
+        
+        <span class="anchor-date">Jul 9, 2015</span>
+      </header>
+      <div class="anchor-title">Works for me</div>
+      <div class="anchor-body">I have a baby boy that is a heavy, fast wetter. I have been searching many materials for the bullet proof diaper. I started with microfiber-leaked, then added hemp-helped but created gaps in the legs with lead to leaking, then switched to kitchen flour sack towels-leaked, then added hemp-bulky, and although the KFST with hemp did work, it was super bulky. I heard about Zorb next. The description was too good to be true. I bought several yards and crossed my fingers. After using these for several weeks I have discovered that although not bullet proof, they do really well.</div>
+    </article>
+    <article class="voice anchor" id="voice-clarence-a-2015-07-15" data-name="Clarence A." data-domains="diaper pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Clarence A.</span>
+        
+        <span class="anchor-date">Jul 15, 2015</span>
+      </header>
+      <div class="anchor-title">LOVE it!</div>
+      <div class="anchor-body">I&#x27;ve been using Zorb as the hidden layer in my cloth diaper inserts and mama cloth for a couple years now and I love it! It absorbs quickly, evenly distributes moisture throughout the pad/insert rather than having a concentrated wet spot, and helps to reduce drying time. Zorb also doesn&#x27;t get stinky the way that microfiber can. It&#x27;s a must-have product for diaper &amp; mama cloth sewers in my opinion!</div>
+    </article>
+    <article class="voice anchor" id="voice-bubba-bear-2015-07-21" data-name="Bubba Bear" data-domains="infant special-needs">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Bubba Bear</span>
+        
+        <span class="anchor-date">Jul 21, 2015</span>
+      </header>
+      <div class="anchor-title">Amazingly absorbent, perfect amount of thickness and flexibility, natural</div>
+      <div class="anchor-body">Love this product! We (some ladies at church and I) made some bandanna bibs for special needs children that constantly drool. They turned out great! The material is the perfect amount of thickness and flexibility and, of course, amazingly absorbent. Many of these children can not have chemicals, and such, in their environments and clothing. We needed to find a natural material and Wazoodle Fabrics is the ONLY place we were able to find ultra absorbent natural fabric.</div>
+    </article>
+    <article class="voice anchor" id="voice-jasmine-w-2015-08-05" data-name="Jasmine W." data-domains="pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Jasmine W.</span>
+        
+        <span class="anchor-date">Aug 5, 2015</span>
+      </header>
+      <div class="anchor-title">Wonderful Material</div>
+      <div class="anchor-body">Works wonders for reusable pads. It holds so much liquid you&#x27;ll be amazed. Once washed it&#x27;s no longer stiff, and with each washing it gets better and absorbs more. No shrinkage, easy to cut and work with.</div>
+    </article>
+    <article class="voice anchor" id="voice-jackie-w-2015-08-24" data-name="Jackie W." data-domains="diaper">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Jackie W.</span>
+        
+        <span class="anchor-date">Aug 24, 2015</span>
+      </header>
+      <div class="anchor-title">Love Love Love Zorb!!!!</div>
+      <div class="anchor-body">Zorb works great for diapers. It works much better then terry cloth and is not as bulky. Once I tried it, I now use it in every diaper I make. It absorbs great and seldom have leaks.</div>
+    </article>
+    <article class="voice anchor" id="voice-jack-g-2015-09-17" data-name="Jack G." data-domains="diaper">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Jack G.</span>
+        
+        <span class="anchor-date">Sep 17, 2015</span>
+      </header>
+      <div class="anchor-title">Zorb Silver Rocks!</div>
+      <div class="anchor-body">I was a little reluctant to purchase this product because there were no reviews. However, I am very glad I did! What attracts me most about this product is that Zorb Silver is anti-microbial, helps control bad odor, creates long lasting freshness &amp; contains no toxic chemicals, lead or phthalates. Because of it&#x27;s absorbing qualities, it makes for a thin diaper! After it has been washed, it loses it&#x27;s stiffness and becomes very comfortable. I highly recommend Zorb Silver.</div>
+    </article>
+    <article class="voice anchor" id="voice-jade-2015-10-05" data-name="Jade" data-domains="diaper pad infant">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Jade</span>
+        
+        <span class="anchor-date">Oct 5, 2015</span>
+      </header>
+      <div class="anchor-title">Zorb can hold the ocean!</div>
+      <div class="anchor-body">Zorb is the very best fabric to use in cloth feminine pads and nursing pads. It also works well in cloth diapers. I use this so much for my business since it holds more than any other fabric on the market.</div>
+    </article>
+    <article class="voice anchor" id="voice-tina-2015-11-06" data-name="Tina" data-domains="general">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Tina</span>
+        
+        <span class="anchor-date">Nov 6, 2015</span>
+      </header>
+      <div class="anchor-title">Great idea!</div>
+      <div class="anchor-body">A great way to see for yourself the differences in the zorbs. I was able to get a better understanding of how one style would feel comparably and also test the absorbancies.</div>
+    </article>
+    <article class="voice anchor" id="voice-nia-bellomee-2015-11-10" data-name="Nia Bellomee" data-domains="diaper">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Nia Bellomee</span>
+        
+        <span class="anchor-date">Nov 10, 2015</span>
+      </header>
+      <div class="anchor-title">Great product, very absorbent and relatively thin</div>
+      <div class="anchor-body">I was looking for absorbent material for my diaper inserts that was also thin. I wanted to use the fewest layers possible and so far, this is it. Very absorbent and trim. I made two contoured inserts: one with 2 layers of zorb sandwiched between 2 layers of Birdseye cotton (very thin) and one with 3 layers of zorb sandwiched the same way (still, very thin). I&#x27;ve had the best results with the 3 layered insert overnight 7+ hours no leaks and holds a lot of liquid.</div>
+    </article>
+    <article class="voice anchor" id="voice-karina-c-2015-11-18" data-name="Karina C." data-domains="diaper dog">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Karina C.</span>
+        
+        <span class="anchor-date">Nov 18, 2015</span>
+      </header>
+      <div class="anchor-title">Great product</div>
+      <div class="anchor-body">This is a great product. Very easy to use and store. We made cloth diapers and looked for an absorbent fabric to use for diaper inserts. The left over scraps I used to make Belly Bands absorbent bands that fit around male dogs to prevent accidents. They work great! They have a greyhound!</div>
+    </article>
+    <article class="voice anchor" id="voice-val-j-2015-11-24" data-name="Val J." data-domains="diaper pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Val J.</span>
+        
+        <span class="anchor-date">Nov 24, 2015</span>
+      </header>
+      <div class="anchor-title">Very Absorbent</div>
+      <div class="anchor-body">I am using this as an insert in cloth pads. I have used it &amp; it is very absorbent, and used by manufacturers for this purpose.</div>
+    </article>
+    <article class="voice anchor" id="voice-yolanda-j-2015-11-24" data-name="Yolanda J." data-domains="pet-cage">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Yolanda J.</span>
+        
+        <span class="anchor-date">Nov 24, 2015</span>
+      </header>
+      <div class="anchor-title">Great for guinea pig cages</div>
+      <div class="anchor-body">I bought this material to make liners for a guinea pig cage. It works a lot better than the old microfiber drying mats I was using. Zorb is exactly what it says it is - super absorbent. The idea is simple: sandwich a sheet of Zorb between two pieces of anti-pill fleece, sew together, and voila! Instant small-animal-cage liner, without the mess of wood or paper shavings!</div>
+    </article>
+    <article class="voice anchor" id="voice-fiona-m-2015-11-25" data-name="Fiona M." data-domains="general">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Fiona M.</span>
+        
+        <span class="anchor-date">Nov 25, 2015</span>
+      </header>
+      <div class="anchor-title">Love the Softer Zorb</div>
+      <div class="anchor-body">Love ZORB!! I&#x27;ve been using Zorb for the last 5 years now. I love that the Zorb has become softer and flexible making it much easier to sew than before. For those who may remember, it was impossible to buy Zorb a couple of years ago. I would usually receive my fabric a couple of months after placing the order. I had completely given up on using this fabric. Now i place my order and the fabric is at my door in 4 days. A joy to be working with Zorb &amp; Wazoodle again.</div>
+    </article>
+    <article class="voice anchor" id="voice-brenda-johnson-2015-11-25" data-name="Brenda Johnson" data-domains="general">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Brenda Johnson</span>
+        
+        <span class="anchor-date">Nov 25, 2015</span>
+      </header>
+      <div class="anchor-title">Needs to be interlined between 2 layers of fabric</div>
+      <div class="anchor-body">I bought this to compare with the zorb dimples to see which would be the better choice as the absorbent layer. It absorbs great, didn&#x27;t find much of a difference between this and the dimple. However this needs to be interlined between 2 layers of fabric, while zorb dimples doesn&#x27;t need to be interlined.</div>
+    </article>
+    <article class="voice anchor" id="voice-patrick-v-2015-12-03" data-name="Patrick V." data-domains="diaper">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Patrick V.</span>
+        
+        <span class="anchor-date">Dec 3, 2015</span>
+      </header>
+      <div class="anchor-title">Light weight but powerfully absorptive</div>
+      <div class="anchor-body">This is a fantastic product. I use it as the middle layer in the diaper liners that I make. It is thin but extremely absorptive, so it is a perfect product for this application because the liners are not bulky and highly effective.</div>
+    </article>
+    <article class="voice anchor" id="voice-sonya-lillis-2015-12-29" data-name="Sonya Lillis" data-domains="diaper pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Sonya Lillis</span>
+        
+        <span class="anchor-date">Dec 29, 2015</span>
+      </header>
+      <div class="anchor-title">love Zorb</div>
+      <div class="anchor-body">i love this stuff. it&#x27;s itchy on the skin, so you don&#x27;t want to have it directly against baby&#x27;s skin but this stuff topped with some fleece and a waterproof layer underneath makes for great diapers and mama cloth as well. it&#x27;s super absorbent and gets better with each wash. i&#x27;ve been using some ZORB fabric in my pads for like 3 years and haven&#x27;t had a single issue with it.</div>
+    </article>
+      <div class="witness-band">
+    <article class="voice witness" id="voice-wooly-booly-designs-2015-08-28" data-name="Wooly Booly Designs" data-domains="diaper">
+      <header class="witness-head">
+        <span class="witness-name">Wooly Booly Designs</span>
+        
+        <span class="witness-date">Aug 28, 2015</span>
+      </header>
+      <div class="witness-excerpt has-body">Great!</div>
+      <div class="witness-body">This is an excellent product for making diapers/inserts. It&#x27;s cost efficient and works wonders.</div>
+    </article>
+    <article class="voice witness" id="voice-sophie-k-2015-10-27" data-name="Sophie K." data-domains="diaper">
+      <header class="witness-head">
+        <span class="witness-name">Sophie K.</span>
+        
+        <span class="witness-date">Oct 27, 2015</span>
+      </header>
+      <div class="witness-excerpt has-body">Bought for diaper inserts</div>
+      <div class="witness-body">Very easy to cut and sew into inserts. Highly recommended for inserts.</div>
+    </article>
+    <article class="voice witness" id="voice-terence-c-2015-11-06" data-name="Terence C." data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name">Terence C.</span>
+        
+        <span class="witness-date">Nov 6, 2015</span>
+      </header>
+      <div class="witness-excerpt has-body">Love My Zorb!</div>
+      <div class="witness-body">I love using zorb! This product is easy to use and it does the job perfectly!!!</div>
+    </article>
+    <article class="voice witness" id="voice-theresa-v-2015-12-28" data-name="Theresa V." data-domains="pad">
+      <header class="witness-head">
+        <span class="witness-name">Theresa V.</span>
+        
+        <span class="witness-date">Dec 28, 2015</span>
+      </header>
+      <div class="witness-excerpt has-body">Very absorbent, slim and dry fast</div>
+      <div class="witness-body">I used for cloth pad (mama pad) for a couple years. It very absorbent, slim and dry fast.</div>
+    </article></div>
+      <div class="brief-band"><span class="voice brief" id="voice-amanda-2015-07-29" data-name="Amanda" data-domains="general" title="Amanda · Jul 29, 2015 · Amazing"><span class="brief-name">Amanda</span><span class="brief-text">Amazing</span></span><span class="voice brief" id="voice-tom-c-2015-12-26" data-name="Tom C." data-domains="general" title="Tom C. · Dec 26, 2015 · Very Happy"><span class="brief-name">Tom C.</span><span class="brief-text">Very Happy</span></span></div>
+    </div>
+  </details>
+
+  <details class="year-section" id="year-2016" data-year="2016">
+    
+    <summary class="year-summary">
+      <div class="year-summary-head">
+        <span class="year-num">2016</span>
+        <div class="year-summary-meta">
+          <span class="year-density">28 voices</span>
+          <span class="year-note">domains expand quietly</span>
+        </div>
+        <span class="accordion-chevron" aria-hidden="true">+</span>
+      </div>
+      <div class="year-fingerprint">
+        <div class="fp-density">
+          <span class="fp-label">Months</span>
+          <div class="density-strip"><span class="density-cell filled" style="--h:8px" title="Jan 2016 · 3 voices"></span><span class="density-cell filled" style="--h:18px" title="Feb 2016 · 7 voices"></span><span class="density-cell empty" title="Mar 2016 · no voices"></span><span class="density-cell filled" style="--h:6px" title="Apr 2016 · 2 voices"></span><span class="density-cell filled" style="--h:6px" title="May 2016 · 2 voices"></span><span class="density-cell filled" style="--h:8px" title="Jun 2016 · 3 voices"></span><span class="density-cell filled" style="--h:6px" title="Jul 2016 · 2 voices"></span><span class="density-cell filled" style="--h:8px" title="Aug 2016 · 3 voices"></span><span class="density-cell empty" title="Sep 2016 · no voices"></span><span class="density-cell filled" style="--h:6px" title="Oct 2016 · 2 voices"></span><span class="density-cell filled" style="--h:6px" title="Nov 2016 · 2 voices"></span><span class="density-cell filled" style="--h:6px" title="Dec 2016 · 2 voices"></span></div>
+        </div>
+        <div class="fp-row"><span class="fp-label">Anchors</span><span class="fp-value fp-names">Gianna C. · Harry R. · Mary G. · Vivian T. · Estrellad A. · New Kiddo · Margret L. · Jeanette Schmidt</span></div>
+        <div class="fp-row"><span class="fp-label">New here</span><span class="fp-value"><span class="domain-chip new">household</span></span></div>
+        <div class="fp-row"><span class="fp-label">Continuing</span><span class="fp-value"><span class="domain-chip">cloth diaper</span> <span class="domain-chip">mama cloth</span> <span class="domain-chip">incontinence</span> <span class="domain-chip">infant care</span></span></div>
+        
+      <div class="fp-signature">
+        <p class="sig-text">The antimicrobial silver works wonderfully to control the rashes that develop under the tummy fold.</p>
+        <p class="sig-attr">— Harry R., Feb 4</p>
+      </div>
+      </div>
+    </summary>
+    <div class="year-body">
+      <div class="filter-year-label" data-year="2016">2016</div>
+      
+    <article class="voice anchor" id="voice-gianna-c-2016-01-30" data-name="Gianna C." data-domains="diaper pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Gianna C.</span>
+        
+        <span class="anchor-date">Jan 30, 2016</span>
+      </header>
+      <div class="anchor-title">Great absorbancy</div>
+      <div class="anchor-body">Zorb works well in the cloth pads I make. I find it easy to work with and will also be using it for diapers in the future.</div>
+    </article>
+    <article class="voice anchor" id="voice-harry-r-2016-02-04" data-name="Harry R." data-domains="household">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Harry R.</span>
+        
+        <span class="anchor-date">Feb 4, 2016</span>
+      </header>
+      <div class="anchor-title">I am very satisfied with this product</div>
+      <div class="anchor-body">I add this as an absorbency layer in under garments designed for large women. The antimicrobial silver works wonderfully to control the rashes that develop under the tummy fold.</div>
+    </article>
+    <article class="voice anchor" id="voice-mary-g-2016-02-19" data-name="Mary G." data-domains="pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Mary G.</span>
+        
+        <span class="anchor-date">Feb 19, 2016</span>
+      </header>
+      <div class="anchor-title">Great product, good service</div>
+      <div class="anchor-body">I make Swifer and Oreck Orbiter mop pads using Zorb between two pieces of microfiber cloths. They are absorbent, economical, and clean far better than the expensive disposables.</div>
+    </article>
+    <article class="voice anchor" id="voice-vivian-t-2016-02-22" data-name="Vivian T." data-domains="diaper">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Vivian T.</span>
+        
+        <span class="anchor-date">Feb 22, 2016</span>
+      </header>
+      <div class="anchor-title">Silvadur</div>
+      <div class="anchor-body">The Zorb silver is my favorite fabric, because it has silvadur antimicrobial embedded in it, it can help to reduce or even eliminate diaper rash!</div>
+    </article>
+    <article class="voice anchor" id="voice-estrellad-a-2016-04-15" data-name="Estrellad A." data-domains="pad infant">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Estrellad A.</span>
+        
+        <span class="anchor-date">Apr 15, 2016</span>
+      </header>
+      <div class="anchor-title">Exactly what you will need</div>
+      <div class="anchor-body">The best core absorbent material for suck pads &amp; drool bibs that I make for my customers! Also works wonderful for breast pads and mama cloth!</div>
+    </article>
+    <article class="voice anchor" id="voice-new-kiddo-2016-04-17" data-name="New Kiddo" data-domains="diaper pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">New Kiddo</span>
+        
+        <span class="anchor-date">Apr 17, 2016</span>
+      </header>
+      <div class="anchor-title">The best thing since indoor running water</div>
+      <div class="anchor-body">I like to use this anti-microbial fabric for inner lining in diapers and feminine pads. Bed wetters also will appreciate its odor releasing characteristic in bedding pads. It is so thirsty!</div>
+    </article>
+    <article class="voice anchor" id="voice-margret-l-2016-05-03" data-name="Margret L." data-domains="general">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Margret L.</span>
+        
+        <span class="anchor-date">May 3, 2016</span>
+      </header>
+      <div class="anchor-title">Super easy to use. Budget friendly will buy again</div>
+      <div class="anchor-body">I like how the fabric is very budget friendly and of high quality. Great for high absorbency projects without adding too much bulk. Much easier to cut with scissors and to skip the rotary cutter.</div>
+    </article>
+    <article class="voice anchor" id="voice-jeanette-schmidt-2016-06-29" data-name="Jeanette Schmidt" data-domains="incontinence">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Jeanette Schmidt</span>
+        
+        <span class="anchor-date">Jun 29, 2016</span>
+      </header>
+      <div class="anchor-title">Completely Impressed</div>
+      <div class="anchor-body">Completely impressed, starting a new line for older bed wetting and adult incontinence. Wanted to try for the odor and anti microbial properties. Nice and soft, and holds no odor when wet. It is exactly what I need for my new line.</div>
+    </article>
+    <article class="voice anchor" id="voice-elisa-e-2016-07-24" data-name="Elisa E." data-domains="diaper">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Elisa E.</span>
+        
+        <span class="anchor-date">Jul 24, 2016</span>
+      </header>
+      <div class="anchor-title">Super absorbent!</div>
+      <div class="anchor-body">I love this fabric. It is so absorbent! I use two layers of Zorb to make inserts for cloth diapers and I almost never had a leak!! I like it better than the 2nd or 3rd generation because Zorb 1st generation is less flexible and therefore stays well in place in the diaper.</div>
+    </article>
+    <article class="voice anchor" id="voice-tailored-by-erica-2016-11-20" data-name="Tailored By Erica" data-domains="general">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Tailored By Erica</span>
+        
+        <span class="anchor-date">Nov 20, 2016</span>
+      </header>
+      <div class="anchor-title">Great</div>
+      <div class="anchor-body">This is great quality and overall a great product. I do prefer the Zorb II though after ordering both. This one has to have fabric on both sides and is thicker. For the price difference I don&#x27;t mind using this for personal use items though that I don&#x27;t sell.</div>
+    </article>
+      <div class="witness-band">
+    <article class="voice witness" id="voice-cait-l-2016-01-22" data-name="Cait L." data-domains="pad">
+      <header class="witness-head">
+        <span class="witness-name">Cait L.</span>
+        
+        <span class="witness-date">Jan 22, 2016</span>
+      </header>
+      <div class="witness-excerpt has-body">Great absorption</div>
+      <div class="witness-body">Used for cloth pads - great absorption, and speed of absorption. It is my go to core fabric.</div>
+    </article>
+    <article class="voice witness" id="voice-traci-2016-02-22" data-name="Traci" data-domains="pad">
+      <header class="witness-head">
+        <span class="witness-name">Traci</span>
+        
+        <span class="witness-date">Feb 22, 2016</span>
+      </header>
+      <div class="witness-excerpt has-body">Perfect Material for Menstrual</div>
+      <div class="witness-body">I love zorb because it is the perfect material to use for all my menstrual products</div>
+    </article>
+    <article class="voice witness" id="voice-jennifer-2016-02-22" data-name="Jennifer" data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name">Jennifer</span>
+        
+        <span class="witness-date">Feb 22, 2016</span>
+      </header>
+      <div class="witness-excerpt has-body">Affordable</div>
+      <div class="witness-body">This new 60 inch wide is my new all time favorite because its affordable and super absorbent</div>
+    </article>
+    <article class="voice witness" id="voice-olivia-g-2016-05-09" data-name="Olivia G." data-domains="diaper pad">
+      <header class="witness-head">
+        <span class="witness-name">Olivia G.</span>
+        
+        <span class="witness-date">May 9, 2016</span>
+      </header>
+      <div class="witness-excerpt has-body">So absorbent</div>
+      <div class="witness-body">LOVE this because it is so absorbent. I would use it in my diapers, cloth pads and toilet training pants.</div>
+    </article>
+    <article class="voice witness" id="voice-sharon-p-2016-06-14" data-name="Sharon P." data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name">Sharon P.</span>
+        
+        <span class="witness-date">Jun 14, 2016</span>
+      </header>
+      <div class="witness-excerpt has-body">Fast shipping! Product as promised!</div>
+      <div class="witness-body">Product came just as promised. A bit hard to work with because of the weave but very absorbant.</div>
+    </article>
+    <article class="voice witness" id="voice-maxwel-w-2016-06-16" data-name="Maxwel W." data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name">Maxwel W.</span>
+        
+        <span class="witness-date">Jun 16, 2016</span>
+      </header>
+      <div class="witness-excerpt has-body">Top Quality Product</div>
+      <div class="witness-body">Fantastic product! Ideal for projects I need it for. Processing and Delivery quick.</div>
+    </article>
+    <article class="voice witness" id="voice-john-p-2016-07-27" data-name="John P." data-domains="pad">
+      <header class="witness-head">
+        <span class="witness-name">John P.</span>
+        
+        <span class="witness-date">Jul 27, 2016</span>
+      </header>
+      <div class="witness-excerpt has-body">Great for women too</div>
+      <div class="witness-body">I used this to make period underwear and tampons. It works well!</div>
+    </article>
+    <article class="voice witness" id="voice-adam-k-2016-08-04" data-name="Adam K." data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name">Adam K.</span>
+        
+        <span class="witness-date">Aug 4, 2016</span>
+      </header>
+      <div class="witness-excerpt has-body">Its the best!!!!</div>
+      <div class="witness-body">Just amazing.. this is the right product for me.. love love zorbs Silver won&#x27;t use anything else for my shop!!!</div>
+    </article>
+    <article class="voice witness" id="voice-becky-2016-08-25" data-name="Becky" data-domains="pad">
+      <header class="witness-head">
+        <span class="witness-name">Becky</span>
+        
+        <span class="witness-date">Aug 25, 2016</span>
+      </header>
+      <div class="witness-excerpt has-body">Great Product</div>
+      <div class="witness-body">I love this product. I use it when making my puppy pads. love love love, and washes nicely.</div>
+    </article>
+    <article class="voice witness" id="voice-jovi-o-2016-10-23" data-name="Jovi O." data-domains="pad">
+      <header class="witness-head">
+        <span class="witness-name">Jovi O.</span>
+        
+        <span class="witness-date">Oct 23, 2016</span>
+      </header>
+      <div class="witness-excerpt has-body">Just perfect, super absorbent</div>
+      <div class="witness-body">I used it for menstrual cloth pads and they&#x27;re just perfect. I recommend this zorb, 100%!!</div>
+    </article>
+    <article class="voice witness" id="voice-nancy-2016-12-05" data-name="Nancy" data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name">Nancy</span>
+        <span class="plumb-marker mini" data-name="Nancy">1/2</span>
+        <span class="witness-date">Dec 5, 2016</span>
+      </header>
+      <div class="witness-excerpt has-body">Love the product</div>
+      <div class="witness-body">Quick shipping as always (have used their regular website), love the product</div>
+    </article></div>
+      <div class="brief-band"><span class="voice brief" id="voice-iris-c-2016-01-06" data-name="Iris C." data-domains="diaper" title="Iris C. · Jan 6, 2016 · Excellent!"><span class="brief-name">Iris C.</span><span class="brief-text">Excellent!</span></span><span class="voice brief" id="voice-angela-b-2016-02-22" data-name="Angela B." data-domains="general" title="Angela B. · Feb 22, 2016 · Minimal Thickness"><span class="brief-name">Angela B.</span><span class="brief-text">Minimal Thickness</span></span><span class="voice brief" id="voice-victoria-v-2016-02-22" data-name="Victoria V." data-domains="general" title="Victoria V. · Feb 22, 2016 · Inexpensive"><span class="brief-name">Victoria V.</span><span class="brief-text">Inexpensive</span></span><span class="voice brief" id="voice-hannah-n-2016-08-19" data-name="Hannah N." data-domains="pad" title="Hannah N. · Aug 19, 2016 · Good and Fast"><span class="brief-name">Hannah N.</span><span class="brief-text">Good and Fast</span></span><span class="voice brief" id="voice-yanitza-2016-10-22" data-name="Yanitza" data-domains="general" title="Yanitza · Oct 22, 2016 · Excellent"><span class="brief-name">Yanitza</span><span class="brief-text">Excellent</span></span><span class="voice brief" id="voice-christy-2016-11-02" data-name="Christy" data-domains="general" title="Christy · Nov 2, 2016 · New Customer"><span class="brief-name">Christy</span><span class="brief-text">New Customer</span></span><span class="voice brief" id="voice-julie-2016-12-04" data-name="Julie" data-domains="pad" title="Julie · Dec 4, 2016 · Works Great"><span class="brief-name">Julie</span><span class="brief-text">Works Great</span></span></div>
+    </div>
+  </details>
+
+  <details class="year-section" id="year-2017" data-year="2017">
+    
+    <summary class="year-summary">
+      <div class="year-summary-head">
+        <span class="year-num">2017</span>
+        <div class="year-summary-meta">
+          <span class="year-density">4 voices</span>
+          <span class="year-note">few words preserved</span>
+        </div>
+        <span class="accordion-chevron" aria-hidden="true">+</span>
+      </div>
+      <div class="year-fingerprint">
+        <div class="fp-density">
+          <span class="fp-label">Months</span>
+          <div class="density-strip"><span class="density-cell empty" title="Jan 2017 · no voices"></span><span class="density-cell empty" title="Feb 2017 · no voices"></span><span class="density-cell empty" title="Mar 2017 · no voices"></span><span class="density-cell empty" title="Apr 2017 · no voices"></span><span class="density-cell filled" style="--h:18px" title="May 2017 · 1 voice"></span><span class="density-cell empty" title="Jun 2017 · no voices"></span><span class="density-cell filled" style="--h:18px" title="Jul 2017 · 1 voice"></span><span class="density-cell empty" title="Aug 2017 · no voices"></span><span class="density-cell filled" style="--h:18px" title="Sep 2017 · 1 voice"></span><span class="density-cell empty" title="Oct 2017 · no voices"></span><span class="density-cell filled" style="--h:18px" title="Nov 2017 · 1 voice"></span><span class="density-cell empty" title="Dec 2017 · no voices"></span></div>
+        </div>
+        <div class="fp-row"><span class="fp-label">Anchors</span><span class="fp-value fp-names">Mike O. · Erin · 2513indy</span></div>
+        
+        <div class="fp-row"><span class="fp-label">Continuing</span><span class="fp-value"><span class="domain-chip">mama cloth</span> <span class="domain-chip">pet-cage</span></span></div>
+        
+      <div class="fp-signature">
+        <p class="sig-text">It is very thin for its purpose and does a great job. You can even double it.</p>
+        <p class="sig-attr">— 2513indy, Sep 20</p>
+      </div>
+      </div>
+    </summary>
+    <div class="year-body">
+      <div class="filter-year-label" data-year="2017">2017</div>
+      
+    <article class="voice anchor" id="voice-mike-o-2017-05-08" data-name="Mike O." data-domains="pet-cage">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Mike O.</span>
+        
+        <span class="anchor-date">May 8, 2017</span>
+      </header>
+      <div class="anchor-title">Zorb is amazing!</div>
+      <div class="anchor-body">I ordered Zorb to make guinea pig liners and it&#x27;s amazing. Wazoodle did an amazing job with packaging. I will be purchasing more now that I upgraded my piggies to a 4x6 C&amp;C cage.</div>
+    </article>
+    <article class="voice anchor" id="voice-erin-2017-07-19" data-name="Erin" data-domains="pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Erin</span>
+        
+        <span class="anchor-date">Jul 19, 2017</span>
+      </header>
+      <div class="anchor-title">Thank you!</div>
+      <div class="anchor-body">I use Zorb in my cloth menstrual pads and this fabric is absolutely perfect for them! Very thin and absorbent! Thank you!</div>
+    </article>
+    <article class="voice anchor" id="voice-2513indy-2017-09-20" data-name="2513indy" data-domains="pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">2513indy</span>
+        
+        <span class="anchor-date">Sep 20, 2017</span>
+      </header>
+      <div class="anchor-title">Thanks</div>
+      <div class="anchor-body">This stuff is great for panty liners and bed pads. It is very thin for its purpose and does a great job. You can even double it. I love that I found you on Etsy.</div>
+    </article>
+      
+      <div class="brief-band"><span class="voice brief" id="voice-helen-2017-11-28" data-name="Helen" data-domains="general" title="Helen · Nov 28, 2017 · Fantastic Fabric"><span class="brief-name">Helen</span><span class="brief-text">Fantastic Fabric</span></span></div>
+    </div>
+  </details>
+
+  <details class="year-section" id="year-2018" data-year="2018">
+    
+    <summary class="year-summary">
+      <div class="year-summary-head">
+        <span class="year-num">2018</span>
+        <div class="year-summary-meta">
+          <span class="year-density">24 voices</span>
+          <span class="year-note">the Etsy era — many voices arrive on a single day in August</span>
+        </div>
+        <span class="accordion-chevron" aria-hidden="true">+</span>
+      </div>
+      <div class="year-fingerprint">
+        <div class="fp-density">
+          <span class="fp-label">Months</span>
+          <div class="density-strip"><span class="density-cell filled" style="--h:2px" title="Jan 2018 · 1 voice"></span><span class="density-cell empty" title="Feb 2018 · no voices"></span><span class="density-cell filled" style="--h:3px" title="Mar 2018 · 2 voices"></span><span class="density-cell empty" title="Apr 2018 · no voices"></span><span class="density-cell filled" style="--h:2px" title="May 2018 · 1 voice"></span><span class="density-cell filled" style="--h:2px" title="Jun 2018 · 1 voice"></span><span class="density-cell empty" title="Jul 2018 · no voices"></span><span class="density-cell filled" style="--h:18px" title="Aug 2018 · 18 voices"></span><span class="density-cell empty" title="Sep 2018 · no voices"></span><span class="density-cell empty" title="Oct 2018 · no voices"></span><span class="density-cell filled" style="--h:2px" title="Nov 2018 · 1 voice"></span><span class="density-cell empty" title="Dec 2018 · no voices"></span></div>
+        </div>
+        <div class="fp-row"><span class="fp-label">Anchors</span><span class="fp-value fp-names">Ruby E. · weebsfurbaby2016 · Megan · Abe H. · Nia F. · Kiki D. · Ravchel T. · Kathrine</span></div>
+        
+        <div class="fp-row"><span class="fp-label">Continuing</span><span class="fp-value"><span class="domain-chip">cloth diaper</span> <span class="domain-chip">mama cloth</span> <span class="domain-chip">household</span></span></div>
+        
+      <div class="fp-signature">
+        <p class="sig-text">I sew diapers, cloth menstrual pads, and then I use my scraps to make dish sponges.</p>
+        <p class="sig-attr">— Kathrine, August</p>
+      </div>
+      </div>
+    </summary>
+    <div class="year-body">
+      <div class="filter-year-label" data-year="2018">2018</div>
+      
+    <article class="voice anchor" id="voice-ruby-e-2018-03-12" data-name="Ruby E." data-domains="pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Ruby E.</span>
+        
+        <span class="anchor-date">Mar 12, 2018</span>
+      </header>
+      <div class="anchor-title">great for</div>
+      <div class="anchor-body">I used this for menstrual pads and it works great. It can get thick if you&#x27;re doing more than one layer so I only made a few with 2 layers for really heavy days.</div>
+    </article>
+    <article class="voice anchor" id="voice-weebsfurbaby2016-2018-03-19" data-name="weebsfurbaby2016" data-domains="pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">weebsfurbaby2016</span>
+        
+        <span class="anchor-date">Mar 19, 2018</span>
+      </header>
+      <div class="anchor-title">Love ordering the Zorb!</div>
+      <div class="anchor-body">I love ordering Zorb from Wazoodle, for the menstrual pads I make! They always ship out in a timely manner, and customer service is great!</div>
+    </article>
+    <article class="voice anchor" id="voice-megan-2018-05-26" data-name="Megan" data-domains="diaper">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Megan</span>
+        <span class="plumb-marker" data-name="Megan" title="One of 2 appearances by this maker">1 of 2</span>
+        <span class="anchor-date">May 26, 2018</span>
+      </header>
+      <div class="anchor-title">Great seller</div>
+      <div class="anchor-body">Super fast delivery, great seller, high quality absorbency fabric for diaper liners.</div>
+    </article>
+    <article class="voice anchor" id="voice-abe-h-2018-08" data-name="Abe H." data-domains="general">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Abe H.</span>
+        
+        <span class="anchor-date">Aug 2018</span>
+      </header>
+      <div class="anchor-title">I like the product</div>
+      <div class="anchor-body">I love using zorb. excellent quality. the service is very good always send samples that I love helps me to know more about which company.</div>
+    </article>
+    <article class="voice anchor" id="voice-nia-f-2018-08" data-name="Nia F." data-domains="diaper pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Nia F.</span>
+        
+        <span class="anchor-date">Aug 2018</span>
+      </header>
+      <div class="anchor-title">Pads and diapers</div>
+      <div class="anchor-body">I love this fabric for making cloth pads out of. I was having life threatening allergies to disposable pads. Now my periods are so much easier</div>
+    </article>
+    <article class="voice anchor" id="voice-kiki-d-2018-08" data-name="Kiki D." data-domains="general">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Kiki D.</span>
+        
+        <span class="anchor-date">Aug 2018</span>
+      </header>
+      <div class="anchor-title">Love it</div>
+      <div class="anchor-body">I love that I don&#x27;t have to prewash this before I use it. I only have to cut out one piece of this instead of cutting many pieces of other fabrics. Most importantly, it is absorbent, and absorbs quickly.</div>
+    </article>
+    <article class="voice anchor" id="voice-ravchel-t-2018-08" data-name="Ravchel T." data-domains="pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Ravchel T.</span>
+        
+        <span class="anchor-date">Aug 2018</span>
+      </header>
+      <div class="anchor-title">Good Value</div>
+      <div class="anchor-body">I love the absorbency of this fabric as used for cage liners and various accessories that I make for my clients and their pets. I make Cage Liners and pads, Cuddle Huts, Cuddle Cups, Water Bottle Pads.</div>
+    </article>
+    <article class="voice anchor" id="voice-kathrine-2018-08" data-name="Kathrine" data-domains="diaper pad household">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Kathrine</span>
+        
+        <span class="anchor-date">Aug 2018</span>
+      </header>
+      <div class="anchor-title">Worth the money</div>
+      <div class="anchor-body">Worth every penny!! I bought a bolt about a year ago and it has been amazing! I sew diapers, cloth menstrual pads, and then I use my scraps to make dish sponges. The quick absorption works amazing to have that stay-dry feeling in diaper and pads plus it makes for the perfect dish sponge that holds soap well, and doesn&#x27;t have that icky smell that throw away sponges get.</div>
+    </article>
+    <article class="voice anchor" id="voice-karen-c-2018-08" data-name="Karen C." data-domains="pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Karen C.</span>
+        
+        <span class="anchor-date">Aug 2018</span>
+      </header>
+      <div class="anchor-title">I love the ZORB</div>
+      <div class="anchor-body">This fabric is fantastic for the absorbent layer of cloth pads. It holds a lot of fluid and cleans well. The untreated version does not hold odor and lasts for years.</div>
+    </article>
+    <article class="voice anchor" id="voice-corinne-l-2018-08" data-name="Corinne L." data-domains="pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Corinne L.</span>
+        
+        <span class="anchor-date">Aug 2018</span>
+      </header>
+      <div class="anchor-title">Love it!</div>
+      <div class="anchor-body">I love original zorb. It&#x27;s easy to work with and has minimal stretch. I use it as an absorbent core layer for reusable cloth pads that I make for donation and sometimes myself. 1 layer of Original Zorb = moderate absorbency and 2 layers of Original Zorb = heavy/overnight absorbency. I combine it with flannel since Original Zorb can be susceptible to compression leaks.</div>
+    </article>
+    <article class="voice anchor" id="voice-cynthia-d-2018-08" data-name="Cynthia D." data-domains="diaper">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Cynthia D.</span>
+        
+        <span class="anchor-date">Aug 2018</span>
+      </header>
+      <div class="anchor-title">Will buy again</div>
+      <div class="anchor-body">Love original zorb! It performs wonderfully and is very easy to work with. I use this in the absorbent layer and snap in soaker for cloth diapers.</div>
+    </article>
+    <article class="voice anchor" id="voice-dan-i-2018-08" data-name="Dan I." data-domains="general">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Dan I.</span>
+        
+        <span class="anchor-date">Aug 2018</span>
+      </header>
+      <div class="anchor-title">Reusable baby and women&#x27;s products</div>
+      <div class="anchor-body">I buy the 10 yard roll and use it for my home based business and it arrives well packed, in tight packaging, and always in good shape!</div>
+    </article>
+      <div class="witness-band">
+    <article class="voice witness" id="voice-karina-2018-01-30" data-name="Karina" data-domains="pad">
+      <header class="witness-head">
+        <span class="witness-name">Karina</span>
+        
+        <span class="witness-date">Jan 30, 2018</span>
+      </header>
+      <div class="witness-excerpt has-body">Will Definitely Buy More</div>
+      <div class="witness-body">Very easy to work with when sewing cloth pads. I will definitely buy more</div>
+    </article>
+    <article class="voice witness" id="voice-maggie-d-2018-08" data-name="Maggie D." data-domains="diaper">
+      <header class="witness-head">
+        <span class="witness-name">Maggie D.</span>
+        
+        <span class="witness-date">Aug 2018</span>
+      </header>
+      <div class="witness-excerpt has-body">Nice product</div>
+      <div class="witness-body">I love how trim this fabric makes my diapers. I like it with a layer of hemp fleece.</div>
+    </article>
+    <article class="voice witness" id="voice-alexa-s-2018-08" data-name="Alexa S" data-domains="pad">
+      <header class="witness-head">
+        <span class="witness-name">Alexa S</span>
+        
+        <span class="witness-date">Aug 2018</span>
+      </header>
+      <div class="witness-excerpt has-body">Amazing</div>
+      <div class="witness-body">This was so easy to work with! I love how thin my pads are with Zorb vs my other cores.</div>
+    </article>
+    <article class="voice witness" id="voice-karin-r-2018-08" data-name="Karin R." data-domains="pad">
+      <header class="witness-head">
+        <span class="witness-name">Karin R.</span>
+        
+        <span class="witness-date">Aug 2018</span>
+      </header>
+      <div class="witness-excerpt has-body">Cloth pads!</div>
+      <div class="witness-body">I love this stuff! It&#x27;s super easy to work with and it can absorb so much.</div>
+    </article>
+    <article class="voice witness" id="voice-nina-c-2018-08" data-name="Nina C." data-domains="pad">
+      <header class="witness-head">
+        <span class="witness-name">Nina C.</span>
+        
+        <span class="witness-date">Aug 2018</span>
+      </header>
+      <div class="witness-excerpt has-body">Good reusable cloth pads</div>
+      <div class="witness-body">Zorb is so light and easy to work with! Super absorbent and sanitary!</div>
+    </article>
+    <article class="voice witness" id="voice-ryan-h-2018-08-17" data-name="Ryan H." data-domains="pad">
+      <header class="witness-head">
+        <span class="witness-name">Ryan H.</span>
+        
+        <span class="witness-date">Aug 17, 2018</span>
+      </header>
+      <div class="witness-excerpt has-body">Reusable Cloth Pads</div>
+      <div class="witness-body">I love this fabric! Super absorbent, easy to sew and of quality!</div>
+    </article>
+    <article class="voice witness" id="voice-kelly-2018-08-17" data-name="Kelly" data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name">Kelly</span>
+        
+        <span class="witness-date">Aug 17, 2018</span>
+      </header>
+      <div class="witness-excerpt has-body">Great at absorbing</div>
+      <div class="witness-body">Has amazing absorbing strength. Wish gen one original zorb had silver too.</div>
+    </article>
+    <article class="voice witness" id="voice-celine-2018-11-09" data-name="Celine" data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name">Celine</span>
+        
+        <span class="witness-date">Nov 9, 2018</span>
+      </header>
+      <div class="witness-excerpt has-body">So absorbent</div>
+      <div class="witness-body">The zorb is what i needed for my upcoming projects! So absorbent!</div>
+    </article></div>
+      <div class="brief-band"><span class="voice brief" id="voice-gardeninggurl-2018-06-06" data-name="GardeningGurl" data-domains="general" title="GardeningGurl · Jun 6, 2018 · Awesome product"><span class="brief-name">GardeningGurl</span><span class="brief-text">Awesome product</span></span><span class="voice brief" id="voice-mabel-s-2018-08" data-name="Mabel S." data-domains="general" title="Mabel S. · Aug 2018 · Great quality"><span class="brief-name">Mabel S.</span><span class="brief-text">Great quality</span></span><span class="voice brief" id="voice-hannah-t-2018-08" data-name="Hannah T." data-domains="general" title="Hannah T. · Aug 2018 · Nice"><span class="brief-name">Hannah T.</span><span class="brief-text">Nice</span></span><span class="voice brief" id="voice-mary-l-2018-08" data-name="Mary L." data-domains="pad" title="Mary L. · Aug 2018 · Menstrual Cloth Pads"><span class="brief-name">Mary L.</span><span class="brief-text">Menstrual Cloth Pads</span></span></div>
+    </div>
+  </details>
+
+  <details class="year-section" id="year-2019" data-year="2019">
+    
+    <summary class="year-summary">
+      <div class="year-summary-head">
+        <span class="year-num">2019</span>
+        <div class="year-summary-meta">
+          <span class="year-density">9 voices</span>
+          <span class="year-note">the earthquake gets named, ten months later</span>
+        </div>
+        <span class="accordion-chevron" aria-hidden="true">+</span>
+      </div>
+      <div class="year-fingerprint">
+        <div class="fp-density">
+          <span class="fp-label">Months</span>
+          <div class="density-strip"><span class="density-cell filled" style="--h:7px" title="Jan 2019 · 1 voice"></span><span class="density-cell filled" style="--h:7px" title="Feb 2019 · 1 voice"></span><span class="density-cell filled" style="--h:7px" title="Mar 2019 · 1 voice"></span><span class="density-cell empty" title="Apr 2019 · no voices"></span><span class="density-cell filled" style="--h:7px" title="May 2019 · 1 voice"></span><span class="density-cell filled" style="--h:7px" title="Jun 2019 · 1 voice"></span><span class="density-cell empty" title="Jul 2019 · no voices"></span><span class="density-cell empty" title="Aug 2019 · no voices"></span><span class="density-cell filled" style="--h:18px" title="Sep 2019 · 3 voices"></span><span class="density-cell empty" title="Oct 2019 · no voices"></span><span class="density-cell filled" style="--h:7px" title="Nov 2019 · 1 voice"></span><span class="density-cell empty" title="Dec 2019 · no voices"></span></div>
+        </div>
+        <div class="fp-row"><span class="fp-label">Anchors</span><span class="fp-value fp-names">Jen S. · Yaderin · ShelleyRay · Mel M.</span></div>
+        
+        <div class="fp-row"><span class="fp-label">Continuing</span><span class="fp-value"><span class="domain-chip">cloth diaper</span> <span class="domain-chip">mama cloth</span> <span class="domain-chip">pet-cage</span></span></div>
+        
+      <div class="fp-signature">
+        <p class="sig-text">Even during the Nov. earthquake where I had to go 4 days with no cage maintenance there was NO SMELL.</p>
+        <p class="sig-attr">— ShelleyRay, Sep 19</p>
+      </div>
+      </div>
+    </summary>
+    <div class="year-body">
+      <div class="filter-year-label" data-year="2019">2019</div>
+      
+    <article class="voice anchor" id="voice-jen-s-2019-06-23" data-name="Jen S." data-domains="pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Jen S.</span>
+        
+        <span class="anchor-date">Jun 23, 2019</span>
+      </header>
+      <div class="anchor-title">Great experience!</div>
+      <div class="anchor-body">I use this to make Cloth Pads and I love the performance. I have a year buying from Wazoodle Fabrics and my experience has always been great.</div>
+    </article>
+    <article class="voice anchor" id="voice-yaderin-2019-09-09" data-name="Yaderin" data-domains="diaper pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Yaderin</span>
+        <span class="plumb-marker" data-name="Yaderin" title="One of 2 appearances by this maker">1 of 2</span>
+        <span class="anchor-date">Sep 9, 2019</span>
+      </header>
+      <div class="anchor-title">Love this Shop!</div>
+      <div class="anchor-body">I absolutely love this shop. It&#x27;s very hard to find zorb so I opted to purchase it online. This is my second purchase and I love that they have different size options. I used it for cloth diaper inserts and reusable menstrual pad cores.</div>
+    </article>
+    <article class="voice anchor" id="voice-shelleyray-2019-09-19" data-name="ShelleyRay" data-domains="pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">ShelleyRay</span>
+        
+        <span class="anchor-date">Sep 19, 2019</span>
+      </header>
+      <div class="anchor-title">Awesome product</div>
+      <div class="anchor-body">I love this product! I&#x27;ve been using this for years now in my ginuea pig cage pads! It&#x27;s amazing to have 6 little guys and have no smell! Even during the Nov. earthquake where I had to go 4 days with no cage maintenance there was NO SMELL! I will order this for as long as I have pets!</div>
+    </article>
+    <article class="voice anchor" id="voice-mel-m-2019-09-21" data-name="Mel M." data-domains="pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Mel M.</span>
+        
+        <span class="anchor-date">Sep 21, 2019</span>
+      </header>
+      <div class="anchor-title">Great for menstrual pads</div>
+      <div class="anchor-body">I use this for menstrual pads. Thicker is a little better in this case because a thinner absorbent core paired with a PUL bottom layer and wicking top layer don&#x27;t always have enough body to keep its shape and stay in place. But this zorb does.</div>
+    </article>
+      <div class="witness-band">
+    <article class="voice witness" id="voice-m-j-2019-03-17" data-name="M.J." data-domains="pet-cage">
+      <header class="witness-head">
+        <span class="witness-name">M.J.</span>
+        
+        <span class="witness-date">Mar 17, 2019</span>
+      </header>
+      <div class="witness-excerpt has-body">Got it quickly</div>
+      <div class="witness-body">Got it quickly and can&#x27;t wait to use it for playmats and liners for our soon-to-be-new hedgehog.</div>
+    </article>
+    <article class="voice witness" id="voice-jo-ann-2019-11-16" data-name="Jo Ann" data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name">Jo Ann</span>
+        
+        <span class="witness-date">Nov 16, 2019</span>
+      </header>
+      <div class="witness-excerpt has-body">Happy Customer!</div>
+      <div class="witness-body">I always come back to this business with their zorb being such good quality! Happy customer!</div>
+    </article></div>
+      <div class="brief-band"><span class="voice brief" id="voice-mistyrose2-2019-01-26" data-name="mistyrose2" data-domains="general" title="mistyrose2 · Jan 26, 2019 · Can&#x27;t wait to use it"><span class="brief-name">mistyrose2</span><span class="brief-text">Can&#x27;t wait to use it</span></span><span class="voice brief" id="voice-beegogh-2019-02-02" data-name="BeeGogh" data-domains="general" title="BeeGogh · Feb 2, 2019 · Awesome fabric!"><span class="brief-name">BeeGogh</span><span class="brief-text">Awesome fabric!</span></span><span class="voice brief" id="voice-valerie-2019-05-01" data-name="Valerie" data-domains="pad pet-cage" title="Valerie · May 1, 2019 · Best absorbent liner"><span class="brief-name">Valerie</span><span class="brief-text">Best absorbent liner</span></span></div>
+    </div>
+  </details>
+
+  <details class="year-section" id="year-2020" data-year="2020">
+    
+    <summary class="year-summary">
+      <div class="year-summary-head">
+        <span class="year-num">2020</span>
+        <div class="year-summary-meta">
+          <span class="year-density">5 voices</span>
+          <span class="year-note">the quietest year</span>
+        </div>
+        <span class="accordion-chevron" aria-hidden="true">+</span>
+      </div>
+      <div class="year-fingerprint">
+        <div class="fp-density">
+          <span class="fp-label">Months</span>
+          <div class="density-strip"><span class="density-cell empty" title="Jan 2020 · no voices"></span><span class="density-cell filled" style="--h:10px" title="Feb 2020 · 1 voice"></span><span class="density-cell filled" style="--h:10px" title="Mar 2020 · 1 voice"></span><span class="density-cell filled" style="--h:10px" title="Apr 2020 · 1 voice"></span><span class="density-cell filled" style="--h:18px" title="May 2020 · 2 voices"></span><span class="density-cell empty" title="Jun 2020 · no voices"></span><span class="density-cell empty" title="Jul 2020 · no voices"></span><span class="density-cell empty" title="Aug 2020 · no voices"></span><span class="density-cell empty" title="Sep 2020 · no voices"></span><span class="density-cell empty" title="Oct 2020 · no voices"></span><span class="density-cell empty" title="Nov 2020 · no voices"></span><span class="density-cell empty" title="Dec 2020 · no voices"></span></div>
+        </div>
+        <div class="fp-row"><span class="fp-label">Anchors</span><span class="fp-value fp-names">ckau54 · MJ</span></div>
+        <div class="fp-row"><span class="fp-label">New here</span><span class="fp-value"><span class="domain-chip new">humanitarian</span></span></div>
+        <div class="fp-row"><span class="fp-label">Continuing</span><span class="fp-value"><span class="domain-chip">mama cloth</span></span></div>
+        
+      <div class="fp-signature">
+        <p class="sig-text">I plan to use it along with PUL fabric to make reusable menstrual pads to put in shoeboxes for Operation Christmas Child.</p>
+        <p class="sig-attr">— ckau54, May 4</p>
+      </div>
+      </div>
+    </summary>
+    <div class="year-body">
+      <div class="filter-year-label" data-year="2020">2020</div>
+      
+    <article class="voice anchor" id="voice-ckau54-2020-05-04" data-name="ckau54" data-domains="pad humanitarian">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">ckau54</span>
+        
+        <span class="anchor-date">May 4, 2020</span>
+      </header>
+      <div class="anchor-title">Would buy again</div>
+      <div class="anchor-body">This fabric is exactly as described. I plan to use it along with PUL fabric to make reusable menstrual pads to put in shoeboxes for Operation Christmas Child. I would buy from this seller again.</div>
+    </article>
+    <article class="voice anchor" id="voice-mj-2020-05-22" data-name="MJ" data-domains="general">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">MJ</span>
+        
+        <span class="anchor-date">May 22, 2020</span>
+      </header>
+      <div class="anchor-title">You ROCK!</div>
+      <div class="anchor-body">Thee fastest shipping I have ever had! (I am 64 years old) Packaged wonderful exactly what I need. I am a happy camper! Thank you for tagging the fabric with the name of fabric.</div>
+    </article>
+      <div class="witness-band">
+    <article class="voice witness" id="voice-tim-2020-02-05" data-name="Tim" data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name">Tim</span>
+        
+        <span class="witness-date">Feb 5, 2020</span>
+      </header>
+      <div class="witness-excerpt has-body">Excellent!</div>
+      <div class="witness-body">Excellent! Used as a core to some reusable towels and they perform wonderfully.</div>
+    </article>
+    <article class="voice witness" id="voice-yaderin-2020-03-08" data-name="Yaderin" data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name">Yaderin</span>
+        <span class="plumb-marker mini" data-name="Yaderin">2/2</span>
+        <span class="witness-date">Mar 8, 2020</span>
+      </header>
+      <div class="witness-excerpt has-body">Love this shop</div>
+      <div class="witness-body">Love this shop. Been buying zorb from them for a while now. I use it for my momma cloth. Completely recommend.</div>
+    </article>
+    <article class="voice witness" id="voice-peggy-2020-04-25" data-name="Peggy" data-domains="pad">
+      <header class="witness-head">
+        <span class="witness-name">Peggy</span>
+        
+        <span class="witness-date">Apr 25, 2020</span>
+      </header>
+      <div class="witness-excerpt has-body">This stuff is great</div>
+      <div class="witness-body">This stuff is great - easy to cut too. Making reusable pads and so far, they work really well. Very absorbent.</div>
+    </article></div>
+      
+    </div>
+  </details>
+
+  <details class="year-section" id="year-2021" data-year="2021">
+    
+    <summary class="year-summary">
+      <div class="year-summary-head">
+        <span class="year-num">2021</span>
+        <div class="year-summary-meta">
+          <span class="year-density">17 voices</span>
+          <span class="year-note">the voice burst</span>
+        </div>
+        <span class="accordion-chevron" aria-hidden="true">+</span>
+      </div>
+      <div class="year-fingerprint">
+        <div class="fp-density">
+          <span class="fp-label">Months</span>
+          <div class="density-strip"><span class="density-cell empty" title="Jan 2021 · no voices"></span><span class="density-cell empty" title="Feb 2021 · no voices"></span><span class="density-cell empty" title="Mar 2021 · no voices"></span><span class="density-cell filled" style="--h:10px" title="Apr 2021 · 2 voices"></span><span class="density-cell filled" style="--h:14px" title="May 2021 · 3 voices"></span><span class="density-cell filled" style="--h:6px" title="Jun 2021 · 1 voice"></span><span class="density-cell filled" style="--h:18px" title="Jul 2021 · 4 voices"></span><span class="density-cell filled" style="--h:10px" title="Aug 2021 · 2 voices"></span><span class="density-cell filled" style="--h:6px" title="Sep 2021 · 1 voice"></span><span class="density-cell filled" style="--h:6px" title="Oct 2021 · 1 voice"></span><span class="density-cell empty" title="Nov 2021 · no voices"></span><span class="density-cell filled" style="--h:14px" title="Dec 2021 · 3 voices"></span></div>
+        </div>
+        <div class="fp-row"><span class="fp-label">Anchors</span><span class="fp-value fp-names">dollparts · Katherine · Terese · Laura Guevara · Gail · Nancy · Renee Smith · Janelle Bennette-Wharton</span></div>
+        
+        <div class="fp-row"><span class="fp-label">Continuing</span><span class="fp-value"><span class="domain-chip">cloth diaper</span> <span class="domain-chip">mama cloth</span> <span class="domain-chip">pet-cage</span> <span class="domain-chip">humanitarian</span> <span class="domain-chip">infant care</span> <span class="domain-chip">household</span></span></div>
+        
+      <div class="fp-signature">
+        <p class="sig-text">I owe my business success to this Zorb fabric.</p>
+        <p class="sig-attr">— Laura Guevara, Jul 20</p>
+      </div>
+      </div>
+    </summary>
+    <div class="year-body">
+      <div class="filter-year-label" data-year="2021">2021</div>
+      
+    <article class="voice anchor" id="voice-dollparts-2021-04-28" data-name="dollparts" data-domains="pad pet-cage">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">dollparts</span>
+        
+        <span class="anchor-date">Apr 28, 2021</span>
+      </header>
+      <div class="anchor-title">Perfect product</div>
+      <div class="anchor-body">This is perfect! I wanted to make fabric liners for my guinea pigs but wanted the middle layer to use something more absorbent than an old towel or a u-haul furniture pad. Plus I love that this fabric has no shrinkage.</div>
+    </article>
+    <article class="voice anchor" id="voice-katherine-2021-05-26" data-name="Katherine" data-domains="diaper">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Katherine</span>
+        <span class="plumb-marker" data-name="Katherine" title="One of 2 appearances by this maker">1 of 2</span>
+        <span class="anchor-date">May 26, 2021</span>
+      </header>
+      <div class="anchor-title">Happy Zorb</div>
+      <div class="anchor-body">Very happy to see Wazoodle Zorb on Etsy! I use the Zorb 3D Stay Dry Dimple fabric to sandwich Zorb original when making fitted cloth diapers and inserts. Communication with Wazoodle is easy. The owners are great about answering questions.</div>
+    </article>
+    <article class="voice anchor" id="voice-terese-2021-06-28" data-name="Terese" data-domains="general">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Terese</span>
+        
+        <span class="anchor-date">Jun 28, 2021</span>
+      </header>
+      <div class="anchor-title">Love Zorb!</div>
+      <div class="anchor-body">I own my own small business and I use Zorb almost exclusively for my products. It&#x27;s the absolute best for absorption! I have tried everything out there and Zorb is the winner! I can&#x27;t say enough wonderful things about Zorb or Wazoodle, simply the best!</div>
+    </article>
+    <article class="voice anchor" id="voice-laura-guevara-2021-07-20" data-name="Laura Guevara" data-domains="pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Laura Guevara</span>
+        
+        <span class="anchor-date">Jul 20, 2021</span>
+      </header>
+      <div class="anchor-title">Great Fabric!</div>
+      <div class="anchor-body">I use this fabric as the main core for maxipads for my cloth maxipad business (Designer Pads by LXG), it is a great quality fabric at a great price! I owe my business success to this Zorb fabric. It&#x27;s super absorbent and I like that I can do multiple layers for extra absorbency, my clients love the pads absorbency. I highly recommend!</div>
+    </article>
+    <article class="voice anchor" id="voice-gail-2021-07-20" data-name="Gail" data-domains="pad humanitarian">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Gail</span>
+        
+        <span class="anchor-date">Jul 20, 2021</span>
+      </header>
+      <div class="anchor-title">Great recommendation for reusable menstrual pads for OCC girls age 10-14</div>
+      <div class="anchor-body">We are making reusable menstrual pads this year for Operation Christmas Child shoeboxes for girls ages 10-14. I found Amy Nix&#x27;s youtube tutorials and she uses Zorb in her pads (and recommends Wazoodle). I sandwiched a layer of Zorb between two pieces of flannel and stitched the layers together to make the core. I did run a scrap under running water and it saturated VERY quickly. I squeezed out the water and left it to dry. It was dry in a couple of hours.</div>
+    </article>
+    <article class="voice anchor" id="voice-nancy-2021-08-06" data-name="Nancy" data-domains="household">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Nancy</span>
+        <span class="plumb-marker" data-name="Nancy" title="One of 2 appearances by this maker">2 of 2</span>
+        <span class="anchor-date">Aug 6, 2021</span>
+      </header>
+      <div class="anchor-title">Works wonderfully to control the rashes that develop under the tummy fold</div>
+      <div class="anchor-body">Zorb Original Silver Fabric is a wonderful product. I cut the fabric into 3 inch strips, and use the strips in my belly pouch skin folds, to reduce inflammation caused by friction, humidity, and sweat. Zorb Silver fabric relieves my itchy, burning skin folds. I&#x27;ve tried other moisture-wicking fabric with antimicrobial silver, but these small packets are very expensive. I use Zorb Silver fabric because it is less expensive, and helps me feel better - no itching and no odor.</div>
+    </article>
+    <article class="voice anchor" id="voice-renee-smith-2021-08-26" data-name="Renee Smith" data-domains="general">
+      <div class="depth-arc"><span class="depth-line"></span><span class="depth-text">since 2018 · 3 years lived before language</span></div>
+      <header class="anchor-head">
+        <span class="anchor-name">Renee Smith</span>
+        
+        <span class="anchor-date">Aug 26, 2021</span>
+      </header>
+      <div class="anchor-title">Quality Product &amp; Fast Shipping</div>
+      <div class="anchor-body">But it&#x27;s more than quality and shipping. This is a small, family owned business and they do their absolute best to do things in excellence. I love Wazoodle. I&#x27;ve been a customer for 3 years.</div>
+    </article>
+    <article class="voice anchor" id="voice-janelle-bennette-wharton-2021-09-21" data-name="Janelle Bennette-Wharton" data-domains="general">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Janelle Bennette-Wharton</span>
+        
+        <span class="anchor-date">Sep 21, 2021</span>
+      </header>
+      <div class="anchor-title">it worked well</div>
+      <div class="anchor-body">I followed the instructions and this material though quite thin really does absorb a lot, it held up in the wash really well also.</div>
+    </article>
+    <article class="voice anchor" id="voice-june-goshi-2021-12-16" data-name="June Goshi" data-domains="pad humanitarian">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">June Goshi</span>
+        
+        <span class="anchor-date">Dec 16, 2021</span>
+      </header>
+      <div class="anchor-title">Great absorbent material</div>
+      <div class="anchor-body">Our church contributes to Samaritan&#x27;s Purse, Operation Christmas Child Program. We sew reusable sanitary pads for teenagers in third world countries. We use it with four layers of flannel on the inside and an outer shell of flannel. The zorb material is great for its absorbent quality.</div>
+    </article>
+    <article class="voice anchor" id="voice-danielle-koch-2021-12-26" data-name="Danielle Koch" data-domains="pet-cage">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Danielle Koch</span>
+        
+        <span class="anchor-date">Dec 26, 2021</span>
+      </header>
+      <div class="anchor-title">Fabulous for making guinea pig fleece liners</div>
+      <div class="anchor-body">This Zorb fabric was super easy to cut and use to make the absorbent inner layer for guinea pig cage liners! Thank you very much!</div>
+    </article>
+      <div class="witness-band">
+    <article class="voice witness" id="voice-amy-2021-04-30" data-name="Amy" data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name">Amy</span>
+        
+        <span class="witness-date">Apr 30, 2021</span>
+      </header>
+      <div class="witness-excerpt has-body">Easy to Use</div>
+      <div class="witness-body">Love the Zorb original fabric. it was sooo absorbent. I loved how easy it was to use.</div>
+    </article>
+    <article class="voice witness" id="voice-nicole-2021-05-12" data-name="Nicole" data-domains="pad">
+      <header class="witness-head">
+        <span class="witness-name">Nicole</span>
+        
+        <span class="witness-date">May 12, 2021</span>
+      </header>
+      <div class="witness-excerpt has-body">Fast Shipping</div>
+      <div class="witness-body">Perfect for making period underwear. Shipping was ridiculously fast, I&#x27;m very impressed.</div>
+    </article>
+    <article class="voice witness" id="voice-amanda-f-2021-07-11" data-name="Amanda F" data-domains="pet-cage">
+      <header class="witness-head">
+        <span class="witness-name">Amanda F</span>
+        
+        <span class="witness-date">Jul 11, 2021</span>
+      </header>
+      <div class="witness-excerpt has-body">Wonderful!</div>
+      <div class="witness-body">I love zorb fabric! I use it to make guinea pig bedding. It&#x27;s so absorbent &amp; works wonders!</div>
+    </article>
+    <article class="voice witness" id="voice-vivian-zornek-katz-2021-07-15" data-name="Vivian Zornek-Katz" data-domains="pad infant">
+      <header class="witness-head">
+        <span class="witness-name">Vivian Zornek-Katz</span>
+        
+        <span class="witness-date">Jul 15, 2021</span>
+      </header>
+      <div class="witness-excerpt has-body">Just what the pattern called for</div>
+      <div class="witness-body">I bought this to make nursing pads, which was recommended by the pattern maker. It was exactly what was needed.</div>
+    </article>
+    <article class="voice witness" id="voice-wazoodle-fabrics-2021-10-19" data-name="Wazoodle Fabrics" data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name">Wazoodle Fabrics</span>
+        
+        <span class="witness-date">Oct 19, 2021</span>
+      </header>
+      <div class="witness-excerpt has-body">Good stuff!</div>
+      <div class="witness-body">So far so good. It&#x27;s easy to work with and easy enough to sew. Seems to soak up a lot of liquid!</div>
+    </article>
+    <article class="voice witness" id="voice-roxanne-schiffbauer-sposato-2021-12-30" data-name="Roxanne Schiffbauer-Sposato" data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name">Roxanne Schiffbauer-Sposato</span>
+        
+        <span class="witness-date">Dec 30, 2021</span>
+      </header>
+      <div class="witness-excerpt has-body">Zorb</div>
+      <div class="witness-body">This fabric is awesome! Absolutely the best absorption of any other fabric I&#x27;ve used.</div>
+    </article></div>
+      <div class="brief-band"><span class="voice brief" id="voice-theresa-2021-05-21" data-name="Theresa" data-domains="pad" title="Theresa · May 21, 2021 · Fast"><span class="brief-name">Theresa</span><span class="brief-text">Fast</span></span></div>
+    </div>
+  </details>
+
+  <details class="year-section" id="year-2022" data-year="2022">
+    
+    <summary class="year-summary">
+      <div class="year-summary-head">
+        <span class="year-num">2022</span>
+        <div class="year-summary-meta">
+          <span class="year-density">18 voices</span>
+          <span class="year-note">Pamela writes from inside her sixth year of sewing</span>
+        </div>
+        <span class="accordion-chevron" aria-hidden="true">+</span>
+      </div>
+      <div class="year-fingerprint">
+        <div class="fp-density">
+          <span class="fp-label">Months</span>
+          <div class="density-strip"><span class="density-cell empty" title="Jan 2022 · no voices"></span><span class="density-cell empty" title="Feb 2022 · no voices"></span><span class="density-cell filled" style="--h:11px" title="Mar 2022 · 3 voices"></span><span class="density-cell filled" style="--h:14px" title="Apr 2022 · 4 voices"></span><span class="density-cell filled" style="--h:18px" title="May 2022 · 5 voices"></span><span class="density-cell filled" style="--h:5px" title="Jun 2022 · 1 voice"></span><span class="density-cell filled" style="--h:8px" title="Jul 2022 · 2 voices"></span><span class="density-cell filled" style="--h:5px" title="Aug 2022 · 1 voice"></span><span class="density-cell empty" title="Sep 2022 · no voices"></span><span class="density-cell filled" style="--h:5px" title="Oct 2022 · 1 voice"></span><span class="density-cell filled" style="--h:5px" title="Nov 2022 · 1 voice"></span><span class="density-cell empty" title="Dec 2022 · no voices"></span></div>
+        </div>
+        <div class="fp-row"><span class="fp-label">Anchors</span><span class="fp-value fp-names">John Mathews · Michelle Harkins · Nancy Brooks · John Robert Hall · Patricia Council · Katherine · Michele Eskew · Pamela Killion</span></div>
+        <div class="fp-row"><span class="fp-label">New here</span><span class="fp-value"><span class="domain-chip new">hydroponic</span></span></div>
+        <div class="fp-row"><span class="fp-label">Continuing</span><span class="fp-value"><span class="domain-chip">cloth diaper</span> <span class="domain-chip">mama cloth</span> <span class="domain-chip">pet-cage</span> <span class="domain-chip">dog</span> <span class="domain-chip">incontinence</span> <span class="domain-chip">humanitarian</span> <span class="domain-chip">infant care</span></span></div>
+        
+      <div class="fp-signature">
+        <p class="sig-text">Out of 3 yards, I got 42 inserts.</p>
+        <p class="sig-attr">— Michelle Harkins, Mar 20</p>
+      </div>
+      </div>
+    </summary>
+    <div class="year-body">
+      <div class="filter-year-label" data-year="2022">2022</div>
+      
+    <article class="voice anchor" id="voice-john-mathews-2022-03-09" data-name="John Mathews" data-domains="pad pet-cage">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">John Mathews</span>
+        
+        <span class="anchor-date">Mar 9, 2022</span>
+      </header>
+      <div class="anchor-title">Good product for a customer alternative</div>
+      <div class="anchor-body">We make to order fleece cage liners for small pets, mostly guinea pigs, and pet pads for crates and such with an absorbent middle layer. Generally we use a u-haul furniture pad which consist of recycled denim for the absorbent layer, but many of our customers know of, have used and would like ZORB to be used in the cage liners and pads that their pets use. My own test, for the applications that we use both products for, prove the ZORB to be a superior product in several regards, rate of absorption and holding of liquid.</div>
+    </article>
+    <article class="voice anchor" id="voice-michelle-harkins-2022-03-20" data-name="Michelle Harkins" data-domains="diaper pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Michelle Harkins</span>
+        
+        <span class="anchor-date">Mar 20, 2022</span>
+      </header>
+      <div class="anchor-title">Amazing fabric</div>
+      <div class="anchor-body">I bought this to make inserts for my son&#x27;s cloth diapers. Out of 3 yards, I got 42 inserts. And I plan on buying more after time for more inserts and possibly cloth pads.</div>
+    </article>
+    <article class="voice anchor" id="voice-nancy-brooks-2022-04-01" data-name="Nancy Brooks" data-domains="pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Nancy Brooks</span>
+        
+        <span class="anchor-date">Apr 1, 2022</span>
+      </header>
+      <div class="anchor-title">Zorb Original</div>
+      <div class="anchor-body">I&#x27;m learning to sew cloth pads and this is now my preferred core fabric. Easy to work with and cut and it sews well to my flannel core liners.</div>
+    </article>
+    <article class="voice anchor" id="voice-john-robert-hall-2022-04-19" data-name="John Robert Hall" data-domains="hydroponic">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">John Robert Hall</span>
+        <span class="plumb-marker" data-name="John Robert Hall" title="One of 2 appearances by this maker">1 of 2</span>
+        <span class="anchor-date">Apr 19, 2022</span>
+      </header>
+      <div class="anchor-title">Works great in a greenhouse</div>
+      <div class="anchor-body">I was having difficulty finding a fabric I could put in the bottom of a hydroponic cup to soak water up to the plant. Any fabric just won&#x27;t do. Zorb though wicked water right up to the plant. The roots grow down through the fabric well and the plant gets plenty of nutrients. We would cut it into about 7 inch long strips, tie a knot on one end and suspend it within the 960 spot hydroponic system. Works great!</div>
+    </article>
+    <article class="voice anchor" id="voice-john-robert-hall-2022-05-08" data-name="John Robert Hall" data-domains="hydroponic">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">John Robert Hall</span>
+        <span class="plumb-marker" data-name="John Robert Hall" title="One of 2 appearances by this maker">2 of 2</span>
+        <span class="anchor-date">May 8, 2022</span>
+      </header>
+      <div class="anchor-title">Works great in a greenhouse</div>
+      <div class="anchor-body">We just bought some more yardage of ZORB, (not much until the school buys it), to use in the hydroponic system in the high school greenhouse. It is absolutely perfect for wicking fertilized moisture to the base plant. The basil is 8 inches tall on the 2nd batch and healthy. Thanks you guys for a great product that works well in a greenhouse experiment.</div>
+    </article>
+    <article class="voice anchor" id="voice-patricia-council-2022-05-23" data-name="Patricia Council" data-domains="diaper pad dog">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Patricia Council</span>
+        
+        <span class="anchor-date">May 23, 2022</span>
+      </header>
+      <div class="anchor-title">My must have product</div>
+      <div class="anchor-body">I make dog diapers and absorbent pads and zorb is my must have fabric. It&#x27;s incredibly absorbent and works amazingly well for all my products.</div>
+    </article>
+    <article class="voice anchor" id="voice-katherine-2022-07-21" data-name="Katherine" data-domains="general">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Katherine</span>
+        <span class="plumb-marker" data-name="Katherine" title="One of 2 appearances by this maker">2 of 2</span>
+        <span class="anchor-date">Jul 21, 2022</span>
+      </header>
+      <div class="anchor-title">Almost disturbingly absorbent</div>
+      <div class="anchor-body">It&#x27;s very absorbent. Like, almost disturbingly so. It arrived quickly and came with a swatch of a zorb/PUL sample, which is like some sort of witchcraft. Will buy again.</div>
+    </article>
+    <article class="voice anchor" id="voice-michele-eskew-2022-08-25" data-name="Michele Eskew" data-domains="incontinence">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Michele Eskew</span>
+        
+        <span class="anchor-date">Aug 25, 2022</span>
+      </header>
+      <div class="anchor-title">Great fabric, great value</div>
+      <div class="anchor-body">I purchased this to make some incontinence underwear. I used a single layer for light needs and find it to be very comfortable.</div>
+    </article>
+    <article class="voice anchor" id="voice-pamela-killion-2022-10-25" data-name="Pamela Killion" data-domains="pad humanitarian">
+      <div class="depth-arc"><span class="depth-line"></span><span class="depth-text">since 2016 · 6 years lived before language</span></div>
+      <header class="anchor-head">
+        <span class="anchor-name">Pamela Killion</span>
+        
+        <span class="anchor-date">Oct 25, 2022</span>
+      </header>
+      <div class="anchor-title">Happy long time customer</div>
+      <div class="anchor-body">I have used this zorb original fabric to sew washable menstrual pads for rural African girls since 2016. It&#x27;s easy to work with and creates a soft high quality pad that is comfortable and wears well. Best of all, this product does not need pre-washed!</div>
+    </article>
+    <article class="voice anchor" id="voice-anne-2022-11-06" data-name="Anne" data-domains="incontinence">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Anne</span>
+        
+        <span class="anchor-date">Nov 6, 2022</span>
+      </header>
+      <div class="anchor-title">Perfect for liners</div>
+      <div class="anchor-body">I bought a brand of underwear that are absorbent for women with stress incontinence. One pair cost twice what 2 yards of Zorb costs. So I decided to buy material to see if I could make my own liners. Zorb is perfect. I have been telling others they need to buy this fabric and save money too.</div>
+    </article>
+      <div class="witness-band">
+    <article class="voice witness" id="voice-lisa-english-2022-03-17" data-name="Lisa English" data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name">Lisa English</span>
+        
+        <span class="witness-date">Mar 17, 2022</span>
+      </header>
+      <div class="witness-excerpt has-body">First time user</div>
+      <div class="witness-body">I am beyond excited to have found Zorb! It&#x27;s a game changer in my projects.</div>
+    </article>
+    <article class="voice witness" id="voice-lee-hinterberger-2022-04-16" data-name="Lee Hinterberger" data-domains="pet-cage">
+      <header class="witness-head">
+        <span class="witness-name">Lee Hinterberger</span>
+        
+        <span class="witness-date">Apr 16, 2022</span>
+      </header>
+      <div class="witness-excerpt has-body">Works perfect</div>
+      <div class="witness-body">I use this in my guinea pigs cage. Easy to work with, very absorbent and yet lightweight.</div>
+    </article>
+    <article class="voice witness" id="voice-laura-prince-2022-04-29" data-name="Laura Prince" data-domains="diaper infant">
+      <header class="witness-head">
+        <span class="witness-name">Laura Prince</span>
+        
+        <span class="witness-date">Apr 29, 2022</span>
+      </header>
+      <div class="witness-excerpt has-body">Washed great</div>
+      <div class="witness-body">I bought this to make burp diapers for new born gifts. Once sewn they washed up great and stayed very flat.</div>
+    </article>
+    <article class="voice witness" id="voice-nancy-drake-2022-05-08" data-name="Nancy Drake" data-domains="pad">
+      <header class="witness-head">
+        <span class="witness-name">Nancy Drake</span>
+        
+        <span class="witness-date">May 8, 2022</span>
+      </header>
+      <div class="witness-excerpt has-body">Great absorbency</div>
+      <div class="witness-body">I love using a double layer of zorb in my pads! Holds up for a very long time!</div>
+    </article>
+    <article class="voice witness" id="voice-patsy-semenyna-2022-05-11" data-name="Patsy Semenyna" data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name">Patsy Semenyna</span>
+        
+        <span class="witness-date">May 11, 2022</span>
+      </header>
+      <div class="witness-excerpt has-body">Super absorbent</div>
+      <div class="witness-body">I tested to see how much water it would absorb. It was amazing. It&#x27;s easy to sew as well.</div>
+    </article>
+    <article class="voice witness" id="voice-heidi-2022-07-09" data-name="Heidi" data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name">Heidi</span>
+        
+        <span class="witness-date">Jul 9, 2022</span>
+      </header>
+      <div class="witness-excerpt has-body">Zorb purchase</div>
+      <div class="witness-body">First time buying and using Zorb, absolutely love it! I am making reusable panty liners and it&#x27;s perfect!</div>
+    </article></div>
+      <div class="brief-band"><span class="voice brief" id="voice-sandy-2022-05-05" data-name="Sandy" data-domains="dog" title="Sandy · May 5, 2022 · First time user"><span class="brief-name">Sandy</span><span class="brief-text">First time user</span></span><span class="voice brief" id="voice-patricia-louque-2022-06-25" data-name="Patricia Louque" data-domains="general" title="Patricia Louque · Jun 25, 2022 · Soft yet sturdy"><span class="brief-name">Patricia Louque</span><span class="brief-text">Soft yet sturdy</span></span></div>
+    </div>
+  </details>
+
+  <details class="year-section" id="year-2023" data-year="2023">
+    
+    <summary class="year-summary">
+      <div class="year-summary-head">
+        <span class="year-num">2023</span>
+        <div class="year-summary-meta">
+          <span class="year-density">11 voices</span>
+          <span class="year-note">the retrospectives gather</span>
+        </div>
+        <span class="accordion-chevron" aria-hidden="true">+</span>
+      </div>
+      <div class="year-fingerprint">
+        <div class="fp-density">
+          <span class="fp-label">Months</span>
+          <div class="density-strip"><span class="density-cell filled" style="--h:10px" title="Jan 2023 · 1 voice"></span><span class="density-cell empty" title="Feb 2023 · no voices"></span><span class="density-cell empty" title="Mar 2023 · no voices"></span><span class="density-cell filled" style="--h:18px" title="Apr 2023 · 2 voices"></span><span class="density-cell filled" style="--h:18px" title="May 2023 · 2 voices"></span><span class="density-cell filled" style="--h:18px" title="Jun 2023 · 2 voices"></span><span class="density-cell empty" title="Jul 2023 · no voices"></span><span class="density-cell empty" title="Aug 2023 · no voices"></span><span class="density-cell filled" style="--h:18px" title="Sep 2023 · 2 voices"></span><span class="density-cell filled" style="--h:10px" title="Oct 2023 · 1 voice"></span><span class="density-cell empty" title="Nov 2023 · no voices"></span><span class="density-cell filled" style="--h:10px" title="Dec 2023 · 1 voice"></span></div>
+        </div>
+        <div class="fp-row"><span class="fp-label">Anchors</span><span class="fp-value fp-names">Rita T · Lisa Griffith · Discovery Fabrics · Eunice · Kathryn · Wheek Dreams Designs · Cynthia S. · Diana Graham</span></div>
+        
+        <div class="fp-row"><span class="fp-label">Continuing</span><span class="fp-value"><span class="domain-chip">cloth diaper</span> <span class="domain-chip">mama cloth</span> <span class="domain-chip">pet-cage</span> <span class="domain-chip">humanitarian</span></span></div>
+        
+      <div class="fp-signature">
+        <p class="sig-text">I&#x27;ve been using this for 4 years now for the pads I make and put into Operation Christmas Child boxes.</p>
+        <p class="sig-attr">— Cynthia S., Sep 5</p>
+      </div>
+      </div>
+    </summary>
+    <div class="year-body">
+      <div class="filter-year-label" data-year="2023">2023</div>
+      
+    <article class="voice anchor" id="voice-rita-t-2023-01-20" data-name="Rita T" data-domains="pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Rita T</span>
+        
+        <span class="anchor-date">Jan 20, 2023</span>
+      </header>
+      <div class="anchor-title">Served the purpose!</div>
+      <div class="anchor-body">My daughter has windows that are not properly sealed in her apartment. In the cold weather, moisture comes in and settles on the sills. I made pads for her to absorb the water (used double layer of zorb inside flannel). The zorb was easy to sew with and the pads seem to be helping a lot.</div>
+    </article>
+    <article class="voice anchor" id="voice-lisa-griffith-2023-04-03" data-name="Lisa Griffith" data-domains="pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Lisa Griffith</span>
+        
+        <span class="anchor-date">Apr 3, 2023</span>
+      </header>
+      
+      <div class="anchor-body">Used this as the inner absorbent layer for fabric reusable pads after seeing it mentioned in many tutorials. Loved how easy it was to work with. No difficulty sewing, easy to cut, overall a lovely product.</div>
+    </article>
+    <article class="voice anchor" id="voice-discovery-fabrics-2023-05-18" data-name="Discovery Fabrics" data-domains="general">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Discovery Fabrics</span>
+        
+        <span class="anchor-date">May 18, 2023</span>
+      </header>
+      <div class="anchor-title">Works great</div>
+      <div class="anchor-body">Discovery Fabrics has been using Zorb for several years. It is highly absorbent and easy to use! We offer a panty pack for home sewists to make their own panties, and we include Zorb and PUL in the panty pack as an add-on. Very popular!</div>
+    </article>
+    <article class="voice anchor" id="voice-eunice-2023-05-29" data-name="Eunice" data-domains="pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Eunice</span>
+        
+        <span class="anchor-date">May 29, 2023</span>
+      </header>
+      <div class="anchor-title">Zorb works very well</div>
+      <div class="anchor-body">After first time wet it activates and started absorbing faster. It is a good product for the women&#x27;s days pads I made from fabric, everyone that uses it have like it.</div>
+    </article>
+    <article class="voice anchor" id="voice-kathryn-2023-06-17" data-name="Kathryn" data-domains="diaper">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Kathryn</span>
+        
+        <span class="anchor-date">Jun 17, 2023</span>
+      </header>
+      <div class="anchor-title">Easy to sew</div>
+      <div class="anchor-body">I&#x27;m making cloth diapers and have found this combination to work for me: I quilt a strip of this Zorb to the inner liner of the diaper. I make a soaker of one layer of W-226 &amp; one layer of W-227. This kept my 17 year old niece dry and leak free for 4 hours.</div>
+    </article>
+    <article class="voice anchor" id="voice-wheek-dreams-designs-2023-06-21" data-name="Wheek Dreams Designs" data-domains="pet-cage">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Wheek Dreams Designs</span>
+        
+        <span class="anchor-date">Jun 21, 2023</span>
+      </header>
+      <div class="anchor-title">Love the Original Zorb!</div>
+      <div class="anchor-body">I make fleece liner bedding for small pet cages. I originally was using Uhaul layers, which are a hassle to work with sometimes depending on the size of liner I am making, plus, when I clean my Guinea Pig cage (5 Guinea Pigs), the uhaul core is always wet. I decided to make a liner with the Zorb for my Guinea Pigs to test it out. To my surprise there was only very minor dampness in the areas they lounge around the most. Everywhere else, the liner was dry! The uhaul was always wet across 80% of the liner when it was time to swap it. So the fact the zorb fleece liner dries easier, which in itself is wonderful, it is also not as heavy to move around when swapping with a fresh liner. I made a small, very amateur skilled video of the absorbing differences between Zorb and Uhaul to post on my online listings.</div>
+    </article>
+    <article class="voice anchor" id="voice-cynthia-s-2023-09-05" data-name="Cynthia S." data-domains="pad humanitarian">
+      <div class="depth-arc"><span class="depth-line"></span><span class="depth-text">since 2019 · 4 years lived before language</span></div>
+      <header class="anchor-head">
+        <span class="anchor-name">Cynthia S.</span>
+        
+        <span class="anchor-date">Sep 5, 2023</span>
+      </header>
+      <div class="anchor-title">Excellent Fabric</div>
+      <div class="anchor-body">Zorb Original is perfect to use as the liner for homemade menstrual pads. I&#x27;ve been using this for 4 years now for the pads I make and put into Operation Christmas Child boxes. It makes beautiful pads. I&#x27;m so glad I found this company&#x27;s website.</div>
+    </article>
+    <article class="voice anchor" id="voice-diana-graham-2023-09-23" data-name="Diana Graham" data-domains="general">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Diana Graham</span>
+        
+        <span class="anchor-date">Sep 23, 2023</span>
+      </header>
+      <div class="anchor-title">Great product</div>
+      <div class="anchor-body">Easy to order, quick to ship and a perfectly packaged product. Love the Zorb I ordered and so pleased with Wazoodle&#x27;s Fabric.</div>
+    </article>
+      <div class="witness-band">
+    <article class="voice witness" id="voice-anonymous-2023-04-07" data-name="Anonymous" data-domains="pad">
+      <header class="witness-head">
+        <span class="witness-name anonymous">Anonymous</span>
+        
+        <span class="witness-date">Apr 7, 2023</span>
+      </header>
+      <div class="witness-excerpt has-body">Hammocks for wild animal rescue</div>
+      <div class="witness-body">I purchased Zorb to make hammocks and cage pads for a wild small animal rescue. I found the original zorb to be thinner than the extra absorbent so I added an extra layer of zorb about an inch smaller. Made sewing my seams easier and provided an ample layer of absorption. Animal babies approved.</div>
+    </article>
+    <article class="voice witness" id="voice-catherine-straka-2023-12-01" data-name="catherine straka" data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name">catherine straka</span>
+        
+        <span class="witness-date">Dec 1, 2023</span>
+      </header>
+      <div class="witness-excerpt has-body">zorb</div>
+      <div class="witness-body">I really like this product. Buying it here has been the best price and service is quick and timely.</div>
+    </article></div>
+      <div class="brief-band"><span class="voice brief" id="voice-madelyn-berry-2023-10-18" data-name="madelyn berry" data-domains="general" title="madelyn berry · Oct 18, 2023 · Planning"><span class="brief-name">madelyn berry</span><span class="brief-text">Planning</span></span></div>
+    </div>
+  </details>
+
+  <details class="year-section" id="year-2024" data-year="2024">
+    
+    <summary class="year-summary">
+      <div class="year-summary-head">
+        <span class="year-num">2024</span>
+        <div class="year-summary-meta">
+          <span class="year-density">8 voices</span>
+          <span class="year-note">Dianne Leach arrives — nine years in</span>
+        </div>
+        <span class="accordion-chevron" aria-hidden="true">+</span>
+      </div>
+      <div class="year-fingerprint">
+        <div class="fp-density">
+          <span class="fp-label">Months</span>
+          <div class="density-strip"><span class="density-cell filled" style="--h:12px" title="Jan 2024 · 2 voices"></span><span class="density-cell empty" title="Feb 2024 · no voices"></span><span class="density-cell filled" style="--h:18px" title="Mar 2024 · 3 voices"></span><span class="density-cell filled" style="--h:7px" title="Apr 2024 · 1 voice"></span><span class="density-cell empty" title="May 2024 · no voices"></span><span class="density-cell filled" style="--h:7px" title="Jun 2024 · 1 voice"></span><span class="density-cell empty" title="Jul 2024 · no voices"></span><span class="density-cell empty" title="Aug 2024 · no voices"></span><span class="density-cell empty" title="Sep 2024 · no voices"></span><span class="density-cell filled" style="--h:7px" title="Oct 2024 · 1 voice"></span><span class="density-cell empty" title="Nov 2024 · no voices"></span><span class="density-cell empty" title="Dec 2024 · no voices"></span></div>
+        </div>
+        <div class="fp-row"><span class="fp-label">Anchors</span><span class="fp-value fp-names">JoAnn Straub · Laura P · Dianne Leach</span></div>
+        
+        <div class="fp-row"><span class="fp-label">Continuing</span><span class="fp-value"><span class="domain-chip">cloth diaper</span> <span class="domain-chip">mama cloth</span> <span class="domain-chip">humanitarian</span> <span class="domain-chip">infant care</span></span></div>
+        
+      <div class="fp-signature">
+        <p class="sig-text">Girls who have nothing personal to use for their monthly periods. Mud, straw, rags, anything they find.</p>
+        <p class="sig-attr">— Dianne Leach, Oct 10</p>
+      </div>
+      </div>
+    </summary>
+    <div class="year-body">
+      <div class="filter-year-label" data-year="2024">2024</div>
+      
+    <article class="voice anchor" id="voice-joann-straub-2024-03-14" data-name="JoAnn Straub" data-domains="general">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">JoAnn Straub</span>
+        
+        <span class="anchor-date">Mar 14, 2024</span>
+      </header>
+      <div class="anchor-title">Superior Product!</div>
+      <div class="anchor-body">Far superior than expected!! Soft, absorbent, awesome! Wasn&#x27;t sure what to expect. Ordered for a church project and it far exceeds my expectations.</div>
+    </article>
+    <article class="voice anchor" id="voice-laura-p-2024-04-01" data-name="Laura P" data-domains="diaper infant">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Laura P</span>
+        
+        <span class="anchor-date">Apr 1, 2024</span>
+      </header>
+      <div class="anchor-title">Great product</div>
+      <div class="anchor-body">I use this with flat diapers to make burp cloths for shower gifts. It sews easily and is very absorbent and soft. The price is very reasonable and it ships quickly.</div>
+    </article>
+    <article class="voice anchor" id="voice-dianne-leach-2024-10-10" data-name="Dianne Leach" data-domains="pad humanitarian">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Dianne Leach</span>
+        
+        <span class="anchor-date">Oct 10, 2024</span>
+      </header>
+      <div class="anchor-title">God inspired stitches - girl pads for Kenya</div>
+      <div class="anchor-body">This Zorb will be used for charity for Girls who have nothing personal to use for their monthly periods. They cannot go to school or if they do, product use is mud, straw, rags, anything they find. Our hearts are in this project and try to raise donations to be given to purchase this product. Thank you for having such an antibacterial wonderful product in bulk to do many pads. It takes a lot of work. 50 yards does 1000 pads. 3 each girl gives us 333 girls product.</div>
+    </article>
+      <div class="witness-band">
+    <article class="voice witness" id="voice-k-herbert-2024-01-26" data-name="K Herbert" data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name">K Herbert</span>
+        
+        <span class="witness-date">Jan 26, 2024</span>
+      </header>
+      <div class="witness-excerpt has-body">Original Zorb</div>
+      <div class="witness-body">This fabric, though thick, was still easy to cut with rotary cutter and to sew several layers. Love it!</div>
+    </article>
+    <article class="voice witness" id="voice-thomas-bielman-2024-03-08" data-name="thomas bielman" data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name">thomas bielman</span>
+        
+        <span class="witness-date">Mar 8, 2024</span>
+      </header>
+      <div class="witness-excerpt">this is my favorite zorb, easy to work with and does the job</div>
+      
+    </article>
+    <article class="voice witness" id="voice-beth-davis-2024-06-12" data-name="Beth Davis" data-domains="pad">
+      <header class="witness-head">
+        <span class="witness-name">Beth Davis</span>
+        
+        <span class="witness-date">Jun 12, 2024</span>
+      </header>
+      <div class="witness-excerpt has-body">Love this!</div>
+      <div class="witness-body">I use this to add additional absorbance in my re-usable pads and it works wonderfully!</div>
+    </article></div>
+      <div class="brief-band"><span class="voice brief" id="voice-kate-2024-01-02" data-name="Kate" data-domains="general" title="Kate · Jan 2, 2024 · Wonderfully absorbent!"><span class="brief-name">Kate</span><span class="brief-text">Wonderfully absorbent!</span></span><span class="voice brief" id="voice-sandra-crosmun-2024-03-06" data-name="Sandra Crosmun" data-domains="general" title="Sandra Crosmun · Mar 6, 2024 · Excellent Company"><span class="brief-name">Sandra Crosmun</span><span class="brief-text">Excellent Company</span></span></div>
+    </div>
+  </details>
+
+  <details class="year-section" id="year-2025" data-year="2025">
+    
+    <summary class="year-summary">
+      <div class="year-summary-head">
+        <span class="year-num">2025</span>
+        <div class="year-summary-meta">
+          <span class="year-density">13 voices</span>
+          <span class="year-note">the four-year proofs</span>
+        </div>
+        <span class="accordion-chevron" aria-hidden="true">+</span>
+      </div>
+      <div class="year-fingerprint">
+        <div class="fp-density">
+          <span class="fp-label">Months</span>
+          <div class="density-strip"><span class="density-cell filled" style="--h:6px" title="Jan 2025 · 1 voice"></span><span class="density-cell filled" style="--h:6px" title="Feb 2025 · 1 voice"></span><span class="density-cell empty" title="Mar 2025 · no voices"></span><span class="density-cell empty" title="Apr 2025 · no voices"></span><span class="density-cell empty" title="May 2025 · no voices"></span><span class="density-cell filled" style="--h:6px" title="Jun 2025 · 1 voice"></span><span class="density-cell filled" style="--h:6px" title="Jul 2025 · 1 voice"></span><span class="density-cell filled" style="--h:18px" title="Aug 2025 · 4 voices"></span><span class="density-cell filled" style="--h:6px" title="Sep 2025 · 1 voice"></span><span class="density-cell filled" style="--h:10px" title="Oct 2025 · 2 voices"></span><span class="density-cell filled" style="--h:10px" title="Nov 2025 · 2 voices"></span><span class="density-cell empty" title="Dec 2025 · no voices"></span></div>
+        </div>
+        <div class="fp-row"><span class="fp-label">Anchors</span><span class="fp-value fp-names">Kari · Piney · Megan · penda t. · Phyllis</span></div>
+        
+        <div class="fp-row"><span class="fp-label">Continuing</span><span class="fp-value"><span class="domain-chip">mama cloth</span> <span class="domain-chip">pet-cage</span> <span class="domain-chip">incontinence</span> <span class="domain-chip">humanitarian</span> <span class="domain-chip">infant care</span></span></div>
+        
+      <div class="fp-signature">
+        <p class="sig-text">4 years later the pads are going strong.</p>
+        <p class="sig-attr">— penda t., Aug 26</p>
+      </div>
+      </div>
+    </summary>
+    <div class="year-body">
+      <div class="filter-year-label" data-year="2025">2025</div>
+      
+    <article class="voice anchor" id="voice-kari-2025-01-23" data-name="Kari" data-domains="pet-cage">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Kari</span>
+        
+        <span class="anchor-date">Jan 23, 2025</span>
+      </header>
+      <div class="anchor-title">Works great for guinea pig blankets</div>
+      <div class="anchor-body">Piggies do NOT like pee feet. I made some cage/playpen liners with Zorb W-202. So far it seems to be doing its job in the playpen (made with fleece, Zorb, fleece) - no more wet pigs. I have yet to test the cage liner (made with fleece, zorb, waterproof ripstop). So far very happy with product.</div>
+    </article>
+    <article class="voice anchor" id="voice-piney-2025-02-23" data-name="Piney" data-domains="pad incontinence">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Piney</span>
+        
+        <span class="anchor-date">Feb 23, 2025</span>
+      </header>
+      <div class="anchor-title">9 out of 12 used Zorb</div>
+      <div class="anchor-body">I received my Zorb order yesterday. The thickness and the feel of the Zorb is better than I expected!! I purchased the Zorb on a recommendation to make some personal incontinence pads. Yes, I could use other padding as suggested to me, but when 9 out of 12 used Zorb when making their pads, that was good enough for me. I am happy with my purchase.</div>
+    </article>
+    <article class="voice anchor" id="voice-megan-2025-07-04" data-name="Megan" data-domains="pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Megan</span>
+        <span class="plumb-marker" data-name="Megan" title="One of 2 appearances by this maker">2 of 2</span>
+        <span class="anchor-date">Jul 4, 2025</span>
+      </header>
+      <div class="anchor-title">Wouldn&#x27;t use anything else</div>
+      <div class="anchor-body">Super fast shipping and an excellent quality fabric! I make reusable menstrual pads, and I wouldn&#x27;t ever use a different absorption layer than Zorb. It&#x27;s amazing stuff!! Highly recommend it!!!</div>
+    </article>
+    <article class="voice anchor" id="voice-penda-t-2025-08-26" data-name="penda t." data-domains="pad">
+      <div class="depth-arc"><span class="depth-line"></span><span class="depth-text">since 2021 · 4 years lived before language</span></div>
+      <header class="anchor-head">
+        <span class="anchor-name">penda t.</span>
+        
+        <span class="anchor-date">Aug 26, 2025</span>
+      </header>
+      <div class="anchor-title">Worth it - 4 years later</div>
+      <div class="anchor-body">Used this to make reusable pads and 4 years later the pads are going strong. It was very much worth the price.</div>
+    </article>
+    <article class="voice anchor" id="voice-phyllis-2025-08-28" data-name="Phyllis" data-domains="pad humanitarian">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">Phyllis</span>
+        
+        <span class="anchor-date">Aug 28, 2025</span>
+      </header>
+      <div class="anchor-title">Pads for Ethiopia</div>
+      <div class="anchor-body">I use it for cloth pad, I send pads for school girls in Ethiopia who are in need of this product, Zorb is one of the best thing to use.</div>
+    </article>
+      <div class="witness-band">
+    <article class="voice witness" id="voice-carrie-valentin-2025-06-18" data-name="Carrie Valentin" data-domains="infant">
+      <header class="witness-head">
+        <span class="witness-name">Carrie Valentin</span>
+        
+        <span class="witness-date">Jun 18, 2025</span>
+      </header>
+      <div class="witness-excerpt has-body">Good absorbent material</div>
+      <div class="witness-body">I am using Zorb to line spit up cloths for my grandson expected in August!</div>
+    </article>
+    <article class="voice witness" id="voice-kelli-harvey-2025-08-18" data-name="Kelli Harvey" data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name">Kelli Harvey</span>
+        
+        <span class="witness-date">Aug 18, 2025</span>
+      </header>
+      <div class="witness-excerpt has-body">Only place I will buy my Zorb from</div>
+      <div class="witness-body">Only place I will buy my Zorb from. Amazing communication and customer service.</div>
+    </article>
+    <article class="voice witness" id="voice-john-cipolletti-2025-10-02" data-name="John Cipolletti" data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name">John Cipolletti</span>
+        
+        <span class="witness-date">Oct 2, 2025</span>
+      </header>
+      <div class="witness-excerpt has-body">Very Absorbing</div>
+      <div class="witness-body">A good absorbing material that can be cut to size for the job. Can be washed and reused over and over again.</div>
+    </article>
+    <article class="voice witness" id="voice-anonymous-2025-10-19" data-name="Anonymous" data-domains="general">
+      <header class="witness-head">
+        <span class="witness-name anonymous">Anonymous</span>
+        
+        <span class="witness-date">Oct 19, 2025</span>
+      </header>
+      <div class="witness-excerpt has-body">Much better than Uhaul</div>
+      <div class="witness-body">Much better than Uhaul! It is lighter and doesn&#x27;t bleed into the fleece! Sews nice and is worth it!</div>
+    </article>
+    <article class="voice witness" id="voice-anonymous-2025-11-02" data-name="Anonymous" data-domains="pad">
+      <header class="witness-head">
+        <span class="witness-name anonymous">Anonymous</span>
+        
+        <span class="witness-date">Nov 2, 2025</span>
+      </header>
+      <div class="witness-excerpt has-body">Pairs of underwear and pads</div>
+      <div class="witness-body">We were able to make several pairs of underwear and period pads with 2 yards.</div>
+    </article></div>
+      <div class="brief-band"><span class="voice brief" id="voice-t-andis-2025-08-17" data-name="T. Andis" data-domains="general" title="T. Andis · Aug 17, 2025 · Wonderful fabric"><span class="brief-name">T. Andis</span><span class="brief-text">Wonderful fabric</span></span><span class="voice brief" id="voice-ileana-lombardi-2025-09-13" data-name="Ileana Lombardi" data-domains="general" title="Ileana Lombardi · Sep 13, 2025 · Retains water very well"><span class="brief-name">Ileana Lombardi</span><span class="brief-text">Retains water very well</span></span><span class="voice brief" id="voice-holly-f68-2025-11-10" data-name="Holly F68" data-domains="pad" title="Holly F68 · Nov 10, 2025 · Nice quality"><span class="brief-name">Holly F68</span><span class="brief-text">Nice quality</span></span></div>
+    </div>
+  </details>
+
+  <details class="year-section" id="year-2026" data-year="2026">
+    
+    <summary class="year-summary">
+      <div class="year-summary-head">
+        <span class="year-num">2026</span>
+        <div class="year-summary-meta">
+          <span class="year-density">2 voices</span>
+          <span class="year-note">today</span>
+        </div>
+        <span class="accordion-chevron" aria-hidden="true">+</span>
+      </div>
+      <div class="year-fingerprint">
+        <div class="fp-density">
+          <span class="fp-label">Months</span>
+          <div class="density-strip"><span class="density-cell filled" style="--h:18px" title="Jan 2026 · 1 voice"></span><span class="density-cell filled" style="--h:18px" title="Feb 2026 · 1 voice"></span><span class="density-cell empty" title="Mar 2026 · no voices"></span><span class="density-cell empty" title="Apr 2026 · no voices"></span><span class="density-cell empty" title="May 2026 · no voices"></span><span class="density-cell empty" title="Jun 2026 · no voices"></span><span class="density-cell empty" title="Jul 2026 · no voices"></span><span class="density-cell empty" title="Aug 2026 · no voices"></span><span class="density-cell empty" title="Sep 2026 · no voices"></span><span class="density-cell empty" title="Oct 2026 · no voices"></span><span class="density-cell empty" title="Nov 2026 · no voices"></span><span class="density-cell empty" title="Dec 2026 · no voices"></span></div>
+        </div>
+        <div class="fp-row"><span class="fp-label">Anchors</span><span class="fp-value fp-names">L.C.</span></div>
+        
+        <div class="fp-row"><span class="fp-label">Continuing</span><span class="fp-value"><span class="domain-chip">mama cloth</span></span></div>
+        
+      <div class="fp-signature">
+        <p class="sig-text">Zorb is the perfect liner for reusable menstrual pads.</p>
+        <p class="sig-attr">— L.C., Feb 13</p>
+      </div>
+      </div>
+    </summary>
+    <div class="year-body">
+      <div class="filter-year-label" data-year="2026">2026</div>
+      
+    <article class="voice anchor" id="voice-l-c-2026-02-13" data-name="L.C." data-domains="pad">
+      
+      <header class="anchor-head">
+        <span class="anchor-name">L.C.</span>
+        
+        <span class="anchor-date">Feb 13, 2026</span>
+      </header>
+      <div class="anchor-title">Zorb fits the bill</div>
+      <div class="anchor-body">Zorb is the perfect liner for reusable menstrual pads, absorbs quickly and holds a lot. It is expensive so I add one layer of zorb and one layer of quilted material or absorbent fleece as the core. It is worth the money.</div>
+    </article>
+      
+      <div class="brief-band"><span class="voice brief" id="voice-karen-zacharias-2026-01-04" data-name="karen zacharias" data-domains="general" title="karen zacharias · Jan 4, 2026 · awesome product"><span class="brief-name">karen zacharias</span><span class="brief-text">awesome product</span></span></div>
+    </div>
+  </details>
+</main>
+
+<!-- ════════════ CROSS-WEAVE ════════════ -->
+<section class="cross-weave">
+  <div class="cross-weave-inner">
+    <p class="cross-weave-label">where this map opens to others —</p>
+    <ul class="cross-weave-list">
+      <li class="cross-weave-row">
+        <a class="cross-weave-link" href="zorb-s01-hero-EDITORIAL.html">
+          <span class="cw-name">the engineering</span>
+          <span class="cw-context">how the fabric is built · Zorb Original Editorial</span>
+        </a>
+      </li>
+      <li class="cross-weave-row">
+        <a class="cross-weave-link" href="zorb-original-stories.html">
+          <span class="cw-name">the witnesses</span>
+          <span class="cw-context">eleven journeys, one voice each · Zorb Original Stories</span>
+        </a>
+      </li>
+      <li class="cross-weave-row">
+        <span class="cross-weave-link cross-weave-pending">
+          <span class="cw-name">the brand</span>
+          <span class="cw-context">Zorb across all ten variants · Zorb Brand Atlas</span>
+        </span>
+      </li>
+      <li class="cross-weave-row">
+        <span class="cross-weave-link cross-weave-pending">
+          <span class="cw-name">the family</span>
+          <span class="cw-context">the fabric within the larger story · Wazoodle Master Story Book</span>
+        </span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ════════════ BOOKENDING CLOSE ════════════ -->
+<section class="closing">
+  <div class="closing-inner">
+    <p class="closing-mark">— end of the moments-line —</p>
+    <h2 class="closing-h">
+      <span>Eleven years.</span>
+      <span>One fabric.</span>
+      <span>One hundred and sixty-seven voices.</span>
+      <em>Kept.</em>
+    </h2>
+    <div class="closing-hairline"></div>
+  </div>
+</section>
+
+<!-- ════════════ COLOPHON ════════════ -->
+<footer class="colophon">
+  <div class="colophon-inner">
+    <div>
+      <p class="colophon-mark">
+        Zorb Original — The Moments-Line<br>
+        <span>AKAS Wisdom · Made in USA · A companion to the engineering and the witnesses</span>
+      </p>
+      <p class="colophon-note">
+        Some review dates reflect platform-import moments rather than original posting dates — most visibly the August 2018 cluster, which preserves voices from earlier review systems and is rendered at month-precision. Anonymous voices are makers whose attribution was lost during platform transitions; their testimony is preserved. Dates that are reduced to month-level are the corpus's seams in plain sight.
+      </p>
+    </div>
+    <div class="colophon-links">
+      <a class="colophon-link" href="zorb-s01-hero-EDITORIAL.html">The engineering →</a>
+      <a class="colophon-link ghost" href="zorb-original-stories.html">The witnesses →</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  // Plumb-line interaction
+  const markers = document.querySelectorAll('.plumb-marker');
+  markers.forEach(m => {
+    m.addEventListener('mouseenter', () => {
+      const name = m.dataset.name;
+      document.querySelectorAll(`.voice[data-name="${CSS.escape(name)}"]`).forEach(v => {
+        v.setAttribute('data-highlighted', 'true');
+      });
+    });
+    m.addEventListener('mouseleave', () => {
+      const name = m.dataset.name;
+      document.querySelectorAll(`.voice[data-name="${CSS.escape(name)}"]`).forEach(v => {
+        v.removeAttribute('data-highlighted');
+      });
+    });
+    m.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const name = m.dataset.name;
+      const voices = Array.from(document.querySelectorAll(`.voice[data-name="${CSS.escape(name)}"]`));
+      const current = voices.indexOf(m.closest('.voice'));
+      const next = voices[(current + 1) % voices.length];
+      if (next) {
+        const section = next.closest('.year-section');
+        if (section && !section.open) section.open = true;
+        next.scrollIntoView({behavior: 'smooth', block: 'center'});
+      }
+    });
+  });
+
+  // Year-nav active state
+  const navLinks = document.querySelectorAll('.nav-year');
+  const sections = document.querySelectorAll('.year-section');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const id = e.target.id;
+        const link = document.querySelector(`.nav-year[href="#${id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, {rootMargin: '-30% 0px -50% 0px'});
+  sections.forEach(s => obs.observe(s));
+
+  // Open / close all
+  // [Removed Phase 1 — desktop toggles never used during felt experience walk; UI furniture]
+
+  // Domain filter
+  const filterChips = document.querySelectorAll('.filter-chip');
+  const matchCountEl = document.getElementById('match-count');
+  const controlsEl = document.getElementById('controls');
+  const mobileClearText = document.getElementById('mobile-clear-text');
+  const mobileClearButton = document.getElementById('mobile-clear-button');
+  let activeFilter = null;
+  function applyFilter() {
+    const voices = document.querySelectorAll('.voice');
+    if (!activeFilter) {
+      document.body.classList.remove('filtering');
+      voices.forEach(v => v.classList.remove('match'));
+      document.querySelectorAll('.year-section').forEach(s => {
+        s.removeAttribute('data-no-match');
+      });
+      matchCountEl.textContent = '';
+      mobileClearText.textContent = '';
+      return;
+    }
+    document.body.classList.add('filtering');
+    let total = 0;
+    voices.forEach(v => {
+      const domains = (v.dataset.domains || '').split(/\s+/);
+      if (domains.includes(activeFilter)) {
+        v.classList.add('match');
+        total++;
+      } else {
+        v.classList.remove('match');
+      }
+    });
+    document.querySelectorAll('.year-section').forEach(s => {
+      const hasMatch = s.querySelector('.voice.match');
+      if (hasMatch) {
+        s.removeAttribute('data-no-match');
+        s.open = true;
+      } else {
+        s.setAttribute('data-no-match', 'true');
+      }
+    });
+    const filterLabel = document.querySelector(`.filter-chip[data-filter="${activeFilter}"]`).textContent;
+    const countText = `showing ${total} ${filterLabel} ${total === 1 ? 'voice' : 'voices'}`;
+    matchCountEl.textContent = countText;
+    mobileClearText.textContent = countText;
+  }
+  filterChips.forEach(c => {
+    c.addEventListener('click', () => {
+      const f = c.dataset.filter;
+      if (activeFilter === f) {
+        activeFilter = null;
+        filterChips.forEach(x => x.classList.remove('active'));
+      } else {
+        activeFilter = f;
+        filterChips.forEach(x => x.classList.toggle('active', x.dataset.filter === f));
+        // On mobile: scroll the active chip into the visible part of the strip
+        if (window.innerWidth <= 720) {
+          c.scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'center'});
+        }
+      }
+      applyFilter();
+    });
+  });
+  // Clear button on mobile match-count strip
+  mobileClearButton.addEventListener('click', () => {
+    if (activeFilter) {
+      const activeChip = document.querySelector('.filter-chip.active');
+      if (activeChip) activeChip.click();
+    }
+  });
+
+  // Domain emergence rows: click to filter
+  document.querySelectorAll('.emergence-row').forEach(row => {
+    row.addEventListener('click', () => {
+      const d = row.dataset.domain;
+      const chip = document.querySelector(`.filter-chip[data-filter="${d}"]`);
+      if (chip) chip.click();
+      document.getElementById('controls').scrollIntoView({behavior: 'smooth', block: 'start'});
+    });
+  });
+
+  // Direct hash navigation on load — if URL contains #voice-..., open parent year
+  function handleHashNav() {
+    const hash = window.location.hash;
+    if (!hash || !hash.startsWith('#voice-')) return;
+    const target = document.querySelector(hash);
+    if (!target) return;
+    const section = target.closest('.year-section');
+    if (section && !section.open) section.open = true;
+    setTimeout(() => {
+      target.scrollIntoView({behavior: 'smooth', block: 'center'});
+    }, 100);
+  }
+  if (window.location.hash) handleHashNav();
+  window.addEventListener('hashchange', handleHashNav);
+
+  // Application maker links: open the target voice's year and scroll to it
+  document.querySelectorAll('.app-maker').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      // Clear any active filter first
+      if (activeFilter) {
+        const activeChip = document.querySelector(`.filter-chip.active`);
+        if (activeChip) activeChip.click();
+      }
+      const href = link.getAttribute('href');
+      const target = document.querySelector(href);
+      if (!target) return;
+      // If target is a year section, just open and scroll
+      if (target.classList.contains('year-section')) {
+        target.open = true;
+        setTimeout(() => target.scrollIntoView({behavior: 'smooth', block: 'start'}), 50);
+        return;
+      }
+      // Target is a voice — open its parent year and scroll to it
+      const section = target.closest('.year-section');
+      if (section && !section.open) section.open = true;
+      setTimeout(() => {
+        target.scrollIntoView({behavior: 'smooth', block: 'center'});
+      }, 50);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
