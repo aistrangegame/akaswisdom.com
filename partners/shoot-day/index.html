@@ -1,0 +1,338 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>AKAS Shoot Day</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: one long day page in Shelby's order — masthead with the schedule, a sticky anchor rail, one band per block, the picture as collapsible sections, settled facts, close. Wazoodle Design System (Parrot tblHuvgH4lc3qXnSv), house brand tier, light by design. */
+:root{
+ color-scheme:light;
+ --paper:#FFFFFF;--ground:#EFECE6;--stone:#E7E1D5;--stone-line:#E3DDD0;--divider:#ECE6DA;--hover:#F6F2E9;
+ --ink:#1E1E1E;--ink-2:#3A352E;--muted:#6F685C;--label:#6F685C;--mid:#5C5C58;
+ --voice:#3B8234;--voice-dk:#2C6427;
+ --sig:#1E5219;--sig-dk:#163D12;--sig-d:#6A9E66;--wash:#E4EFE2;--wash-bd:#C8DEC4;--deep:#1A2E15;--deep-hi:#213A1B;--spark:#D4B800;
+ --font-serif:"Newsreader",Georgia,serif;--font-sans:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+ --fs-h2:clamp(26px,3vw,38px);--fs-h3:clamp(21px,2vw,27px);--fs-lg:19px;--fs-body:16px;--fs-ui:14px;--fs-sm:13px;--fs-eyebrow:12px;
+ --s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-5:24px;--s-6:32px;--s-7:48px;--s-8:64px;
+ --r-pill:999px;--r-lg:16px;--r-md:12px;--r-sm:6px;
+ --shadow-1:0 1px 3px rgba(40,34,24,.06),0 1px 2px rgba(40,34,24,.04);--shadow-2:0 10px 34px rgba(40,34,24,.16),0 2px 8px rgba(40,34,24,.08);
+ --ease-soft:cubic-bezier(.4,0,.2,1);--dur-fast:.15s;--dur-base:.25s;
+ --w-col:940px;--gut:clamp(16px,4vw,32px)
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 var(--fs-body)/1.6 var(--font-sans);margin:0}
+::selection{background:var(--sig-d);color:var(--ink)}
+.wz-in{width:min(var(--w-col),100% - 2*var(--gut));margin-inline:auto}
+.wz-band{padding-block:60px}@media(min-width:768px){.wz-band{padding-block:72px}}
+.wz-band--paper{background:var(--paper)}.wz-band--ground{background:var(--ground)}.wz-band--stone{background:var(--stone)}.wz-band--wash{background:var(--wash)}
+.wz-band--deep{background:var(--deep);color:rgba(255,255,255,.92)}
+.wz-eyebrow{font:800 var(--fs-eyebrow)/1.4 var(--font-sans);letter-spacing:.18em;text-transform:uppercase;color:var(--label);margin:0}
+.wz-eyebrow--voice{color:var(--voice)}
+.wz-title{font:500 var(--fs-h2)/1.12 var(--font-serif);letter-spacing:-.01em;color:var(--ink);margin:10px 0 0;text-wrap:balance}
+.wz-title em{font-style:italic;color:var(--voice)}
+.wz-sub{font-size:17px;line-height:1.5;color:var(--ink-2);max-width:56ch;margin:14px 0 0}
+.wz-badge{display:inline-flex;align-items:center;gap:6px;font:700 11.5px/1 var(--font-sans);letter-spacing:.02em;white-space:nowrap;padding:5px 10px;border-radius:var(--r-pill);border:1px solid transparent;vertical-align:2px}
+.wz-badge--spec{background:var(--paper);color:var(--muted);border-color:var(--stone-line)}
+.wz-badge--voice{background:color-mix(in srgb,var(--voice) 14%,transparent);color:var(--voice-dk)}
+.wz-badge--brand{background:var(--wash);color:var(--sig-dk);border-color:var(--wash-bd)}
+.wz-card{background:var(--paper);border:1px solid var(--stone-line);border-radius:var(--r-lg);box-shadow:var(--shadow-1);padding:var(--s-5)}
+.wz-card--flat{box-shadow:none}
+a{color:var(--sig)}a:hover{color:var(--sig-dk)}
+:focus-visible{outline:1.5px solid var(--sig);box-shadow:0 0 0 4px color-mix(in srgb,var(--sig) 14%,transparent);border-radius:var(--r-sm)}
+/* masthead */
+.mast{background:radial-gradient(ellipse at 12% 0%,color-mix(in srgb,var(--voice) 6%,transparent),transparent 60%),var(--paper);padding-block:48px 40px}
+.mast h1{font:500 clamp(34px,5vw,52px)/1.08 var(--font-serif);letter-spacing:-.015em;margin:12px 0 0;text-wrap:balance}.mast h1 em{font-style:italic;color:var(--voice)}
+.sched{margin-top:var(--s-6);display:grid;gap:0;border-top:1px solid var(--stone-line)}
+.sched a,.sched div{display:grid;grid-template-columns:110px 1fr auto;gap:var(--s-4);align-items:baseline;padding:10px 4px;border-bottom:1px solid var(--divider);text-decoration:none;color:var(--ink-2)}
+.sched a:hover{background:var(--hover)}
+.sched .t{font:600 var(--fs-sm)/1.4 var(--font-sans);color:var(--muted);font-variant-numeric:tabular-nums}
+.sched b{font:500 var(--fs-lg)/1.3 var(--font-serif);color:var(--ink)}
+.sched .who{font-size:var(--fs-sm);color:var(--muted)}
+.sched div b{font-family:var(--font-sans);font-weight:500;font-size:var(--fs-ui);color:var(--muted)}
+@media(max-width:560px){.sched a,.sched div{grid-template-columns:84px 1fr}.sched .who{grid-column:2}}
+.guide-link{display:inline-flex;margin-top:var(--s-5);gap:10px;align-items:center;font:700 var(--fs-ui) var(--font-sans);color:var(--sig);text-decoration:none;border:1.5px solid var(--wash-bd);background:var(--wash);border-radius:var(--r-pill);padding:12px 22px}
+.guide-link:hover{border-color:var(--sig)}
+.guide-link+.guide-link{margin-left:10px}@media(max-width:560px){.guide-link+.guide-link{margin-left:0}}
+/* rail */
+.wz-rail{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:color-mix(in srgb,var(--ground) 96%,transparent);backdrop-filter:blur(8px);border-block:1px solid var(--stone-line)}
+.wz-rail-in{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;width:min(var(--w-col),100% - 2*var(--gut));margin-inline:auto}
+.wz-rail-in::-webkit-scrollbar{display:none}
+.wz-rail a{flex:0 0 auto;font:700 15.5px/1 var(--font-sans);color:var(--mid);text-decoration:none;padding:14px 12px;border-bottom:2px solid transparent}
+@media(min-width:768px){.wz-rail a{font-size:17px}}
+.wz-rail a.on{color:var(--sig);border-bottom-color:var(--sig)}
+/* blocks */
+.part{margin-top:var(--s-7)}
+.part-h{font:800 var(--fs-eyebrow)/1.4 var(--font-sans);letter-spacing:.18em;text-transform:uppercase;color:var(--voice);margin:0 0 var(--s-2);display:flex;gap:10px;align-items:center}
+.part-h::after{content:"";flex:1;height:1px;background:var(--divider)}
+.mins{color:var(--muted);letter-spacing:.06em}
+.q{padding-block:var(--s-5);border-bottom:1px solid var(--divider)}
+.q-text{font:500 var(--fs-h3)/1.25 var(--font-serif);margin:0;text-wrap:balance;max-width:44ch}
+.trig{margin:var(--s-3) 0 0;padding:0;list-style:none;display:grid;gap:6px;max-width:68ch}
+.trig li{position:relative;padding-left:18px;color:var(--ink-2)}
+.trig li::before{content:"";position:absolute;left:2px;top:.72em;width:6px;height:6px;border-radius:50%;background:var(--sig-d)}
+.personal{margin-top:var(--s-6);background:var(--wash);border-color:var(--wash-bd)}
+.walk{list-style:none;padding:0;margin:var(--s-6) 0 0;display:grid;gap:0;border-top:1px solid var(--stone-line)}
+.walk li{display:grid;grid-template-columns:44px 1fr;gap:var(--s-3);padding:14px 0;border-bottom:1px solid var(--divider);color:var(--ink-2)}
+.walk .num{font:500 var(--fs-h3)/1 var(--font-serif);color:var(--sig-d);font-variant-numeric:tabular-nums}
+.inbox{margin-top:var(--s-5);color:var(--ink-2)}
+/* picture */
+.pics{margin-top:var(--s-6);display:grid;gap:var(--s-3)}
+.pic{background:var(--paper);border:1px solid var(--stone-line);border-radius:var(--r-lg);box-shadow:var(--shadow-1)}
+.pic summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:40px 1fr auto;align-items:center;gap:var(--s-3);padding:18px var(--s-5);min-height:56px}
+.pic summary::-webkit-details-marker{display:none}
+.pic summary::after{content:"+";font:400 24px/1 var(--font-serif);color:var(--muted)}
+.pic[open] summary::after{content:"–"}
+.pic-n{font:500 var(--fs-h3)/1 var(--font-serif);color:var(--sig-d)}
+.pic-t{font:500 var(--fs-lg)/1.3 var(--font-serif);color:var(--ink)}
+.prose{padding:0 var(--s-5) var(--s-5);color:var(--ink-2);max-width:72ch}
+.prose h3{font:800 var(--fs-eyebrow)/1.4 var(--font-sans);letter-spacing:.18em;text-transform:uppercase;color:var(--voice);margin:var(--s-5) 0 var(--s-2)}
+.prose p{margin:var(--s-3) 0}.prose ul,.prose ol{padding-left:20px;display:grid;gap:4px}
+.prose strong{color:var(--ink);font-weight:700}
+.prose code{font-size:var(--fs-sm)}
+/* settled + close */
+.settled{margin:var(--s-6) 0 0;padding:0;list-style:none;display:grid;gap:10px;max-width:72ch}
+.settled li{padding:12px 16px;background:var(--paper);border:1px solid var(--wash-bd);border-radius:var(--r-md);color:var(--ink-2)}
+.doors{display:grid;gap:var(--s-3);grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));margin-top:var(--s-6)}
+.door{display:grid;gap:4px;padding:16px 20px;background:var(--paper);border:1px solid var(--stone-line);border-left:3px solid var(--stone-line);border-radius:var(--r-md);text-decoration:none;color:var(--ink-2);font-size:var(--fs-sm)}
+.door strong{font:500 var(--fs-lg)/1.3 var(--font-serif);color:var(--ink)}
+.door:hover{border-left-color:var(--sig);box-shadow:var(--shadow-2)}
+.door.rung{border-left-color:var(--voice)}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;scroll-behavior:auto!important}}
+/* the thirteen films */
+.films{display:grid;gap:var(--s-3);grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));margin-top:var(--s-6)}
+.film{display:grid;grid-template-columns:44px 1fr;grid-template-rows:auto auto;column-gap:var(--s-3);row-gap:2px;align-items:baseline;padding:16px 18px;background:var(--paper);border:1px solid var(--stone-line);border-radius:var(--r-md);text-decoration:none;color:var(--ink-2)}
+.film:hover{border-color:var(--sig);box-shadow:var(--shadow-2)}
+.film-n{grid-row:1/3;font:500 var(--fs-h3)/1 var(--font-serif);color:var(--sig-d);font-variant-numeric:tabular-nums}
+.film-t{font:500 var(--fs-lg)/1.25 var(--font-serif);color:var(--ink)}
+.film-go{font:700 var(--fs-sm)/1.4 var(--font-sans);color:var(--sig)}
+.film.today{background:var(--wash);border-color:var(--wash-bd)}
+.film.today .film-n{color:var(--voice)}
+.doclink{font:700 var(--fs-sm) var(--font-sans);letter-spacing:0;text-transform:none;margin-left:8px}
+html{scroll-behavior:smooth}section[id]{scroll-margin-top:60px}
+</style>
+<header class="mast" id="top"><div class="wz-in">
+ <p class="wz-eyebrow">Thursday, October 8, 2026 · 1360 Adams Road, Bensalem · 9:00–5:00</p>
+ <h1>The day, <em>and what's under it.</em></h1>
+ <p class="wz-sub">Shelby's plan is the spine. Under each of her questions sits the memory that jogs it: the names, the moments, the family's own words. The facts are here so the three of you don't have to carry them, and the day can go to what was never written down.</p>
+ <nav class="sched" aria-label="Schedule"><div><span class="t">9:00–9:30</span><b>Setup</b><span></span></div><a href="#sid"><span class="t">9:30–10:55</span><b>Sid</b><span class="who">Origin · Pandemic · Acquisition · SupAbsorb</span></a><div><span class="t">10:55–11:10</span><b>Break and reset</b><span></span></div><a href="#arch"><span class="t">11:10–12:35</span><b>Arch</b><span class="who">Origin · Pandemic · Acquisition · SupAbsorb</span></a><div><span class="t">12:35–1:05</span><b>Lunch</b><span></span></div><a href="#ash"><span class="t">1:05–1:55</span><b>Ash</b><span class="who">Origin · Pandemic · Acquisition · SupAbsorb</span></a><a href="#family"><span class="t">1:55–2:40</span><b>Family conversation</b><span class="who">Sid and Arch, then all three</span></a><div><span class="t">2:40–2:50</span><b>Break and reset</b><span></span></div><a href="#footage"><span class="t">2:50–4:10</span><b>Supporting footage</b><span class="who">The building, outside in</span></a><div><span class="t">4:10–4:35</span><b>Short-answer pickups</b><span></span></div><div><span class="t">4:35–4:50</span><b>Coverage check</b><span></span></div><div><span class="t">4:50–5:00</span><b>Wrap</b><span></span></div></nav>
+ <a class="guide-link" href="/partners/brians-guide/">Look up any name in Brian's Guide →</a>
+ <a class="guide-link" href="#films">The thirteen film docs ↓</a>
+</div></header>
+<nav class="wz-rail" aria-label="Sections"><div class="wz-rail-in"><a href="#sid">Sid</a><a href="#arch">Arch</a><a href="#ash">Ash</a><a href="#family">Family</a><a href="#footage">Footage</a><a href="#films">Films</a><a href="#picture">The picture</a><a href="#settled">Settled</a></div></nav>
+<section class="wz-band wz-band--paper" id="sid"><div class="wz-in">
+<p class="wz-eyebrow">Block 1 · 9:30–10:55 · The engineering decisions</p><h2 class="wz-title">Sid</h2><p class="wz-sub">Origin 25 · Pandemic 20 · Acquisition 15 · SupAbsorb 25</p>
+<div class="part"><h3 class="part-h">Origin <span class="mins">25 min</span></h3>
+<div class="q"><p class="q-text">What experience did you bring before AKAS? One moment that shaped your standard.</p><ul class="trig"><li>suitcase left behind (1974)</li><li>air-conditioning chose the career (JK Synthetics)</li><li>&quot;It is the environment&quot; (Lohia, Mr. Sreen)</li><li>the Hundred Days at Modi, PERT charts by car light, March 31</li><li>Umergau: &quot;I said I can assemble them. I didn&#x27;t know a damn thing about it.&quot;</li><li>&quot;It is written by an engineer.&quot;</li></ul></div>
+<div class="q"><p class="q-text">2007 to 2010 — what happened between? The 2009 conversation.</p><ul class="trig"><li>2007 &quot;do you have a fabric that does this?&quot; — the original Fabric Finder, by hand</li><li>Fabrite profitable by 2008 → the EPA letter, the hidden material, the PATH train</li><li>Arch: &quot;We have to quit this… I&#x27;m going to fund it.&quot;</li><li><span class="wz-badge wz-badge--voice">Open — for the day</span> the New York years; doing both</li></ul></div>
+<div class="q"><p class="q-text">What did leaving mean for the family? The first three fabrics, the first orders.</p><ul class="trig"><li><span class="wz-badge wz-badge--spec">Memory only</span> $50,000 and no loan</li><li>Arch&#x27;s idea: machines lying idle — take them on contract</li><li>the first fabric was red, New Jersey, CPSIA-tested</li><li>PUL, microfiber terry, wide loop</li><li>Memorial Day weekend warehouse</li><li>the table from the roadside</li><li>one toilet closed for rolls; rolls in the garage</li></ul></div>
+<div class="q"><p class="q-text">What does AKAS mean to you now?</p><ul class="trig"><li>four initials</li><li>Akasha, space</li><li>&quot;Nobody in the world has been able to copy them.&quot;</li><li>fingertips</li></ul></div>
+</div>
+<div class="part"><h3 class="part-h">Pandemic <span class="mins">20 min</span></h3>
+<div class="q"><p class="q-text">When the network closed, which decision kept material available?</p><ul class="trig"><li>&quot;the knitting is shut down right now&quot;</li><li>new partners across state lines</li><li>five machines (ProCool interlock, Zorb dimple spacer, one-way wicking — press, Dec 2020)</li><li>gown materials ready April 2020</li><li>yarn by the container, on trust</li><li>one dimple machine running three Zorb fabrics → a dedicated one by late August</li><li>1370 Adams Road, Jan 2020: &quot;I did not want to lose the opportunity&quot;</li></ul></div>
+<div class="q"><p class="q-text">What did capacity require from you personally? When did it feel like catching up?</p><ul class="trig"><li>6 a.m.–10 p.m., seven days, March–September</li><li>meals in the warehouse</li></ul></div>
+<div class="q"><p class="q-text">What did the year cost? What changed after?</p><ul class="trig"><li>never under-stocked again → 1M+ yards</li><li>the rest is his</li></ul></div>
+</div>
+<div class="part"><h3 class="part-h">Acquisition <span class="mins">15 min</span></h3>
+<div class="q"><p class="q-text">What did you find when you went to Canada to meet Mike Morris, the owner of Wazoodle Fabrics?</p><ul class="trig"><li>three tellings side by side (Ash: Sid irons out the financials</li><li>Arch: two days watching, six months of paid orders unfilled, her call to Sid</li><li>C-1263: Mike&#x27;s small office in Markham, Dreamland turned down to keep the name with a family)</li><li>structured over two years, refunds deducted from what was owed</li><li><span class="wz-badge wz-badge--voice">Open — for the day</span> what he saw walking in</li></ul></div>
+<div class="q"><p class="q-text">What was in the truck? When did the scale become clear?</p><ul class="trig"><li>the first weeks: eight hours to Canada, post packages, drive back — until Purolator</li></ul></div>
+<div class="q"><p class="q-text">What did Zorb bring? What did you develop after?</p><ul class="trig"><li>Zorb Original came with Wazoodle</li><li>imported stock ran out → American mills</li><li>3 → 35 → 75 styles; teaching mills bamboo and organic cotton</li><li>Zorb 3D from a customer&#x27;s ask</li><li>ProCool &quot;the only Made in USA one-way wicking fabric&quot; (Textile World, Dec 2018)</li><li>Zorb 4D (2019)</li><li>TransDRY (2020)</li><li>the Width Decision</li><li>the Bolt Retired</li></ul></div>
+</div>
+<div class="part"><h3 class="part-h">Supabsorb <span class="mins">25 min</span></h3>
+<div class="q"><p class="q-text">2009 — what did you witness? What did you learn later?</p><ul class="trig"><li>the EPA letter</li><li>the waste in the ground</li><li>Chapter 7</li><li>refusing the restart</li><li>&quot;She voiced the no; he provided the reason.&quot;</li></ul></div>
+<div class="q"><p class="q-text">How did spill protection enter? Which mat came first?</p><ul class="trig"><li>The blank — heart of Video 04</li><li>the diaper decline (Amazon, China)</li><li>&quot;oil is what the world runs on&quot;</li><li><span class="wz-badge wz-badge--spec">Memory only</span> a sorbent customer&#x27;s binder opens 2010, first order 2017</li></ul></div>
+<div class="q"><p class="q-text">2017 right? What happened up to 2022?</p><ul class="trig"><li>2017 genesis → public launch Dec 2019 (&quot;an alternative to clay sorbents and rental rugs&quot;) → registered April 2022 → NFSI Aug 2022</li></ul></div>
+<div class="q"><p class="q-text">One mat in front of us — where it works, its limits.</p><ul class="trig"><li>StickyBack: absorbs and stops slips, NFSI, ADA, forklift-rated</li><li>or Railroad: &quot;They make a great track mat. We make a great railroad maintenance operation.&quot;</li></ul></div>
+<div class="q"><p class="q-text">Maker and mat — one standard?</p><ul class="trig"><li>&quot;The fabrics that hold a baby dry at three in the morning, and the mats that hold a factory floor clean… the same pair of hands.&quot;</li></ul></div>
+</div>
+<div class="personal wz-card wz-card--flat"><p class="wz-eyebrow wz-eyebrow--voice">Toward the personal</p><ul class="trig"><li>&quot;Newspaper at 5 o&#x27;clock… FedEx all day&quot;</li><li>Arch the breadwinner, &#x27;88–&#x27;89</li><li>March 31 at Silvasa</li><li>&quot;more personal than official&quot;</li><li>where the fabrics have gone: NASA, SpaceX, Olympic torches, governments, the Army lab&#x27;s ripstop</li><li><span class="wz-badge wz-badge--voice">Open — for the day</span> &quot;astronaut equipment&quot; (EXIM&#x27;s release</li></ul></div>
+</div></section>
+<section class="wz-band wz-band--ground" id="arch"><div class="wz-in">
+<p class="wz-eyebrow">Block 2 · 11:10–12:35 · The customer relationships</p><h2 class="wz-title">Arch</h2><p class="wz-sub">Origin 30 · Pandemic 25 · Acquisition 20 · SupAbsorb 10</p>
+<div class="part"><h3 class="part-h">Origin <span class="mins">30 min</span></h3>
+<div class="q"><p class="q-text">Arriving in 2005 — what did you hope for? The building, the sign or plaque — does it exist?</p><ul class="trig"><li>the 2005 vision: a big building, a board reading AKAS Textiles, a plaque &quot;it all starts with a dream&quot;</li><li>she got the NJ job first</li><li>head of quality at a bulk drug exporter; quality director at Osteotech</li><li><span class="wz-badge wz-badge--voice">Open — for the day</span> the plaque</li></ul></div>
+<div class="q"><p class="q-text">2007 to 2010, and the 2009 conversation that changed what you&#x27;d accept.</p><ul class="trig"><li>she voiced the no</li><li>&quot;We have to quit this and start your own business. And I&#x27;m going to fund it.&quot;</li><li>&quot;Never build on ground you have poisoned.&quot;</li><li>the contract-machine idea was hers</li></ul></div>
+<div class="q"><p class="q-text">A customer request that changed what you offered.</p><ul class="trig"><li>Megan → Ready-AbZORB, &quot;Dear Megan, we are grateful to you&quot;</li><li>swatches on every page</li><li>silver priced at cost (Silvadur then, Silver Plus now)</li><li>PFAS: tested every fabric</li><li>Anastasia: &quot;I&#x27;m talking to the CEO?&quot;</li><li>Nancy V.: thalassemia, the fire, &quot;don&#x27;t tell anyone where I buy&quot;</li><li>makers teaching each other on their own blogs</li><li>&quot;I went at it backwards, trying to explain rather than asking questions.&quot;</li></ul></div>
+<div class="q"><p class="q-text">What does AKAS mean now? What should someone understand before trusting you?</p><ul class="trig"><li>&quot;I already did.&quot;</li><li>360 reviews name her</li><li>&quot;Happy sewing!&quot;</li><li>MBDA: &quot;named using the initials of all family members&quot;</li><li>WTC: &quot;mission is all in its name&quot;</li></ul></div>
+</div>
+<div class="part"><h3 class="part-h">Pandemic <span class="mins">25 min</span></h3>
+<div class="q"><p class="q-text">The first mask emails. Who suggested an existing fabric?</p><ul class="trig"><li>Nov 2019 Thailand, Indonesia, Korea</li><li>Jan 2020 Singapore, Australia, Japan, Hong Kong → Silver Arch, &quot;first the guidance, then the products&quot;</li><li>Feb: American hospitals</li><li><span class="wz-badge wz-badge--voice">Open — for the day</span> who suggested</li></ul></div>
+<div class="q"><p class="q-text">The article — what could you honestly say?</p><ul class="trig"><li>dated by its own text &quot;(Jan/Feb 2020)&quot;</li><li>FDA and CDC</li><li>&quot;No tests were performed… no guarantee.&quot;</li><li>March 16: one search result, hers</li></ul></div>
+<div class="q"><p class="q-text">The surge week, and closing retail.</p><ul class="trig"><li>15 → 500 → 1,000 → news crew Sunday</li><li>&quot;30,000 yards were gone in one day… 700 orders sitting&quot;</li><li>5× the price declined; the line-skipper declined</li><li>&quot;Would you like to be surprised?&quot;</li><li>&quot;Too much to do, too few hands, too little time.&quot;</li></ul></div>
+<div class="q"><p class="q-text">The father in Poway.</p><ul class="trig"><li>Derek Barrios, April 2020</li><li>a special-needs son</li><li>out of stock everywhere</li><li>she sent it free</li><li>&quot;She has won my business.&quot;</li></ul></div>
+<div class="q"><p class="q-text">What were you unwilling to claim?</p><ul class="trig"><li>&quot;As of today, we cannot claim anti-viral properties.&quot;</li><li>the 72% was the university&#x27;s finding (Northeastern, ACS Nano, 70+ combinations) — never hers</li><li>&quot;Am ploughing on.&quot;</li></ul></div>
+<div class="q"><p class="q-text">What did the year cost?</p><ul class="trig"><li>&quot;We don&#x27;t have time to eat, to sleep. I&#x27;m cooking in the office.&quot;</li><li>&quot;I&#x27;m a lone voice… we did not give up.&quot;</li><li>letters to county and state, unanswered</li><li>Hotchkiss: 42 gowns — &quot;This is the least we can do.&quot;</li><li>Kapunahele: &quot;Hey, I didn&#x27;t catch covid.&quot;</li><li><span class="wz-badge wz-badge--voice">Open — for the day</span> the 2018 step-back and the return</li></ul></div>
+</div>
+<div class="part"><h3 class="part-h">Acquisition <span class="mins">20 min</span></h3>
+<div class="q"><p class="q-text">Wazoodle before. Who first suggested buying?</p><ul class="trig"><li>Wazoodle was AKAS&#x27;s customer first</li><li>its owner competed with his own customers, held their orders → Wazoodle Hell</li><li><span class="wz-badge wz-badge--voice">Open — for the day</span> who suggested</li></ul></div>
+<div class="q"><p class="q-text">What worried the lawyers? What did you actually say?</p><ul class="trig"><li>Michael, printouts ready</li><li>&quot;They&#x27;re at the bottom. The only way is up.&quot;</li><li>&quot;Well, that&#x27;s a different way of looking at it.&quot;</li></ul></div>
+<div class="q"><p class="q-text">Why were the days in Canada so few — plan or deadline?</p><ul class="trig"><li><span class="wz-badge wz-badge--voice">Open — for the day</span> count open</li><li>her telling: two days watching before the call to Sid</li></ul></div>
+<div class="q"><p class="q-text">(moved from origin) Ash asking you to leave your job.</p><ul class="trig"><li>&quot;Mom, we need you,&quot; 2012</li><li>&quot;We made the leap and never looked back.&quot;</li></ul></div>
+</div>
+<div class="part"><h3 class="part-h">Supabsorb <span class="mins">10 min</span></h3>
+<div class="q"><p class="q-text">The 2009 conversation, in your words.</p><ul class="trig"><li>&quot;She voiced the no; he provided the reason.&quot;</li><li><span class="wz-badge wz-badge--spec">Memory only</span> $50,000, no loan — she funded it</li></ul></div>
+</div>
+<div class="personal wz-card wz-card--flat"><p class="wz-eyebrow wz-eyebrow--voice">Toward the personal</p><ul class="trig"><li>her side of El Chico</li><li>2005 hopes</li><li>the 2018 step-back and return</li><li>the plaque</li></ul></div>
+</div></section>
+<section class="wz-band wz-band--paper" id="ash"><div class="wz-in">
+<p class="wz-eyebrow">Block 3 · 1:05–1:55 · The next generation, the witness</p><h2 class="wz-title">Ash</h2><p class="wz-sub">Origin 15 · Pandemic 10 · Acquisition 15 · SupAbsorb 10</p>
+<div class="part"><h3 class="part-h">Origin <span class="mins">15 min</span></h3>
+<div class="q"><p class="q-text">A normal early day — work, classes, orders, warehouse. What did Karishma contribute?</p><ul class="trig"><li>job 9–3, warehouse evenings, college at night, weekends warehouse + website</li><li>taught himself HTML and carousels</li><li>Memorial Day weekend warehouse, the roadside table</li><li>Karishma: &quot;my sister, who is a writer&quot; — the blog; stepped back 2017</li></ul></div>
+<div class="q"><p class="q-text">The 2021 rebuild — what happened, who helped, four days.</p><ul class="trig"><li>due April 2020, paused &quot;to help fight the battle against COVID-19&quot;</li><li>May 6 2021: &quot;loaded with issues&quot;</li><li>four days: Lukas, Sanjana, Maria, Ryan, Karina</li><li>every feature a maker&#x27;s request</li><li>the &quot;What&#x27;s not to Love&quot; list</li><li>the rhyme: 2012 in days, 2021 in four</li></ul></div>
+<div class="q"><p class="q-text">What does AKAS mean to you now?</p><ul class="trig"><li>Ashrey = shelter</li><li>one birthday with Karishma, five years apart</li><li>&quot;When you tell your story backwards it almost sounds easy. But it wasn&#x27;t.&quot;</li><li>&quot;We publish what things are made of.&quot;</li><li>Maker&#x27;s Row 2025 Top 5</li><li>the makers&#x27; own Zorb pages</li></ul></div>
+</div>
+<div class="part"><h3 class="part-h">Pandemic <span class="mins">10 min</span></h3>
+<div class="q"><p class="q-text">How did the windows work? The warehouse, breakfast to evening, who was there?</p><ul class="trig"><li>open 24–72 hours, closed ~two weeks to catch up and keep making fabric, again — March to September</li><li>6 a.m.–10 p.m.</li><li>Ash, his wife, Arch, Sid; friends on the evening shift</li><li>sites disabled when there was no fabric</li></ul></div>
+<div class="q"><p class="q-text">What did you see your parents do that customers never saw?</p><ul class="trig"><li>Arch cooking in the office; her letters to the state</li><li>Sid on the phone across states, yarn on trust</li><li>&quot;barely getting time to eat or sleep&quot;</li></ul></div>
+</div>
+<div class="part"><h3 class="part-h">Acquisition <span class="mins">15 min</span></h3>
+<div class="q"><p class="q-text">(moved) What made you ask your mother to join? Where were you?</p><ul class="trig"><li>&quot;Mom, we need you,&quot; 2012</li><li>&quot;He did not know at the time why the conviction was so clear.&quot;</li></ul></div>
+<div class="q"><p class="q-text">The flight to Canada. The first hours. How did you divide the work?</p><ul class="trig"><li>Markham, Ontario</li><li>Mike Morris&#x27;s small office, a shelf of books on websites</li><li>an inbox of people who&#x27;d paid and received nothing</li></ul></div>
+<div class="q"><p class="q-text">The truck — when did the scale become clear?</p><ul class="trig"><li>eight-hour drives to Canada and back to post packages — until Purolator</li></ul></div>
+<div class="q"><p class="q-text">The unload and the first shipments — the first sign it worked.</p><ul class="trig"><li>New Jersey (Manalapan)</li><li>&quot;one day at a time, one email at a time, one order at a time&quot;</li><li>Emily; first anniversary Aug 7 2013 (→ Video 07)</li></ul></div>
+<div class="q"><p class="q-text">AKAS and Wazoodle, better than an org chart?</p><ul class="trig"><li>Wazoodle was AKAS&#x27;s customer first</li><li>AKAS makes, Wazoodle opens the door</li><li>swatch → yard → roll → AKAS</li><li>&quot;The Wazoodle door does not close when this one opens.&quot;</li></ul></div>
+</div>
+<div class="part"><h3 class="part-h">Supabsorb <span class="mins">10 min</span></h3>
+<div class="q"><p class="q-text">Companies versus brands.</p><ul class="trig"><li>AKAS Tex LLC (public releases: &quot;AKAS Textiles and Laminations&quot;) — manufacturer</li><li>Wazoodle Fabrics LLC — retail, owns the Zorb mark</li><li>Sorbents LLC — legal entity, 2022</li><li>SupAbsorb Tech — the public brand</li></ul></div>
+<div class="q"><p class="q-text">Maker and mat — the shared line</p></div>
+</div>
+<div class="personal wz-card wz-card--flat"><p class="wz-eyebrow wz-eyebrow--voice">Toward the personal</p><ul class="trig"><li>&quot;That rubbed off on me. Not the textiles. The depth.&quot;</li><li>Fabric.com&#x27;s slide was a screenshot of his Fabric Finder</li></ul></div>
+</div></section>
+<section class="wz-band wz-band--ground" id="family"><div class="wz-in">
+<p class="wz-eyebrow">Block 4 · 1:55–2:40 · Sid and Arch, then all three</p><h2 class="wz-title">Family</h2><p class="wz-sub">Sid + Arch 20 · All three 25</p>
+<div class="part"><h3 class="part-h">Sid + Arch <span class="mins">20 min</span></h3>
+<div class="q"><ul class="trig"><li>El Chico, May 30 1980 — each tells it whole first, then the other adds</li><li>engaged that day, married December 1980</li></ul></div>
+<div class="q"><ul class="trig"><li>where memories differ (offered, not corrected): the days in Canada</li><li>lawyers before or after</li><li>the 2009 words</li><li>who suggested buying</li><li>who suggested an existing fabric</li></ul></div>
+<div class="q"><p class="q-text">The years behind it</p><ul class="trig"><li>1988–89, Arch the breadwinner</li><li>2005, her job first, his FedEx, one car</li></ul></div>
+<div class="q"><p class="q-text">EXIM + Congress</p><ul class="trig"><li>testifying to what export finance did</li><li>Exporter of the Year 2021</li><li>the bank president&#x27;s visit, July 2022</li></ul></div>
+</div>
+<div class="part"><h3 class="part-h">All Three <span class="mins">25 min</span></h3>
+<div class="q"><ul class="trig"><li>what each sees that the others miss</li><li>reviews name Arch, never Sid</li><li>&quot;It is the environment.&quot;</li></ul></div>
+<div class="q"><p class="q-text">The warehouses</p><ul class="trig"><li>dirty every time, washed, shelving put up themselves</li><li>pallets → low shelves → tall → ladders</li><li>Englishtown → Manalapan → Bucks County → 1370 in 2020</li><li>2014 Spirit Award + ribbon cutting</li></ul></div>
+<div class="q"><p class="q-text">The creation that surprised most</p><ul class="trig"><li>Kula Cloth</li><li>the cryogenic glove</li><li>Johnny&#x27;s soup bags</li><li>duck diapers</li><li>a kayak hull</li><li>the bladder exstrophy pad</li><li>Dianne Leach&#x27;s 333 girls</li><li>Olympic torches, NASA, SpaceX</li></ul></div>
+<div class="q"><p class="q-text">Names and rhythm</p><ul class="trig"><li>AKAS</li><li>the shared birthday</li><li>&quot;Every five years. Nobody planned it.&quot;</li></ul></div>
+<div class="q"><p class="q-text">Close</p><ul class="trig"><li>what the year cost, together</li></ul></div>
+</div>
+</div></section>
+<section class="wz-band wz-band--paper" id="footage"><div class="wz-in">
+<p class="wz-eyebrow">Block 5 · 2:50–4:10 · Walked with Shelby and Brian</p><h2 class="wz-title">Footage</h2><p class="wz-sub">The building, outside in</p>
+<ol class="walk"><li><span class="num">1</span><span>Outside — exterior, entrance, signs, the 2020 addition (plaque only if it exists)</span></li><li><span class="num">2</span><span>Conference + kitchen combo space</span></li><li><span class="num">3</span><span>Main office — where the staff work</span></li><li><span class="num">4</span><span>Back office</span></li><li><span class="num">5</span><span>Whiteboards + planning space — how the whole process of making fabric runs (clear the boards first)</span></li><li><span class="num">6</span><span>Warehouse — retail cutting · swatch region · notions</span></li><li><span class="num">7</span><span>Wholesale packing · bulk outgoing staging · incoming staging</span></li><li><span class="num">8</span><span>Storage across all the warehouses — how the system is structured; tall shelves and ladders</span></li><li><span class="num">9</span><span>Full shelves beside an empty section — what the shelves became in the pandemic</span></li><li><span class="num">10</span><span>The mats — the part of the warehouse the sorbent business has taken over (StickyBack at a doorway, Railroad outdoors, new beside used)</span></li><li><span class="num">11</span><span>All the masks · photographs of all the fabrics</span></li></ol>
+<p class="inbox"><span class="wz-badge wz-badge--brand">Arch at the inbox</span> Nancy Vaughan, Hotchkiss — the April 19, 2020 email and the published story.</p>
+</div></section>
+<section class="wz-band wz-band--ground" id="films"><div class="wz-in">
+ <p class="wz-eyebrow">The thirteen films · one working doc each</p>
+ <h2 class="wz-title">Every film, <em>its script in Google Docs</em></h2>
+ <p class="wz-sub">Today's interviews feed films 01–04, marked in green. The other nine are here too, for when a story fits them.</p>
+ <div class="films"><a class="film today" href="https://docs.google.com/document/d/1KUAUgqChpz36pUPA6_3JjRVfehlllXmsVVasvE-eKzQ/edit" target="_blank" rel="noopener"><span class="film-n">01</span><span class="film-t">The AKAS Journey</span><span class="film-go">Shot today · Open the doc ↗</span></a><a class="film today" href="https://docs.google.com/document/d/1wkhjRaa5YnTEosyfm5Hi_yPJ6i4W53ewlxAYdWAiG1s/edit" target="_blank" rel="noopener"><span class="film-n">02</span><span class="film-t">The Pandemic Journey</span><span class="film-go">Shot today · Open the doc ↗</span></a><a class="film today" href="https://docs.google.com/document/d/1QFuhQtap5nUgowKh6CO-JmcLAXeAzySU9Uw-JgzZ9a4/edit" target="_blank" rel="noopener"><span class="film-n">03</span><span class="film-t">The Wazoodle Buying Journey</span><span class="film-go">Shot today · Open the doc ↗</span></a><a class="film today" href="https://docs.google.com/document/d/1Nf1nvfyCK1YG13zRrsmQK9m7T4eCAY_6xDjskaguvpg/edit" target="_blank" rel="noopener"><span class="film-n">04</span><span class="film-t">The Second Call — Sorbents Journey</span><span class="film-go">Shot today · Open the doc ↗</span></a><a class="film" href="https://docs.google.com/document/d/1K-4AYJtgKTe3aFPM9CefBuqDZc4rOOYNpBaSfymyvRE/edit" target="_blank" rel="noopener"><span class="film-n">05</span><span class="film-t">Does This Exist?</span><span class="film-go">Open the doc ↗</span></a><a class="film" href="https://docs.google.com/document/d/19YUMA56m3ePmoN9i-LhZEciw7isMQlc5UPUl4AlvGuU/edit" target="_blank" rel="noopener"><span class="film-n">06</span><span class="film-t">The Ladder</span><span class="film-go">Open the doc ↗</span></a><a class="film" href="https://docs.google.com/document/d/1D7IXBf3wcwbH05CcMeYFHDI-SLdKYtHPkpcGOJivsVI/edit" target="_blank" rel="noopener"><span class="film-n">07</span><span class="film-t">An Email Came Back</span><span class="film-go">Open the doc ↗</span></a><a class="film" href="https://docs.google.com/document/d/1sVbbW5wZsM0LXRi9o7jkrjQlrNQ2raUKKAiySQTNM38/edit" target="_blank" rel="noopener"><span class="film-n">08</span><span class="film-t">The Ones Who Sew Across Water</span><span class="film-go">Open the doc ↗</span></a><a class="film" href="https://docs.google.com/document/d/17Pe15UBwP7CEZFauWBfz4aW2aWCrVv2QOeNM190aoZU/edit" target="_blank" rel="noopener"><span class="film-n">09</span><span class="film-t">Zorb Original</span><span class="film-go">Open the doc ↗</span></a><a class="film" href="https://docs.google.com/document/d/1WUoI32N8Cb11FoEewRZqepJ_wOuRW41zLH0wpL5TkBA/edit" target="_blank" rel="noopener"><span class="film-n">10</span><span class="film-t">ProSoft 1 mil ECO-PUL</span><span class="film-go">Open the doc ↗</span></a><a class="film" href="https://docs.google.com/document/d/1g-K8cOsrgluHoSU8JDpVkUkoddUaoDo9tMf5-vmAMec/edit" target="_blank" rel="noopener"><span class="film-n">11</span><span class="film-t">ProCool Performance Interlock</span><span class="film-go">Open the doc ↗</span></a><a class="film" href="https://docs.google.com/document/d/1won_SfKjsaZmJiYXnDMq_G9R63iHJ8V2qx-7GxD3jgk/edit" target="_blank" rel="noopener"><span class="film-n">12</span><span class="film-t">ProECO Organic Cotton Interlock</span><span class="film-go">Open the doc ↗</span></a><a class="film" href="https://docs.google.com/document/d/1bO3c8fYgsg19DWCzWhhj0Ci_h3L_skUwYEYoEEOoL8k/edit" target="_blank" rel="noopener"><span class="film-n">13</span><span class="film-t">Swatch First</span><span class="film-go">Open the doc ↗</span></a></div>
+</div></section>
+<section class="wz-band wz-band--stone" id="picture"><div class="wz-in">
+ <p class="wz-eyebrow">For Shelby · open, for discussion</p>
+ <h2 class="wz-title">The picture behind the day</h2>
+ <p class="wz-sub">Fifteen years of the record, connected. Take what serves the films; the final calls are made together in the edit.</p>
+ <div class="pics"><details class="pic"><summary><span class="pic-n">1</span><span class="pic-t">Six threads through all four films</span></summary><div class="prose"><p><strong>One gesture, repeated.</strong> Someone else's failure lands; the family absorbs it fast — the Hundred Days at Modi (1985–86) · Fabrite poisoning the ground (2009) · Wazoodle Hell turned around in days (2012) · mills shut by order, the network rebuilt across states (2020) · the website failing, rebuilt in four days (2021). Film 01 is the pattern; Films 02–04 are three times it happened.
+<strong>Every product began with someone asking.</strong> 2007 "do you have a fabric that does this?" · Megan → Ready-AbZORB · a customer's ask → Zorb 3D · emails from Asia → masks · Wazoodle was a customer before it was a purchase. Every decision connects to the person it helped — and started with that person.
+<strong>Three roles, held for decades.</strong> Sid makes (names a fabric by touch; credits "the environment"; no review names him). Arch says, and refuses (the no to Fabrite, "the only way is up," five times the price declined, "no tests were performed"; 360 reviews name her). Ash holds it and witnesses (the site, the Fabric Finder, the four-day rebuild; "When you tell your story backwards it almost sounds easy. But it wasn't.").
+<strong>Trust runs both ways.</strong> The family gives knowledge away ("we publish what things are made of"; "a discount ends; a specification does not"). The makers protect them back: Anastasia never named her vendor · Nancy V.: "don't tell anyone where I buy" · makers confronted a counterfeit-Zorb seller before the family knew · Emily: "give Arch a chance."
+<strong>The ground.</strong> Fabrite poisoned it; AKAS was born refusing it. Made in USA means self-sufficiency — Arch: "being at the mercy of other countries for essential supplies is the worst position." SupAbsorb catches spills before they reach soil; Film 04 closes the circle Film 01 opens.
+<strong>The cost was never written down.</strong> The record holds dates and deeds; the feeling is almost absent. That's what the day is for.</p></div></details>
+<details class="pic"><summary><span class="pic-n">2</span><span class="pic-t">Timeline</span></summary><div class="prose"><p>1956 Sid born — Friday the 13th and Baisakhi · 1957 Arch born · May 30 1980 El Chico, engaged the same day · 1982, 1987 Karishma, then Ashrey, born on the same date · 2002 a child in Canada shouts "Wazoodle" · 2005 America · 2007 AKAS founded, trading · 2009 Fabrite and the EPA letter · 2010 full-time, manufacturing; Englishtown NJ · 2011 Manalapan NJ · 2012 Wazoodle bought; "Mom, we need you"; the truck to New Jersey · 2013 the blog; silver priced at cost · 2014 Pennsylvania; Spirit Award + ribbon cutting · 2016 Zorb 3D · 2017 first sorbents; Cuddle Plush (UK) · 2018 "the only Made in USA one-way wicking fabric" · 2019 Zorb 4D; MBDA; Congress testimony; SupAbsorb launch (Dec) · Jan–Feb 2020 1370 Adams Road; Silver Arch; the mask article · Mar–Sep 2020 15 → 500 → 1,000; open 24–72 h, closed ~2 weeks, repeating · 2021 four-day rebuild; EXIM Exporter of the Year; Milpoint (France) · 2022 Sorbents LLC; NFSI; Find a Fabric (Australia); EXIM president visits (July) · 2023 Rainbow (South Africa); WTC Philadelphia · 2026 ELLE France. Rhythm: 2002 · 2007 · 2012 · 2017 · 2022.</p></div></details>
+<details class="pic"><summary><span class="pic-n">3</span><span class="pic-t">Story bank by film</span></summary><div class="prose"><h3>01 · The AKAS Journey<a class="doclink" href="https://docs.google.com/document/d/1KUAUgqChpz36pUPA6_3JjRVfehlllXmsVVasvE-eKzQ/edit" target="_blank" rel="noopener">doc ↗</a></h3>
+<p>Before — the suitcase left at college · air-conditioning choosing the career · "It is the environment" · the Hundred Days · a birth certificate "written by an engineer" · Arch the breadwinner, 1988–89 · 2005: newspapers at 5 a.m., FedEx all day, one car.
+Founding — $50,000 and no loan · Arch's idea: idle mill machines on contract · the first fabric was red; PUL, microfiber terry, wide loop · a table from the roadside · a toilet closed because it was full of rolls · pallets → shelves → ladders in warehouses they cleaned and shelved themselves.
+Growing — a swatch on every product page · silver priced at cost seven years before masks (Silvadur then, Silver Plus now) · Megan and Ready-AbZORB; Zorb 3D; 3 → 35 → 75 styles · Sid teaching mills bamboo and organic cotton · the bolt retired for rolls; the width decision · testing every fabric when the PFAS story broke · Seattle 2020: Arch stands up in the hall; the platform's Fabric Finder slide is a screenshot of Wazoodle's · "This is the Big Boys Club!"
+Where the fabrics have gone — NASA, SpaceX, Olympic torches, governments, an Army research lab's ripstop · Days for Girls in 80+ countries; Ghana, Ethiopia, Guatemala, Malawi, South Sudan, Kenya · Dianne Leach: 50 yards, 1,000 pads, 333 girls · a workshop in Niger (ELLE France); the Pan-African Sisterhood in Philadelphia · Kula Cloth in REI · a pad for children with bladder exstrophy · the Vanderbilt transplant program; gowns for a nursing home · lymphedema strips for a father; a kidney patient's PD bag · duck diapers, a kayak hull, a cryogenic glove, hydroponics, soup bags for people without homes.
+Recognition — MBDA 2019 · Congress · EXIM Exporter of the Year 2021; the president's visit 2022 · Spirit Award 2014 · WTC Philadelphia 2023 · Maker's Row Top 5, 2025.
+2021 — the site rebuilt in four days, every feature a maker had asked for.</p>
+<h3>02 · The Pandemic Journey<a class="doclink" href="https://docs.google.com/document/d/1wkhjRaa5YnTEosyfm5Hi_yPJ6i4W53ewlxAYdWAiG1s/edit" target="_blank" rel="noopener">doc ↗</a></h3>
+<p>Early signs — Thailand, Indonesia, Korea (late 2019) → Singapore, Japan, Australia, Hong Kong · Silver Arch: "first the guidance, then the products" · the article, with Arch's own "no tests were performed" · March 16: one search result, hers.
+Surge — 15 → 500 → 1,000 → a news crew · "30,000 yards were gone in one day… 700 orders sitting" · the 24–72-hour rhythm · declined: five times the price, skipping the line, pressure through the media · "Would you like to be surprised?" · "too few hands, too little time"; "barely getting time to eat or sleep" · meals together in the warehouse · Arch's letters to the state, unanswered.
+Sid's side — mills shut by order · new partners in other states, five new machines · yarn by the container, on trust · one dimple machine shared by three fabrics.
+The makers — Nancy Vaughan's 42 gowns (Hotchkiss) · Derek Barrios in Poway · Sharon Mech's masks for the warehouse team · Lori Widmar: #becauseofbrooklyn · Twin Rivers Quilters and Carolina East Hospital · Suyana: masks sewn by workers the pandemic displaced, mostly immigrants · Kapunahele: "Hey, I didn't catch covid."
+Research and press — the study, credited to Northeastern University · Bensalem Times, Philadelphia Inquirer, NBC.
+After — never short of stock again.</p>
+<h3>03 · The Wazoodle Buying Journey<a class="doclink" href="https://docs.google.com/document/d/1QFuhQtap5nUgowKh6CO-JmcLAXeAzySU9Uw-JgzZ9a4/edit" target="_blank" rel="noopener">doc ↗</a></h3>
+<p>Before — Wazoodle was AKAS's customer first · its owner competing with his own customers; "Wazoodle Hell" · the attorney's printouts; Arch: "They're at the bottom. The only way is up." · "Mom, we need you."
+In Canada — Mike Morris's small office in Markham · the Dreamland offer turned down to keep the name with a family · six months of orders already paid for, refunded from the family's pocket.
+Home — the truck to New Jersey · eight-hour drives back to post packages until Purolator · "one day at a time, one email at a time, one order at a time" · Zorb Original.
+After the first shipments, Video 07 picks up: Emily, Patti Council, Hell → Earth → Heaven, "Is my Wazoodle here?!"</p>
+<h3>04 · The Second Call<a class="doclink" href="https://docs.google.com/document/d/1Nf1nvfyCK1YG13zRrsmQK9m7T4eCAY_6xDjskaguvpg/edit" target="_blank" rel="noopener">doc ↗</a></h3>
+<p>Origin — Fabrite, the EPA letter, the refusal · the diaper decline: "oil is what the world runs on."
+The line — 2017 → Dec 2019 launch ("an alternative to clay sorbents and rental rugs") → 2022 · StickyBack absorbs and stops slips, NFSI, ADA · Railroad works with the rain; its honest limit: "They make a great track mat. We make a great railroad maintenance operation." · recycled content up to 90% · mining and oil &amp; gas lead · brand voice: educate, never attack.
+Close — "The fabrics that hold a baby dry at three in the morning, and the mats that hold a factory floor clean… the same pair of hands."</p></div></details>
+<details class="pic"><summary><span class="pic-n">4</span><span class="pic-t">The voices</span></summary><div class="prose"><p>Sid (let him touch fabric) — "It is the environment." · "I said I can assemble them. I didn't know a damn thing about it." · "Nobody in the world has been able to copy them." · "More personal than official."
+Arch — "The only way is up." · "I'm going to fund it." · "As of today, we cannot claim anti-viral properties." · "I'm a lone voice… we did not give up." · "Happy sewing!"
+Ash — "Mom, we need you." · "A discount ends; a specification does not." · "That rubbed off on me. Not the textiles. The depth."</p></div></details>
+<details class="pic"><summary><span class="pic-n">5</span><span class="pic-t">What the record doesn&#x27;t hold</span></summary><div class="prose"><p>What Sid saw in Canada · why the days there were so few, and how many · who first suggested buying Wazoodle · the first mat and the first sorbent customer · El Chico from both sides · whether the plaque exists · the New York years · what the pandemic year cost each of them.</p></div></details>
+<details class="pic"><summary><span class="pic-n">6</span><span class="pic-t">Let&#x27;s talk</span></summary><div class="prose"><p>How we show supplier names and how fabric gets made (stock or cleared footage is yours to use) · how we describe the previous Wazoodle owner · crediting the university study · Silvadur becoming Silver Plus, told as it happened · any performance figures, once the documents are in hand. We make the final calls together in the edit.</p></div></details>
+<details class="pic"><summary><span class="pic-n">7</span><span class="pic-t">The soft library — online pieces already in hand (physical items: Ash brings)</span></summary><div class="prose"><p>01 AKAS JOURNEY
+- WTC Philadelphia — "AKAS Textiles: mission is all in its name" — <a href="https://www.wtca.org/locations/world-trade-center-philadelphia/news/akas-textiles-mission-is-all-in-its-name" target="_blank" rel="noopener">wtca.org</a>
+- MBDA, Feb 2019 — <a href="https://www.mbda.gov/news/blog/2019/02/indian-owned-textile-company-maintains-made-usa-resources-increases-global-sales-w" target="_blank" rel="noopener">mbda.gov</a>
+- EXIM Exporter of the Year 2021 — <a href="https://www.exim.gov/news/pennsylvania-textiles-manufacturer-akas-textiles-and-laminations-named-exim-exporter-year" target="_blank" rel="noopener">exim.gov</a>
+- How AKAS won the award — <a href="https://akastex.com/exporter-of-the-year-how-akas-tex-won-the-award/" target="_blank" rel="noopener">akastex.com</a>
+- EXIM president visits, July 2022 — <a href="https://akastex.com/exim-bank-president-chair-reta-jo-lewis-visits-akas/" target="_blank" rel="noopener">akastex.com</a>
+- Textile World, Dec 2018 — the only Made-in-USA one-way wicking fabric — <a href="https://www.textileworld.com/textile-world/knitting-apparel/2018/12/akas-introduces-only-made-in-the-usa-one-way-wicking-fabric/" target="_blank" rel="noopener">textileworld.com</a>
+- Zorb 4D launch, Nov 2019 — <a href="https://www.textileworld.com/textile-world/new-products/2019/11/wazoodle-fabrics-launches-a-composite-fabric-that-is-super-absorbent-and-waterproof/" target="_blank" rel="noopener">textileworld.com</a>
+- TransDRY license, Feb 2020 — <a href="https://www.textileworld.com/textile-world/2020/02/akas-tex-is-now-licensed-by-cotton-inc-as-provider-of-the-transdry-finishing-technology/" target="_blank" rel="noopener">textileworld.com</a>
+- The Zorb 3D origin (Ash) — <a href="https://wazoodle.com/blogs/news/zorb-3d-origins" target="_blank" rel="noopener">wazoodle.com</a>
+- The Ready-AbZORB origin, "Dear Megan" (Ash) — <a href="https://wazoodle.com/blogs/news/ready-abzorb-origins" target="_blank" rel="noopener">wazoodle.com</a>
+- The Story of Wazoodle 2.0 — the four-day rebuild (Ash) — <a href="https://wazoodle.com/blogs/news/the-story-of-wazoodle-2-0" target="_blank" rel="noopener">wazoodle.com</a>
+- Wazoodle fabrics free of PFAS (Arch) — <a href="https://wazoodle.com/blogs/news/free-of-pfas-pfoa" target="_blank" rel="noopener">wazoodle.com</a>
+- Why OEKO-TEX isn't relevant to American-made fabric (Arch) — <a href="https://wazoodle.com/blogs/news/why-oeko-tex-is-not-relevant" target="_blank" rel="noopener">wazoodle.com</a>
+- ELLE France, Aug 2026 — <a href="https://www.elle.fr/Societe/News/Recit-de-la-recherche-du-tissu-magique-pour-lutter-contre-la-precarite-menstruelle-4498010" target="_blank" rel="noopener">elle.fr</a>
+- Billy Penn — the Pan-African Sisterhood — <a href="https://billypenn.com/2025/09/18/pan-african-sisterhood-reusable-menstrual-pad-products/" target="_blank" rel="noopener">billypenn.com</a>
+- BeDry Pad (children with bladder exstrophy) — <a href="https://www.bladderexstrophy.com/wp-content/uploads/2023/07/BeDry-Pad-Design-and-Testing.docx.pdf" target="_blank" rel="noopener">bladderexstrophy.com</a>
+- Maker's Row, Top 5 Sustainable US Fabric Manufacturers 2025 — <a href="https://makersrow.com/blog/top-sustainable-fabric-manufacturers-in-the-usa/" target="_blank" rel="noopener">makersrow.com</a>
+02 PANDEMIC
+- The mask article (Arch, Jan/Feb 2020) — <a href="https://wazoodle.com/blogs/news/3-fabrics-that-can-be-used-to-make-a-face-mask" target="_blank" rel="noopener">wazoodle.com</a>
+- The Covid-19 update, March 2020 — <a href="https://wazoodle.com/blogs/news/covid-19-update" target="_blank" rel="noopener">wazoodle.com</a>
+- Why America Needs to Change! (Arch) — <a href="https://wazoodle.com/blogs/news/why-america-needs-to-change" target="_blank" rel="noopener">wazoodle.com</a>
+- Bensalem Times, Apr 6 2020, "Small Shop, Big Impact" — <a href="https://lowerbuckstimes.com/2020/04/06/small-shop-big-impact/" target="_blank" rel="noopener">lowerbuckstimes.com</a>
+- AKAS offers medical textiles, Apr 2020 — <a href="https://www.ifai.com/2020/04/08/akas-offers-medical-textiles/" target="_blank" rel="noopener">ifai.com</a>
+- The original study — ACS Nano (Northeastern) — <a href="https://pubs.acs.org/doi/10.1021/acsnano.0c03972" target="_blank" rel="noopener">pubs.acs.org</a>
+- Textile World, June 2020 — <a href="https://www.textileworld.com/textile-world/2020/06/face-masks-constructed-with-akas-textiles-fabrics-outperforms-n95-respirator-in-university-test/" target="_blank" rel="noopener">textileworld.com</a>
+- Five new knitting machines, Dec 2020 — <a href="https://www.textileworld.com/textile-world/knitting-apparel/2020/12/akas-tex-increases-knitting-capability/" target="_blank" rel="noopener">textileworld.com</a>
+- Hotchkiss — Nancy's gowns — <a href="https://wazoodle.com/blogs/news/how-nancy-the-hotchkiss-school-made-medical-gowns-in-the-ppe-battle-to-fight-covid-19" target="_blank" rel="noopener">wazoodle.com</a>
+- Lori Widmar — <a href="https://wazoodle.com/blogs/news/lori-widmar-proves-kindness-isn-t-cancelled" target="_blank" rel="noopener">wazoodle.com</a>
+- Sharon Mech — <a href="https://wazoodle.com/blogs/news/sharon-mech-donates-face-masks-and-laughter" target="_blank" rel="noopener">wazoodle.com</a>
+- Suyana — <a href="https://wazoodle.com/blogs/news/suyana-ppe-covid19" target="_blank" rel="noopener">wazoodle.com</a>
+- Washing and sanitizing reusable masks (Arch) — <a href="https://wazoodle.com/blogs/news/3-suggestions-for-washing-and-sanitizing-of-reusable-masks" target="_blank" rel="noopener">wazoodle.com</a>
+03 BUYING JOURNEY — (the record lives in family memory, photographs and the Wazoodle 2.0 story above; no outside articles)
+04 SECOND CALL
+- SupAbsorb launch, Dec 2019 — <a href="https://www.textileworld.com/textile-world/nonwovens-technical-textiles/2019/12/supabsorb-tech-launches-new-line-of-super-absorbent-industrial-floor-mats" target="_blank" rel="noopener">textileworld.com</a>
+- ISHN, Dec 2019 — <a href="https://www.ishn.com/articles/111962-supabsorb-tech-the-new-line-of-super-absorbent-industrial-floor-mats-launched" target="_blank" rel="noopener">ishn.com</a>
+- StickyBack, NFSI-certified — <a href="https://akastex.com/nfsi-certified-stickyback-mat-designed-to-prevent-slips/" target="_blank" rel="noopener">akastex.com</a>
+- superabsorbentmats.com</p></div></details>
+<details class="pic"><summary><span class="pic-n">8</span><span class="pic-t">Strongest moment per cut (proposals)</span></summary><div class="prose"><p>1 What AKAS means — four names: Archana (devotion), Karishma (miracle), Ashrey (shelter), Sidharth (purpose accomplished); together, a word for space
+2 Ash asking his mother — "Mom, we need you," 2012 · "We made the leap and never looked back."
+3 Four-day rebuild — May 6 the outside site fails; five people, four days, every feature a maker had asked for
+4 Closing the store to keep a promise — open 24–72 hours, closed two weeks; "too much to do, too few hands, too little time"; five times the price, declined
+5 A request Arch still remembers — Derek Barrios: a special-needs son, no fabric anywhere, she sent it free — "She has won my business."
+6 What the year cost — "We don't have time to eat, to sleep. I'm cooking in the office." · "we did not give up."
+7 From Canada to New Jersey — Mike Morris's small office; the truck; eight-hour drives back to post packages until Purolator
+8 The lawyers and Arch — the printouts of Wazoodle Hell · "They're at the bottom. The only way is up." · "That's a different way of looking at it."
+9 What came with Zorb — the imported stock ran out, they chose American mills; 3 → 35 → 75 · "Nobody in the world has been able to copy them."
+10 Spill protection as Sid's second purpose — Fabrite poisoned the ground; the mats catch it before it reaches soil
+11 The first mat — whatever Sid tells tomorrow (the record's blank); StickyBack as the fallback: absorbs and stops slips
+12 One standard — "The fabrics that hold a baby dry at three in the morning, and the mats that hold a factory floor clean… the same pair of hands."</p></div></details></div>
+</div></section>
+<section class="wz-band wz-band--wash" id="settled"><div class="wz-in">
+ <p class="wz-eyebrow wz-eyebrow--voice">Settled before the day</p>
+ <h2 class="wz-title">What the family ruled on October 7</h2>
+ <ul class="settled"><li>Nancy V. (thalassemia, the fire) and Nancy Vaughan (Hotchkiss) are two different people</li><li>&quot;Mom, we need you&quot; = 2012, at the Wazoodle decision (not 2007–2010)</li><li>Rag Rug is from Quebec; the supabsorb skill is wrong; we don&#x27;t lead with Rag Rug</li><li>2012: the truck unloaded in NEW JERSEY (Manalapan); shipping resumed from NJ; Pennsylvania = 2014</li><li>The days in Canada: count OPEN (moving toward seven or eight) — no &quot;six days&quot; anywhere; follows Arch&#x27;s structure</li><li>Sid&#x27;s acquisition Q: &quot;What did you find when you went to Canada to meet Mike Morris, the owner of Wazoodle Fabrics?&quot;</li><li>Cut 7 → &quot;From Canada to New Jersey&quot;</li><li>2020 windows: open 24–72 hours, closed about two weeks to catch up and keep making fabric, again — March to September</li><li>2015 FBI call: dropped</li><li>2014: Bucks County Spirit Award + ribbon cutting (same year)</li><li>EXIM Exporter of the Year = 2021; EXIM president&#x27;s visit = July 2022</li><li>1360 Adams Road owned; adjoining 1370 Adams Road bought January 2020</li><li>Silver: website says Silver Plus; the films tell the truth — Silvadur before, Silver Plus now</li><li>Fabrics have gone into Olympic torches, space with NASA, SpaceX, governments</li></ul>
+</div></section>
+<section class="wz-band wz-band--paper"><div class="wz-in">
+ <p class="wz-eyebrow">Where this leads</p>
+ <h2 class="wz-title">After the cameras stop</h2>
+ <div class="doors">
+  <a class="door" href="#top"><span class="wz-eyebrow">Back to the top</span><strong>The schedule</strong>Jump to any block.</a>
+  <a class="door" href="#films"><span class="wz-eyebrow">For everyone</span><strong>The thirteen film docs</strong>One Google Doc per film.</a>
+  <a class="door" href="#picture"><span class="wz-eyebrow">For Shelby</span><strong>The picture behind the day</strong>Threads, timeline, story bank, cuts.</a>
+  <a class="door rung" href="/partners/brians-guide/"><span class="wz-eyebrow">For Brian</span><strong>Brian's Guide</strong>175 entries — type what you just heard.</a>
+ </div>
+</div></section>
+<script>
+(()=>{const links=[...document.querySelectorAll('.wz-rail a')];const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+ const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));const on=links.find(a=>a.classList.contains('on'));if(on)on.scrollIntoView({block:'nearest',inline:'center'})}})},{rootMargin:'-40% 0px -55% 0px'});
+ secs.forEach(s=>io.observe(s));})();
+</script>
+
+</body></html>
